@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3774F158-57F1-4268-ACDF-9087FD6F7816}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ArgTrack</RootNamespace>
+    <AssemblyName>ArgTrack</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ArgTrack.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\argtrack.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Arg2Data, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Arg2Data.0.1.0\lib\net40\Arg2Data.dll</HintPath>
+    </Reference>
+    <Reference Include="ArgData, Version=0.16.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ArgData.0.16.1\lib\net40\ArgData.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Commands\Application\CheckForUpdateCommand.cs" />
+    <Compile Include="Commands\Application\ExitApplicationCommand.cs" />
+    <Compile Include="Commands\Application\HelpDocsCommand.cs" />
+    <Compile Include="Commands\Application\OpenArgDataPageCommand.cs" />
+    <Compile Include="Commands\Application\OpenDownloadPageCommand.cs" />
+    <Compile Include="Commands\Application\ShowMessageCommand.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\Tracks\AddBestLineSegmentCommand.cs" />
+    <Compile Include="Commands\Tracks\AddObjectSettingsCommand.cs" />
+    <Compile Include="Commands\Tracks\AddTrackCommandCommand.cs" />
+    <Compile Include="Commands\Tracks\AddTrackSectionCommand.cs" />
+    <Compile Include="Commands\Tracks\ConvertTrackCommand.cs" />
+    <Compile Include="Commands\Tracks\DeleteBestLineSegmentCommand.cs" />
+    <Compile Include="Commands\Tracks\DeleteTrackCommandCommand.cs" />
+    <Compile Include="Commands\Tracks\DeleteTrackSectionCommand.cs" />
+    <Compile Include="Commands\Tracks\EditBestLineCommand.cs" />
+    <Compile Include="Commands\Tracks\EditGenericByteDataCommand.cs" />
+    <Compile Include="Commands\Tracks\EditTrackCommandCommand.cs" />
+    <Compile Include="Commands\Tracks\EditTrackObjectSettingsCommand.cs" />
+    <Compile Include="Commands\Tracks\EditTrackObjectShapeCommand.cs" />
+    <Compile Include="Commands\Tracks\EditTrackSectionCommand.cs" />
+    <Compile Include="Commands\Tracks\LoadHorizonFromFileCommand.cs" />
+    <Compile Include="Commands\Tracks\LoadTrackCommand.cs" />
+    <Compile Include="Commands\Tracks\SaveHorizonToFileCommand.cs" />
+    <Compile Include="Commands\Tracks\SaveTrackCommand.cs" />
+    <Compile Include="Commands\Tracks\ValidateTrackCommand.cs" />
+    <Compile Include="Converters\EnumBooleanConverter.cs" />
+    <Compile Include="FileDialog.cs" />
+    <Compile Include="MainViewModelPasserArounder.cs" />
+    <Compile Include="Mappers\Mapper.cs" />
+    <Compile Include="Mappers\TrackMapper.cs" />
+    <Compile Include="PaletteHelper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="TrackStuff\TrackConverter.cs" />
+    <Compile Include="UserControls\AboutTabUserControl.xaml.cs">
+      <DependentUpon>AboutTabUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CarSetup\CarSetupPairUserControl.xaml.cs">
+      <DependentUpon>CarSetupPairUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CarSetup\CarSetupUserControl.xaml.cs">
+      <DependentUpon>CarSetupUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Tracks\TrackBestLineUserControl.xaml.cs">
+      <DependentUpon>TrackBestLineUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Tracks\TrackHeaderUserControl.xaml.cs">
+      <DependentUpon>TrackHeaderUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Tracks\TrackHorizonUserControl.xaml.cs">
+      <DependentUpon>TrackHorizonUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Tracks\TrackObjectSettingsUserControl.xaml.cs">
+      <DependentUpon>TrackObjectSettingsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Tracks\TrackObjectShapesUserControl.xaml.cs">
+      <DependentUpon>TrackObjectShapesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Tracks\TrackPitLaneSectionsUserControl.xaml.cs">
+      <DependentUpon>TrackPitLaneSectionsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Tracks\TrackSectionsUserControl.xaml.cs">
+      <DependentUpon>TrackSectionsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Tracks\TrackSetupUserControl.xaml.cs">
+      <DependentUpon>TrackSetupUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Tracks\TrackTabUserControl.xaml.cs">
+      <DependentUpon>TrackTabUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VersionChecker.cs" />
+    <Compile Include="ViewModels\AboutTabViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\Track\BestLineSegmentViewModel.cs" />
+    <Compile Include="ViewModels\Track\BillboardObjects.cs" />
+    <Compile Include="ViewModels\Track\CommandDescriptions.cs" />
+    <Compile Include="ViewModels\Track\EditableByteData.cs" />
+    <Compile Include="ViewModels\Track\GenericByteListEditingViewModel.cs" />
+    <Compile Include="ViewModels\Track\SetupViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackCommandViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackHeaderViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackObjectSettingsViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackObjectShapeViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackRawDataViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackSectionViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackTabViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackViewModel.cs" />
+    <Compile Include="Windows\Track\TrackBestLineDetailsWindow.xaml.cs">
+      <DependentUpon>TrackBestLineDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackCommandDetailsWindow.xaml.cs">
+      <DependentUpon>TrackCommandDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackGenericByteListDetailsWindow.xaml.cs">
+      <DependentUpon>TrackGenericByteListDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackGenericByteValueDetailsWindow.xaml.cs">
+      <DependentUpon>TrackGenericByteValueDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackObjectSettingsDetailsWindow.xaml.cs">
+      <DependentUpon>TrackObjectSettingsDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackObjectShapeDetailsWindow.xaml.cs">
+      <DependentUpon>TrackObjectShapeDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackSectionDetailsWindow.xaml.cs">
+      <DependentUpon>TrackSectionDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackValidationWindow.xaml.cs">
+      <DependentUpon>TrackValidationWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="UserControls\AboutTabUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\CarSetup\CarSetupPairUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\CarSetup\CarSetupUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Tracks\TrackBestLineUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Tracks\TrackHeaderUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Tracks\TrackHorizonUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Tracks\TrackObjectSettingsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Tracks\TrackObjectShapesUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Tracks\TrackPitLaneSectionsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Tracks\TrackSectionsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Tracks\TrackSetupUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Tracks\TrackTabUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackBestLineDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackCommandDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackGenericByteListDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackGenericByteValueDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackObjectSettingsDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackObjectShapeDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackSectionDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackValidationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\argtrack.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\BuildCommon.targets" />
+  <Target Name="AfterResolveReferences">
+    <ItemGroup>
+      <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.dll'">
+        <LogicalName>%(ReferenceCopyLocalPaths.DestinationSubDirectory)%(ReferenceCopyLocalPaths.Filename)%(ReferenceCopyLocalPaths.Extension)</LogicalName>
+      </EmbeddedResource>
+    </ItemGroup>
+  </Target>
+</Project>

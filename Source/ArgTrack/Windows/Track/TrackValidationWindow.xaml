@@ -1,0 +1,39 @@
+﻿<Window x:Class="ArgTrack.Windows.Track.TrackValidationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArgTrack.Windows.Track"
+        xmlns:tracks="clr-namespace:ArgTrack.Commands.Tracks"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=tracks:TrackValidationViewModel, IsDesignTimeCreatable=True}"
+        Title="Track Validation" Height="300" Width="400">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <ListView Height="260" Margin="5" ItemsSource="{Binding Results}" IsSynchronizedWithCurrentItem="True">
+                <!--<ListView.InputBindings>
+                    <KeyBinding Key="Enter"
+                            Command="{Binding EditTrackSectionCommand}"
+                            CommandParameter="{Binding TrackSections/}"></KeyBinding>
+                </ListView.InputBindings>-->
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Message" Width="260">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Message}">
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding MouseAction="LeftDoubleClick"
+                                                      Command="{Binding EditTrackSectionCommand}"
+                                                      CommandParameter="{Binding}"></MouseBinding>
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Window>

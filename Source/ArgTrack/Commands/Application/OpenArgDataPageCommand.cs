@@ -1,0 +1,12 @@
+﻿using System.Diagnostics;
+
+namespace ArgTrack.Commands
+{
+    public class OpenArgDataPageCommand : CommandBase
+    {
+        public override void Execute(object parameter)
+        {
+            Process.Start(@"http://manicomio.se/argdata");
+        }
+    }
+}
