@@ -6,7 +6,7 @@ namespace ArgTrack.Commands.Tracks
     {
         private readonly bool _isTrack;
 
-        // TODO: bool here = horrible design...
+        // TODO: bool here = horrible design... split into DeletePitLaneSectionCommand?
         public DeleteTrackSectionCommand(bool isTrack = true)
         {
             _isTrack = isTrack;
@@ -20,9 +20,15 @@ namespace ArgTrack.Commands.Tracks
                 return;
 
             if (_isTrack)
+            {
                 vm.TrackSections.RemoveAt(vm.SelectedTrackSectionIndex);
+                vm.RecalculateTrackSectionIndexz();
+            }
             else
+            {
                 vm.PitLaneSections.RemoveAt(vm.SelectedPitLaneSectionIndex);
+                vm.RecalculatePitLaneSectionIndexz();
+            }
         }
     }
 }

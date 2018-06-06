@@ -64,6 +64,26 @@ namespace ArgTrack.ViewModels.Track
             }
         }
 
+        public void RecalculatePitLaneSectionIndexz()
+        {
+            int i = 0;
+            foreach (var section in PitLaneSections)
+            {
+                section.Index = i;
+                i++;
+            }
+        }
+
+        public void RecalculateBestLineSectionIndexz()
+        {
+            int i = 0;
+            foreach (var section in BestLineSegments)
+            {
+                //section.Index = i;
+                i++;
+            }
+        }
+
 
         private ObservableCollection<TrackSectionViewModel> _pitLaneSections;
 

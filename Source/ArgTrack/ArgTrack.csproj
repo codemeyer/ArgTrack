@@ -87,6 +87,8 @@
     <Compile Include="Commands\Tracks\EditTrackObjectSettingsCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackObjectShapeCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackSectionCommand.cs" />
+    <Compile Include="Commands\Tracks\InsertBestLineSegmentCommand.cs" />
+    <Compile Include="Commands\Tracks\InsertPitLaneSectionCommand.cs" />
     <Compile Include="Commands\Tracks\InsertTrackSectionCommand.cs" />
     <Compile Include="Commands\Tracks\LoadHorizonFromFileCommand.cs" />
     <Compile Include="Commands\Tracks\LoadTrackCommand.cs" />

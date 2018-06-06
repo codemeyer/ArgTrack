@@ -45,6 +45,10 @@
                         Command="{Binding AddTrackSectionCommand}" CommandParameter="{Binding Track.PitLaneSections}">
                     Add Section
                 </Button>
+                <Button Width="100" Margin="5,0,0,0" Height="24" Visibility="{Binding ShowPitLaneSectionActionButtons}"
+                        Command="{Binding InsertPitLaneSectionCommand}" CommandParameter="{Binding Track}">
+                    Insert Section
+                </Button>
                 <Button Width="100" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowPitLaneSectionActionButtons}"
                         Command="{Binding DeletePitLaneSectionCommand}" CommandParameter="{Binding Track}">
                     Delete Section
@@ -53,6 +57,10 @@
                 <Button Width="100" Margin="5,0,0,0" Height="24" Visibility="{Binding ShowBestLineActionButtons}"
                         Command="{Binding AddBestLineSegmentCommand}" CommandParameter="{Binding Track.BestLineSegments}">
                     Add Section
+                </Button>
+                <Button Width="100" Margin="5,0,0,0" Height="24" Visibility="{Binding ShowBestLineActionButtons}"
+                        Command="{Binding InsertBestLineSegmentCommand}" CommandParameter="{Binding Track}">
+                    Insert Section
                 </Button>
                 <Button Width="100" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowBestLineActionButtons}"
                         Command="{Binding DeleteBestLineSegmentCommand}" CommandParameter="{Binding Track}">
