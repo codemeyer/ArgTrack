@@ -40,13 +40,15 @@
                         Command="{Binding DeleteTrackSectionCommand}" CommandParameter="{Binding Track}">
                     Delete Section
                 </Button>
-                <Button Width="100" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowTrackSectionActionButtons}"
+                <Button Width="32" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowTrackSectionActionButtons}"
                         Command="{Binding MoveTrackSectionUpCommand}" CommandParameter="{Binding Track}">
-                    Up (todoicon)
+                    <Button.ToolTip>Move Track Section Up</Button.ToolTip>
+                    ▲
                 </Button>
-                <Button Width="100" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowTrackSectionActionButtons}"
+                <Button Width="32" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowTrackSectionActionButtons}"
                         Command="{Binding MoveTrackSectionDownCommand}" CommandParameter="{Binding Track}">
-                    Down (todoicon)
+                    <Button.ToolTip>Move Track Section Down</Button.ToolTip>
+                    ▼
                 </Button>
 
                 <Button Width="100" Margin="5,0,0,0" Height="24" Visibility="{Binding ShowPitLaneSectionActionButtons}"
@@ -61,13 +63,15 @@
                         Command="{Binding DeletePitLaneSectionCommand}" CommandParameter="{Binding Track}">
                     Delete Section
                 </Button>
-                <Button Width="100" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowPitLaneSectionActionButtons}"
+                <Button Width="32" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowPitLaneSectionActionButtons}"
                         Command="{Binding MovePitLaneSectionUpCommand}" CommandParameter="{Binding Track}">
-                    Up (todoicon)
+                    <Button.ToolTip>Move Pit Lane Section Up</Button.ToolTip>
+                    ▲
                 </Button>
-                <Button Width="100" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowPitLaneSectionActionButtons}"
+                <Button Width="32" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowPitLaneSectionActionButtons}"
                         Command="{Binding MovePitLaneSectionDownCommand}" CommandParameter="{Binding Track}">
-                    Down (todoicon)
+                    <Button.ToolTip>Move Pit Lane Section Down</Button.ToolTip>
+                    ▼
                 </Button>
 
                 <Button Width="100" Margin="5,0,0,0" Height="24" Visibility="{Binding ShowBestLineActionButtons}"
@@ -82,13 +86,15 @@
                         Command="{Binding DeleteBestLineSegmentCommand}" CommandParameter="{Binding Track}">
                     Delete Section
                 </Button>
-                <Button Width="100" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowBestLineActionButtons}"
+                <Button Width="32" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowBestLineActionButtons}"
                         Command="{Binding MoveBestLineSegmentUpCommand}" CommandParameter="{Binding Track}">
-                    Up (todoicon)
+                    <Button.ToolTip>Move Best Line Segment Up</Button.ToolTip>
+                    ▲
                 </Button>
-                <Button Width="100" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowBestLineActionButtons}"
+                <Button Width="32" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowBestLineActionButtons}"
                         Command="{Binding MoveBestLineSegmentDownCommand}" CommandParameter="{Binding Track}">
-                    Down (todoicon)
+                    <Button.ToolTip>Move Best Line Segment Down</Button.ToolTip>
+                    ▼
                 </Button>
 
                 <!--<Button Width="100" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowObjectSettingsActionButtons}"
