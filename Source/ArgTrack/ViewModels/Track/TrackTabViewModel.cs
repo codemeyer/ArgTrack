@@ -112,11 +112,17 @@ namespace ArgTrack.ViewModels.Track
         public ICommand AddTrackSectionCommand { get; } = new AddTrackSectionCommand();
         public ICommand InsertTrackSectionCommand { get; } = new InsertTrackSectionCommand();
         public ICommand DeleteTrackSectionCommand { get; } = new DeleteTrackSectionCommand();
+        public ICommand MoveTrackSectionUpCommand { get; } = new MoveTrackSectionUpCommand();
+        public ICommand MoveTrackSectionDownCommand { get; } = new MoveTrackSectionDownCommand();
         public ICommand InsertPitLaneSectionCommand { get; } = new InsertPitLaneSectionCommand();
         public ICommand DeletePitLaneSectionCommand { get; } = new DeleteTrackSectionCommand(false);
+        public ICommand MovePitLaneSectionUpCommand { get; } = new MovePitLaneSectionUpCommand();
+        public ICommand MovePitLaneSectionDownCommand { get; } = new MovePitLaneSectionDownCommand();
         public ICommand AddBestLineSegmentCommand { get; } = new AddBestLineSegmentCommand();
         public ICommand InsertBestLineSegmentCommand { get; } = new InsertBestLineSegmentCommand();
         public ICommand DeleteBestLineSegmentCommand { get; } = new DeleteBestLineSegmentCommand();
+        public ICommand MoveBestLineSegmentUpCommand { get; } = new MoveBestLineSegmentUpCommand();
+        public ICommand MoveBestLineSegmentDownCommand { get; } = new MoveBestLineSegmentDownCommand();
         public ICommand AddObjectSettingsCommand { get; } = new AddObjectSettingsCommand();
         public ICommand UpdateHorizonFromFileCommand { get; } = new LoadHorizonFromFileCommand(new FileDialog());
         public ICommand SaveHorizonToFileCommand { get; } = new SaveHorizonToFileCommand(new FileDialog());

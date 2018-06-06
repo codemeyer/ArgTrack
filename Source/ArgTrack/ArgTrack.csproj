@@ -92,6 +92,12 @@
     <Compile Include="Commands\Tracks\InsertTrackSectionCommand.cs" />
     <Compile Include="Commands\Tracks\LoadHorizonFromFileCommand.cs" />
     <Compile Include="Commands\Tracks\LoadTrackCommand.cs" />
+    <Compile Include="Commands\Tracks\MoveBestLineSegmentDownCommand.cs" />
+    <Compile Include="Commands\Tracks\MoveBestLineSegmentUpCommand.cs" />
+    <Compile Include="Commands\Tracks\MovePitLaneSectionDownCommand.cs" />
+    <Compile Include="Commands\Tracks\MovePitLaneSectionUpCommand.cs" />
+    <Compile Include="Commands\Tracks\MoveTrackSectionDownCommand.cs" />
+    <Compile Include="Commands\Tracks\MoveTrackSectionUpCommand.cs" />
     <Compile Include="Commands\Tracks\SaveHorizonToFileCommand.cs" />
     <Compile Include="Commands\Tracks\SaveTrackCommand.cs" />
     <Compile Include="Commands\Tracks\ValidateTrackCommand.cs" />
