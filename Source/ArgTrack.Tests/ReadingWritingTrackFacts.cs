@@ -13,10 +13,10 @@ namespace ArgTrack.Tests
             var file = ExampleDataHelper.GetExampleDataPath("F1CT01.DAT", TestDataFileType.Tracks);
             var tempFile = ExampleDataHelper.GetTempFileName(".DAT");
 
-            var originalTrack = TrackReader.Read(file);
+            var originalTrack = new TrackReader().Read(file);
             var viewModel = Mappers.TrackMapper.MapEntireTrackToViewModel(originalTrack);
             var trackFromViewModel = Mappers.TrackMapper.MapEntireTrackViewModelToTrack(viewModel);
-            TrackWriter.Write(trackFromViewModel, tempFile);
+            new TrackWriter().Write(trackFromViewModel, tempFile);
 
             // compare original and new
             var originalBytes = File.ReadAllBytes(file);

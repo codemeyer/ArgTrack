@@ -35,7 +35,7 @@ namespace ArgTrack.Commands.Tracks
 
             try
             {
-                var track = TrackReader.Read(path);
+                var track = new TrackReader().Read(path);
 
                 var viewModel = Mappers.TrackMapper.MapEntireTrackToViewModel(track);
                 // blergh

@@ -8,8 +8,7 @@ namespace ArgTrack
     {
         public static Color GetColor(int index)
         {
-            // TODO: check range?
-            var drawingColor = Palette.GetColor((byte)index);
+            var drawingColor = Palette.CreateDrivingPalette().GetColor((byte)index);
             return Color.FromRgb(drawingColor.R, drawingColor.G, drawingColor.B);
         }
 
@@ -60,7 +59,6 @@ namespace ArgTrack
                 {14, System.Drawing.Color.FromArgb(239, 238, 222)},
                 {15, System.Drawing.Color.FromArgb(22, 108, 26)}
             };
-        }
-       
+        }  
     }
 }

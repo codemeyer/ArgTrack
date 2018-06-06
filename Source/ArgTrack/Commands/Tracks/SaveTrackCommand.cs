@@ -33,7 +33,7 @@ namespace ArgTrack.Commands.Tracks
 
             var track = Mappers.TrackMapper.MapEntireTrackViewModelToTrack(vm.Track);
 
-            TrackWriter.Write(track, path);
+            new TrackWriter().Write(track, path);
         }
     }
 }

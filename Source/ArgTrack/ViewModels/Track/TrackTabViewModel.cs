@@ -110,6 +110,7 @@ namespace ArgTrack.ViewModels.Track
         public ICommand ValidateTrackCommand { get; } = new ValidateTrackCommand();
         public ICommand ConvertTrackCommand { get; } = new ConvertTrackCommand(new FileDialog());
         public ICommand AddTrackSectionCommand { get; } = new AddTrackSectionCommand();
+        public ICommand InsertTrackSectionCommand { get; } = new InsertTrackSectionCommand();
         public ICommand DeleteTrackSectionCommand { get; } = new DeleteTrackSectionCommand();
         public ICommand DeletePitLaneSectionCommand { get; } = new DeleteTrackSectionCommand(false);
         public ICommand AddBestLineSegmentCommand { get; } = new AddBestLineSegmentCommand();

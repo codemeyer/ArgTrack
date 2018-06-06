@@ -32,6 +32,10 @@
                         Command="{Binding AddTrackSectionCommand}" CommandParameter="{Binding Track.TrackSections}">
                     Add Section
                 </Button>
+                <Button Width="100" Margin="5,0,0,0" Height="24" Visibility="{Binding ShowTrackSectionActionButtons}"
+                        Command="{Binding InsertTrackSectionCommand}" CommandParameter="{Binding Track}">
+                    Insert Section
+                </Button>
                 <Button Width="100" Margin="3,0,0,0" Height="24" Visibility="{Binding ShowTrackSectionActionButtons}"
                         Command="{Binding DeleteTrackSectionCommand}" CommandParameter="{Binding Track}">
                     Delete Section

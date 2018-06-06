@@ -54,6 +54,16 @@ namespace ArgTrack.ViewModels.Track
             set { SetProperty(ref _trackSections, value, () => TrackSections); }
         }
 
+        public void RecalculateTrackSectionIndexz()
+        {
+            int i = 0;
+            foreach (var section in TrackSections)
+            {
+                section.Index = i;
+                i++;
+            }
+        }
+
 
         private ObservableCollection<TrackSectionViewModel> _pitLaneSections;
 
@@ -135,6 +145,8 @@ namespace ArgTrack.ViewModels.Track
 
         private void UpdateHorizonImage()
         {
+            var palette = Palette.CreateDrivingPalette();
+
             // TODO: somewhere else ffs
             byte[] horizonBytes = HorizonBytes;
 
@@ -145,7 +157,7 @@ namespace ArgTrack.ViewModels.Track
             {
                 for (int x = 0; x <= 511; x++)
                 {
-                    var color = Palette.GetColor(horizonBytes[pos]);
+                    var color = palette.GetColor(horizonBytes[pos]);
 
                     bitmap.SetPixel(x, y, color);
                     pos++;
@@ -159,7 +171,7 @@ namespace ArgTrack.ViewModels.Track
             {
                 for (int x = 0; x <= 511; x++)
                 {
-                    var color = Palette.GetColor(horizonBytes[pos]);
+                    var color = palette.GetColor(horizonBytes[pos]);
 
 
                     for (int py = 0; py <= 7; py++)

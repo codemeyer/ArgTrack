@@ -43,8 +43,8 @@
     <Reference Include="Arg2Data, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Arg2Data.0.1.0\lib\net40\Arg2Data.dll</HintPath>
     </Reference>
-    <Reference Include="ArgData, Version=0.16.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ArgData.0.16.1\lib\net40\ArgData.dll</HintPath>
+    <Reference Include="ArgData, Version=0.17.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ArgData.0.17.0\lib\net40\ArgData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -87,6 +87,7 @@
     <Compile Include="Commands\Tracks\EditTrackObjectSettingsCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackObjectShapeCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackSectionCommand.cs" />
+    <Compile Include="Commands\Tracks\InsertTrackSectionCommand.cs" />
     <Compile Include="Commands\Tracks\LoadHorizonFromFileCommand.cs" />
     <Compile Include="Commands\Tracks\LoadTrackCommand.cs" />
     <Compile Include="Commands\Tracks\SaveHorizonToFileCommand.cs" />

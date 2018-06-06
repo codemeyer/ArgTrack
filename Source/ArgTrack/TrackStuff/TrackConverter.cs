@@ -37,7 +37,7 @@ namespace ArgTrack.TrackStuff
             //templateSourceTrack.PitLaneSections = gp2Track.PitLaneSections;
             // TODO: BestLine
 
-            TrackWriter.Write(templateSourceTrack, outputPath);
+            new TrackWriter().Write(templateSourceTrack, outputPath);
         }
         
         private static ArgData.Entities.TrackSide ConvertGp2TrackSide(Arg2Data.Entities.TrackSide trackSideGp2)
