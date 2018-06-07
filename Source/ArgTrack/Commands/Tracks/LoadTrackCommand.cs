@@ -40,6 +40,7 @@ namespace ArgTrack.Commands.Tracks
                 var viewModel = Mappers.TrackMapper.MapEntireTrackToViewModel(track);
                 // blergh
                 TrackViewModelPasserArounder.TrackViewModel = viewModel;
+                MainViewModelPasserArounder.MainViewModel.HasLoadedTrack = true;
 
                 vm.Track = viewModel;
             }

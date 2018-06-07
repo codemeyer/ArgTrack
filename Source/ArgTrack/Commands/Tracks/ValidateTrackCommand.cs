@@ -41,6 +41,13 @@ namespace ArgTrack.Commands.Tracks
 
             window.ShowDialog();
         }
+
+        public override bool CanExecute(object parameter)
+        {
+            var mvm = parameter as MainViewModel;
+
+            return mvm.HasLoadedTrack;
+        }
     }
 
     public class TrackValidator

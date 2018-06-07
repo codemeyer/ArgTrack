@@ -33,6 +33,15 @@ namespace ArgTrack.ViewModels
         //public ICommand RedoBrokerCommand { get; } = new RedoBrokerCommand();
 
 
+        private bool _hasLoadedTrack;
+
+        public bool HasLoadedTrack
+        {
+            get { return _hasLoadedTrack; }
+            set { SetProperty(ref _hasLoadedTrack, value, () => HasLoadedTrack); }
+        }
+
+
         public string Error { get; }
 
         public string this[string columnName]
