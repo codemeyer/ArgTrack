@@ -7,7 +7,9 @@
         xmlns:tracks="clr-namespace:ArgTrack.Commands.Tracks"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=tracks:TrackValidationViewModel, IsDesignTimeCreatable=True}"
-        Title="Track Validation" Height="300" Width="400">
+        Title="Track Validation"
+        WindowStartupLocation="CenterOwner"
+        Width="640" Height="400">
     <Grid>
         <StackPanel Orientation="Vertical">
             <ListView Height="260" Margin="5" ItemsSource="{Binding Results}" IsSynchronizedWithCurrentItem="True">
@@ -18,7 +20,7 @@
                 </ListView.InputBindings>-->
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Message" Width="260">
+                        <GridViewColumn Header="Message" Width="580">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Message}">

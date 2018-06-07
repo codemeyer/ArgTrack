@@ -19,7 +19,12 @@ namespace ArgTrack.ViewModels
         public ICommand ExitApplicationCommand { get; } = new ExitApplicationCommand();
 
         public ICommand HelpDocsCommand { get; } = new HelpDocsCommand();
-        
+
+        public ICommand ValidateTrackCommand { get; } = new ValidateTrackCommand();
+        public ICommand ConvertTrackCommand { get; } = new ConvertTrackCommand(new FileDialog());
+
+        public ICommand OpenAboutTabCommand { get; } = new OpenAboutTabCommand();
+
         public ICommand ShowWarningMessageCommand { get; } = new ShowWarningMessageCommand();
         public ICommand ShowErrorMessageCommand { get; } = new ShowErrorMessageCommand();
         public ICommand ShowMessageCommand { get; } = new ShowMessageCommand();

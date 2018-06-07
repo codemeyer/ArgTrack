@@ -21,7 +21,23 @@
         <KeyBinding Key="Y" Modifiers="Control" Command="{Binding RedoBrokerCommand}" CommandParameter="{Binding}"></KeyBinding>-->
     </Window.InputBindings>
     <Grid Margin="0" Background="#204161">
-        <TabControl Margin="5,5,5,5" TabStripPlacement="Left" SelectedIndex="{Binding SelectedMainTabIndex}">
+        <Menu HorizontalAlignment="Left" VerticalAlignment="Top" Width="1200">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" Command="{Binding LoadTrackCommand}" CommandParameter="{Binding}"></MenuItem>
+                <MenuItem Header="_Save" Command="{Binding SaveTrackCommand}" CommandParameter="{Binding}"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="E_xit" Command="{Binding ExitApplicationCommand}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="_Validate Track" Command="{Binding ValidateTrackCommand}" CommandParameter="{Binding}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="View _Help" Command="{Binding HelpDocsCommand}"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="_About ArgEditor" Command="{Binding OpenAboutTabCommand}" CommandParameter="{Binding}"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TabControl Margin="5,25,5,5" TabStripPlacement="Left" SelectedIndex="{Binding SelectedMainTabIndex}">
             <TabItem Height="40" Width="60" Margin="0,0,0,0">
                 <TabItem.Header>
                     <Path Width="40" Height="26" Stretch="Fill" Canvas.Left="-21" Canvas.Top="-14" StrokeThickness="2" Stroke="#000" StrokeMiterLimit="10">

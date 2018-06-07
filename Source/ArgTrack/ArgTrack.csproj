@@ -69,6 +69,7 @@
     <Compile Include="Commands\Application\CheckForUpdateCommand.cs" />
     <Compile Include="Commands\Application\ExitApplicationCommand.cs" />
     <Compile Include="Commands\Application\HelpDocsCommand.cs" />
+    <Compile Include="Commands\Application\OpenAboutTabCommand.cs" />
     <Compile Include="Commands\Application\OpenArgDataPageCommand.cs" />
     <Compile Include="Commands\Application\OpenDownloadPageCommand.cs" />
     <Compile Include="Commands\Application\ShowMessageCommand.cs" />

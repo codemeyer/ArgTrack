@@ -107,8 +107,6 @@ namespace ArgTrack.ViewModels.Track
 
         public ICommand LoadTrackCommand { get; } = new LoadTrackCommand(new FileDialog());
         public ICommand SaveTrackCommand { get; } = new SaveTrackCommand(new FileDialog());
-        public ICommand ValidateTrackCommand { get; } = new ValidateTrackCommand();
-        public ICommand ConvertTrackCommand { get; } = new ConvertTrackCommand(new FileDialog());
         public ICommand AddTrackSectionCommand { get; } = new AddTrackSectionCommand();
         public ICommand InsertTrackSectionCommand { get; } = new InsertTrackSectionCommand();
         public ICommand DeleteTrackSectionCommand { get; } = new DeleteTrackSectionCommand();
