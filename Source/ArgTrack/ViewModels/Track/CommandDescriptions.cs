@@ -116,7 +116,7 @@ namespace ArgTrack.ViewModels.Track
                 {
                     0x85, new Dictionary<int, string>
                     {
-                        { 0, "Distance from start of sector" },
+                        { 0, "Distance from start of sector?" },
                         { 1, "Transition length" },
                         { 2, "New width" }
                     }
@@ -133,22 +133,126 @@ namespace ArgTrack.ViewModels.Track
                         { 0, "Unknown/unused?" }
                     }
                 },
-                //{0x88, "TODO"},
-                //{0x89, "TODO"},
-                //{0x8a, "TODO"},
-                //{0x8b, "TODO"},
-                //{0x8c, "TODO"},
-                //{0x8d, "TODO"},
-                //{0x8e, "TODO"},
-                //{0x8f, "TODO"},
-                //{0x90, "TODO"},
-                //{0x91, "TODO"},
-                //{0x92, "TODO"},
-                //{0x93, "TODO"},
-                //{0x94, "TODO"},
-                //{0x95, "TODO"},
-                //{0x96, "TODO"},
-                //{0x97, "TODO"},
+                {
+                    0x88, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" },
+                        { 1, "Length of zone marking?" }
+                    }
+                },
+                {
+                    0x89, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" },
+                        { 1, "Length of zone marking?" }
+                    }
+                },
+                {
+                    0x8A, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" },
+                        { 1, "Unknown" },
+                        { 2, "Length of zone marking?" },
+                        { 3, "Unknown" },
+                        { 4, "Unknown" },
+                        { 5, "Unknown" }
+                    }
+                },
+                {
+                    0x8B, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" },
+                        { 1, "Unknown" },
+                        { 2, "Width or length of grid markings?" },
+                        { 3, "Unknown" },
+                        { 4, "Unknown" },
+                        { 5, "Unknown" }
+                    }
+                },
+                {
+                    0x8C, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown?" },
+                        { 1, "Length?" }
+                    }
+                },
+                {
+                    0x8D, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown?" },
+                        { 1, "Length?" }
+                    }
+                },
+                {
+                    0x8E, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" },
+                        { 1, "Offset into sector" },
+                        { 2, "Length" }
+                    }
+                },
+                {
+                    0x8F, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" },
+                        { 1, "Offset into sector" },
+                        { 2, "Length" }
+                    }
+                },
+                {
+                    0x90, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" },
+                        { 1, "Unknown" }
+                    }
+                },
+                {
+                    0x91, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" },
+                        { 1, "Unknown" }
+                    }
+                },
+                {
+                    0x92, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" },
+                        { 1, "Unknown" }
+                    }
+                },
+                {
+                    0x93, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" },
+                        { 1, "Unknown" }
+                    }
+                },
+                {
+                    0x94, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" },
+                        { 1, "Coaching factor" }
+                    }
+                },
+                {
+                    0x95, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" },
+                        { 1, "Coaching factor" }
+                    }
+                },
+                {
+                    0x96, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" }
+                    }
+                },
+                {
+                    0x97, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" }
+                    }
+                },
                 {
                     0x98, new Dictionary<int, string>
                     {
@@ -163,21 +267,102 @@ namespace ArgTrack.ViewModels.Track
                         { 1, "Height modification" }
                     }
                 },
-                //{0x9a, "TODO"},
-                //{0x9b, "TODO"},
-                //{0x9c, "TODO"},
-                //{0x9d, "TODO"},
-                //{0x9e, "TODO"},
-                //{0x9f, "TODO"},
-                //{0xa0, "TODO"},
-                //{0xa1, "TODO"},
-                //{0xa2, "TODO"},
-                //{0xa3, "TODO"},
-                //{0xa4, "TODO"},
-                //{0xa5, "TODO"},
-                //{0xa6, "TODO"},
-                //{0xa7, "TODO"},
-                //{0xa8, "TODO"},
+                {
+                    0x9A, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" },
+                        { 1, "Height identifier" },
+                        { 2, "New height value" }
+                    }
+                },
+                {
+                    0x9B, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" }
+                    }
+                },
+                {
+                    0x9C, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" }
+                    }
+                },
+                {
+                    0x9D, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" }
+                    }
+                },
+                {
+                    0x9E, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" }
+                    }
+                },
+                {
+                    0x9F, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" }
+                    }
+                },
+                {
+                    0xA0, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" }
+                    }
+                },
+                {
+                    0xA1, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" }
+                    }
+                },
+                {
+                    0xA2, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" }
+                    }
+                },
+                {
+                    0xA3, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" }
+                    }
+                },
+                {
+                    0xA4, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" }
+                    }
+                },
+                {
+                    0xA5, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" }
+                    }
+                },
+                {
+                    0xA6, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" },
+                        { 1, "Unknown" },
+                        { 2, "Unknown" }
+                    }
+                },
+                {
+                    0xA7, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" },
+                        { 1, "Unknown" },
+                        { 2, "Unknown" }
+                    }
+                },
+                {
+                    0xA8, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" }
+                    }
+                },
                 {
                     0xa9, new Dictionary<int, string>
                     {
@@ -185,8 +370,23 @@ namespace ArgTrack.ViewModels.Track
                         { 1, "Distance" }
                     }
                 },
-                //{0xaa, "TODO"},
-                //{0xab, "TODO"},
+                {
+                    0xAA, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown/unused?" },
+                        { 1, "Length for computer cars to angle towards pitlane (backwards)?" },
+                        { 2, "Length for computer cars to angle out of pits?" },
+                        { 3, "Computer car pit lane speed" }
+                    }
+                },
+                {
+                    0xAB, new Dictionary<int, string>
+                    {
+                        { 0, "Unknown" },
+                        { 1, "Unknown" },
+                        { 2, "Unknown" }
+                    }
+                },
                 {
                     0xac, new Dictionary<int, string>
                     {
