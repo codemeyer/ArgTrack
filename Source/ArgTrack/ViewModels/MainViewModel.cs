@@ -21,7 +21,7 @@ namespace ArgTrack.ViewModels
         public ICommand HelpDocsCommand { get; } = new HelpDocsCommand();
 
         public ICommand ValidateTrackCommand { get; } = new ValidateTrackCommand();
-        public ICommand ConvertTrackCommand { get; } = new ConvertTrackCommand(new FileDialog());
+        public ICommand ConvertTrackCommand { get; } = new ConvertTrackCommand();
 
         public ICommand OpenAboutTabCommand { get; } = new OpenAboutTabCommand();
 

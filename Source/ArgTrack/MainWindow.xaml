@@ -30,6 +30,7 @@
             </MenuItem>
             <MenuItem Header="_Tools">
                 <MenuItem Header="_Validate Track" Command="{Binding ValidateTrackCommand}" CommandParameter="{Binding}"></MenuItem>
+                <MenuItem Header="_Convert GP2 Track..." Command="{Binding ConvertTrackCommand}" CommandParameter="{Binding}"></MenuItem>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="View _Help" Command="{Binding HelpDocsCommand}"></MenuItem>

@@ -8,7 +8,13 @@ namespace ArgTrack.Commands.Tracks
 {
     public class LoadTrackCommand : CommandBase
     {
+        private string _path;
         private readonly IFileDialog _fileDialog;
+
+        public LoadTrackCommand(string path)
+        {
+            _path = path;
+        }
 
         public LoadTrackCommand(IFileDialog fileDialog)
         {
@@ -28,7 +34,12 @@ namespace ArgTrack.Commands.Tracks
                 vm = main.TrackTabViewModel;
             }
 
-            var path = _fileDialog.SelectDatFileToOpen();
+            var path = _path;
+
+            if (_fileDialog != null)
+            {
+                path = _fileDialog.SelectDatFileToOpen();
+            }
 
             if (string.IsNullOrWhiteSpace(path))
                 return;

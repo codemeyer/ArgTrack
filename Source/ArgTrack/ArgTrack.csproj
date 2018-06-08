@@ -150,6 +150,7 @@
     <Compile Include="ViewModels\AboutTabViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\TrackConversionViewModel.cs" />
     <Compile Include="ViewModels\Track\BestLineSegmentViewModel.cs" />
     <Compile Include="ViewModels\Track\BillboardObjects.cs" />
     <Compile Include="ViewModels\Track\CommandDescriptions.cs" />
@@ -169,6 +170,9 @@
     </Compile>
     <Compile Include="Windows\Track\TrackCommandDetailsWindow.xaml.cs">
       <DependentUpon>TrackCommandDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackConversionWindow.xaml.cs">
+      <DependentUpon>TrackConversionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Track\TrackGenericByteListDetailsWindow.xaml.cs">
       <DependentUpon>TrackGenericByteListDetailsWindow.xaml</DependentUpon>
@@ -255,6 +259,10 @@
     <Page Include="Windows\Track\TrackCommandDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackConversionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Track\TrackGenericByteListDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

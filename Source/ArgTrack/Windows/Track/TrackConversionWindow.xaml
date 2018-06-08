@@ -1,0 +1,79 @@
+﻿<Window x:Class="ArgTrack.Windows.Track.TrackConversionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArgTrack.Windows.Track"
+        xmlns:viewModels="clr-namespace:ArgTrack.ViewModels"
+        mc:Ignorable="d"
+        Title="ArgTrack"
+        d:DataContext="{d:DesignInstance Type=viewModels:TrackConversionViewModel, IsDesignTimeCreatable=False}"
+        ShowInTaskbar="False" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Width="500" Height="450">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="5">
+
+            <StackPanel Orientation="Horizontal">
+                <Label Width="140">Source GP2 Track</Label>
+                <TextBox Width="240" Height="22" Text="{Binding SourceTrackPath}"></TextBox>
+                <Button Margin="5,0,0,0" Width="64" Height="22" Click="BrowseSourceTrack_OnClick">Browse...</Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Width="140">Template F1GP Track</Label>
+                <TextBox Width="240" Height="22" Text="{Binding TemplateTrackPath}"></TextBox>
+                <Button Margin="5,0,0,0" Width="64" Height="22" Click="BrowseTemplateTrack_OnClick">Browse...</Button>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Label Width="140">New F1GP Track</Label>
+                <TextBox Width="240" Height="22" Text="{Binding TargetTrackPath}"></TextBox>
+                <Button Margin="5,0,0,0" Width="64" Height="22" Click="BrowseTargetTrack_OnClick">Browse...</Button>
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Label>Data that will be converted from the GP2 track</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5,0">
+                        - Track Sections<LineBreak />
+                        - Pit Lane Sections<LineBreak />
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label>Data that will be copied from the F1GP template track</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5,0">
+                        - Header info (kerb colors, etc)<LineBreak />
+                        - Best Line Segments<LineBreak />
+                        - Object Settings<LineBreak />
+                        - Object Shapes<LineBreak />
+                        - Horizon<LineBreak />
+                        - Computer Car Setup<LineBreak />
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label>Misc information</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5,0">
+                        <!-- Add note about removed track commands? -->
+                        The newly created file will be opened after conversion is complete.
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel Margin="5" Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Width="70" Height="22" Margin="3" IsDefault="True" Content="OK" Click="Button_Click"></Button>
+            <Button Width="70" Height="22" Margin="3" IsCancel="True" Content="Cancel"></Button>
+        </StackPanel>
+
+    </Grid>
+</Window>

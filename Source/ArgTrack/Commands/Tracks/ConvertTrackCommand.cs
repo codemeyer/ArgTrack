@@ -1,26 +1,40 @@
-﻿using System;
+﻿using System.Windows;
+using ArgTrack.TrackStuff;
+using ArgTrack.ViewModels;
+using ArgTrack.Windows.Track;
 
 namespace ArgTrack.Commands.Tracks
 {
-    // ReSharper disable once InconsistentNaming
     public class ConvertTrackCommand : CommandBase
     {
-        private IFileDialog _fileDialog;
-
-        public ConvertTrackCommand(IFileDialog fileDialog)
-        {
-            _fileDialog = fileDialog;
-        }
-
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            var vm = parameter as MainViewModel;
 
-            // TODO: open convert-window
-            //  there you choose: GP2 track, F1GP "base" track and new file name
-            //  then what to convert: Track Sections, Pit Lane Sections only available to start with
-            // TODO: retrieve TrackConversionViewModel and see what should be converted
-            // TODO: load the new file
+            if (vm == null)
+                return;
+
+            var viewModel = new TrackConversionViewModel();
+
+            var window = new TrackConversionWindow
+            {
+                Owner = Application.Current.MainWindow,
+                DataContext = viewModel
+            };
+
+            var update = window.ShowDialog();
+
+            if (update.HasValue && update.Value)
+            {
+                var sourceTrack = Arg2Data.TrackReader.Read(viewModel.SourceTrackPath);
+                var templateTrack = new ArgData.TrackReader().Read(viewModel.TemplateTrackPath);
+                var outputPath = viewModel.TargetTrackPath;
+
+                TrackConverter.ConvertGP2ToF1GP(sourceTrack, templateTrack, outputPath);
+
+                LoadTrackCommand cmd = new LoadTrackCommand(outputPath);
+                cmd.Execute(vm);
+            }
         }
     }
 }
