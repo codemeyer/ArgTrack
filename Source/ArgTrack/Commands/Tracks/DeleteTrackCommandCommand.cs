@@ -1,3 +1,4 @@
+using System.Linq;
 using ArgTrack.ViewModels.Track;
 
 namespace ArgTrack.Commands.Tracks
@@ -14,6 +15,16 @@ namespace ArgTrack.Commands.Tracks
             // confirmation?
 
             vm.Commands.RemoveAt(vm.SelectedTrackCommandIndex);
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            var vm = parameter as TrackSectionViewModel;
+
+            if (vm == null)
+                return false;
+
+            return vm.Commands.Any();
         }
     }
 }
