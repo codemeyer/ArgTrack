@@ -72,6 +72,7 @@
     <Compile Include="Commands\Application\OpenAboutTabCommand.cs" />
     <Compile Include="Commands\Application\OpenArgDataPageCommand.cs" />
     <Compile Include="Commands\Application\OpenDownloadPageCommand.cs" />
+    <Compile Include="Commands\Application\OpenOtherSiteCommand.cs" />
     <Compile Include="Commands\Application\ShowMessageCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\Tracks\AddBestLineSegmentCommand.cs" />

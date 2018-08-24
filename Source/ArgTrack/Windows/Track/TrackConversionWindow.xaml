@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ArgTrack.Windows.Track"
         xmlns:viewModels="clr-namespace:ArgTrack.ViewModels"
         mc:Ignorable="d"
-        Title="ArgTrack"
+        Title="GP2 Track Conversion"
         d:DataContext="{d:DesignInstance Type=viewModels:TrackConversionViewModel, IsDesignTimeCreatable=False}"
         ShowInTaskbar="False" ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"

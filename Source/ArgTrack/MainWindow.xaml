@@ -7,11 +7,12 @@
         xmlns:tracks="clr-namespace:ArgTrack.UserControls.Tracks"
         xmlns:userControls="clr-namespace:ArgTrack.UserControls"
         WindowStartupLocation="Manual"
+        ResizeMode="CanMinimize"
         mc:Ignorable="d"
         Icon="Resources/argtrack.ico"
         Title="ArgTrack"
-        MinWidth="990" MinHeight="716"
-        Width="990" Height="716">
+        MinWidth="990" MinHeight="728"
+        Width="990" Height="728">
     <Window.InputBindings>
         <KeyBinding Key="O" Modifiers="Control" Command="{Binding LoadTrackCommand}" CommandParameter="{Binding}"></KeyBinding>
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveTrackCommand}" CommandParameter="{Binding}"></KeyBinding>

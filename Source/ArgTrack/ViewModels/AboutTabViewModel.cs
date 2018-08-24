@@ -55,6 +55,8 @@ namespace ArgTrack.ViewModels
         public ICommand CheckForUpdateCommand { get; } = new CheckForUpdateCommand();
         public ICommand OpenDownloadPageCommand { get; } = new OpenDownloadPageCommand();
         public ICommand HelpDocsCommand { get; } = new HelpDocsCommand();
-        public ICommand OpenArgDataPageCommand { get; } = new OpenArgDataPageCommand();
+        public ICommand OpenArgToolsSiteCommand { get; } = new OpenOtherSiteCommand("http://www.argtools.com");
+        public ICommand OpenFanSiteCommand { get; } = new OpenOtherSiteCommand("https://sites.google.com/view/f1gpwc");
+        public ICommand OpenGoogleGroupSiteCommand { get; } = new OpenOtherSiteCommand("https://groups.google.com/forum/#!forum/f1gpwc");
     }
 }

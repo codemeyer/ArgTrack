@@ -9,26 +9,17 @@
         d:DataContext="{d:DesignInstance Type=tracks:TrackValidationViewModel, IsDesignTimeCreatable=True}"
         Title="Track Validation"
         WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False" ResizeMode="NoResize"
         Width="640" Height="400">
     <Grid>
         <StackPanel Orientation="Vertical">
             <ListView Height="260" Margin="5" ItemsSource="{Binding Results}" IsSynchronizedWithCurrentItem="True">
-                <!--<ListView.InputBindings>
-                    <KeyBinding Key="Enter"
-                            Command="{Binding EditTrackSectionCommand}"
-                            CommandParameter="{Binding TrackSections/}"></KeyBinding>
-                </ListView.InputBindings>-->
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Message" Width="580">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Message}">
-                                        <TextBlock.InputBindings>
-                                            <MouseBinding MouseAction="LeftDoubleClick"
-                                                      Command="{Binding EditTrackSectionCommand}"
-                                                      CommandParameter="{Binding}"></MouseBinding>
-                                        </TextBlock.InputBindings>
                                     </TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

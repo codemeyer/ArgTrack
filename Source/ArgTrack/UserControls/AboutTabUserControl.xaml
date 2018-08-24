@@ -39,9 +39,23 @@
                                 <TextBlock Margin="5">
                                     Website: <Hyperlink Command="{Binding HelpDocsCommand}">www.argtools.com/argtrack</Hyperlink>
                                 </TextBlock>
-
                             </StackPanel>
                         </GroupBox>
+
+                        <GroupBox Margin="5" Header="Related Sites">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Margin="5">
+                                    ArgTools: <Hyperlink Command="{Binding OpenArgToolsSiteCommand}">www.argtools.com</Hyperlink>
+                                </TextBlock>
+                                <TextBlock Margin="5,0,0,5">
+                                    F1GP Fan Site: <Hyperlink Command="{Binding OpenFanSiteCommand}">sites.google.com/view/f1gpwc</Hyperlink>
+                                </TextBlock>
+                                <TextBlock Margin="5,0">
+                                    F1GP Google Group: <Hyperlink Command="{Binding OpenGoogleGroupSiteCommand}">groups.google.com/forum/#!forum/f1gpwc</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                        </GroupBox>
+
                         <GroupBox Margin="5" Header="Credits">
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Margin="5" TextWrapping="Wrap">
