@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ArgTrack.Commands.Tracks;
 using ArgTrack.ViewModels.Track;
@@ -8,6 +9,7 @@ namespace ArgTrack.UserControls.Tracks
     /// <summary>
     /// Interaction logic for TrackBestLineUserControl.xaml
     /// </summary>
+    [Obsolete("Replaced by a window")]
     public partial class TrackBestLineUserControl : UserControl
     {
         public TrackBestLineUserControl()

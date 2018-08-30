@@ -13,7 +13,7 @@ namespace ArgTrack.Commands.Tracks
             if (vm == null)
                 return;
 
-            var newSection = new TrackSectionViewModel();
+            var newSection = new TrackSectionViewModel(vm.PitLaneSections);
 
             var window = new TrackSectionDetailsWindow
             {

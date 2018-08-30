@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ArgTrack.Commands.Tracks;
 using ArgTrack.ViewModels.Track;
@@ -8,6 +9,7 @@ namespace ArgTrack.UserControls.Tracks
     /// <summary>
     /// Interaction logic for TrackSectionsUserControl.xaml
     /// </summary>
+    [Obsolete("Has been replaced by the TrackSectionListWindow")]
     public partial class TrackSectionsUserControl : UserControl
     {
         public TrackSectionsUserControl()

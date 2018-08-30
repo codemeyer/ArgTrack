@@ -1,10 +1,12 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ArgTrack.Commands.Tracks;
 using ArgTrack.ViewModels.Track;
 
 namespace ArgTrack.UserControls.Tracks
 {
+    [Obsolete("Has been replaced by a window")]
     public partial class TrackObjectSettingsUserControl : UserControl
     {
         public TrackObjectSettingsUserControl()

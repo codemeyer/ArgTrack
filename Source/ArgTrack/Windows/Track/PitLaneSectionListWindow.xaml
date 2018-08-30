@@ -1,0 +1,119 @@
+﻿<Window x:Class="ArgTrack.Windows.Track.PitLaneSectionListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:track="clr-namespace:ArgTrack.ViewModels.Track"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=track:TrackViewModel, IsDesignTimeCreatable=True}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Width="900" Height="610"
+        Title="Pit Lane Sections">
+    <Grid Width="880" Height="590">
+        <StackPanel Orientation="Vertical">
+            <ListView Height="560" Margin="5" ItemsSource="{Binding PitLaneSections}" IsSynchronizedWithCurrentItem="True"
+                  MouseDoubleClick="Control_OnMouseDoubleClick" SelectedIndex="{Binding SelectedTrackSectionIndex}">
+                <ListView.InputBindings>
+                    <KeyBinding Key="Enter"
+                            Command="{Binding EditTrackSectionCommand}"
+                            CommandParameter="{Binding TrackSections/}"></KeyBinding>
+                </ListView.InputBindings>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Index" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding Index}">
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding MouseAction="LeftDoubleClick"
+                                                      Command="{Binding EditTrackSectionCommand}"
+                                                      CommandParameter="{Binding}"></MouseBinding>
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Length" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding Length}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Height" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding Height}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Curvature" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding Curvature}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Left" Text="{Binding CurvatureDescription}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Left Verge" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding LeftVergeWidth}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+
+                        <GridViewColumn Header="Right Verge" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding RightVergeWidth}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Cmds#" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding Commands.Count}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Description" Width="260">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                <!--<ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="Length: " />
+                        <TextBlock Text="{Binding Length}" FontWeight="Bold" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>-->
+            </ListView>
+            <!--<StackPanel Orientation="Horizontal" Margin="0,-5">
+                <Label>Total Length:</Label>
+                <Label Content="{Binding TotalLengthText}"></Label>
+            </StackPanel>-->
+        </StackPanel>
+    </Grid>
+</Window>

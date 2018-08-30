@@ -1,4 +1,5 @@
 ﻿using ArgData;
+using ArgTrack.AppStuff;
 using ArgTrack.ViewModels;
 using ArgTrack.ViewModels.Track;
 
@@ -15,6 +16,7 @@ namespace ArgTrack.Commands.Tracks
 
         public override void Execute(object parameter)
         {
+            // TODO: MainViewModel directly?
             var vm = parameter as TrackTabViewModel;
 
             if (vm == null)
@@ -34,6 +36,22 @@ namespace ArgTrack.Commands.Tracks
             var track = Mappers.TrackMapper.MapEntireTrackViewModelToTrack(vm.Track);
 
             new TrackWriter().Write(track, path);
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            var vm = parameter as TrackTabViewModel;
+
+            if (vm == null)
+            {
+                var main = parameter as MainViewModel;
+                if (main == null)
+                    return false;
+
+                return main.HasLoadedTrack;
+            }
+
+            return false;
         }
     }
 }

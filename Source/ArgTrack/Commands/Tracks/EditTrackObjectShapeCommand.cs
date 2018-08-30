@@ -36,4 +36,17 @@ namespace ArgTrack.Commands.Tracks
             }
         }
     }
+
+    public class EditHorizonCommand : CommandBase
+    {
+        public override void Execute(object parameter)
+        {
+            // TODO: in command?
+            var horizWindow = new HorizonWindow();
+            horizWindow.DataContext = MainViewModelPasserArounder.MainViewModel.TrackViewModel;
+            horizWindow.ShowDialog();
+
+
+        }
+    }
 }

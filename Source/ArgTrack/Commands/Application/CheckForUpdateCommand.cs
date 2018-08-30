@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ArgTrack.AppStuff;
 using ArgTrack.ViewModels;
 
 namespace ArgTrack.Commands
@@ -7,9 +8,7 @@ namespace ArgTrack.Commands
     {
         public override void Execute(object parameter)
         {
-            var viewModel = parameter as AboutTabViewModel;
-
-            if (viewModel == null) return;
+            var viewModel = parameter as AboutViewModel;
 
             viewModel.VersionUnableToRetrieveLabel = Visibility.Collapsed;
             viewModel.VersionLatestLabel = Visibility.Collapsed;

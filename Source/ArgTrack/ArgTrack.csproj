@@ -69,16 +69,20 @@
     <Compile Include="Commands\Application\CheckForUpdateCommand.cs" />
     <Compile Include="Commands\Application\ExitApplicationCommand.cs" />
     <Compile Include="Commands\Application\HelpDocsCommand.cs" />
-    <Compile Include="Commands\Application\OpenAboutTabCommand.cs" />
+    <Compile Include="Commands\Application\OpenAboutWindowCommand.cs" />
     <Compile Include="Commands\Application\OpenArgDataPageCommand.cs" />
     <Compile Include="Commands\Application\OpenDownloadPageCommand.cs" />
     <Compile Include="Commands\Application\OpenOtherSiteCommand.cs" />
     <Compile Include="Commands\Application\ShowMessageCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\Model\ComputerCarLineSegments\AddComputerCarLineSegmentCommand.cs" />
+    <Compile Include="Commands\Model\ComputerCarLineSegments\EditComputerCarLineSegmentCommand.cs" />
+    <Compile Include="Commands\Model\ComputerCarLineSegments\InsertComputerCarLineSegmentCommand.cs" />
+    <Compile Include="Commands\Model\TrackSections\RemoveTrackSectionCommand.cs" />
     <Compile Include="Commands\Tracks\AddBestLineSegmentCommand.cs" />
     <Compile Include="Commands\Tracks\AddObjectSettingsCommand.cs" />
     <Compile Include="Commands\Tracks\AddTrackCommandCommand.cs" />
-    <Compile Include="Commands\Tracks\AddTrackSectionCommand.cs" />
+    <Compile Include="Commands\Model\TrackSections\AddTrackSectionCommand.cs" />
     <Compile Include="Commands\Tracks\ConvertTrackCommand.cs" />
     <Compile Include="Commands\Tracks\DeleteBestLineSegmentCommand.cs" />
     <Compile Include="Commands\Tracks\DeleteTrackCommandCommand.cs" />
@@ -86,12 +90,15 @@
     <Compile Include="Commands\Tracks\EditBestLineCommand.cs" />
     <Compile Include="Commands\Tracks\EditGenericByteDataCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackCommandCommand.cs" />
+    <Compile Include="Commands\Tracks\EditTrackHeaderSettingsCommand.cs" />
+    <Compile Include="Commands\Tracks\EditTrackLayoutSettingsCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackObjectSettingsCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackObjectShapeCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackSectionCommand.cs" />
     <Compile Include="Commands\Tracks\InsertBestLineSegmentCommand.cs" />
     <Compile Include="Commands\Tracks\InsertPitLaneSectionCommand.cs" />
     <Compile Include="Commands\Tracks\InsertTrackSectionCommand.cs" />
+    <Compile Include="Commands\Model\TrackSections\InsertTrackSectionCommand.cs" />
     <Compile Include="Commands\Tracks\LoadHorizonFromFileCommand.cs" />
     <Compile Include="Commands\Tracks\LoadTrackCommand.cs" />
     <Compile Include="Commands\Tracks\MoveBestLineSegmentDownCommand.cs" />
@@ -100,22 +107,32 @@
     <Compile Include="Commands\Tracks\MovePitLaneSectionUpCommand.cs" />
     <Compile Include="Commands\Tracks\MoveTrackSectionDownCommand.cs" />
     <Compile Include="Commands\Tracks\MoveTrackSectionUpCommand.cs" />
+    <Compile Include="Commands\Tracks\OpenComputerCarRacingLineWindowCommand.cs" />
+    <Compile Include="Commands\Tracks\OpenObjectSettingsListWindowCommand.cs" />
+    <Compile Include="Commands\Tracks\OpenObjectShapesListWindowCommand.cs" />
+    <Compile Include="Commands\Tracks\OpenPitLaneSectionListWindowCommand.cs" />
+    <Compile Include="Commands\Tracks\OpenTrackSectionListWindowCommand.cs" />
+    <Compile Include="Commands\Model\RelativeLocation.cs" />
+    <Compile Include="Commands\Model\ComputerCarLineSegments\RemoveComputerCarLineSegmentCommand.cs" />
     <Compile Include="Commands\Tracks\SaveHorizonToFileCommand.cs" />
     <Compile Include="Commands\Tracks\SaveTrackCommand.cs" />
     <Compile Include="Commands\Tracks\ValidateTrackCommand.cs" />
+    <Compile Include="Commands\TrackView\ZoomTrackViewCommand.cs" />
     <Compile Include="Converters\EnumBooleanConverter.cs" />
-    <Compile Include="FileDialog.cs" />
+    <Compile Include="Converters\TreeViewIconEnumToImageConverter.cs" />
+    <Compile Include="AppStuff\FileDialog.cs" />
     <Compile Include="MainViewModelPasserArounder.cs" />
     <Compile Include="Mappers\Mapper.cs" />
     <Compile Include="Mappers\TrackMapper.cs" />
-    <Compile Include="PaletteHelper.cs" />
+    <Compile Include="AppStuff\PaletteHelper.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="TrackStuff\ComputerCarLineLayoutData.cs" />
+    <Compile Include="TrackStuff\LayoutCalculator.cs" />
+    <Compile Include="TrackStuff\LayoutConstants.cs" />
     <Compile Include="TrackStuff\TrackConverter.cs" />
+    <Compile Include="TrackStuff\UnitConvert.cs" />
     <Compile Include="UserControls\AboutTabUserControl.xaml.cs">
       <DependentUpon>AboutTabUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\CarSetup\CarSetupPairUserControl.xaml.cs">
-      <DependentUpon>CarSetupPairUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CarSetup\CarSetupUserControl.xaml.cs">
       <DependentUpon>CarSetupUserControl.xaml</DependentUpon>
@@ -147,12 +164,13 @@
     <Compile Include="UserControls\Tracks\TrackTabUserControl.xaml.cs">
       <DependentUpon>TrackTabUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="VersionChecker.cs" />
-    <Compile Include="ViewModels\AboutTabViewModel.cs" />
+    <Compile Include="AppStuff\VersionChecker.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\TrackConversionViewModel.cs" />
     <Compile Include="ViewModels\Track\BestLineSegmentViewModel.cs" />
+    <Compile Include="ViewModels\Track\BestLineSegmentViewModelCollection.cs" />
     <Compile Include="ViewModels\Track\BillboardObjects.cs" />
     <Compile Include="ViewModels\Track\CommandDescriptions.cs" />
     <Compile Include="ViewModels\Track\EditableByteData.cs" />
@@ -160,19 +178,44 @@
     <Compile Include="ViewModels\Track\SetupViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackCommandViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackHeaderViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackLayoutViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackObjectSettingsViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackObjectShapeViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackRawDataViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackSectionViewModel.cs" />
+    <Compile Include="TrackStuff\TrackSectionLayoutData.cs" />
+    <Compile Include="ViewModels\Track\TrackSectionViewModelCollection.cs" />
     <Compile Include="ViewModels\Track\TrackTabViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackViewModel.cs" />
+    <Compile Include="ViewModels\Track\TreeViewIconEnum.cs" />
+    <Compile Include="Windows\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CarSetupWindow.xaml.cs">
+      <DependentUpon>CarSetupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MainTreeWindow.xaml.cs">
+      <DependentUpon>MainTreeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\ComputerCarRacingLineWindow.xaml.cs">
+      <DependentUpon>ComputerCarRacingLineWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\HorizonWindow.xaml.cs">
+      <DependentUpon>HorizonWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\ObjectSettingsListWindow.xaml.cs">
+      <DependentUpon>ObjectSettingsListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\ObjectShapesListWindow.xaml.cs">
+      <DependentUpon>ObjectShapesListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Track\TrackBestLineDetailsWindow.xaml.cs">
       <DependentUpon>TrackBestLineDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Track\TrackCommandDetailsWindow.xaml.cs">
       <DependentUpon>TrackCommandDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackConversionWindow.xaml.cs">
+    <Compile Include="Windows\Tools\TrackConversionWindow.xaml.cs">
       <DependentUpon>TrackConversionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Track\TrackGenericByteListDetailsWindow.xaml.cs">
@@ -180,6 +223,12 @@
     </Compile>
     <Compile Include="Windows\Track\TrackGenericByteValueDetailsWindow.xaml.cs">
       <DependentUpon>TrackGenericByteValueDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackHeaderWindow.xaml.cs">
+      <DependentUpon>TrackHeaderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackLayoutWindow.xaml.cs">
+      <DependentUpon>TrackLayoutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Track\TrackObjectSettingsDetailsWindow.xaml.cs">
       <DependentUpon>TrackObjectSettingsDetailsWindow.xaml</DependentUpon>
@@ -190,8 +239,14 @@
     <Compile Include="Windows\Track\TrackSectionDetailsWindow.xaml.cs">
       <DependentUpon>TrackSectionDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackValidationWindow.xaml.cs">
+    <Compile Include="Windows\Tools\TrackValidationWindow.xaml.cs">
       <DependentUpon>TrackValidationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\PitLaneSectionListWindow.xaml.cs">
+      <DependentUpon>PitLaneSectionListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\TrackSectionListWindow.xaml.cs">
+      <DependentUpon>TrackSectionListWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -206,10 +261,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\AboutTabUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\CarSetup\CarSetupPairUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -253,6 +304,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CarSetupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainTreeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Track\ComputerCarRacingLineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Track\HorizonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Track\ObjectSettingsListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Track\ObjectShapesListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Track\TrackBestLineDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -261,7 +340,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\TrackConversionWindow.xaml">
+    <Page Include="Windows\Tools\TrackConversionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,6 +351,14 @@
     <Page Include="Windows\Track\TrackGenericByteValueDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackHeaderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackLayoutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Track\TrackObjectSettingsDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -285,7 +372,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\TrackValidationWindow.xaml">
+    <Page Include="Windows\Tools\TrackValidationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Track\PitLaneSectionListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\TrackSectionListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,6 +413,26 @@
   <ItemGroup>
     <Resource Include="Resources\argtrack.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ccline-straight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ccline-right.png" />
+    <Resource Include="Resources\pitlane-right.png" />
+    <Resource Include="Resources\pitlane-straight.png" />
+    <Resource Include="Resources\track-right.png" />
+    <Resource Include="Resources\track-straight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ccline-left.png" />
+    <Resource Include="Resources\pitlane-left.png" />
+    <Resource Include="Resources\track-left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\object-setting.png" />
+    <Resource Include="Resources\object-shape.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\BuildCommon.targets" />
   <Target Name="AfterResolveReferences">

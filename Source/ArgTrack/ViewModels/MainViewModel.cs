@@ -1,5 +1,8 @@
+using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
+using ArgTrack.AppStuff;
 using ArgTrack.Commands;
 using ArgTrack.Commands.Tracks;
 using ArgTrack.ViewModels.Track;
@@ -10,7 +13,7 @@ namespace ArgTrack.ViewModels
     {
         public MainViewModel()
         {
-            AboutTabViewModel = new AboutTabViewModel();
+            AboutTabViewModel = new AboutViewModel();
             TrackTabViewModel = new TrackTabViewModel();
         }
 
@@ -23,14 +26,17 @@ namespace ArgTrack.ViewModels
         public ICommand ValidateTrackCommand { get; } = new ValidateTrackCommand();
         public ICommand ConvertTrackCommand { get; } = new ConvertTrackCommand();
 
-        public ICommand OpenAboutTabCommand { get; } = new OpenAboutTabCommand();
+        public ICommand OpenAboutWindowCommand { get; } = new OpenAboutWindowCommand();
 
         public ICommand ShowWarningMessageCommand { get; } = new ShowWarningMessageCommand();
         public ICommand ShowErrorMessageCommand { get; } = new ShowErrorMessageCommand();
         public ICommand ShowMessageCommand { get; } = new ShowMessageCommand();
 
-        //public ICommand UndoBrokerCommand { get; } = new UndoBrokerCommand();
-        //public ICommand RedoBrokerCommand { get; } = new RedoBrokerCommand();
+        public ICommand OpenTrackSectionListWindowCommand { get; } = new OpenTrackSectionListWindowCommand();
+        public ICommand OpenPitLaneSectionListWindowCommand { get; } = new OpenPitLaneSectionListWindowCommand();
+        public ICommand OpenComputerCarRacingLineWindowCommand { get; } = new OpenComputerCarRacingLineWindowCommand();
+        public ICommand OpenObjectSettingsListWindowCommand { get; } = new OpenObjectSettingsListWindowCommand();
+        public ICommand OpenObjectShapesListWindowCommand { get; } = new OpenObjectShapesListWindowCommand();
 
 
         private bool _hasLoadedTrack;
@@ -38,9 +44,44 @@ namespace ArgTrack.ViewModels
         public bool HasLoadedTrack
         {
             get { return _hasLoadedTrack; }
-            set { SetProperty(ref _hasLoadedTrack, value, () => HasLoadedTrack); }
+            set
+            {
+                if (SetProperty(ref _hasLoadedTrack, value, () => HasLoadedTrack))
+                {
+                    UpdateTreeViewVisibility();
+                }
+            }
         }
 
+        private void UpdateTreeViewVisibility()
+        {
+            VisibleAtStartup = HasLoadedTrack ? Visibility.Hidden : Visibility.Visible;
+            VisibleWhenTrackHasBeenLoaded = HasLoadedTrack ? Visibility.Visible : Visibility.Hidden;
+        }
+
+
+
+        private Visibility _visibleAtStartup = Visibility.Visible;
+
+        public Visibility VisibleAtStartup
+        {
+            get { return _visibleAtStartup; }
+            set { SetProperty(ref _visibleAtStartup, value, () => VisibleAtStartup); }
+        }
+
+
+
+        private Visibility _visibleWhenTrackHasBeenLoaded = Visibility.Hidden;
+
+        public Visibility VisibleWhenTrackHasBeenLoaded
+        {
+            get { return _visibleWhenTrackHasBeenLoaded; }
+            set { SetProperty(ref _visibleWhenTrackHasBeenLoaded, value, () => VisibleWhenTrackHasBeenLoaded); }
+        }
+
+
+        //ShowNoTrackHasBeenLoadedMessage
+        //ShowTrackDataTreeView
 
         public string Error { get; }
 
@@ -52,17 +93,50 @@ namespace ArgTrack.ViewModels
             }
         }
 
-        public AboutTabViewModel AboutTabViewModel { get; set; }
 
+        [Obsolete("Delete after the tab-layout has been removed")]
+        public AboutViewModel AboutTabViewModel { get; set; }
+
+        [Obsolete("Delete after the tab-layout has been removed")]
         public TrackTabViewModel TrackTabViewModel { get; set; }
 
 
         private int _selectedMainTabIndex;
 
+        [Obsolete("Delete after the tab-layout has been removed")]
         public int SelectedMainTabIndex
         {
             get { return _selectedMainTabIndex; }
             set { SetProperty(ref _selectedMainTabIndex, value, () => SelectedMainTabIndex); }
+        }
+
+        private object _selectedTreeViewItem;
+
+        public object SelectedTreeViewItem
+        {
+            get { return _selectedTreeViewItem; }
+            set { SetProperty(ref _selectedTreeViewItem, value, () => SelectedTreeViewItem); }
+        }
+
+
+        // TODO: use this instead of the one under the TrackTabViewModel
+
+
+        private TrackViewModel _trackViewModel;
+
+        public TrackViewModel TrackViewModel
+        {
+            get { return _trackViewModel; }
+            set { SetProperty(ref _trackViewModel, value, () => TrackViewModel); }
+        }
+
+
+        private TrackLayoutViewModel _trackLayoutViewModel;
+
+        public TrackLayoutViewModel TrackLayoutViewModel
+        {
+            get { return _trackLayoutViewModel; }
+            set { SetProperty(ref _trackLayoutViewModel, value, () => TrackLayoutViewModel); }
         }
     }
 }

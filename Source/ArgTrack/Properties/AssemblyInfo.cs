@@ -8,7 +8,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Manicomio Software")]
 [assembly: AssemblyProduct("ArgTrack")]
-[assembly: AssemblyCopyright("Copyright © 2017-2018 Fredrik Meyer")]
+[assembly: AssemblyCopyright("Copyright © 2017-2019 Fredrik Meyer")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,5 +21,5 @@ using System.Windows;
 
 [assembly: InternalsVisibleTo("ArgTrack.Tests")]
 
-[assembly: AssemblyVersion("0.2.0.0")]
-[assembly: AssemblyFileVersion("0.2.0.0")]
+[assembly: AssemblyVersion("0.3.0.0")]
+[assembly: AssemblyFileVersion("0.3.0.0")]

@@ -14,7 +14,7 @@ namespace ArgTrack.Commands.Tracks
             if (vm == null)
                 return;
 
-            var clone = new TrackSectionViewModel();
+            var clone = new TrackSectionViewModel(vm.ParentList);
             TrackMapper.MapTrackSectionViewModel(vm, clone);
 
             var window = new TrackSectionDetailsWindow
@@ -30,6 +30,8 @@ namespace ArgTrack.Commands.Tracks
             {
                 // map clone to actual value
                 TrackMapper.MapTrackSectionViewModel(clone, vm);
+
+                // TODO: repaint 3D track! ie LayoutCalculator etc
             }
         }
     }

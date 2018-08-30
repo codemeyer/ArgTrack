@@ -1,10 +1,12 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ArgTrack.Mappers;
 using ArgTrack.ViewModels.Track;
 using ArgTrack.Windows.Track;
 
 namespace ArgTrack.Commands.Tracks
 {
+    [Obsolete("Only used by the legacy 'Data' view??")]
     public class EditBestLineCommand : CommandBase
     {
         public override void Execute(object parameter)
@@ -14,7 +16,7 @@ namespace ArgTrack.Commands.Tracks
             if (vm == null)
                 return;
 
-            var clone = new BestLineSegmentViewModel();
+            var clone = new BestLineSegmentViewModel(vm.ParentList);
             TrackMapper.MapTrackBestLineViewModel(vm, clone);
 
             var window = new TrackBestLineDetailsWindow

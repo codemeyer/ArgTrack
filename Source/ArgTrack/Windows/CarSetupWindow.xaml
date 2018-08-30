@@ -1,0 +1,231 @@
+﻿<Window x:Class="ArgTrack.Windows.CarSetupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArgTrack.Windows"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False" ResizeMode="NoResize"
+        Width="450" Height="350"
+        Title="Computer Car Setup">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <GroupBox Margin="5,5,5,5" Header="Wings">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="80">Front Wing</Label>
+                        <TextBox Width="30" Height="20" Background="LightGray" IsReadOnly="True"
+                                 Text="{Binding FrontWing}"></TextBox>
+                        <Slider Value="{Binding FrontWing}" Minimum="0" Maximum="64"
+                                SmallChange="1" LargeChange="5"
+                                Margin="40,3,10,0" Width="200"></Slider>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="80">Rear Wing</Label>
+                        <TextBox Width="30" Height="20" Background="LightGray" IsReadOnly="True"
+                                 Text="{Binding RearWing}"></TextBox>
+                        <Slider Value="{Binding RearWing}" Minimum="0" Maximum="64"
+                                SmallChange="1" LargeChange="5"
+                                Margin="40,3,10,0" Width="200">
+                        </Slider>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <!--<GroupBox Margin="5,5,5,5" Header="Brake Balance">
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="80">Balance</Label>
+                    <TextBox Width="30" Height="20" Background="LightGray" IsReadOnly="True"
+                             Text="{Binding BrakeBalance}"></TextBox>
+                    <Label Width="20" Margin="20,0,-10,0" HorizontalContentAlignment="Right">R</Label>
+                    <Slider
+                            Value="{Binding BrakeBalance}" Minimum="-32" Maximum="32"
+                            SmallChange="1" LargeChange="5"
+                            Margin="10,3,10,0" Width="200">
+                    </Slider>
+                    <Label Margin="-12,0,0,0">F</Label>
+                </StackPanel>
+            </GroupBox>-->
+
+            <GroupBox Margin="5,5,5,5" Header="Gear Ratios">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="80">1st Gear</Label>
+                        <TextBox Width="30" Height="20" Background="LightGray" IsReadOnly="True"
+                                 Text="{Binding GearRatio1}"></TextBox>
+                        <Slider
+                            Value="{Binding GearRatio1}" Minimum="16" Maximum="80"
+                            SmallChange="1" LargeChange="5"
+                            Margin="40,3,10,0" Width="200">
+                        </Slider>
+                        <Border Height="20" HorizontalAlignment="Left">
+                            <Border.Style>
+                                <Style>
+                                    <Setter Property="Border.BorderThickness" Value="0"/>
+                                    <Setter Property="Border.Width" Value="0" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IncorrectGearRatio1}" Value="True">
+                                            <Setter Property="Border.BorderThickness" Value="2"/>
+                                            <Setter Property="Border.Width" Value="2" />
+                                            <Setter Property="Border.BorderBrush" Value="Red" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="80">2nd Gear</Label>
+                        <TextBox Width="30" Height="20" Background="LightGray" IsReadOnly="True"
+                                 Text="{Binding GearRatio2}"></TextBox>
+                        <Slider
+                            Value="{Binding GearRatio2}" Minimum="16" Maximum="80"
+                            SmallChange="1" LargeChange="5"
+                            Margin="40,3,10,0" Width="200">
+                        </Slider>
+                        <Border Height="20" HorizontalAlignment="Left">
+                            <Border.Style>
+                                <Style>
+                                    <Setter Property="Border.BorderThickness" Value="0"/>
+                                    <Setter Property="Border.Width" Value="0" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IncorrectGearRatio2}" Value="True">
+                                            <Setter Property="Border.BorderThickness" Value="2"/>
+                                            <Setter Property="Border.Width" Value="2" />
+                                            <Setter Property="Border.BorderBrush" Value="Red" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="80">3rd Gear</Label>
+                        <TextBox Width="30" Height="20" Background="LightGray" IsReadOnly="True"
+                                 Text="{Binding GearRatio3}"></TextBox>
+                        <Slider
+                            Value="{Binding GearRatio3}" Minimum="16" Maximum="80"
+                            SmallChange="1" LargeChange="5"
+                            Margin="40,3,10,0" Width="200">
+                        </Slider>
+                        <Border Height="20" HorizontalAlignment="Left">
+                            <Border.Style>
+                                <Style>
+                                    <Setter Property="Border.BorderThickness" Value="0"/>
+                                    <Setter Property="Border.Width" Value="0" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IncorrectGearRatio3}" Value="True">
+                                            <Setter Property="Border.BorderThickness" Value="2"/>
+                                            <Setter Property="Border.Width" Value="2" />
+                                            <Setter Property="Border.BorderBrush" Value="Red" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="80">4th Gear</Label>
+                        <TextBox Width="30" Height="20" Background="LightGray" IsReadOnly="True"
+                                 Text="{Binding GearRatio4}"></TextBox>
+                        <Slider
+                            Value="{Binding GearRatio4}" Minimum="16" Maximum="80"
+                            SmallChange="1" LargeChange="5"
+                            Margin="40,3,10,0" Width="200">
+                        </Slider>
+                        <Border Height="20" HorizontalAlignment="Left">
+                            <Border.Style>
+                                <Style>
+                                    <Setter Property="Border.BorderThickness" Value="0"/>
+                                    <Setter Property="Border.Width" Value="0" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IncorrectGearRatio4}" Value="True">
+                                            <Setter Property="Border.BorderThickness" Value="2"/>
+                                            <Setter Property="Border.Width" Value="2" />
+                                            <Setter Property="Border.BorderBrush" Value="Red" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="80">5th Gear</Label>
+                        <TextBox Width="30" Height="20" Background="LightGray" IsReadOnly="True"
+                                 Text="{Binding GearRatio5}"></TextBox>
+                        <Slider
+                            Value="{Binding GearRatio5}" Minimum="16" Maximum="80"
+                            SmallChange="1" LargeChange="5"
+                            Margin="40,3,10,0" Width="200">
+                        </Slider>
+                        <Border Height="20" HorizontalAlignment="Left">
+                            <Border.Style>
+                                <Style>
+                                    <Setter Property="Border.BorderThickness" Value="0"/>
+                                    <Setter Property="Border.Width" Value="0" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IncorrectGearRatio5}" Value="True">
+                                            <Setter Property="Border.BorderThickness" Value="2"/>
+                                            <Setter Property="Border.Width" Value="2" />
+                                            <Setter Property="Border.BorderBrush" Value="Red" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="80">6th Gear</Label>
+                        <TextBox Width="30" Height="20" Background="LightGray" IsReadOnly="True"
+                                 Text="{Binding GearRatio6}"></TextBox>
+                        <Slider
+                            Value="{Binding GearRatio6}" Minimum="16" Maximum="80"
+                            SmallChange="1" LargeChange="5"
+                            Margin="40,3,10,0" Width="200">
+                        </Slider>
+                        <Border Height="20" HorizontalAlignment="Left">
+                            <Border.Style>
+                                <Style>
+                                    <Setter Property="Border.BorderThickness" Value="0"/>
+                                    <Setter Property="Border.Width" Value="0" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IncorrectGearRatio6}" Value="True">
+                                            <Setter Property="Border.BorderThickness" Value="2"/>
+                                            <Setter Property="Border.Width" Value="2" />
+                                            <Setter Property="Border.BorderBrush" Value="Red" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <!--<GroupBox Margin="5,5,5,5" Header="Tyre Compound">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="0,5,0,0">Dry Race Start Compound</Label>
+                        <RadioButton GroupName="{Binding TyreCompoundRadioButtonGroup}" Margin="20,10,10,10" IsChecked="{Binding IsTyreCompoundA}">A</RadioButton>
+                        <RadioButton GroupName="{Binding TyreCompoundRadioButtonGroup}" Margin="10,10,10,10" IsChecked="{Binding IsTyreCompoundB}">B</RadioButton>
+                        <RadioButton GroupName="{Binding TyreCompoundRadioButtonGroup}" Margin="10,10,10,10" IsChecked="{Binding IsTyreCompoundC}">C</RadioButton>
+                        <RadioButton GroupName="{Binding TyreCompoundRadioButtonGroup}" Margin="10,10,10,10" IsChecked="{Binding IsTyreCompoundD}">D</RadioButton>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>-->
+
+        </StackPanel>
+        <StackPanel Margin="5" Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Width="70" Height="22" Margin="3" IsDefault="True" Click="OKButton_OnClick"
+                    Content="OK"></Button>
+            <Button Width="70" Height="22" Margin="3" IsCancel="True" Click="CancelButton_OnClick"
+                    Content="Cancel"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

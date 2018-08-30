@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -6,13 +5,17 @@ using System.Linq;
 using System.Windows.Input;
 using ArgData.Entities;
 using ArgTrack.Commands.Tracks;
+using ArgTrack.TrackStuff;
 
 namespace ArgTrack.ViewModels.Track
 {
     public class TrackSectionViewModel : BaseViewModel
     {
-        public TrackSectionViewModel()
+        public TrackSectionViewModelCollection ParentList { get; }
+
+        public TrackSectionViewModel(TrackSectionViewModelCollection parentList)
         {
+            ParentList = parentList;
             SelectedTrackCommandValueToAdd = 0x80;
             UpdateCurvatureDescription();
         }
@@ -41,13 +44,12 @@ namespace ArgTrack.ViewModels.Track
 
         private void UpdateLengthDescription(byte length)
         {
-            int feet = length * 16;
-            double meters = Math.Round(feet * 0.3048, 2);
+            double meters = UnitConvert.TrackLengthToMeters(length);
 
             var cult = new CultureInfo("en-US");
             var meterz = meters.ToString("F", cult);
 
-            //LengthDescription = $"~{meters:F} meters ({feet} feet)";
+            int feet = length * 16;
             LengthDescription = $"~{meterz} meters ({feet} feet)";
         }
 
@@ -75,14 +77,27 @@ namespace ArgTrack.ViewModels.Track
             }
         }
 
+
+
+        // TODO: how to tell Track from PitLane here?
+
         private void UpdateCurvatureDescription()
         {
             if (Curvature < 0)
+            {
                 CurvatureDescription = "Left";
+                Icon = TreeViewIconEnum.TrackLeft;
+            }
             else if (Curvature > 0)
+            {
                 CurvatureDescription = "Right";
+                Icon = TreeViewIconEnum.TrackRight;
+            }
             else
+            {
                 CurvatureDescription = "Straight";
+                Icon = TreeViewIconEnum.TrackStraight;
+            }
         }
 
 
@@ -271,6 +286,18 @@ namespace ArgTrack.ViewModels.Track
 
 
 
+        private TreeViewIconEnum _icon;
+
+        public TreeViewIconEnum Icon
+        {
+            get { return _icon; }
+            set { SetProperty(ref _icon, value, () => Icon); }
+        }
+
+
+
+
+
         // hmmm?
         public string Description
         {
@@ -373,15 +400,19 @@ namespace ArgTrack.ViewModels.Track
 
 
 
+        private TrackSectionLayoutData _layout;
+
+        public TrackSectionLayoutData Layout
+        {
+            get { return _layout; }
+            set { SetProperty(ref _layout, value, () => Layout); }
+        }
+
 
         public ICommand AddTrackCommandCommand { get; } = new AddTrackCommandCommand();
         public ICommand DeleteTrackCommandCommand { get; } = new DeleteTrackCommandCommand();
 
-
-
-        //public List<TrackCommand> Commands { get; set; }
-        //public byte LeftVergeWidth { get; set; }
-        //public byte RightVergeWidth { get; set; }
+        public ICommand EditThis { get; } = new EditTrackSectionCommand();
     }
 
 

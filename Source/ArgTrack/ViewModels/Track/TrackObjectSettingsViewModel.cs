@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
+using ArgTrack.Commands.Tracks;
 
 namespace ArgTrack.ViewModels.Track
 {
@@ -215,6 +217,9 @@ namespace ArgTrack.ViewModels.Track
         {
             get { return BillboardObjects.List(); }
         }
+
+
+        public ICommand Edit { get; } = new EditTrackObjectSettingsCommand();
     }
 
 

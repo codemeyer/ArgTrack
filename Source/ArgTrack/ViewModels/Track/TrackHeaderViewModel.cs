@@ -1,9 +1,13 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using ArgData.Entities;
+using ArgTrack.AppStuff;
 using ArgTrack.Commands.Tracks;
+using ArgTrack.TrackStuff;
 
 namespace ArgTrack.ViewModels.Track
 {
@@ -84,8 +88,31 @@ namespace ArgTrack.ViewModels.Track
         public short TrackStartWidth
         {
             get { return _trackStartWidth; }
-            set { SetProperty(ref _trackStartWidth, value, () => TrackStartWidth); }
+            set
+            {
+                if (SetProperty(ref _trackStartWidth, value, () => TrackStartWidth))
+                {
+                    UpdateTrackWidthDescription();
+                }
+            }
         }
+
+
+        private void UpdateTrackWidthDescription()
+        {
+            TrackWidthDescription = UnitConvert.TrackWidthToMetersDescription(TrackStartWidth);
+        }
+
+
+        private string _trackWidthDescription;
+
+        public string TrackWidthDescription
+        {
+            get { return _trackWidthDescription; }
+            set { SetProperty(ref _trackWidthDescription, value, () => TrackWidthDescription); }
+        }
+
+
 
         private byte _leftVergeStartWidth;
 
@@ -117,6 +144,8 @@ namespace ArgTrack.ViewModels.Track
                         ShowKerbColor2 = Visibility.Collapsed;
                     else
                         ShowKerbColor2 = Visibility.Visible;
+
+                    UpdateKerbExampleColors();
                 }
             }
         }
@@ -127,7 +156,11 @@ namespace ArgTrack.ViewModels.Track
         public byte KerbUpperColor
         {
             get { return _kerbUpperColor; }
-            set { SetProperty(ref _kerbUpperColor, value, () => KerbUpperColor); }
+            set
+            {
+                SetProperty(ref _kerbUpperColor, value, () => KerbUpperColor);
+                UpdateKerbExampleColors();
+            }
         }
 
         private byte _kerbLowerColor;
@@ -135,7 +168,11 @@ namespace ArgTrack.ViewModels.Track
         public byte KerbLowerColor
         {
             get { return _kerbLowerColor; }
-            set { SetProperty(ref _kerbLowerColor, value, () => KerbLowerColor); }
+            set
+            {
+                SetProperty(ref _kerbLowerColor, value, () => KerbLowerColor);
+                UpdateKerbExampleColors();
+            }
         }
 
         private byte _kerbUpperColor2;
@@ -143,7 +180,11 @@ namespace ArgTrack.ViewModels.Track
         public byte KerbUpperColor2
         {
             get { return _kerbUpperColor2; }
-            set { SetProperty(ref _kerbUpperColor2, value, () => KerbUpperColor2); }
+            set
+            {
+                SetProperty(ref _kerbUpperColor2, value, () => KerbUpperColor2);
+                UpdateKerbExampleColors();
+            }
         }
 
         private byte _kerbLowerColor2;
@@ -151,7 +192,11 @@ namespace ArgTrack.ViewModels.Track
         public byte KerbLowerColor2
         {
             get { return _kerbLowerColor2; }
-            set { SetProperty(ref _kerbLowerColor2, value, () => KerbLowerColor2); }
+            set
+            {
+                SetProperty(ref _kerbLowerColor2, value, () => KerbLowerColor2);
+                UpdateKerbExampleColors();
+            }
         }
 
 
@@ -161,6 +206,88 @@ namespace ArgTrack.ViewModels.Track
         {
             get { return _showKerbColor2; }
             set { SetProperty(ref _showKerbColor2, value, () => ShowKerbColor2); }
+        }
+
+
+        private ObservableCollection<Rectangle> _upperKerbExampleColorRectangles;
+
+        public ObservableCollection<Rectangle> UpperKerbExampleColorRectangles
+        {
+            get { return _upperKerbExampleColorRectangles; }
+            set { SetProperty(ref _upperKerbExampleColorRectangles, value, () => UpperKerbExampleColorRectangles); }
+        }
+
+        private ObservableCollection<Rectangle> _lowerKerbExampleColorRectangles;
+
+        public ObservableCollection<Rectangle> LowerKerbExampleColorRectangles
+        {
+            get { return _lowerKerbExampleColorRectangles; }
+            set { SetProperty(ref _lowerKerbExampleColorRectangles, value, () => LowerKerbExampleColorRectangles); }
+        }
+
+        private void UpdateKerbExampleColors()
+        {
+            const int width = 20;
+            const int upperHeight = 14;
+            const int lowerHeight = 4;
+            var upperColors = new ObservableCollection<Rectangle>();
+            var lowerColors = new ObservableCollection<Rectangle>();
+
+            var upperColorWhite = new SolidColorBrush(new Color { R = 0xFF, G = 0xFF, B = 0xEE, A = 0xFF });
+            var lowerColorWhite = new SolidColorBrush(new Color { R = 0xDF, G = 0xDE, B = 0xD2, A = 0xFF });
+            var upperColor1 = AvailableKerbColors[KerbUpperColor].DisplayValue;
+            var lowerColor1 = AvailableKerbColors[KerbLowerColor].DisplayValue;
+
+            if (KerbType == KerbType.DualColor)
+            {
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColorWhite });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColor1 });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColorWhite });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColor1 });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColorWhite });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColor1 });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColorWhite });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColor1 });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColorWhite });
+
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColorWhite });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColor1 });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColorWhite });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColor1 });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColorWhite });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColor1 });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColorWhite });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColor1 });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColorWhite });
+            }
+            else
+            {
+                var upperColor2 = AvailableKerbColors[KerbUpperColor2].DisplayValue;
+                var lowerColor2 = AvailableKerbColors[KerbLowerColor2].DisplayValue;
+
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColorWhite });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColor1 });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColorWhite });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColor2 });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColorWhite });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColor1 });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColorWhite });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColor2 });
+                upperColors.Add(new Rectangle { Width = width, Height = upperHeight, Fill = upperColorWhite });
+
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColorWhite });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColor1 });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColorWhite });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColor2 });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColorWhite });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColor1 });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColorWhite });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColor2 });
+                lowerColors.Add(new Rectangle { Width = width, Height = lowerHeight, Fill = lowerColorWhite });
+            }
+
+            UpperKerbExampleColorRectangles = upperColors;
+            LowerKerbExampleColorRectangles = lowerColors;
         }
 
 
@@ -225,7 +352,7 @@ namespace ArgTrack.ViewModels.Track
             }
         }
 
-        
+
         // also contains Offsets and RawData for now
 
         private int _unknownLong1;
@@ -270,6 +397,7 @@ namespace ArgTrack.ViewModels.Track
 
 
 
+        // TODO: these three items should be somewhere else, not really related to TrackHeader anymore
 
         private byte[] _dataAfterSetup;
 

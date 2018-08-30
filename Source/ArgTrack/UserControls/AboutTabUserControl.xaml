@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:ArgTrack.ViewModels"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=viewModels:AboutTabViewModel, IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=viewModels:AboutViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="400" d:DesignWidth="520">
     <Grid Width="520">
         <StackPanel Orientation="Vertical">

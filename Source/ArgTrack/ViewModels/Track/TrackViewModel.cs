@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using ArgData;
+using ArgTrack.AppStuff;
 using ArgTrack.Commands.Tracks;
+using ArgTrack.TrackStuff;
 
 namespace ArgTrack.ViewModels.Track
 {
@@ -15,9 +16,10 @@ namespace ArgTrack.ViewModels.Track
     {
         public TrackViewModel()
         {
-            _trackSections = new ObservableCollection<TrackSectionViewModel>();
-            _pitLaneSections = new ObservableCollection<TrackSectionViewModel>();
-            _bestLineSegments = new ObservableCollection<BestLineSegmentViewModel>();
+            _trackSections = new TrackSectionViewModelCollection(this);
+            _pitLaneSections = new TrackSectionViewModelCollection(this);
+            //_bestLineSegments = new ObservableCollection<BestLineSegmentViewModel>();
+            _bestLineSegments = new BestLineSegmentViewModelCollection(this);
             _trackObjectSettings = new ObservableCollection<TrackObjectSettingsViewModel>();
             _trackObjectShapes = new ObservableCollection<TrackObjectShapeViewModel>();
 
@@ -30,25 +32,12 @@ namespace ArgTrack.ViewModels.Track
 
         private void TrackSections_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            int totalFeet = 0;
-
-            foreach (var section in TrackSections)
-            {
-                totalFeet += section.Length * 16;
-            }
-
-            double meters = Math.Round(totalFeet * 0.3048, 2);
-
-            var cult = new CultureInfo("en-US");
-            var meterz = meters.ToString("F", cult);
-
-            //LengthDescription = $"~{meters:F} meters ({feet} feet)";
-            TotalLengthText = $"~{meterz} meters ({totalFeet} feet)";
+            TotalLengthText = UnitConvert.TrackLengthToMetersDescription(TrackSections.Sum(t => t.Length));
         }
 
-        private ObservableCollection<TrackSectionViewModel> _trackSections;
+        private TrackSectionViewModelCollection _trackSections;
 
-        public ObservableCollection<TrackSectionViewModel> TrackSections
+        public TrackSectionViewModelCollection TrackSections
         {
             get { return _trackSections; }
             set { SetProperty(ref _trackSections, value, () => TrackSections); }
@@ -85,18 +74,30 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-        private ObservableCollection<TrackSectionViewModel> _pitLaneSections;
+        public void RecalculateLayout()
+        {
+            var layoutVM = TrackLayoutViewModel.FromTrackViewModel(this);
 
-        public ObservableCollection<TrackSectionViewModel> PitLaneSections
+            MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel = layoutVM;
+        }
+
+
+        //private ObservableCollection<TrackSectionViewModel> _pitLaneSections;
+        private TrackSectionViewModelCollection _pitLaneSections;
+
+        //public ObservableCollection<TrackSectionViewModel> PitLaneSections
+        public TrackSectionViewModelCollection PitLaneSections
         {
             get { return _pitLaneSections; }
             set { SetProperty(ref _pitLaneSections, value, () => PitLaneSections); }
         }
 
 
-        private ObservableCollection<BestLineSegmentViewModel> _bestLineSegments;
+        //private ObservableCollection<BestLineSegmentViewModel> _bestLineSegments;
+        private BestLineSegmentViewModelCollection _bestLineSegments;
 
-        public ObservableCollection<BestLineSegmentViewModel> BestLineSegments
+        //public ObservableCollection<BestLineSegmentViewModel> BestLineSegments
+        public BestLineSegmentViewModelCollection BestLineSegments
         {
             get { return _bestLineSegments; }
             set { SetProperty(ref _bestLineSegments, value, () => BestLineSegments); }
@@ -230,6 +231,7 @@ namespace ArgTrack.ViewModels.Track
 
 
 
+        // TODO: these are the selected indexes in the listviews, not in the treeview!!
         private int _selectedTrackSectionIndex;
 
         public int SelectedTrackSectionIndex
@@ -255,8 +257,6 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-
-
         private string _totalLengthText;
 
         public string TotalLengthText
@@ -266,10 +266,12 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-
         public ICommand EditTrackSectionCommand { get; } = new EditTrackSectionCommand();
         public ICommand EditBestLineCommand { get; } = new EditBestLineCommand();
         public ICommand EditTrackObjectSettingsCommand { get; } = new EditTrackObjectSettingsCommand();
         public ICommand EditTrackObjectShapeCommand { get; } = new EditTrackObjectShapeCommand();
+
+        public ICommand UpdateHorizonFromFileCommand { get; } = new LoadHorizonFromFileCommand(new FileDialog());
+        public ICommand SaveHorizonToFileCommand { get; } = new SaveHorizonToFileCommand(new FileDialog());
     }
 }

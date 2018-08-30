@@ -1,9 +1,14 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
+using ArgTrack.AppStuff;
+using ArgTrack.Commands.Model.TrackSections;
 using ArgTrack.Commands.Tracks;
+using InsertTrackSectionCommand = ArgTrack.Commands.Tracks.InsertTrackSectionCommand;
 
 namespace ArgTrack.ViewModels.Track
 {
+    [Obsolete("Can be deleted after moving completely to tree view?")]
     public class TrackTabViewModel : BaseViewModel
     {
         public TrackTabViewModel()

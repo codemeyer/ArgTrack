@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using ArgTrack.ViewModels;
 using ArgTrack.ViewModels.Track;
-using ArgTrack.Windows.Track;
+using ArgTrack.Windows.Tools;
 
 namespace ArgTrack.Commands.Tracks
 {

@@ -213,5 +213,7 @@ namespace ArgTrack.ViewModels.Track
 
 
         public ICommand EditGenericByteDataCommand { get; } = new EditGenericByteDataCommand();
+
+        public ICommand Edit { get; } = new EditTrackObjectShapeCommand();
     }
 }

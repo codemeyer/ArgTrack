@@ -21,7 +21,7 @@ namespace ArgTrack.Mappers
 
             foreach (var section in track.TrackSections)
             {
-                var sectionViewModel = new TrackSectionViewModel();
+                var sectionViewModel = new TrackSectionViewModel(viewModel.TrackSections);
                 MapSectionToViewModel(section, sectionViewModel);
 
                 // may need to change when rearranging becomes possible?
@@ -32,7 +32,7 @@ namespace ArgTrack.Mappers
 
             foreach (var section in track.PitLaneSections)
             {
-                var sectionViewModel = new TrackSectionViewModel();
+                var sectionViewModel = new TrackSectionViewModel(viewModel.PitLaneSections);
                 MapSectionToViewModel(section, sectionViewModel);
 
                 // may need to change when rearranging becomes possible?
@@ -43,7 +43,7 @@ namespace ArgTrack.Mappers
 
             foreach (var section in track.BestLineSegments)
             {
-                var sectionViewModel = new BestLineSegmentViewModel();
+                var sectionViewModel = new BestLineSegmentViewModel(viewModel.BestLineSegments);
                 MapBestLineSegmentToViewModel(section, sectionViewModel);
 
                 viewModel.BestLineSegments.Add(sectionViewModel);
@@ -108,7 +108,6 @@ namespace ArgTrack.Mappers
             }
         }
 
-
         public static void MapCommandToViewModel(TrackCommand command, TrackCommandViewModel viewModel)
         {
             viewModel.Command = command.Command;
@@ -124,7 +123,6 @@ namespace ArgTrack.Mappers
             }
         }
 
-
         private static TrackCommandArgumentViewModel GetIt(byte command, int argumentIndex)
         {
             if (command == 0x80 && argumentIndex == 1)
@@ -133,9 +131,7 @@ namespace ArgTrack.Mappers
                 return new TrackCommandArgumentViewModel();
         }
 
-
-        private static void MapBestLineSegmentToViewModel(TrackBestLineSegment section,
-            BestLineSegmentViewModel viewModel)
+        private static void MapBestLineSegmentToViewModel(TrackBestLineSegment section, BestLineSegmentViewModel viewModel)
         {
             viewModel.Length = (byte)section.Length;
             viewModel.Radius = section.Radius;
@@ -146,7 +142,6 @@ namespace ArgTrack.Mappers
             viewModel.SegmentType = section.SegmentType;
             viewModel.Type = section.SegmentType.ToString();
         }
-
 
         private static void MapTrackObjectToViewModel(TrackObjectSettings objectData, TrackObjectSettingsViewModel viewModel)
         {
@@ -250,7 +245,7 @@ namespace ArgTrack.Mappers
 
             foreach(var sourceArg in source.Arguments)
             {
-                var targetArg = GetIt(source.Command, source.Arguments.IndexOf(sourceArg)); //new TrackCommandArgumentViewModel();
+                var targetArg = GetIt(source.Command, source.Arguments.IndexOf(sourceArg));
                 MapTrackCommandArgumentViewModel(sourceArg, targetArg);
                 newArgs.Add(targetArg);
             }
@@ -258,8 +253,12 @@ namespace ArgTrack.Mappers
             target.Arguments = newArgs;
         }
 
-        private static void MapTrackCommandArgumentViewModel(TrackCommandArgumentViewModel source,
-            TrackCommandArgumentViewModel target)
+        public static void MapTrackHeaderViewModel(TrackHeaderViewModel source, TrackHeaderViewModel target)
+        {
+            CopyProperties(source, target);
+        }
+
+        private static void MapTrackCommandArgumentViewModel(TrackCommandArgumentViewModel source, TrackCommandArgumentViewModel target)
         {
             CopyProperties(source, target);
         }
@@ -299,7 +298,6 @@ namespace ArgTrack.Mappers
                 }
             }
         }
-
 
         public static Track MapEntireTrackViewModelToTrack(TrackViewModel viewModel)
         {

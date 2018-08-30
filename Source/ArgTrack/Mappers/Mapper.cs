@@ -19,20 +19,6 @@ namespace ArgTrack.Mappers
             targetViewModel.TyreCompound = sourceData.TyreCompound;
         }
 
-        public static void MapCarSetupToData(SetupViewModel sourceViewModel, Setup targetData)
-        {
-            targetData.FrontWing = sourceViewModel.FrontWing;
-            targetData.RearWing = sourceViewModel.RearWing;
-            targetData.BrakeBalance = sourceViewModel.BrakeBalance;
-            targetData.GearRatio1 = sourceViewModel.GearRatio1;
-            targetData.GearRatio2 = sourceViewModel.GearRatio2;
-            targetData.GearRatio3 = sourceViewModel.GearRatio3;
-            targetData.GearRatio4 = sourceViewModel.GearRatio4;
-            targetData.GearRatio5 = sourceViewModel.GearRatio5;
-            targetData.GearRatio6 = sourceViewModel.GearRatio6;
-            targetData.TyreCompound = sourceViewModel.TyreCompound;
-        }
-
         public static void MapCarSetupViewModel(SetupViewModel source, SetupViewModel target)
         {
             target.FrontWing = source.FrontWing;

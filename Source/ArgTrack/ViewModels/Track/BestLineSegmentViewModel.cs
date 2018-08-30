@@ -1,18 +1,61 @@
 using System.Collections.Generic;
 using System.Windows;
 using ArgData.Entities;
+using ArgTrack.TrackStuff;
 
 namespace ArgTrack.ViewModels.Track
 {
     public class BestLineSegmentViewModel : BaseViewModel
     {
+        public BestLineSegmentViewModelCollection ParentList { get; }
+
+        public BestLineSegmentViewModel(BestLineSegmentViewModelCollection parentList)
+        {
+            ParentList = parentList;
+        }
+
 
         private byte _length;
 
         public byte Length
         {
             get { return _length; }
-            set { SetProperty(ref _length, value, () => Length); }
+            set
+            {
+                SetProperty(ref _length, value, () => Length);
+                UpdateLengthDescription(value);
+            }
+        }
+
+
+        /// <summary>
+        /// Gets the index of the view model inside the list it belongs to.
+        /// </summary>
+        /// <returns></returns>
+        private int IndexOf()
+        {
+            return ParentList.IndexOf(this);
+        }
+
+
+        private void UpdateLengthDescription(byte length)
+        {
+            LengthDescription = UnitConvert.TrackLengthToMetersDescription(length);
+            //double meters = UnitConvert.TrackLengthToMeters(length);
+
+            //var cult = new CultureInfo("en-US");
+            //var meterz = meters.ToString("F", cult);
+
+            //int feet = length * 16;
+            //LengthDescription = $"~{meterz} meters ({feet} feet)";
+        }
+
+        private string _lengthDescription;
+
+        public string LengthDescription
+        {
+            get { return _lengthDescription; }
+            set { SetProperty(ref _lengthDescription, value, () => LengthDescription); }
         }
 
 
@@ -39,7 +82,13 @@ namespace ArgTrack.ViewModels.Track
         public short Radius
         {
             get { return _radius; }
-            set { SetProperty(ref _radius, value, () => Radius); }
+            set
+            {
+                if (SetProperty(ref _radius, value, () => Radius))
+                {
+                    UpdateIcon();
+                }
+            }
         }
 
         private short _highRadius;
@@ -47,7 +96,13 @@ namespace ArgTrack.ViewModels.Track
         public short HighRadius
         {
             get { return _highRadius; }
-            set { SetProperty(ref _highRadius, value, () => HighRadius); }
+            set
+            {
+                if (SetProperty(ref _highRadius, value, () => HighRadius))
+                {
+                    UpdateIcon();
+                }
+            }
         }
 
         private short _lowRadius;
@@ -55,7 +110,13 @@ namespace ArgTrack.ViewModels.Track
         public short LowRadius
         {
             get { return _lowRadius; }
-            set { SetProperty(ref _lowRadius, value, () => LowRadius); }
+            set
+            {
+                if (SetProperty(ref _lowRadius, value, () => LowRadius))
+                {
+                    UpdateIcon();
+                }
+            }
         }
 
 
@@ -109,6 +170,51 @@ namespace ArgTrack.ViewModels.Track
             get { return _type; }
             set { SetProperty(ref _type, value, () => Type); }
         }
+
+
+        private TreeViewIconEnum _icon = TreeViewIconEnum.ComputerCarLineStraight;
+
+        public TreeViewIconEnum Icon
+        {
+            get { return _icon; }
+            set { SetProperty(ref _icon, value, () => Icon); }
+        }
+
+
+        private void UpdateIcon()
+        {
+            if (SegmentType == TrackBestLineSegmentType.WideRadius)
+            {
+                if (HighRadius < 0)
+                {
+                    Icon = TreeViewIconEnum.ComputerCarLineLeft;
+                }
+                else if (HighRadius > 0)
+                {
+                    Icon = TreeViewIconEnum.ComputerCarLineRight;
+                }
+                else
+                {
+                    Icon = TreeViewIconEnum.ComputerCarLineStraight;
+                }
+            }
+            else
+            {
+                if (Radius < 0)
+                {
+                    Icon = TreeViewIconEnum.ComputerCarLineLeft;
+                }
+                else if (Radius > 0)
+                {
+                    Icon = TreeViewIconEnum.ComputerCarLineRight;
+                }
+                else
+                {
+                    Icon = TreeViewIconEnum.ComputerCarLineStraight;
+                }
+            }
+        }
+
 
 
 
@@ -218,7 +324,11 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-
+        // makes the current view model the selected one in its list
+        public void SelectInList()
+        {
+            ParentList.SelectedIndex = IndexOf();
+        }
     }
 
 

@@ -4,6 +4,7 @@ using ArgTrack.Windows.Track;
 
 namespace ArgTrack.Commands.Tracks
 {
+    [System.Obsolete("Maybe obsolete moving forward?")]
     public class InsertTrackSectionCommand : CommandBase
     {
         public override void Execute(object parameter)
@@ -13,7 +14,7 @@ namespace ArgTrack.Commands.Tracks
             if (vm == null)
                 return;
 
-            var newSection = new TrackSectionViewModel();
+            var newSection = new TrackSectionViewModel(vm.TrackSections);
 
             var window = new TrackSectionDetailsWindow
             {

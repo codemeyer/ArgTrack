@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=track:BestLineSegmentViewModel, IsDesignTimeCreatable=True}"
         d:DesignWidth="320" d:DesignHeight="280"
-        Width="320" Height="280"
-        Title="Track Best Line Details"
+        Width="386" Height="280"
+        Title="Computer Car Racing Line Details"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False" ResizeMode="NoResize">
     <Grid>
@@ -25,6 +25,7 @@
             <StackPanel Orientation="Horizontal">
                 <Label Width="180">Length</Label>
                 <TextBox Width="60" Height="22" Text="{Binding Length}"></TextBox>
+                <Label Margin="20,0,0,0" Width="100" Height="26" Content="{Binding LengthDescription}"></Label>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Visibility="{Binding ShowDisplacement}">

@@ -2,6 +2,7 @@ using ArgTrack.ViewModels.Track;
 
 namespace ArgTrack.Commands.Tracks
 {
+    [System.Obsolete("Replaced by RemoveTrackSectionCommand?")]
     public class DeleteTrackSectionCommand : CommandBase
     {
         private readonly bool _isTrack;

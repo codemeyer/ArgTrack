@@ -15,7 +15,7 @@ namespace ArgTrack.Commands.Tracks
             if (vm == null)
                 return;
 
-            var newSection = new BestLineSegmentViewModel();
+            var newSection = new BestLineSegmentViewModel(vm.BestLineSegments);
             newSection.CanEditType = true;
             newSection.SegmentType = TrackBestLineSegmentType.Normal;
 
