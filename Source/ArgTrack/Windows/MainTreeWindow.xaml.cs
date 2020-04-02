@@ -58,10 +58,16 @@ namespace ArgTrack.Windows
             cmd.Execute(TrackViewModelPasserArounder.TrackViewModel.TrackHeader);
         }
 
+        private void TrackMiscDataCarSettingsTreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var cmd = new EditCarSettingsCommand();
+            cmd.Execute(TrackViewModelPasserArounder.TrackViewModel.CarSettings);
+        }
+
         private void TrackLayoutTreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var cmd = new EditTrackLayoutSettingsCommand();
-            cmd.Execute(TrackViewModelPasserArounder.TrackViewModel.TrackHeader);
+            cmd.Execute(TrackViewModelPasserArounder.TrackViewModel.TrackSettings);
         }
 
         private void TrackSectionTreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -77,6 +83,13 @@ namespace ArgTrack.Windows
 
             var cmd = new EditTrackSectionCommand();
             cmd.Execute(trackSection);
+        }
+
+
+        private void ComputerCarsRacingLineHeader_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var cmd = new EditComputerCarLineHeaderCommand();
+            cmd.Execute(MainViewModelPasserArounder.MainViewModel.TrackViewModel);
         }
 
         private void ComputerCarsRacingLine_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -115,12 +128,10 @@ namespace ArgTrack.Windows
             }
         }
 
-        private void ComputerCarsAdditionalData_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ComputerCarsBehavior_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var cmd = new EditGenericByteDataCommand();
-            var bytes = MainViewModelPasserArounder.MainViewModel.TrackViewModel.TrackHeader.DataAfterSetup;
-
-            cmd.Execute(bytes);
+            var cmd = new EditComputerCarBehaviorCommand();
+            cmd.Execute(TrackViewModelPasserArounder.TrackViewModel.ComputerCarBehavior);
         }
 
         private void ObjectSettingsTreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -214,22 +225,6 @@ namespace ArgTrack.Windows
             {
                 MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.SelectedTrackSection = null;
             }
-        }
-
-        private void TrackMiscAdditionalData1TreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var cmd = new EditGenericByteDataCommand();
-            var bytes = MainViewModelPasserArounder.MainViewModel.TrackViewModel.TrackHeader.FinalData1;
-
-            cmd.Execute(bytes);
-        }
-
-        private void TrackMiscAdditionalData2TreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var cmd = new EditGenericByteDataCommand();
-            var bytes = MainViewModelPasserArounder.MainViewModel.TrackViewModel.TrackHeader.FinalData2;
-
-            cmd.Execute(bytes);
         }
 
         private void OnPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)

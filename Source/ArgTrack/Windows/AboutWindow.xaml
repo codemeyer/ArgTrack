@@ -7,8 +7,8 @@
         xmlns:viewModels="clr-namespace:ArgTrack.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModels:AboutViewModel, IsDesignTimeCreatable=True}"
-        d:DesignWidth="520" d:DesignHeight="476"
-        Width="520" Height="476"
+        d:DesignWidth="440" d:DesignHeight="396"
+        Width="440" Height="396"
         ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
         Title="About ArgTrack">
     <Grid>
@@ -61,12 +61,8 @@
                 <GroupBox Margin="5" Header="Credits">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Margin="5" TextWrapping="Wrap">
-                            René Smit - research material and Chequered Flag<LineBreak/>
-                            Barrie Millar, Klaus Six - for Chequered Flag<LineBreak/>
-                            Kristóf Kály-Kullai - for F1GP DOS Track editor<LineBreak />
-                            Paul Hoad - for the GP2 Track Editor<LineBreak/>
-                            Hrvoje Štimac - various research material<LineBreak />
-                            Maxime Labelle, Adrian Walti, Martijn Keizer, et al<LineBreak />
+                            <Hyperlink Command="{Binding OpenFanSiteCommand}">www.argtools.com/argtrack/credits</Hyperlink>
+                            <LineBreak />
                             <LineBreak/>
                             <!--ArgTrack is powered by the <Hyperlink Command="{Binding OpenArgDataPageCommand}">ArgData API</Hyperlink><LineBreak/>
                             <LineBreak/>-->

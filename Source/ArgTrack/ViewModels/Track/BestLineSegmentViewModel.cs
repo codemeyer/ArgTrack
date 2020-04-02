@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using ArgData.Entities;
@@ -70,6 +71,7 @@ namespace ArgTrack.ViewModels.Track
 
         private short _displacement;
 
+        [Obsolete("Displacement has moved, use TrackViewModel.ComputerCarLineDisplacement until further notice")]
         public short Displacement
         {
             get { return _displacement; }
@@ -120,9 +122,9 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-        private TrackBestLineSegmentType _segmentType;
+        private TrackComputerCarLineSegmentType _segmentType;
 
-        public TrackBestLineSegmentType SegmentType
+        public TrackComputerCarLineSegmentType SegmentType
         {
             get { return _segmentType; }
             set
@@ -138,21 +140,21 @@ namespace ArgTrack.ViewModels.Track
         {
             switch (SegmentType)
             {
-                case TrackBestLineSegmentType.Displacement:
-                    ShowDisplacement = Visibility.Visible;
-                    ShowRadius = Visibility.Visible;
-                    ShowCorrection = Visibility.Visible;
-                    ShowLowRadius = Visibility.Collapsed;
-                    ShowHighRadius = Visibility.Collapsed;
-                    break;
-                case TrackBestLineSegmentType.Normal:
+                //case TrackBestLineSegmentType.Displacement:
+                //    ShowDisplacement = Visibility.Visible;
+                //    ShowRadius = Visibility.Visible;
+                //    ShowCorrection = Visibility.Visible;
+                //    ShowLowRadius = Visibility.Collapsed;
+                //    ShowHighRadius = Visibility.Collapsed;
+                //    break;
+                case TrackComputerCarLineSegmentType.Normal:
                     ShowDisplacement = Visibility.Collapsed;
                     ShowRadius = Visibility.Visible;
                     ShowCorrection = Visibility.Visible;
                     ShowLowRadius = Visibility.Collapsed;
                     ShowHighRadius = Visibility.Collapsed;
                     break;
-                case TrackBestLineSegmentType.WideRadius:
+                case TrackComputerCarLineSegmentType.WideRadius:
                     ShowDisplacement = Visibility.Collapsed;
                     ShowRadius = Visibility.Collapsed;
                     ShowCorrection = Visibility.Collapsed; //?
@@ -183,7 +185,7 @@ namespace ArgTrack.ViewModels.Track
 
         private void UpdateIcon()
         {
-            if (SegmentType == TrackBestLineSegmentType.WideRadius)
+            if (SegmentType == TrackComputerCarLineSegmentType.WideRadius)
             {
                 if (HighRadius < 0)
                 {
@@ -233,13 +235,13 @@ namespace ArgTrack.ViewModels.Track
             {
                 var list = new List<BestLineTypeBoundValue>();
 
-                list.Add(new BestLineTypeBoundValue(TrackBestLineSegmentType.Normal, "Normal"));
-                list.Add(new BestLineTypeBoundValue(TrackBestLineSegmentType.WideRadius, "Wide Radius"));
+                list.Add(new BestLineTypeBoundValue(TrackComputerCarLineSegmentType.Normal, "Normal"));
+                list.Add(new BestLineTypeBoundValue(TrackComputerCarLineSegmentType.WideRadius, "Wide Radius"));
 
-                if (!CanEditType)
-                {
-                    list.Add(new BestLineTypeBoundValue(TrackBestLineSegmentType.Displacement, "Displacement"));
-                }
+                //if (!CanEditType)
+                //{
+                //    list.Add(new BestLineTypeBoundValue(TrackBestLineSegmentType.Displacement, "Displacement"));
+                //}
 
                 return list;
             }
@@ -252,19 +254,19 @@ namespace ArgTrack.ViewModels.Track
         {
             get
             {
-                if (SegmentType == TrackBestLineSegmentType.Displacement)
-                {
-                    return $"Displacement: {Displacement}";
-                    // more here?
-                }
+                //if (SegmentType == TrackBestLineSegmentType.Displacement)
+                //{
+                //    return $"Displacement: {Displacement}";
+                //    // more here?
+                //}
 
-                if (SegmentType == TrackBestLineSegmentType.Normal)
+                if (SegmentType == TrackComputerCarLineSegmentType.Normal)
                 {
                     return $"Radius: {Radius}, Correction: {Correction}";
                     // more here?
                 }
 
-                if (SegmentType == TrackBestLineSegmentType.WideRadius)
+                if (SegmentType == TrackComputerCarLineSegmentType.WideRadius)
                 {
                     return $"High radius: {HighRadius}, Low radius: {LowRadius}";
                     // more here?
@@ -293,6 +295,7 @@ namespace ArgTrack.ViewModels.Track
 
         private Visibility _showDisplacement;
 
+        [Obsolete("Displacement should be edited elsewhere")]
         public Visibility ShowDisplacement
         {
             get { return _showDisplacement; }
@@ -334,13 +337,13 @@ namespace ArgTrack.ViewModels.Track
 
     public class BestLineTypeBoundValue
     {
-        public BestLineTypeBoundValue(TrackBestLineSegmentType value, string displayValue)
+        public BestLineTypeBoundValue(TrackComputerCarLineSegmentType value, string displayValue)
         {
             Value = value;
             DisplayValue = displayValue;
         }
 
-        public TrackBestLineSegmentType Value { get; set; }
+        public TrackComputerCarLineSegmentType Value { get; set; }
         public string DisplayValue { get; set; }
     }
 }

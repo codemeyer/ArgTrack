@@ -19,7 +19,7 @@ namespace ArgTrack.ViewModels.Track
             var layoutVM = new TrackLayoutViewModel();
             layoutVM.TrackData = points;
 
-            if (trackViewModel.TrackHeader.SurroundingArea == SurroundingArea.Green)
+            if (trackViewModel.TrackSettings.SurroundingArea == SurroundingArea.Green)
             {
                 layoutVM.SurroundingAreaColor = "#5E8136";
             }
@@ -219,7 +219,7 @@ namespace ArgTrack.ViewModels.Track
             }
         }
 
-        
+
         private double _trackRenderHeight;
 
         // TODO: this doesn't need to be a WPF-style property
@@ -281,7 +281,7 @@ namespace ArgTrack.ViewModels.Track
             get { return _scrollMinY; }
             set { SetProperty(ref _scrollMinY, value, () => ScrollMinY); }
         }
-        
+
         private int _scrollMaxY;
 
         public int ScrollMaxY
@@ -289,7 +289,7 @@ namespace ArgTrack.ViewModels.Track
             get { return _scrollMaxY; }
             set { SetProperty(ref _scrollMaxY, value, () => ScrollMaxY); }
         }
-        
+
         private int _scrollHeight;
 
         public int ScrollHeight
@@ -324,7 +324,7 @@ namespace ArgTrack.ViewModels.Track
         }
 
         private double _zoomFactor = 1.0;
-        
+
         public double ZoomFactor
         {
             get { return _zoomFactor; }
@@ -346,7 +346,7 @@ namespace ArgTrack.ViewModels.Track
 
         // TODO: set to actual layout section, which then updates this data?
         private PointData _selectedTrackSection;
-        
+
         public PointData SelectedTrackSection
         {
             get { return _selectedTrackSection; }

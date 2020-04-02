@@ -1,12 +1,10 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using ArgTrack.Mappers;
 using ArgTrack.ViewModels.Track;
 using ArgTrack.Windows.Track;
 
 namespace ArgTrack.Commands.Tracks
 {
-    [Obsolete("Only used by the legacy 'Data' view??")]
     public class EditBestLineCommand : CommandBase
     {
         public override void Execute(object parameter)

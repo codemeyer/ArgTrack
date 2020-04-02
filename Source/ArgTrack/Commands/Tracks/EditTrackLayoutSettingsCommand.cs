@@ -9,13 +9,14 @@ namespace ArgTrack.Commands.Tracks
     {
         public override void Execute(object parameter)
         {
-            var vm = parameter as TrackHeaderViewModel;
+            //var vm = parameter as TrackHeaderViewModel;
+            var vm = parameter as TrackSettingsViewModel;
 
             if (vm == null)
                 return;
 
-            var clone = new TrackHeaderViewModel();
-            TrackMapper.MapTrackHeaderViewModel(vm, clone);
+            var clone = new TrackSettingsViewModel();
+            TrackMapper.MapTrackSettingsViewModel(vm, clone);
 
             var window = new TrackLayoutWindow
             {
@@ -29,7 +30,8 @@ namespace ArgTrack.Commands.Tracks
             if (update.HasValue && update.Value)
             {
                 // map clone to actual value
-                TrackMapper.MapTrackHeaderViewModel(clone, vm);
+                //TrackMapper.MapTrackHeaderViewModel(clone, vm);
+                TrackMapper.MapTrackSettingsViewModel(clone, vm);
 
                 // TODO: repaint 3D track! ie LayoutCalculator etc
             }

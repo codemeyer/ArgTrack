@@ -28,11 +28,6 @@
                 <Label Margin="20,0,0,0" Width="100" Height="26" Content="{Binding LengthDescription}"></Label>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Visibility="{Binding ShowDisplacement}">
-                <Label Width="180">Displacement</Label>
-                <TextBox Width="60" Height="22" Text="{Binding Displacement}"></TextBox>
-            </StackPanel>
-
             <StackPanel Orientation="Horizontal" Visibility="{Binding ShowRadius}">
                 <Label Width="180">Radius</Label>
                 <TextBox Width="60" Height="22" Text="{Binding Radius}"></TextBox>

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -18,14 +19,22 @@ namespace ArgTrack.ViewModels.Track
         {
             _trackSections = new TrackSectionViewModelCollection(this);
             _pitLaneSections = new TrackSectionViewModelCollection(this);
-            //_bestLineSegments = new ObservableCollection<BestLineSegmentViewModel>();
             _bestLineSegments = new BestLineSegmentViewModelCollection(this);
             _trackObjectSettings = new ObservableCollection<TrackObjectSettingsViewModel>();
             _trackObjectShapes = new ObservableCollection<TrackObjectShapeViewModel>();
 
+            TrackSettings = new TrackSettingsViewModel();
+
+            ComputerCarBehavior = new ComputerCarBehaviorViewModel();
+
+            CarSettings = new CarSettingsViewModel();
+
+            // TODO: cameras
+            TrackCameraCommands = new TrackCameraCommandViewModelCollection(this);
+            // TODO: track camera list (which is the effective list after the commands have been applied)
+
             TrackHeader = new TrackHeaderViewModel();
             ComputerCarSetup = new SetupViewModel("TrackSetup");
-            //TrackRawData = new TrackRawDataViewModel();
 
             TrackSections.CollectionChanged += TrackSections_CollectionChanged;
         }
@@ -122,18 +131,47 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
+        private TrackCameraCommandViewModelCollection _trackCameraCommands;
+
+        public TrackCameraCommandViewModelCollection TrackCameraCommands
+        {
+            get { return _trackCameraCommands; }
+            set { SetProperty(ref _trackCameraCommands, value, () => TrackCameraCommands); }
+        }
+
+
+        public TrackSettingsViewModel TrackSettings { get; }
+
+
         public TrackHeaderViewModel TrackHeader { get; }
 
 
         public SetupViewModel ComputerCarSetup { get; set; }
 
 
+        public ComputerCarBehaviorViewModel ComputerCarBehavior { get; set; }
+
+
+        public CarSettingsViewModel CarSettings { get; set; }
+
+
         // see TrackHeader instead
         //public TrackRawDataViewModel TrackRawData { get; set; }
 
 
+        private short _computerCarLineDisplacement;
+
+        // place elsewhere in the future?
+        public short ComputerCarLineDisplacement
+        {
+            get { return _computerCarLineDisplacement; }
+            set { SetProperty(ref _computerCarLineDisplacement, value, () => ComputerCarLineDisplacement); }
+        }
+
+
         private byte _lapCount;
 
+        [Obsolete("Has moved to other location in ArgData, make this match")]
         public byte LapCount
         {
             get { return _lapCount; }

@@ -31,7 +31,7 @@
                 <MenuItem Header="_Pit Lane Sections" Command="{Binding OpenPitLaneSectionListWindowCommand}" CommandParameter="{Binding}"></MenuItem>
                 <MenuItem Header="_Computer Car Racing Line" Command="{Binding OpenComputerCarRacingLineWindowCommand}" CommandParameter="{Binding}"></MenuItem>
                 <MenuItem Header="_Object Settings" Command="{Binding OpenObjectSettingsListWindowCommand}" CommandParameter="{Binding}"></MenuItem>
-                <MenuItem Header="_Object Shapes" Command="{Binding OpenObjectShapesListWindowCommand}" CommandParameter="{Binding}"></MenuItem>
+                <MenuItem Header="Object _Shapes" Command="{Binding OpenObjectShapesListWindowCommand}" CommandParameter="{Binding}"></MenuItem>
             </MenuItem>
             <MenuItem Header="_Tools">
                 <MenuItem Header="_Validate Track" Command="{Binding ValidateTrackCommand}" CommandParameter="{Binding}"></MenuItem>
@@ -63,9 +63,14 @@
                 </TextBlock>
                 <TreeView Grid.Row="0" Margin="0" Visibility="{Binding VisibleWhenTrackHasBeenLoaded}"
                           SelectedItemChanged="TreeView_OnSelectedItemChanged">
+
+                    <!-- Track Layout -->
                     <TreeViewItem Header="Track Layout" Margin="0,3" IsExpanded="True">
                         <TreeViewItem Header="Misc Settings" Margin="0,0"
-                                  MouseDoubleClick="TrackLayoutTreeView_OnMouseDoubleClick"></TreeViewItem>
+                                  MouseDoubleClick="TrackLayoutTreeView_OnMouseDoubleClick">
+                        </TreeViewItem>
+
+                        <!-- Track Layout > Track Sections -->
                         <TreeViewItem Header="Track Sections" Margin="0,3"
                                   ItemsSource="{Binding TrackViewModel.TrackSections}"
                                   MouseDoubleClick="TrackSectionTreeView_OnMouseDoubleClick"
@@ -76,6 +81,8 @@
                                 </ContextMenu>
                             </TreeViewItem.ContextMenu>
                         </TreeViewItem>
+
+                        <!-- Track Layout > Pit Lane Sections -->
                         <TreeViewItem Header="Pit Lane Sections" Margin="0,0"
                                   ItemsSource="{Binding TrackViewModel.PitLaneSections}"
                                   MouseDoubleClick="TrackSectionTreeView_OnMouseDoubleClick"
@@ -88,8 +95,13 @@
                         </TreeViewItem>
                     </TreeViewItem>
 
+                    <!-- Computer Cars -->
                     <TreeViewItem Header="Computer Cars" Margin="0,3" IsExpanded="True">
-                        <TreeViewItem Header="Racing Line" Margin="0,3"
+                        <TreeViewItem Header="Racing Line Header" Margin="0,3"
+                            MouseDoubleClick="ComputerCarsRacingLineHeader_OnMouseDoubleClick">
+                        </TreeViewItem>
+
+                        <TreeViewItem Header="Racing Line Segments" Margin="0,3"
                                   ItemsSource="{Binding TrackViewModel.BestLineSegments}"
                                   MouseDoubleClick="ComputerCarsRacingLine_OnMouseDoubleClick"
                                   PreviewMouseRightButtonDown="ComputerCarsRacingLine_OnPreviewMouseRightButtonDown">
@@ -101,10 +113,34 @@
                         </TreeViewItem>
                         <TreeViewItem Header="Car Setup" Margin="0,3"
                                       MouseDoubleClick="ComputerCarsSetup_OnMouseDoubleClick"></TreeViewItem>
-                        <TreeViewItem Header="Additional Data" Margin="0,3"
-                                      MouseDoubleClick="ComputerCarsAdditionalData_OnMouseDoubleClick"></TreeViewItem>
+                        <TreeViewItem Header="Behavior" Margin="0,3"
+                                      MouseDoubleClick="ComputerCarsBehavior_OnMouseDoubleClick"></TreeViewItem>
+
+                        <TreeViewItem.Resources>
+                            <!-- Computer Cars context menu -->
+                            <DataTemplate DataType="{x:Type track:BestLineSegmentViewModel}">
+                                <StackPanel Orientation="Horizontal" Margin="-16,3,0,3">
+                                    <Image Width="16" Height="16" Margin="0" Source="{Binding Icon, Converter={StaticResource IconEnumToImageConverter}}"></Image>
+                                    <TextBlock Text="Length: "></TextBlock>
+                                    <TextBlock Text="{Binding Length}" />
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Edit" Command="{Binding ParentList.EditComputerCarLineSegmentCommand}" CommandParameter="{Binding}"></MenuItem>
+                                            <Separator></Separator>
+                                            <MenuItem Header="Add New Section" Command="{Binding ParentList.AddComputerCarLineSegmentCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
+                                            <MenuItem Header="Insert New Segment Before" Command="{Binding ParentList.InsertNewComputerCarLineSegmentBeforeCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
+                                            <MenuItem Header="Insert New Segment After" Command="{Binding ParentList.InsertNewComputerCarLineSegmentAfterCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
+                                            <Separator></Separator>
+                                            <MenuItem Header="Remove Section" Command="{Binding ParentList.RemoveComputerCarLineSegmentCommand}" CommandParameter="{Binding}"></MenuItem>
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
+                                </StackPanel>
+                            </DataTemplate>
+                        </TreeViewItem.Resources>
                     </TreeViewItem>
 
+
+                    <!-- Objects -->
                     <TreeViewItem Header="Objects" Margin="0,3" IsExpanded="True">
                         <TreeViewItem Header="Object Settings" Margin="0,3"
                                   ItemsSource="{Binding TrackViewModel.TrackObjectSettings}"
@@ -112,22 +148,59 @@
                         <TreeViewItem Header="Object Shapes" Margin="0,3"
                                   ItemsSource="{Binding TrackViewModel.TrackObjectShapes}"
                                   MouseDoubleClick="ObjectShapesTreeView_OnMouseDoubleClick"/>
+                        <TreeViewItem.Resources>
+                            <DataTemplate DataType="{x:Type track:TrackObjectSettingsViewModel}">
+                                <StackPanel Orientation="Horizontal" Margin="-16,3,0,3">
+                                    <Image Width="16" Height="16" Margin="0" Source="../Resources/object-setting.png"></Image>
+                                    <TextBlock Text="Offset: "></TextBlock>
+                                    <TextBlock Text="{Binding Offset}" />
+                                    <TextBlock Text=" Id: "></TextBlock>
+                                    <TextBlock Text="{Binding Id}" />
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Edit" Command="{Binding Edit}" CommandParameter="{Binding}"></MenuItem>
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
+                                </StackPanel>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type track:TrackObjectShapeViewModel}">
+                                <StackPanel Orientation="Horizontal" Margin="-16,3,0,3">
+                                    <Image Width="16" Height="16" Margin="0" Source="../Resources/object-shape.png"></Image>
+                                    <TextBlock Text="Id: "></TextBlock>
+                                    <TextBlock Text="{Binding Id}" />
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Edit" Command="{Binding Edit}" CommandParameter="{Binding}"></MenuItem>
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
+                                </StackPanel>
+                            </DataTemplate>
+                        </TreeViewItem.Resources>
                     </TreeViewItem>
 
+
+                    <!-- Horizon -->
                     <TreeViewItem Header="Horizon" Margin="0,3"
-                                  MouseDoubleClick="TrackHorizonTreeView_OnMouseDoubleClick"></TreeViewItem>
+                                  MouseDoubleClick="TrackHorizonTreeView_OnMouseDoubleClick" />
 
-                    <TreeViewItem Header="Misc Data" Margin="0,3">
-                        <TreeViewItem Header="World Location" Margin="0,3" IsExpanded="False"
-                                      MouseDoubleClick="TrackMiscDataTreeView_OnMouseDoubleClick"></TreeViewItem>
-                        <TreeViewItem Header="Additional Data 1" Margin="0,3" IsExpanded="False"
-                                      MouseDoubleClick="TrackMiscAdditionalData1TreeView_OnMouseDoubleClick"></TreeViewItem>
-                        <TreeViewItem Header="Additional Data 2" Margin="0,3" IsExpanded="False"
-                                      MouseDoubleClick="TrackMiscAdditionalData2TreeView_OnMouseDoubleClick">
-                        </TreeViewItem>
+
+                    <!-- Cameras -->
+                    <TreeViewItem Header="Cameras" Margin="0,3" ItemsSource="{Binding TrackViewModel.TrackCameras}">
+                                      <!--MouseDoubleClick="ObjectShapesTreeView_OnMouseDoubleClick"/>-->
                     </TreeViewItem>
+
+
+                    <!-- Misc Data -->
+                    <TreeViewItem Header="Misc Data" Margin="0,3" IsExpanded="True">
+                        <TreeViewItem Header="World Location" Margin="0,3" IsExpanded="False"
+                                      MouseDoubleClick="TrackMiscDataTreeView_OnMouseDoubleClick" />
+                        <TreeViewItem Header="Car Settings" Margin="0,3" IsExpanded="False"
+                                      MouseDoubleClick="TrackMiscDataCarSettingsTreeView_OnMouseDoubleClick" />
+                    </TreeViewItem>
+
 
                     <TreeView.Resources>
+                        <!-- Track Section Context menu -->
                         <DataTemplate DataType="{x:Type track:TrackSectionViewModel}">
                             <StackPanel Orientation="Horizontal" Margin="-16,3,0,3" Background="Transparent">
                                 <Image Width="16" Height="16" Margin="0" Source="{Binding Icon, Converter={StaticResource IconEnumToImageConverter}}"></Image>
@@ -142,53 +215,6 @@
                                         <MenuItem Header="Insert New Section After" Command="{Binding ParentList.InsertNewTrackSectionAfterCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
                                         <Separator></Separator>
                                         <MenuItem Header="Remove Section" Command="{Binding ParentList.RemoveTrackSection}" CommandParameter="{Binding}"></MenuItem>
-                                    </ContextMenu>
-                                </StackPanel.ContextMenu>
-                            </StackPanel>
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type track:BestLineSegmentViewModel}">
-                            <StackPanel Orientation="Horizontal" Margin="-16,3,0,3">
-                                <Image Width="16" Height="16" Margin="0" Source="{Binding Icon, Converter={StaticResource IconEnumToImageConverter}}"></Image>
-                                <TextBlock Text="Length: "></TextBlock>
-                                <TextBlock Text="{Binding Length}" />
-                                <StackPanel.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Edit" Command="{Binding ParentList.EditComputerCarLineSegmentCommand}" CommandParameter="{Binding}"></MenuItem>
-                                        <Separator></Separator>
-                                        <MenuItem Header="Add New Section" Command="{Binding ParentList.AddComputerCarLineSegmentCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
-                                        <MenuItem Header="Insert New Segment Before" Command="{Binding ParentList.InsertNewComputerCarLineSegmentBeforeCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
-                                        <MenuItem Header="Insert New Segment After" Command="{Binding ParentList.InsertNewComputerCarLineSegmentAfterCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
-                                        <Separator></Separator>
-                                        <MenuItem Header="Remove Section" Command="{Binding ParentList.RemoveComputerCarLineSegmentCommand}" CommandParameter="{Binding}"></MenuItem>
-                                    </ContextMenu>
-                                </StackPanel.ContextMenu>
-                            </StackPanel>
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type track:TrackObjectSettingsViewModel}">
-                            <StackPanel Orientation="Horizontal" Margin="-16,3,0,3">
-                                <Image Width="16" Height="16" Margin="0" Source="../Resources/object-setting.png"></Image>
-                                <TextBlock Text="Offset: "></TextBlock>
-                                <TextBlock Text="{Binding Offset}" />
-                                <TextBlock Text="Id: "></TextBlock>
-                                <TextBlock Text="{Binding Id}" />
-                                <StackPanel.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Edit" Command="{Binding Edit}" CommandParameter="{Binding}"></MenuItem>
-                                    </ContextMenu>
-                                </StackPanel.ContextMenu>
-                            </StackPanel>
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type track:TrackObjectShapeViewModel}">
-                            <StackPanel Orientation="Horizontal" Margin="-16,3,0,3">
-                                <Image Width="16" Height="16" Margin="0" Source="../Resources/object-shape.png"></Image>
-                                <TextBlock Text="Id: "></TextBlock>
-                                <TextBlock Text="{Binding Id}" />
-                                <StackPanel.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Edit" Command="{Binding Edit}" CommandParameter="{Binding}"></MenuItem>
                                     </ContextMenu>
                                 </StackPanel.ContextMenu>
                             </StackPanel>

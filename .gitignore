@@ -1,5 +1,3 @@
-TestData/*
-!TestData/Download.ps1
 BuildScripts/Artifacts/*
 BuildScripts/latest-build.txt
 

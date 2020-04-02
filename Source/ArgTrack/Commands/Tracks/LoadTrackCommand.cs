@@ -1,9 +1,7 @@
-﻿using System.Windows;
-using ArgData;
+﻿using ArgData;
 using ArgTrack.AppStuff;
 using ArgTrack.ViewModels;
 using ArgTrack.ViewModels.Track;
-using ArgTrack.Windows;
 
 namespace ArgTrack.Commands.Tracks
 {

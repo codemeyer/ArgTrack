@@ -43,8 +43,8 @@
     <Reference Include="Arg2Data, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Arg2Data.0.1.0\lib\net40\Arg2Data.dll</HintPath>
     </Reference>
-    <Reference Include="ArgData, Version=0.17.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ArgData.0.17.0\lib\net40\ArgData.dll</HintPath>
+    <Reference Include="ArgData, Version=0.19.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ArgData.0.19.1\lib\net40\ArgData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -87,7 +87,10 @@
     <Compile Include="Commands\Tracks\DeleteBestLineSegmentCommand.cs" />
     <Compile Include="Commands\Tracks\DeleteTrackCommandCommand.cs" />
     <Compile Include="Commands\Tracks\DeleteTrackSectionCommand.cs" />
+    <Compile Include="Commands\Tracks\EditComputerCarBehaviorCommand.cs" />
+    <Compile Include="Commands\Tracks\EditComputerCarLineHeaderCommand.cs" />
     <Compile Include="Commands\Tracks\EditBestLineCommand.cs" />
+    <Compile Include="Commands\Tracks\EditCarSettingsCommand.cs" />
     <Compile Include="Commands\Tracks\EditGenericByteDataCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackCommandCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackHeaderSettingsCommand.cs" />
@@ -137,33 +140,6 @@
     <Compile Include="UserControls\CarSetup\CarSetupUserControl.xaml.cs">
       <DependentUpon>CarSetupUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Tracks\TrackBestLineUserControl.xaml.cs">
-      <DependentUpon>TrackBestLineUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Tracks\TrackHeaderUserControl.xaml.cs">
-      <DependentUpon>TrackHeaderUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Tracks\TrackHorizonUserControl.xaml.cs">
-      <DependentUpon>TrackHorizonUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Tracks\TrackObjectSettingsUserControl.xaml.cs">
-      <DependentUpon>TrackObjectSettingsUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Tracks\TrackObjectShapesUserControl.xaml.cs">
-      <DependentUpon>TrackObjectShapesUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Tracks\TrackPitLaneSectionsUserControl.xaml.cs">
-      <DependentUpon>TrackPitLaneSectionsUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Tracks\TrackSectionsUserControl.xaml.cs">
-      <DependentUpon>TrackSectionsUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Tracks\TrackSetupUserControl.xaml.cs">
-      <DependentUpon>TrackSetupUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Tracks\TrackTabUserControl.xaml.cs">
-      <DependentUpon>TrackTabUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AppStuff\VersionChecker.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -172,10 +148,14 @@
     <Compile Include="ViewModels\Track\BestLineSegmentViewModel.cs" />
     <Compile Include="ViewModels\Track\BestLineSegmentViewModelCollection.cs" />
     <Compile Include="ViewModels\Track\BillboardObjects.cs" />
+    <Compile Include="ViewModels\Track\CarSettingsViewModel.cs" />
     <Compile Include="ViewModels\Track\CommandDescriptions.cs" />
+    <Compile Include="ViewModels\Track\ComputerCarBehaviorViewModel.cs" />
     <Compile Include="ViewModels\Track\EditableByteData.cs" />
     <Compile Include="ViewModels\Track\GenericByteListEditingViewModel.cs" />
     <Compile Include="ViewModels\Track\SetupViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackCameraCommandViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackCameraCommandViewModelCollection.cs" />
     <Compile Include="ViewModels\Track\TrackCommandViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackHeaderViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackLayoutViewModel.cs" />
@@ -185,6 +165,7 @@
     <Compile Include="ViewModels\Track\TrackSectionViewModel.cs" />
     <Compile Include="TrackStuff\TrackSectionLayoutData.cs" />
     <Compile Include="ViewModels\Track\TrackSectionViewModelCollection.cs" />
+    <Compile Include="ViewModels\Track\TrackSettingsViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackTabViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackViewModel.cs" />
     <Compile Include="ViewModels\Track\TreeViewIconEnum.cs" />
@@ -224,6 +205,15 @@
     <Compile Include="Windows\Track\TrackGenericByteValueDetailsWindow.xaml.cs">
       <DependentUpon>TrackGenericByteValueDetailsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Track\CarSettingsWindow.xaml.cs">
+      <DependentUpon>CarSettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\ComputerCarLineHeaderWindow.xaml.cs">
+      <DependentUpon>ComputerCarLineHeaderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\ComputerCarBehaviorWindow.xaml.cs">
+      <DependentUpon>ComputerCarBehaviorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Track\TrackHeaderWindow.xaml.cs">
       <DependentUpon>TrackHeaderWindow.xaml</DependentUpon>
     </Compile>
@@ -248,16 +238,8 @@
     <Compile Include="Windows\Track\TrackSectionListWindow.xaml.cs">
       <DependentUpon>TrackSectionListWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\AboutTabUserControl.xaml">
@@ -265,42 +247,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\CarSetup\CarSetupUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Tracks\TrackBestLineUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Tracks\TrackHeaderUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Tracks\TrackHorizonUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Tracks\TrackObjectSettingsUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Tracks\TrackObjectShapesUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Tracks\TrackPitLaneSectionsUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Tracks\TrackSectionsUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Tracks\TrackSetupUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Tracks\TrackTabUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -349,6 +295,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Track\TrackGenericByteValueDetailsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\CarSettingsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\ComputerCarLineHeaderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Track\ComputerCarBehaviorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

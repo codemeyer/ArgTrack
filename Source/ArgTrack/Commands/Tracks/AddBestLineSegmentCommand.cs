@@ -18,7 +18,7 @@ namespace ArgTrack.Commands.Tracks
 
             var newSection = new BestLineSegmentViewModel(vm);
             newSection.CanEditType = true;
-            newSection.SegmentType = TrackBestLineSegmentType.Normal;
+            newSection.SegmentType = TrackComputerCarLineSegmentType.Normal;
 
             var window = new TrackBestLineDetailsWindow
             {

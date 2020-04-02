@@ -8,11 +8,37 @@
         d:DataContext="{d:DesignInstance Type=track:TrackHeaderViewModel, IsDesignTimeCreatable=False}"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False" ResizeMode="NoResize"
-        Width="256" Height="200"
-        Title="Track Header">
+        Width="256" Height="300"
+        Title="World Location">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <StackPanel Grid.Column="0" Margin="5" Orientation="Vertical">
+            <StackPanel Margin="5" Orientation="Vertical">
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="180">First Section Angle</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding FirstSectionAngle}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="180">First Section Height</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding FirstSectionHeight}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                    <Label Width="180">Track Start Width</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding TrackStartWidth}"></TextBox>
+                    <!--<Label Margin="25,0,0,0" Width="165" Height="26" Content="{Binding TrackWidthDescription}"></Label>-->
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="180">Left Verge Start Width</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding LeftVergeStartWidth}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="180">Right Verge Start Width</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding RightVergeStartWidth}"></TextBox>
+                </StackPanel>
 
                 <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                     <Label Width="180">Track Center X</Label>

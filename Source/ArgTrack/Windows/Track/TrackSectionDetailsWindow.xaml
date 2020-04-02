@@ -19,7 +19,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="260"></ColumnDefinition>
-                        <ColumnDefinition Width="260"></ColumnDefinition>
+                        <ColumnDefinition Width="360"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Orientation="Vertical" Grid.Column="0">
@@ -39,19 +39,23 @@
                         </StackPanel>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Width="360">
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="-25,0,0,0" Width="165" Height="26" Content="{Binding LengthDescription}"></Label>
                         </StackPanel>
 
                         <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
-                            <Label Width="165">Left Verge Width</Label>
+                            <Label Width="140">Verge End Width Left</Label>
                             <TextBox Width="60" Height="22" Text="{Binding LeftVergeWidth}"></TextBox>
+                            <!--<Label Width="45" Margin="20,0,0,0">Right</Label>
+                            <TextBox Width="60" Height="22" Text="{Binding RightVergeWidth}"></TextBox>-->
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <Label Width="165">Right Verge Width</Label>
+                            <Label Width="140">Verge End Width Right</Label>
                             <TextBox Width="60" Height="22" Text="{Binding RightVergeWidth}"></TextBox>
+                            <!--<Label Width="45" Margin="20,0,0,0">Right</Label>
+                            <TextBox Width="60" Height="22" Text="{Binding LeftVergeWidth}"></TextBox>-->
                         </StackPanel>
                     </StackPanel>
                 </Grid>

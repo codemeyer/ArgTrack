@@ -5,39 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:track="clr-namespace:ArgTrack.ViewModels.Track"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=track:TrackHeaderViewModel, IsDesignTimeCreatable=False}"
+        d:DataContext="{d:DesignInstance Type=track:TrackSettingsViewModel, IsDesignTimeCreatable=False}"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False" ResizeMode="NoResize"
-        Width="580" Height="440"
-        Title="Track Layout">
+        Width="580" Height="470"
+        Title="Track Settings">
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Margin="5" Orientation="Vertical">
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Width="180">First Section Angle</Label>
-                    <TextBox Width="50" Height="22" Text="{Binding FirstSectionAngle}"></TextBox>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Width="180">First Section Height</Label>
-                    <TextBox Width="50" Height="22" Text="{Binding FirstSectionHeight}"></TextBox>
-                </StackPanel>
-
-                <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-                    <Label Width="180">Track Start Width</Label>
-                    <TextBox Width="50" Height="22" Text="{Binding TrackStartWidth}"></TextBox>
-                    <Label Margin="25,0,0,0" Width="165" Height="26" Content="{Binding TrackWidthDescription}"></Label>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Width="180">Left Verge Start Width</Label>
-                    <TextBox Width="50" Height="22" Text="{Binding LeftVergeStartWidth}"></TextBox>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Width="180">Right Verge Start Width</Label>
-                    <TextBox Width="50" Height="22" Text="{Binding RightVergeStartWidth}"></TextBox>
+                    <Label Width="180">Lap Count</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding LapCount}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
@@ -136,6 +115,33 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+                </StackPanel>
+
+
+                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+                    <Label Width="180">Lap Time Indication</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding LapTimeIndication}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="180">Time Factor Non-Race</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding TimeFactorNonRace}"></TextBox>
+                    <!--<Label Margin="25,0,0,0" Width="165" Height="26" Content="{Binding TrackWidthDescription}"></Label>-->
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="180">Time Factor Race</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding TimeFactorRace}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="180">Pit Lane Default Draw Distance</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding DefaultPitLaneViewDistance}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="180">Unknown Track Distance</Label>
+                    <TextBox Width="50" Height="22" Text="{Binding UnknownTrackDistance}"></TextBox>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

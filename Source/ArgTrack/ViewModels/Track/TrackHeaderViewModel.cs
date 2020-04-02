@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using ArgData.Entities;
 using ArgTrack.AppStuff;
-using ArgTrack.Commands.Tracks;
 using ArgTrack.TrackStuff;
 
 namespace ArgTrack.ViewModels.Track
@@ -53,33 +51,6 @@ namespace ArgTrack.ViewModels.Track
         {
             get { return _trackCenterZ; }
             set { SetProperty(ref _trackCenterZ, value, () => TrackCenterZ); }
-        }
-
-
-        private TrackSide _poleSide;
-
-        public TrackSide PoleSide
-        {
-            get { return _poleSide; }
-            set { SetProperty(ref _poleSide, value, () => PoleSide); }
-        }
-
-
-        private TrackSide _pitsSide;
-
-        public TrackSide PitsSide
-        {
-            get { return _pitsSide; }
-            set { SetProperty(ref _pitsSide, value, () => PitsSide); }
-        }
-
-
-        private SurroundingArea _surroundingArea;
-
-        public SurroundingArea SurroundingArea
-        {
-            get { return _surroundingArea; }
-            set { SetProperty(ref _surroundingArea, value, () => SurroundingArea); }
         }
 
 
@@ -133,6 +104,7 @@ namespace ArgTrack.ViewModels.Track
 
         private KerbType _kerbType;
 
+        [System.Obsolete("Moved to TrackSettingsViewModel")]
         public KerbType KerbType
         {
             get { return _kerbType; }
@@ -153,6 +125,7 @@ namespace ArgTrack.ViewModels.Track
 
         private byte _kerbUpperColor;
 
+        [System.Obsolete("Moved to TrackSettingsViewModel")]
         public byte KerbUpperColor
         {
             get { return _kerbUpperColor; }
@@ -165,6 +138,7 @@ namespace ArgTrack.ViewModels.Track
 
         private byte _kerbLowerColor;
 
+        [System.Obsolete("Moved to TrackSettingsViewModel")]
         public byte KerbLowerColor
         {
             get { return _kerbLowerColor; }
@@ -177,6 +151,7 @@ namespace ArgTrack.ViewModels.Track
 
         private byte _kerbUpperColor2;
 
+        [System.Obsolete("Moved to TrackSettingsViewModel")]
         public byte KerbUpperColor2
         {
             get { return _kerbUpperColor2; }
@@ -189,6 +164,7 @@ namespace ArgTrack.ViewModels.Track
 
         private byte _kerbLowerColor2;
 
+        [System.Obsolete("Moved to TrackSettingsViewModel")]
         public byte KerbLowerColor2
         {
             get { return _kerbLowerColor2; }
@@ -202,6 +178,7 @@ namespace ArgTrack.ViewModels.Track
 
         private Visibility _showKerbColor2 = Visibility.Collapsed;
 
+        [System.Obsolete("Moved to TrackSettingsViewModel")]
         public Visibility ShowKerbColor2
         {
             get { return _showKerbColor2; }
@@ -211,6 +188,7 @@ namespace ArgTrack.ViewModels.Track
 
         private ObservableCollection<Rectangle> _upperKerbExampleColorRectangles;
 
+        [System.Obsolete("Moved to TrackSettingsViewModel")]
         public ObservableCollection<Rectangle> UpperKerbExampleColorRectangles
         {
             get { return _upperKerbExampleColorRectangles; }
@@ -219,12 +197,14 @@ namespace ArgTrack.ViewModels.Track
 
         private ObservableCollection<Rectangle> _lowerKerbExampleColorRectangles;
 
+        [System.Obsolete("Moved to TrackSettingsViewModel")]
         public ObservableCollection<Rectangle> LowerKerbExampleColorRectangles
         {
             get { return _lowerKerbExampleColorRectangles; }
             set { SetProperty(ref _lowerKerbExampleColorRectangles, value, () => LowerKerbExampleColorRectangles); }
         }
 
+        [System.Obsolete("Moved to TrackSettingsViewModel")]
         private void UpdateKerbExampleColors()
         {
             const int width = 20;
@@ -321,6 +301,7 @@ namespace ArgTrack.ViewModels.Track
             }
         }
 
+        [System.Obsolete("Moved to TrackSettingsViewModel")]
         public List<KerbTypeBoundValue> AvailableKerbTypes
         {
             get
@@ -399,33 +380,33 @@ namespace ArgTrack.ViewModels.Track
 
         // TODO: these three items should be somewhere else, not really related to TrackHeader anymore
 
-        private byte[] _dataAfterSetup;
+        //private byte[] _dataAfterSetup;
 
-        public byte[] DataAfterSetup
-        {
-            get { return _dataAfterSetup; }
-            set { SetProperty(ref _dataAfterSetup, value, () => DataAfterSetup); }
-        }
+        //public byte[] DataAfterSetup
+        //{
+        //    get { return _dataAfterSetup; }
+        //    set { SetProperty(ref _dataAfterSetup, value, () => DataAfterSetup); }
+        //}
 
-        private byte[] _finalData1;
+        //private byte[] _finalData1;
 
-        public byte[] FinalData1
-        {
-            get { return _finalData1; }
-            set { SetProperty(ref _finalData1, value, () => FinalData1); }
-        }
-
-
-        private byte[] _finalData2;
-
-        public byte[] FinalData2
-        {
-            get { return _finalData2; }
-            set { SetProperty(ref _finalData2, value, () => FinalData2); }
-        }
+        //public byte[] FinalData1
+        //{
+        //    get { return _finalData1; }
+        //    set { SetProperty(ref _finalData1, value, () => FinalData1); }
+        //}
 
 
-        public ICommand EditGenericByteDataCommand { get; } = new EditGenericByteDataCommand();
+        //private byte[] _finalData2;
+
+        //public byte[] FinalData2
+        //{
+        //    get { return _finalData2; }
+        //    set { SetProperty(ref _finalData2, value, () => FinalData2); }
+        //}
+
+
+        //public ICommand EditGenericByteDataCommand { get; } = new EditGenericByteDataCommand();
 
     }
 

@@ -84,7 +84,7 @@ namespace ArgTrack.TrackStuff
                 double pitLaneShiftX = Math.Cos(Math.PI - startSection.StartAngle * LayoutConstants.AngleScaleRadians) * pitlaneShift / LayoutConstants.TrackWidthUnitsPerLengthUnit;
                 double pitLaneShiftY = Math.Sin(Math.PI - startSection.StartAngle * LayoutConstants.AngleScaleRadians) * pitlaneShift / LayoutConstants.TrackWidthUnitsPerLengthUnit;
 
-                if (track.TrackHeader.PitsSide == TrackSide.Right)
+                if (track.TrackSettings.PitsSide == TrackSide.Right)
                 {
                     dPosX = startSection.StartPosition.X - pitLaneShiftX;
                     dPosY = startSection.StartPosition.Y + pitLaneShiftY;
@@ -340,7 +340,7 @@ namespace ArgTrack.TrackStuff
         // TODO:   i.e. whether startpoint is center, or startpoint is left or right corner
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="startPosition"></param>
         /// <param name="startAngle"></param>

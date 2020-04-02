@@ -59,13 +59,13 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Displacement" Width="90">
+                    <!--<GridViewColumn Header="Displacement" Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Right" Text="{Binding Displacement}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    </GridViewColumn>-->
 
                     <GridViewColumn Header="HighRadius" Width="90">
                         <GridViewColumn.CellTemplate>

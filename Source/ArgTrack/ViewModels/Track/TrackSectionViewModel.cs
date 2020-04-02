@@ -137,6 +137,28 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
+
+        // TODO: these should be the end widths of the previous section,
+        // except for the first section of the track, then the start widths are the ones defined in TrackSettings
+
+        //private byte _leftVergeStartWidth;
+
+        //public byte LeftVergeStartWidth
+        //{
+        //    get { return _leftVergeStartWidth; }
+        //    set { SetProperty(ref _leftVergeStartWidth, value, () => LeftVergeStartWidth); }
+        //}
+
+        //private byte _rightVergeStartWidth;
+
+        //public byte RightVergeStartWidth
+        //{
+        //    get { return _rightVergeStartWidth; }
+        //    set { SetProperty(ref _rightVergeStartWidth, value, () => RightVergeStartWidth); }
+        //}
+
+
+
         private KerbHeight _kerbHeight;
 
         public KerbHeight KerbHeight

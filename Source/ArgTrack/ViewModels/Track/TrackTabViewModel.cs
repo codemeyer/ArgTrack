@@ -18,6 +18,7 @@ namespace ArgTrack.ViewModels.Track
 
         private TrackViewModel _track;
 
+        [Obsolete("Should not be used, replace with some global instead")]
         public TrackViewModel Track
         {
             get { return _track; }

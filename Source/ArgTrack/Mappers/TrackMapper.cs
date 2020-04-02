@@ -11,13 +11,18 @@ namespace ArgTrack.Mappers
         {
             var viewModel = new TrackViewModel();
 
-            viewModel.LapCount = track.LapCount;
+            MapTrackSettingsToViewModel(track.TrackSettings, viewModel.TrackSettings);
+
+            viewModel.ComputerCarLineDisplacement = track.ComputerCarLineDisplacement;
+
+            MapComputerCarBehaviorToViewModel(track.ComputerCarBehavior, viewModel.ComputerCarBehavior);
+
+            MapCarSettingsToViewModel(track.CarSettings, viewModel.CarSettings);
 
             viewModel.HorizonBytes = track.Horizon.GetBytes();
 
             MapHeaderToViewModel(track.TrackDataHeader, viewModel.TrackHeader);
             MapOffsetsToHeaderViewModel(track.Offsets, viewModel.TrackHeader);
-            MapRawDataToHeaderViewModel(track.RawData, viewModel.TrackHeader);
 
             foreach (var section in track.TrackSections)
             {
@@ -41,7 +46,7 @@ namespace ArgTrack.Mappers
                 viewModel.PitLaneSections.Add(sectionViewModel);
             }
 
-            foreach (var section in track.BestLineSegments)
+            foreach (var section in track.ComputerCarLineSegments)
             {
                 var sectionViewModel = new BestLineSegmentViewModel(viewModel.BestLineSegments);
                 MapBestLineSegmentToViewModel(section, sectionViewModel);
@@ -72,7 +77,50 @@ namespace ArgTrack.Mappers
             Mapper.MapCarSetupToViewModel(track.ComputerCarSetup, viewModel.ComputerCarSetup);
 
 
+            foreach (TrackCameraCommand camera in track.TrackCameraCommands)
+            {
+                if (camera is DeleteTrackCameraCommand deleteCamera)
+                {
+                    var deleteCameraViewModel = new DeleteTrackCameraCommandViewModel(deleteCamera.CameraIndex);
+                    viewModel.TrackCameraCommands.Add(deleteCameraViewModel);
+                }
+
+                if (camera is TrackCameraAdjustmentCommand adjustCamera)
+                {
+                    var adjustCameraViewModel = new TrackCameraAdjustmentCommandViewModel(adjustCamera.CameraIndex, adjustCamera.Adjustment, adjustCamera.TrackSide);
+                    viewModel.TrackCameraCommands.Add(adjustCameraViewModel);
+                }
+
+                if (camera is TrackCameraRangeRightSideAdjustmentCommand rangeRightSide)
+                {
+                    var rangeAdjust = new TrackCameraRangeRightSideAdjustmentCommandViewModel(rangeRightSide.CameraIndexFrom, rangeRightSide.CameraIndexTo);
+                    viewModel.TrackCameraCommands.Add(rangeAdjust);
+                }
+            }
+
             return viewModel;
+        }
+
+        private static void MapComputerCarBehaviorToViewModel(TrackComputerCarBehavior behavior, ComputerCarBehaviorViewModel viewModel)
+        {
+            viewModel.FormationLength = behavior.FormationLength;
+            viewModel.LateBrakingFactorNonRace = behavior.LateBrakingFactorNonRace;
+            viewModel.LateBrakingFactorRace = behavior.LateBrakingFactorRace;
+            viewModel.LateBrakingFactorWetRace = behavior.LateBrakingFactorWetRace;
+            viewModel.PowerFactor = behavior.PowerFactor;
+            viewModel.StrategyChance = behavior.StrategyChance;
+            viewModel.StrategyFirstPitStopLap = behavior.StrategyFirstPitStopLap;
+            viewModel.UnknownData = behavior.UnknownData;
+        }
+
+        private static void MapCarSettingsToViewModel(TrackCarSettings settings, CarSettingsViewModel viewModel)
+        {
+            viewModel.Acceleration = settings.Acceleration;
+            viewModel.AirResistance = settings.AirResistance;
+            viewModel.FuelLoad = settings.FuelLoad;
+            viewModel.GripFactor = settings.GripFactor;
+            viewModel.TyreWearNonQualifying = settings.TyreWearNonQualifying;
+            viewModel.TyreWearQualifying = settings.TyreWearQualifying;
         }
 
         public static void MapSectionToViewModel(TrackSection section, TrackSectionViewModel viewModel)
@@ -108,7 +156,7 @@ namespace ArgTrack.Mappers
             }
         }
 
-        public static void MapCommandToViewModel(TrackCommand command, TrackCommandViewModel viewModel)
+        public static void MapCommandToViewModel(TrackSectionCommand command, TrackCommandViewModel viewModel)
         {
             viewModel.Command = command.Command;
             viewModel.Arguments.Clear();
@@ -131,13 +179,30 @@ namespace ArgTrack.Mappers
                 return new TrackCommandArgumentViewModel();
         }
 
-        private static void MapBestLineSegmentToViewModel(TrackBestLineSegment section, BestLineSegmentViewModel viewModel)
+        private static void MapTrackSettingsToViewModel(TrackSettings settings, TrackSettingsViewModel viewModel)
+        {
+            viewModel.UnknownTrackDistance = settings.UnknownTrackDistance;
+            viewModel.DefaultPitLaneViewDistance = settings.DefaultPitLaneViewDistance;
+            viewModel.KerbType = settings.KerbType;
+            viewModel.KerbUpperColor = settings.KerbUpperColor;
+            viewModel.KerbLowerColor = settings.KerbLowerColor;
+            viewModel.KerbUpperColor2 = settings.KerbUpperColor2;
+            viewModel.KerbLowerColor2 = settings.KerbLowerColor2;
+            viewModel.PitsSide = settings.PitsSide;
+            viewModel.PoleSide = settings.PoleSide;
+            viewModel.SurroundingArea = settings.SurroundingArea;
+            viewModel.LapCount = settings.LapCount;
+            viewModel.LapTimeIndication = settings.LapTimeIndication;
+            viewModel.TimeFactorNonRace = settings.TimeFactorNonRace;
+            viewModel.TimeFactorRace = settings.TimeFactorRace;
+        }
+
+        private static void MapBestLineSegmentToViewModel(TrackComputerCarLineSegment section, BestLineSegmentViewModel viewModel)
         {
             viewModel.Length = (byte)section.Length;
             viewModel.Radius = section.Radius;
             viewModel.HighRadius = section.HighRadius;
             viewModel.LowRadius = section.LowRadius;
-            viewModel.Displacement = section.Displacement;
             viewModel.Correction = section.Correction;
             viewModel.SegmentType = section.SegmentType;
             viewModel.Type = section.SegmentType.ToString();
@@ -151,7 +216,7 @@ namespace ArgTrack.Mappers
             viewModel.AngleX = objectData.AngleX;
             viewModel.AngleY = objectData.AngleY;
             viewModel.DistanceFromTrack = objectData.DistanceFromTrack;
-            viewModel.Id = objectData.Id;
+            viewModel.Id2 = objectData.Id2;
             viewModel.Unknown2 = objectData.Unknown2;
             viewModel.Height = objectData.Height;
 
@@ -165,14 +230,6 @@ namespace ArgTrack.Mappers
             viewModel.TrackCenterX = headerData.TrackCenterX;
             viewModel.TrackCenterY = headerData.TrackCenterY;
             viewModel.TrackCenterZ = headerData.TrackCenterZ;
-            viewModel.KerbType = headerData.KerbType;
-            viewModel.KerbUpperColor = headerData.KerbUpperColor;
-            viewModel.KerbLowerColor = headerData.KerbLowerColor;
-            viewModel.KerbUpperColor2 = headerData.KerbUpperColor2;
-            viewModel.KerbLowerColor2 = headerData.KerbLowerColor2;
-            viewModel.PoleSide = headerData.PoleSide;
-            viewModel.PitsSide = headerData.PitsSide;
-            viewModel.SurroundingArea = headerData.SurroundingArea;
             viewModel.TrackStartWidth = headerData.StartWidth;
             viewModel.LeftVergeStartWidth = headerData.LeftVergeStartWidth;
             viewModel.RightVergeStartWidth = headerData.RightVergeStartWidth;
@@ -187,12 +244,12 @@ namespace ArgTrack.Mappers
             viewModel.TrackData = offsets.TrackData;
         }
 
-        private static void MapRawDataToHeaderViewModel(TrackRawData rawData, TrackHeaderViewModel viewModel)
-        {
-            viewModel.DataAfterSetup = rawData.DataAfterSetup;
-            viewModel.FinalData1 = rawData.FinalData1;
-            viewModel.FinalData2 = rawData.FinalData2;
-        }
+        //private static void MapRawDataToHeaderViewModel(TrackRawData rawData, TrackHeaderViewModel viewModel)
+        //{
+        //    viewModel.DataAfterSetup = rawData.DataAfterSetup;
+        //    viewModel.FinalData1 = rawData.FinalData1;
+        //    viewModel.FinalData2 = rawData.FinalData2;
+        //}
 
         private static void MapTrackObjectShapeToViewModel(TrackObjectShape objectData,
             TrackObjectShapeViewModel viewModel)
@@ -258,6 +315,11 @@ namespace ArgTrack.Mappers
             CopyProperties(source, target);
         }
 
+        public static void MapTrackSettingsViewModel(TrackSettingsViewModel source, TrackSettingsViewModel target)
+        {
+            CopyProperties(source, target);
+        }
+
         private static void MapTrackCommandArgumentViewModel(TrackCommandArgumentViewModel source, TrackCommandArgumentViewModel target)
         {
             CopyProperties(source, target);
@@ -274,6 +336,11 @@ namespace ArgTrack.Mappers
         }
 
         public static void MapTrackObjectShapeViewModel(TrackObjectShapeViewModel source, TrackObjectShapeViewModel target)
+        {
+            CopyProperties(source, target);
+        }
+
+        public static void MapCarSettingsViewModel(CarSettingsViewModel source, CarSettingsViewModel target)
         {
             CopyProperties(source, target);
         }
@@ -299,10 +366,18 @@ namespace ArgTrack.Mappers
             }
         }
 
+
         public static Track MapEntireTrackViewModelToTrack(TrackViewModel viewModel)
         {
             var track = new Track();
-            track.LapCount = viewModel.LapCount;
+
+            track.ComputerCarLineDisplacement = viewModel.ComputerCarLineDisplacement;
+
+            CopyProperties(viewModel.TrackSettings, track.TrackSettings);
+
+            CopyProperties(viewModel.CarSettings, track.CarSettings);
+            CopyProperties(viewModel.ComputerCarBehavior, track.ComputerCarBehavior);
+            // TODO: more?
 
             for (int i = 0; i <= 4095; i++)
             {
@@ -312,7 +387,6 @@ namespace ArgTrack.Mappers
             CopyProperties(viewModel.TrackHeader, track.TrackDataHeader);
             track.TrackDataHeader.StartWidth = viewModel.TrackHeader.TrackStartWidth;
             CopyProperties(viewModel.TrackHeader, track.Offsets);
-            CopyProperties(viewModel.TrackHeader, track.RawData);
 
             foreach (var section in viewModel.TrackSections)
             {
@@ -330,9 +404,9 @@ namespace ArgTrack.Mappers
 
             foreach (var bestLine in viewModel.BestLineSegments)
             {
-                var target = new TrackBestLineSegment();
+                var target = new TrackComputerCarLineSegment();
                 CopyProperties(bestLine, target);
-                track.BestLineSegments.Add(target);
+                track.ComputerCarLineSegments.Add(target);
             }
 
             foreach (var obj in viewModel.TrackObjectSettings)
@@ -350,6 +424,27 @@ namespace ArgTrack.Mappers
             }
 
             CopyProperties(viewModel.ComputerCarSetup, track.ComputerCarSetup);
+
+            foreach (var cameraViewModel in viewModel.TrackCameraCommands)
+            {
+                if (cameraViewModel is DeleteTrackCameraCommandViewModel deleteVM)
+                {
+                    var camera = new DeleteTrackCameraCommand(deleteVM.CameraIndex);
+                    track.TrackCameraCommands.Add(camera);
+                }
+
+                if (cameraViewModel is TrackCameraAdjustmentCommandViewModel adjustVM)
+                {
+                    var camera = new TrackCameraAdjustmentCommand(adjustVM.CameraIndex, adjustVM.Adjustment, adjustVM.TrackSide);
+                    track.TrackCameraCommands.Add(camera);
+                }
+
+                if (cameraViewModel is TrackCameraRangeRightSideAdjustmentCommandViewModel rightAdjustVM)
+                {
+                    var camera = new TrackCameraRangeRightSideAdjustmentCommand(rightAdjustVM.CameraIndexFrom, rightAdjustVM.CameraIndexTo);
+                    track.TrackCameraCommands.Add(camera);
+                }
+            }
 
             return track;
         }
@@ -381,7 +476,7 @@ namespace ArgTrack.Mappers
 
             foreach (var commandViewModel in viewModel.Commands)
             {
-                var command = TrackCommand.Create(commandViewModel.Command);
+                var command = TrackSectionCommand.Create(commandViewModel.Command);
 
                 //short[] args = new short[command.Arguments.Count];
 

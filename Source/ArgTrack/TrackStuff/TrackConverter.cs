@@ -23,8 +23,10 @@ namespace ArgTrack.TrackStuff
             templateSourceTrack.TrackDataHeader.TrackCenterY = gp2Track.TrackDataHeader.TrackCenterY;
             templateSourceTrack.TrackDataHeader.TrackCenterZ = gp2Track.TrackDataHeader.TrackCenterZ;
             templateSourceTrack.TrackDataHeader.StartWidth = gp2Track.TrackDataHeader.StartWidth;
-            templateSourceTrack.TrackDataHeader.PoleSide = ConvertGp2TrackSide(gp2Track.TrackDataHeader.PoleSide);
-            templateSourceTrack.TrackDataHeader.PitsSide = ConvertGp2TrackSide(gp2Track.TrackDataHeader.PitsSide);
+
+            // TODO: ArgData019 these properties have moved to other objects
+            //templateSourceTrack.TrackDataHeader.PoleSide = ConvertGp2TrackSide(gp2Track.TrackDataHeader.PoleSide);
+            //templateSourceTrack.TrackDataHeader.PitsSide = ConvertGp2TrackSide(gp2Track.TrackDataHeader.PitsSide);
             templateSourceTrack.TrackDataHeader.LeftVergeStartWidth = gp2Track.TrackDataHeader.LeftVergeStartWidth;
             templateSourceTrack.TrackDataHeader.RightVergeStartWidth = gp2Track.TrackDataHeader.RightVergeStartWidth;
             //templateSourceTrack.TrackDataHeader.KerbType = gp2Track.TrackDataHeader.KerbType;
@@ -35,7 +37,7 @@ namespace ArgTrack.TrackStuff
             // TODO: set fixed kerb colors?
 
             templateSourceTrack.TrackSections.Clear();
-            
+
             foreach (var trackSection in gp2Track.TrackSections)
             {
                 var convertedTrackSection = MapTrackSection(trackSection);
@@ -54,7 +56,7 @@ namespace ArgTrack.TrackStuff
 
             new TrackWriter().Write(templateSourceTrack, outputPath);
         }
-        
+
         private static EntitiesF1GP.TrackSide ConvertGp2TrackSide(EntitiesGP2.TrackSide trackSideGp2)
         {
             if (trackSideGp2 == EntitiesGP2.TrackSide.Left)
@@ -118,10 +120,10 @@ namespace ArgTrack.TrackStuff
                 return EntitiesF1GP.KerbHeight.Low;
         }
 
-        private static EntitiesF1GP.TrackCommand MapCommand(EntitiesGP2.TrackCommand command)
+        private static EntitiesF1GP.TrackSectionCommand MapCommand(EntitiesGP2.TrackCommand command)
         {
-            var viewModel = EntitiesF1GP.TrackCommand.Create(command.Command);
-            
+            var viewModel = EntitiesF1GP.TrackSectionCommand.Create(command.Command);
+
             for (int i = 0; i < command.Arguments.Length; i++)
             {
                 viewModel.Arguments[i] = command.Arguments[i];
