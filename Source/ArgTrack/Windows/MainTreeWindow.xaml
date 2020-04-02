@@ -185,9 +185,9 @@
 
 
                     <!-- Cameras -->
-                    <TreeViewItem Header="Cameras" Margin="0,3" ItemsSource="{Binding TrackViewModel.TrackCameras}">
+                    <!--<TreeViewItem Header="Cameras" Margin="0,3" ItemsSource="{Binding TrackViewModel.TrackCameras}">-->
                                       <!--MouseDoubleClick="ObjectShapesTreeView_OnMouseDoubleClick"/>-->
-                    </TreeViewItem>
+                    <!--</TreeViewItem>-->
 
 
                     <!-- Misc Data -->
@@ -372,7 +372,7 @@
                         </Polyline>
                     </Canvas>
                 </Grid>
-                <Grid Width="18" Height="18" HorizontalAlignment="Right" VerticalAlignment="Bottom"></Grid>
+                <Grid Width="18" Height="18" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="#BBB"></Grid>
                 <!--Background="#888"-->
             </Grid>
 
