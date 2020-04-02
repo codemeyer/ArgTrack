@@ -40,7 +40,7 @@
             <MenuItem Header="_Help">
                 <MenuItem Header="View _Help" Command="{Binding HelpDocsCommand}"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="_About ArgEditor" Command="{Binding OpenAboutWindowCommand}" CommandParameter="{Binding}"></MenuItem>
+                <MenuItem Header="_About ArgTrack" Command="{Binding OpenAboutWindowCommand}" CommandParameter="{Binding}"></MenuItem>
             </MenuItem>
         </Menu>
 
@@ -260,7 +260,7 @@
                   DataContext="{Binding TrackLayoutViewModel}" Background="{Binding SurroundingAreaColor}">
                 <StackPanel Width="48" HorizontalAlignment="Right" VerticalAlignment="Top" Height="25" Margin="0,0,18,0"
                             Background="#aaa" Orientation="Horizontal" ZIndex="1">
-                    <!--Visibility="{Binding VisibleWhenTrackHasBeenLoaded}">-->
+                    <!--Visibility="{Binding VisibleWhenTrackHasBeenLoaded}"> is not available at this level... -->
                     <Button Width="20" Height="20" Margin="2" Command="{Binding ZoomTrackViewInCommand}" CommandParameter="{Binding}">+</Button>
                     <Button Width="20" Height="20" Margin="2" Command="{Binding ZoomTrackViewOutCommand}" CommandParameter="{Binding}">-</Button>
                 </StackPanel>

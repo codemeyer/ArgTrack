@@ -8,12 +8,13 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModels:AboutViewModel, IsDesignTimeCreatable=True}"
         d:DesignWidth="440" d:DesignHeight="396"
-        Width="440" Height="396"
+        Width="440" Height="362"
         ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
         Title="About ArgTrack">
     <Grid>
         <StackPanel Orientation="Vertical">
 
+            <!--
             <StackPanel Margin="5" Orientation="Horizontal">
                 <Button HorizontalAlignment="Left" Width="140" Height="24" Margin="0"
                         Command="{Binding CheckForUpdateCommand}" CommandParameter="{Binding}">
@@ -29,6 +30,7 @@
                     <Hyperlink BaselineAlignment="Center" Command="{Binding OpenDownloadPageCommand}">Download!</Hyperlink>
                 </TextBlock>
             </StackPanel>
+            -->
 
             <StackPanel Orientation="Vertical">
                 <GroupBox Margin="5" Header="About">
@@ -37,7 +39,7 @@
                                     <Label>ArgTrack</Label>
                                     <Label Content="{Binding CurrentVersion}"></Label>
                         </TextBlock>
-                        <Label>Copyright © 2017-2019 Fredrik Meyer</Label>
+                        <Label>Copyright © 2017-2020 Fredrik Meyer</Label>
                         <TextBlock Margin="5">
                                     Website: <Hyperlink Command="{Binding HelpDocsCommand}">www.argtools.com/argtrack</Hyperlink>
                         </TextBlock>
@@ -61,7 +63,7 @@
                 <GroupBox Margin="5" Header="Credits">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Margin="5" TextWrapping="Wrap">
-                            <Hyperlink Command="{Binding OpenFanSiteCommand}">www.argtools.com/argtrack/credits</Hyperlink>
+                            <Hyperlink Command="{Binding OpenArgToolsAcknowledgementsSiteCommand}">www.argtools.com/acknowledgements</Hyperlink>
                             <LineBreak />
                             <LineBreak/>
                             <!--ArgTrack is powered by the <Hyperlink Command="{Binding OpenArgDataPageCommand}">ArgData API</Hyperlink><LineBreak/>

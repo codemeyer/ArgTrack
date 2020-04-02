@@ -13,7 +13,6 @@ namespace ArgTrack.ViewModels
     {
         public MainViewModel()
         {
-            AboutTabViewModel = new AboutViewModel();
             TrackTabViewModel = new TrackTabViewModel();
         }
 
@@ -95,20 +94,8 @@ namespace ArgTrack.ViewModels
 
 
         [Obsolete("Delete after the tab-layout has been removed")]
-        public AboutViewModel AboutTabViewModel { get; set; }
-
-        [Obsolete("Delete after the tab-layout has been removed")]
         public TrackTabViewModel TrackTabViewModel { get; set; }
 
-
-        private int _selectedMainTabIndex;
-
-        [Obsolete("Delete after the tab-layout has been removed")]
-        public int SelectedMainTabIndex
-        {
-            get { return _selectedMainTabIndex; }
-            set { SetProperty(ref _selectedMainTabIndex, value, () => SelectedMainTabIndex); }
-        }
 
         private object _selectedTreeViewItem;
 

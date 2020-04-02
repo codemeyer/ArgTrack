@@ -6,7 +6,7 @@ namespace ArgTrack.Commands
     {
         public override void Execute(object parameter)
         {
-            Process.Start(@"http://www.argtools.com/argdata");
+            Process.Start(@"https://www.argtools.com/argdata");
         }
     }
 }

@@ -134,9 +134,6 @@
     <Compile Include="TrackStuff\LayoutConstants.cs" />
     <Compile Include="TrackStuff\TrackConverter.cs" />
     <Compile Include="TrackStuff\UnitConvert.cs" />
-    <Compile Include="UserControls\AboutTabUserControl.xaml.cs">
-      <DependentUpon>AboutTabUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\CarSetup\CarSetupUserControl.xaml.cs">
       <DependentUpon>CarSetupUserControl.xaml</DependentUpon>
     </Compile>
@@ -242,10 +239,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\AboutTabUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="UserControls\CarSetup\CarSetupUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
