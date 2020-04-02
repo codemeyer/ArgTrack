@@ -4,10 +4,10 @@ title: "ArgTrack: Download"
 
 # Download
 
-The latest version is **0.2**, released on 2018-08-24.
+The latest version is **0.3**, released on 2020-04?-??.
 
 <p>
-    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.2.zip">Download</a>
+    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.3.zip">Download</a>
 </p>
 
 <br />
@@ -32,6 +32,17 @@ be found here:
 ## Release notes
 
 Below are the release notes for each released version of ArgTrack.
+
+
+### 0.3
+
+Released 2020-04?-??
+
+- Track drawn on screen so that you know what you are doing
+- Ability to manipulate more track settings and computer car behavior
+- TODO: more
+- _Known issue: Track view occasionally ends up outside scrollable area_
+
 
 ### 0.2
 

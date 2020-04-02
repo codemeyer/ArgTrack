@@ -4,12 +4,10 @@ title: "ArgTrack"
 
 # ArgTrack
 
-ArgTrack is a simple, semi-functional track editor
-for the old PC racing game
-[Microprose Formula One Grand Prix](https://en.wikipedia.org/wiki/Formula_One_Grand_Prix_(video_game)),
-first released in 1992.
+ArgTrack is a simple, semi-functional track editor for the old PC racing game
+[Microprose Formula One Grand Prix](https://en.wikipedia.org/wiki/Formula_One_Grand_Prix_(video_game)).
 
-Note: This software is still in beta, and more features will be added in due time.
+<img src="/argtrack/images/argtrack-main-window.png" alt="ArgTrack main window" class="img-fluid" />
 
 
 ## Features
@@ -18,13 +16,15 @@ Note: This software is still in beta, and more features will be added in due tim
 - You can edit (or at least "manipulate")
  - Track sections
  - Pit lane sections
- - Best line segments
- - Object settings
- - Object shapes
+ - Computer car racing line
+ - Track-side objects
  - Track horizon image
- - Computer car setup
+ - General car behavior
+ - Computer car behavior and car setup
  - and more!
 - Save the track and drive it in the game!
+
+_Note: This software is still in beta, and more features will be added in due time._
 
 
 ## Getting started

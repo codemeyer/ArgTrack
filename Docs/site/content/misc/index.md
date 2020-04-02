@@ -6,6 +6,7 @@ title: "ArgTrack: Misc"
 
 Miscellaneous functionality.
 
+- <a href="/argtrack/tree">Tree</a> menu on the left-hand side
 - <a href="/argtrack/menu-info">Menu info</a>
 - <a href="/argtrack/track-validation-window">Track Validation</a> that ensures your track works in F1GP<br />
 - <a href="/argtrack/gp2-track-conversion-window">Track Conversion</a> from GP2 (only track and pit lane sections for now)<br />

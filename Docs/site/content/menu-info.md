@@ -36,6 +36,53 @@ title: "ArgTrack: Menu Info"
 <br/>
 
 
+
+## Data menu
+
+<table class="table table-bordered table-striped table--medium">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Command</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Track Sections</td>
+            <td>
+                ...
+            </td>
+        </tr>
+        <tr>
+            <td>Pit Lane Sections</td>
+            <td>
+            ...
+            </td>
+        </tr>
+        <tr>
+            <td>Computer Car Racing Line</td>
+            <td>
+            ...
+            </td>
+        </tr>
+        <tr>
+            <td>Object Settings</td>
+            <td>
+            ...
+            </td>
+        </tr>
+        <tr>
+            <td>Object Shapes</td>
+            <td>
+            ...
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p><br/></p>
+
+
 <h2 id="tools-menu">Tools menu</h2>
 
 <table class="table table-bordered table-striped table--medium">
@@ -62,7 +109,7 @@ title: "ArgTrack: Menu Info"
     </tbody>
 </table>
 
-<br/>
+<p><br/></p>
 
 
 <h2 id="help-menu">Help menu</h2>
