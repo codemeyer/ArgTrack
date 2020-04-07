@@ -16,6 +16,16 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
+
+        private int _index;
+
+        public int Index
+        {
+            get { return _index; }
+            set { SetProperty(ref _index, value, () => Index); }
+        }
+
+
         private byte _length;
 
         public byte Length
@@ -26,16 +36,6 @@ namespace ArgTrack.ViewModels.Track
                 SetProperty(ref _length, value, () => Length);
                 UpdateLengthDescription(value);
             }
-        }
-
-
-        /// <summary>
-        /// Gets the index of the view model inside the list it belongs to.
-        /// </summary>
-        /// <returns></returns>
-        private int IndexOf()
-        {
-            return ParentList.IndexOf(this);
         }
 
 
@@ -140,22 +140,13 @@ namespace ArgTrack.ViewModels.Track
         {
             switch (SegmentType)
             {
-                //case TrackBestLineSegmentType.Displacement:
-                //    ShowDisplacement = Visibility.Visible;
-                //    ShowRadius = Visibility.Visible;
-                //    ShowCorrection = Visibility.Visible;
-                //    ShowLowRadius = Visibility.Collapsed;
-                //    ShowHighRadius = Visibility.Collapsed;
-                //    break;
                 case TrackComputerCarLineSegmentType.Normal:
-                    ShowDisplacement = Visibility.Collapsed;
                     ShowRadius = Visibility.Visible;
                     ShowCorrection = Visibility.Visible;
                     ShowLowRadius = Visibility.Collapsed;
                     ShowHighRadius = Visibility.Collapsed;
                     break;
                 case TrackComputerCarLineSegmentType.WideRadius:
-                    ShowDisplacement = Visibility.Collapsed;
                     ShowRadius = Visibility.Collapsed;
                     ShowCorrection = Visibility.Collapsed; //?
                     ShowLowRadius = Visibility.Visible;
@@ -218,8 +209,6 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-
-
         private bool _canEditType;
 
         public bool CanEditType
@@ -238,15 +227,9 @@ namespace ArgTrack.ViewModels.Track
                 list.Add(new BestLineTypeBoundValue(TrackComputerCarLineSegmentType.Normal, "Normal"));
                 list.Add(new BestLineTypeBoundValue(TrackComputerCarLineSegmentType.WideRadius, "Wide Radius"));
 
-                //if (!CanEditType)
-                //{
-                //    list.Add(new BestLineTypeBoundValue(TrackBestLineSegmentType.Displacement, "Displacement"));
-                //}
-
                 return list;
             }
         }
-
 
 
         // hmmm?
@@ -277,29 +260,12 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-        //public TrackBestLineSegmentType SegmentType { get; set; }
-
-        //// only used for first segment?
-        //public short Displacement { get; set; }
-
-        //public short Correction { get; set; }
-
-
         private Visibility _showRadius;
 
         public Visibility ShowRadius
         {
             get { return _showRadius; }
             set { SetProperty(ref _showRadius, value, () => ShowRadius); }
-        }
-
-        private Visibility _showDisplacement;
-
-        [Obsolete("Displacement should be edited elsewhere")]
-        public Visibility ShowDisplacement
-        {
-            get { return _showDisplacement; }
-            set { SetProperty(ref _showDisplacement, value, () => ShowDisplacement); }
         }
 
         private Visibility _showCorrection;
@@ -330,7 +296,7 @@ namespace ArgTrack.ViewModels.Track
         // makes the current view model the selected one in its list
         public void SelectInList()
         {
-            ParentList.SelectedIndex = IndexOf();
+            ParentList.SelectedIndex = Index;
         }
     }
 

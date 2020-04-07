@@ -4,7 +4,7 @@ title: "ArgTrack: Download"
 
 # Download
 
-The latest version is **0.3**, released on 2020-04?-??.
+The latest version is **0.3**, released on 2020-04-??.
 
 <p>
     <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.3.zip">Download</a>
@@ -36,20 +36,25 @@ Below are the release notes for each released version of ArgTrack.
 
 ### 0.3
 
-Released 2020-04?-??
+Released 2020-04-??
 
-- Track drawn on screen so that you know what you are doing
-- Ability to manipulate more track settings and computer car behavior
-- TODO: more
+- Track layout drawn on screen so that you know what you are doing!
+- [Tree view menu](/argtrack/menus/tree-view-menu/) on the left
+- Ability to manipulate more [track settings](/argtrack/screens/misc-track-layout-settings-window/)
+- Ability to edit [general car settings](/argtrack/screens/car-settings-window/)
+- Ability to edit [computer car behavior](/argtrack/screens/computer-car-behavior-window/)
+- Restructured, extended and improved documentation
 - _Known issue: Track view occasionally ends up outside scrollable area_
+- _Known issue: Track view not always redrawn after editing layout-affecting properties_
+- _Known issue: Left-hand corner with width change is drawn incorrectly_
 
 
 ### 0.2
 
 Released 2018-08-24
 
-- Initial [GP2 track conversion](/argtrack/gp2-track-conversion-window) (track and pit lane sections only)
-- Initial [track validation](/argtrack/track-validation-window)
+- Initial [GP2 track conversion](/argtrack/screens/gp2-track-conversion-window/) (track and pit lane sections only)
+- Initial [track validation](/argtrack/screens/track-validation-window/)
 - Can rearrange track sections, pit lane sections and best line segments
 - Can insert track sections, pit lane sections and best line segments among others, not just at the end
 - More/better track command and argument descriptions

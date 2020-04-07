@@ -5,15 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:track="clr-namespace:ArgTrack.ViewModels.Track"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=track:TrackViewModel, IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance Type=track:TrackSectionDataListViewModel, IsDesignTimeCreatable=True}"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
-        Width="900" Height="610"
+        Width="900" Height="640"
         Title="Pit Lane Sections">
     <Grid Width="880" Height="590">
         <StackPanel Orientation="Vertical">
-            <ListView Height="560" Margin="5" ItemsSource="{Binding PitLaneSections}" IsSynchronizedWithCurrentItem="True"
-                  MouseDoubleClick="Control_OnMouseDoubleClick" SelectedIndex="{Binding SelectedTrackSectionIndex}">
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <Button Width="100" Margin="5,0,0,0" Height="24"
+                        Command="{Binding AddTrackSectionCommand}" CommandParameter="{Binding TrackSections}">
+                    Add Section
+                </Button>
+                <Button Width="140" Margin="5,0,0,0" Height="24"
+                        Command="{Binding InsertTrackSectionBeforeCommand}" CommandParameter="{Binding TrackSections}">
+                    Insert Section Before
+                </Button>
+                <Button Width="140" Margin="5,0,0,0" Height="24"
+                        Command="{Binding InsertTrackSectionAfterCommand}" CommandParameter="{Binding TrackSections}">
+                    Insert Section After
+                </Button>
+                <Button Width="100" Margin="3,0,0,0" Height="24"
+                        Command="{Binding RemoveTrackSection}" CommandParameter="{Binding SelectedTrackSection}">
+                    Delete Section
+                </Button>
+                <Button Width="32" Margin="3,0,0,0" Height="24"
+                        Command="{Binding MoveTrackSectionUpCommand}" CommandParameter="{Binding SelectedTrackSection}">
+                    <Button.ToolTip>Move Track Section Up</Button.ToolTip>
+                    ▲
+                </Button>
+                <Button Width="32" Margin="3,0,0,0" Height="24"
+                        Command="{Binding MoveTrackSectionDownCommand}" CommandParameter="{Binding SelectedTrackSection}">
+                    <Button.ToolTip>Move Track Section Down</Button.ToolTip>
+                    ▼
+                </Button>
+            </StackPanel>
+
+            <ListView Height="520" Margin="5" ItemsSource="{Binding TrackSections}" IsSynchronizedWithCurrentItem="True"
+                      MouseDoubleClick="Control_OnMouseDoubleClick" SelectedIndex="{Binding SelectedTrackSectionIndex}" SelectedItem="{Binding SelectedTrackSection}">
                 <ListView.InputBindings>
                     <KeyBinding Key="Enter"
                             Command="{Binding EditTrackSectionCommand}"
@@ -101,14 +131,6 @@
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
-                <!--<ListView.ItemTemplate>
-                <DataTemplate>
-                    <WrapPanel>
-                        <TextBlock Text="Length: " />
-                        <TextBlock Text="{Binding Length}" FontWeight="Bold" />
-                    </WrapPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>-->
             </ListView>
             <!--<StackPanel Orientation="Horizontal" Margin="0,-5">
                 <Label>Total Length:</Label>

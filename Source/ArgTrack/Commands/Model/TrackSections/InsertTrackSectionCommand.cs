@@ -35,10 +35,6 @@ namespace ArgTrack.Commands.Model.TrackSections
 
                 parentList.Insert(newIndex, newSection);
                 parentList.RecalculateGraphics();
-
-                // TODO: ?
-                //vm.RecalculateTrackSectionIndexz();
-                //vm.SelectedTrackSectionIndex--;
             }
         }
     }

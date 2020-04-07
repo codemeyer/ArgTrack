@@ -2,27 +2,29 @@ using ArgTrack.ViewModels.Track;
 
 namespace ArgTrack.Commands.Tracks
 {
+    /// <summary>
+    /// Moves a track section (or a pit lane section) up in the list.
+    /// </summary>
     public class MoveTrackSectionUpCommand : CommandBase
     {
         public override void Execute(object parameter)
         {
-            var vm = parameter as TrackViewModel;
+            var trackSection = parameter as TrackSectionViewModel;
 
-            if (vm == null)
+            if (trackSection == null)
                 return;
 
-            vm.TrackSections.Move(vm.SelectedTrackSectionIndex, vm.SelectedTrackSectionIndex - 1);
-            vm.RecalculateTrackSectionIndexz();
+            trackSection.ParentList.Move(trackSection.Index, trackSection.Index - 1);
         }
 
         public override bool CanExecute(object parameter)
         {
-            var vm = parameter as TrackViewModel;
+            var trackSection = parameter as TrackSectionViewModel;
 
-            if (vm == null)
+            if (trackSection == null)
                 return false;
 
-            return vm.SelectedTrackSectionIndex > 0;
+            return trackSection.Index > 0;
         }
     }
 }

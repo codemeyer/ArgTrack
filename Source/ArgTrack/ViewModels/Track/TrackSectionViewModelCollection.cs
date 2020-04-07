@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Input;
 using ArgTrack.Commands.Model;
 using ArgTrack.Commands.Model.TrackSections;
@@ -7,13 +8,30 @@ using InsertTrackSectionCommand = ArgTrack.Commands.Model.TrackSections.InsertTr
 
 namespace ArgTrack.ViewModels.Track
 {
-    public class TrackSectionViewModelCollection : ObservableCollection<TrackSectionViewModel>
+    public sealed class TrackSectionViewModelCollection : ObservableCollection<TrackSectionViewModel>
     {
         private readonly TrackViewModel _trackViewModel;
 
         public TrackSectionViewModelCollection(TrackViewModel trackViewModel)
         {
             _trackViewModel = trackViewModel;
+
+            this.CollectionChanged += OnCollectionChanged;
+        }
+
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RecalculateIndices();
+
+            // also recalculate graphics? or will that be too expensive?
+        }
+
+        private void RecalculateIndices()
+        {
+            for (var index = 0; index < Items.Count; index++)
+            {
+                Items[index].Index = index;
+            }
         }
 
         /// <summary>
@@ -24,6 +42,7 @@ namespace ArgTrack.ViewModels.Track
         {
             _trackViewModel.RecalculateLayout();
         }
+
 
         public int SelectedIndex { get; set; }
 

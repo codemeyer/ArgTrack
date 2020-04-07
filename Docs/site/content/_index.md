@@ -2,9 +2,7 @@
 title: "ArgTrack"
 ---
 
-# ArgTrack
-
-ArgTrack is a simple, semi-functional track editor for the old PC racing game
+ArgTrack is a track editor for the old PC racing game
 [Microprose Formula One Grand Prix](https://en.wikipedia.org/wiki/Formula_One_Grand_Prix_(video_game)).
 
 <img src="/argtrack/images/argtrack-main-window.png" alt="ArgTrack main window" class="img-fluid" />
@@ -19,7 +17,7 @@ ArgTrack is a simple, semi-functional track editor for the old PC racing game
  - Computer car racing line
  - Track-side objects
  - Track horizon image
- - General car behavior
+ - General car settings
  - Computer car behavior and car setup
  - and more!
 - Save the track and drive it in the game!
@@ -29,9 +27,10 @@ _Note: This software is still in beta, and more features will be added in due ti
 
 ## Getting started
 
-- [Download](/argtrack/download) ArgTrack and follow the installation instructions
-- Read a [tutorial](/argtrack/tutorials) or two to get started
-- Looking for something specific? Look at the [Screen-by-screen](/argtrack/screens) or [Misc](/argtrack/misc) sections
+- [Download](/argtrack/download/) ArgTrack and follow the installation instructions
+- Have a look at the [overview](/argtrack/overview/) to get a feeling for track editing and the ArgTrack layout
+- Read a [tutorial](/argtrack/tutorials/) or two
+- Looking for something specific? Look at the [Screen-by-screen](/argtrack/screens/) or [Misc](/argtrack/misc/) sections
 
 
 ## Feedback
@@ -43,7 +42,7 @@ Please send any feedback to <a href="mailto:fredrik@codemeyer.net">fredrik@codem
 
 ArgTrack would not have been possible without previous work and contributions
 by the wider F1GP community, both past and present. Please visit
-the [Acknowledgements](/acknowledgements) page for more details.
+the [Acknowledgements](/acknowledgements/) page for more details.
 
-ArgTrack is powered by the [ArgData API](/argdata), for which the
+ArgTrack is powered by the [ArgData API](/argdata/), for which the
 source code is available [on GitHub](https://github.com/codemeyer/ArgData).

@@ -1,5 +1,4 @@
 ﻿using System;
-using ArgData.Entities;
 using ArgTrack.ViewModels.Track;
 
 namespace ArgTrack.TrackStuff

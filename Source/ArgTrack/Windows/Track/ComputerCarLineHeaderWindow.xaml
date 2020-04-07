@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False" ResizeMode="NoResize"
         Width="256" Height="160"
-        Title="CC Line Header">
+        Title="Racing Line Header">
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Margin="5" Orientation="Vertical">

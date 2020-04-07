@@ -1,13 +1,12 @@
 ﻿using ArgData;
 using ArgTrack.AppStuff;
-using ArgTrack.ViewModels;
 using ArgTrack.ViewModels.Track;
 
 namespace ArgTrack.Commands.Tracks
 {
     public class LoadTrackCommand : CommandBase
     {
-        private string _path;
+        private readonly string _path;
         private readonly IFileDialog _fileDialog;
 
         public LoadTrackCommand(string path)
@@ -22,17 +21,6 @@ namespace ArgTrack.Commands.Tracks
 
         public override void Execute(object parameter)
         {
-            var vm = parameter as TrackTabViewModel;
-
-            if (vm == null)
-            {
-                var main = parameter as MainViewModel;
-                if (main == null)
-                    return;
-
-                vm = main.TrackTabViewModel;
-            }
-
             var path = _path;
 
             if (_fileDialog != null)
@@ -52,9 +40,7 @@ namespace ArgTrack.Commands.Tracks
             // blergh
             TrackViewModelPasserArounder.TrackViewModel = viewModel;
             MainViewModelPasserArounder.MainViewModel.HasLoadedTrack = true;
-
             MainViewModelPasserArounder.MainViewModel.TrackViewModel = viewModel;
-            vm.Track = viewModel;
 
             // TEMP.AF
             var layoutVM = TrackLayoutViewModel.FromTrackViewModel(viewModel);

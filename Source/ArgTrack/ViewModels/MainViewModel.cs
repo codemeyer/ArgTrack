@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -11,11 +10,6 @@ namespace ArgTrack.ViewModels
 {
     public class MainViewModel : BaseViewModel, IDataErrorInfo
     {
-        public MainViewModel()
-        {
-            TrackTabViewModel = new TrackTabViewModel();
-        }
-
         public ICommand LoadTrackCommand { get; } = new LoadTrackCommand(new FileDialog());
         public ICommand SaveTrackCommand { get; } = new SaveTrackCommand(new FileDialog());
         public ICommand ExitApplicationCommand { get; } = new ExitApplicationCommand();
@@ -93,17 +87,17 @@ namespace ArgTrack.ViewModels
         }
 
 
-        [Obsolete("Delete after the tab-layout has been removed")]
-        public TrackTabViewModel TrackTabViewModel { get; set; }
+        //[Obsolete("Delete after the tab-layout has been removed")]
+        //public TrackTabViewModel TrackTabViewModel { get; set; }
 
 
-        private object _selectedTreeViewItem;
+        //private object _selectedTreeViewItem;
 
-        public object SelectedTreeViewItem
-        {
-            get { return _selectedTreeViewItem; }
-            set { SetProperty(ref _selectedTreeViewItem, value, () => SelectedTreeViewItem); }
-        }
+        //public object SelectedTreeViewItem
+        //{
+        //    get { return _selectedTreeViewItem; }
+        //    set { SetProperty(ref _selectedTreeViewItem, value, () => SelectedTreeViewItem); }
+        //}
 
 
         // TODO: use this instead of the one under the TrackTabViewModel

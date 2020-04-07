@@ -1,24 +1,47 @@
 ---
 title: "ArgTrack: Screens"
-aliases:
-    - "/introduction"
 ---
 
 # Screens
 
-When starting ArgTrack, you will notice that there are some horizontal tabs on the left.
+Here is a list of the various screens/windows that appear throughout the application.
 
-Click on the link in the table below for the screen you want to learn more about.
+For an overview of the main window layout, see the [overview](/argtrack/overview/#window-layout)
 
-<table class="table table-bordered table-striped table--small">
-    <tbody>
-    <tr>
-        <td><img alt="Track Editing Screen" src="/argtrack/images/tab-icon-track.png" /></td>
-        <td><a href="/argtrack/track-editing-screen">Track Editing Screen</a> for updating tracks</td>
-    </tr>
-    <tr>
-        <td><img alt="Help/About Screen" src="/argtrack/images/tab-icon-help-about.png" /></td>
-        <td><a href="/argtrack/help-about-screen">Help/About Screen</a> for version information, checking for updates, credits, etc</td>
-    </tr>
-    </tbody>
-</table>
+
+## Detail windows
+
+Windows that are used to manipulate specific items.
+
+- [Misc Settings](/argtrack/screens/misc-track-layout-settings-window/) window
+- [Track Section Details](/argtrack/screens/track-section-details-window/) window
+- [Computer car Racing line header](/argtrack/screens/racing-line-header-window/) window
+- [Computer Car Racing line segment details](/argtrack/screens/racing-line-segment-details-window/) window
+- [Object settings details](/argtrack/screens/object-settings-details-window/) window
+- [Object shape details](/argtrack/screens/object-shape-details-window/) window
+- [Computer car setup](/argtrack/screens/computer-car-setup-window/) window
+- [Computer car behavior](/argtrack/screens/computer-car-behavior-window/) window
+- [Track horizon](/argtrack/screens/track-horizon-window/) window
+- [World location](/argtrack/screens/world-location-settings-window/) settings window
+- [General car settings](/argtrack/screens/car-settings-window/) window
+
+
+## Data List windows
+
+These are windows that show lists of items.
+They are available from the "Data" [top menu](/argtrack/menus/top-menu/).
+
+- [Track section list](/argtrack/screens/track-section-list-window/) window
+- [Pit lane section list](/argtrack/screens/pit-lane-section-list-window/) window
+- [Racing line list](/argtrack/screens/racing-line-list-window/) window
+- [Object settings list](/argtrack/screens/object-settings-list-window/) window
+- [Object shapes list](/argtrack/screens/object-shapes-list-window/) window
+
+
+## Others
+
+Various other windows.
+
+- [Track Conversion](/argtrack/screens/gp2-track-conversion-window/) window for converting GP2 tracks
+- [Track Validation](/argtrack/screens/track-validation-window/) window
+- [Help/About](/argtrack/screens/help-about-window/) window

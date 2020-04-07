@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Media;
-using ArgData;
 
 namespace ArgTrack.AppStuff
 {

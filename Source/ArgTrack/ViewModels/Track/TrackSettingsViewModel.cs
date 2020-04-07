@@ -316,4 +316,54 @@ namespace ArgTrack.ViewModels.Track
             }
         }
     }
+
+
+
+    public class TrackSideBoundValue
+    {
+        public TrackSideBoundValue(TrackSide value, string displayValue)
+        {
+            Value = value;
+            DisplayValue = displayValue;
+        }
+
+        public TrackSide Value { get; set; }
+        public string DisplayValue { get; set; }
+    }
+
+    public class SurroundingAreaBoundValue
+    {
+        public SurroundingAreaBoundValue(SurroundingArea value, string displayValue)
+        {
+            Value = value;
+            DisplayValue = displayValue;
+        }
+
+        public SurroundingArea Value { get; set; }
+        public string DisplayValue { get; set; }
+    }
+
+    public class KerbTypeBoundValue
+    {
+        public KerbTypeBoundValue(KerbType value, string displayValue)
+        {
+            Value = value;
+            DisplayValue = displayValue;
+        }
+
+        public KerbType Value { get; set; }
+        public string DisplayValue { get; set; }
+    }
+
+    public class KerbColorBoundValue
+    {
+        public KerbColorBoundValue(byte value, SolidColorBrush displayValue)
+        {
+            Value = value;
+            DisplayValue = displayValue;
+        }
+
+        public byte Value { get; set; }
+        public SolidColorBrush DisplayValue { get; set; }
+    }
 }

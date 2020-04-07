@@ -70,7 +70,6 @@
     <Compile Include="Commands\Application\ExitApplicationCommand.cs" />
     <Compile Include="Commands\Application\HelpDocsCommand.cs" />
     <Compile Include="Commands\Application\OpenAboutWindowCommand.cs" />
-    <Compile Include="Commands\Application\OpenArgDataPageCommand.cs" />
     <Compile Include="Commands\Application\OpenDownloadPageCommand.cs" />
     <Compile Include="Commands\Application\OpenOtherSiteCommand.cs" />
     <Compile Include="Commands\Application\ShowMessageCommand.cs" />
@@ -79,14 +78,11 @@
     <Compile Include="Commands\Model\ComputerCarLineSegments\EditComputerCarLineSegmentCommand.cs" />
     <Compile Include="Commands\Model\ComputerCarLineSegments\InsertComputerCarLineSegmentCommand.cs" />
     <Compile Include="Commands\Model\TrackSections\RemoveTrackSectionCommand.cs" />
-    <Compile Include="Commands\Tracks\AddBestLineSegmentCommand.cs" />
     <Compile Include="Commands\Tracks\AddObjectSettingsCommand.cs" />
     <Compile Include="Commands\Tracks\AddTrackCommandCommand.cs" />
     <Compile Include="Commands\Model\TrackSections\AddTrackSectionCommand.cs" />
     <Compile Include="Commands\Tracks\ConvertTrackCommand.cs" />
-    <Compile Include="Commands\Tracks\DeleteBestLineSegmentCommand.cs" />
     <Compile Include="Commands\Tracks\DeleteTrackCommandCommand.cs" />
-    <Compile Include="Commands\Tracks\DeleteTrackSectionCommand.cs" />
     <Compile Include="Commands\Tracks\EditComputerCarBehaviorCommand.cs" />
     <Compile Include="Commands\Tracks\EditComputerCarLineHeaderCommand.cs" />
     <Compile Include="Commands\Tracks\EditBestLineCommand.cs" />
@@ -98,16 +94,11 @@
     <Compile Include="Commands\Tracks\EditTrackObjectSettingsCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackObjectShapeCommand.cs" />
     <Compile Include="Commands\Tracks\EditTrackSectionCommand.cs" />
-    <Compile Include="Commands\Tracks\InsertBestLineSegmentCommand.cs" />
-    <Compile Include="Commands\Tracks\InsertPitLaneSectionCommand.cs" />
-    <Compile Include="Commands\Tracks\InsertTrackSectionCommand.cs" />
     <Compile Include="Commands\Model\TrackSections\InsertTrackSectionCommand.cs" />
     <Compile Include="Commands\Tracks\LoadHorizonFromFileCommand.cs" />
     <Compile Include="Commands\Tracks\LoadTrackCommand.cs" />
     <Compile Include="Commands\Tracks\MoveBestLineSegmentDownCommand.cs" />
     <Compile Include="Commands\Tracks\MoveBestLineSegmentUpCommand.cs" />
-    <Compile Include="Commands\Tracks\MovePitLaneSectionDownCommand.cs" />
-    <Compile Include="Commands\Tracks\MovePitLaneSectionUpCommand.cs" />
     <Compile Include="Commands\Tracks\MoveTrackSectionDownCommand.cs" />
     <Compile Include="Commands\Tracks\MoveTrackSectionUpCommand.cs" />
     <Compile Include="Commands\Tracks\OpenComputerCarRacingLineWindowCommand.cs" />
@@ -119,6 +110,8 @@
     <Compile Include="Commands\Model\ComputerCarLineSegments\RemoveComputerCarLineSegmentCommand.cs" />
     <Compile Include="Commands\Tracks\SaveHorizonToFileCommand.cs" />
     <Compile Include="Commands\Tracks\SaveTrackCommand.cs" />
+    <Compile Include="ViewModels\Track\ComputerCarRacingLineDataListViewModel.cs" />
+    <Compile Include="ViewModels\Track\TrackSectionDataListViewModel.cs" />
     <Compile Include="Commands\Tracks\ValidateTrackCommand.cs" />
     <Compile Include="Commands\TrackView\ZoomTrackViewCommand.cs" />
     <Compile Include="Converters\EnumBooleanConverter.cs" />
@@ -163,7 +156,6 @@
     <Compile Include="TrackStuff\TrackSectionLayoutData.cs" />
     <Compile Include="ViewModels\Track\TrackSectionViewModelCollection.cs" />
     <Compile Include="ViewModels\Track\TrackSettingsViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackTabViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackViewModel.cs" />
     <Compile Include="ViewModels\Track\TreeViewIconEnum.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">

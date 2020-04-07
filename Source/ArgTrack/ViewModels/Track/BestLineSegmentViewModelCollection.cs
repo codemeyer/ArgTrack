@@ -1,18 +1,35 @@
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Input;
 using ArgTrack.Commands.Model;
 using ArgTrack.Commands.Model.ComputerCarLineSegments;
-using ArgTrack.Commands.Tracks;
 
 namespace ArgTrack.ViewModels.Track
 {
-    public class BestLineSegmentViewModelCollection : ObservableCollection<BestLineSegmentViewModel>
+    public sealed class BestLineSegmentViewModelCollection : ObservableCollection<BestLineSegmentViewModel>
     {
         private readonly TrackViewModel _viewModel;
 
         public BestLineSegmentViewModelCollection(TrackViewModel viewModel)
         {
             _viewModel = viewModel;
+
+            this.CollectionChanged += OnCollectionChanged;
+        }
+
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            RecalculateIndices();
+
+            // also recalculate graphics? or will that be too expensive?
+        }
+
+        private void RecalculateIndices()
+        {
+            for (var index = 0; index < Items.Count; index++)
+            {
+                Items[index].Index = index;
+            }
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -29,7 +28,6 @@ namespace ArgTrack.ViewModels.Track
 
             CarSettings = new CarSettingsViewModel();
 
-            // TODO: cameras
             TrackCameraCommands = new TrackCameraCommandViewModelCollection(this);
             // TODO: track camera list (which is the effective list after the commands have been applied)
 
@@ -52,37 +50,6 @@ namespace ArgTrack.ViewModels.Track
             set { SetProperty(ref _trackSections, value, () => TrackSections); }
         }
 
-        public void RecalculateTrackSectionIndexz()
-        {
-            int i = 0;
-            foreach (var section in TrackSections)
-            {
-                section.Index = i;
-                i++;
-            }
-        }
-
-        public void RecalculatePitLaneSectionIndexz()
-        {
-            int i = 0;
-            foreach (var section in PitLaneSections)
-            {
-                section.Index = i;
-                i++;
-            }
-        }
-
-        public void RecalculateBestLineSectionIndexz()
-        {
-            int i = 0;
-            foreach (var section in BestLineSegments)
-            {
-                //section.Index = i;
-                i++;
-            }
-        }
-
-
         public void RecalculateLayout()
         {
             var layoutVM = TrackLayoutViewModel.FromTrackViewModel(this);
@@ -91,10 +58,8 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-        //private ObservableCollection<TrackSectionViewModel> _pitLaneSections;
         private TrackSectionViewModelCollection _pitLaneSections;
 
-        //public ObservableCollection<TrackSectionViewModel> PitLaneSections
         public TrackSectionViewModelCollection PitLaneSections
         {
             get { return _pitLaneSections; }
@@ -102,10 +67,8 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-        //private ObservableCollection<BestLineSegmentViewModel> _bestLineSegments;
         private BestLineSegmentViewModelCollection _bestLineSegments;
 
-        //public ObservableCollection<BestLineSegmentViewModel> BestLineSegments
         public BestLineSegmentViewModelCollection BestLineSegments
         {
             get { return _bestLineSegments; }
@@ -155,9 +118,6 @@ namespace ArgTrack.ViewModels.Track
         public CarSettingsViewModel CarSettings { get; set; }
 
 
-        // see TrackHeader instead
-        //public TrackRawDataViewModel TrackRawData { get; set; }
-
 
         private short _computerCarLineDisplacement;
 
@@ -166,16 +126,6 @@ namespace ArgTrack.ViewModels.Track
         {
             get { return _computerCarLineDisplacement; }
             set { SetProperty(ref _computerCarLineDisplacement, value, () => ComputerCarLineDisplacement); }
-        }
-
-
-        private byte _lapCount;
-
-        [Obsolete("Has moved to other location in ArgData, make this match")]
-        public byte LapCount
-        {
-            get { return _lapCount; }
-            set { SetProperty(ref _lapCount, value, () => LapCount); }
         }
 
 

@@ -1,8 +1,8 @@
 ---
-title: "ArgTrack: Tutorial: Kerbs and Walls"
+title: "ArgTrack: Tutorial: Moving back Walls and adding Kerbs"
 ---
 
-# Tutorial: Kerbs and Walls
+# Tutorial: Moving back Walls and adding Kerbs
 
 This tutorial will introduce you to some of the different things you can change in
 an existing track file.
@@ -13,18 +13,17 @@ By walking through this tutorial, you will update the Phoenix track in the follo
 - Move walls further back
 - Add kerbs to a corner
 
-This tutorial will be expanded eventually, or more separate tutorials will be added.
+_Note: Please backup your F1GP folder before following this tutorial, otherwise you may lose data,
+and you will definitely alter the Phoenix track._
 
-Note: Please backup your F1GP folder before following this tutorial, otherwise you may lose data, and you will definitely
-alter the Phoenix track.
-
-Start off by loading the track in ArgTrack: Go to the Track tab and then
-click Load Track. Then select F1CT01.DAT in your F1GP folder.
+Start off by loading the track in ArgTrack: Go to the File menu and select Open.
+Then select F1CT01.DAT (Phoenix) in your F1GP folder.
 
 
 ## Changing the kerb colors
 
-On the first "Misc" tab, have a look at the various Kerb properties. You can change the type of kerb between
+Go to "Misc Settings" under "Track Layout" in the [tree view menu](/argtrack/menus/tree-view-menu/) on the left.
+Have a look at the various Kerb properties. You can change the type of kerb between
 having two or three colors, and you can change which colors are used.
 
 Let's flip the Kerb Type to Triple Color. Now you will see another pair of Kerb Color dropdowns appear.
@@ -47,8 +46,8 @@ Its kerbs now has three colors.
 We will now learn how to move walls further back from the track. For this example, we will "open up" the right side
 at the first corner by moving the walls a bit back.
 
-Go to the first corner's first section in ArgTrack. This is the first section from the top that has the value "Right"
-in the field to the right of the Curvature value. Double-click the section in the list, and then change the Right Verge Width value to 20.
+Go to the first corner's first section in ArgTrack. This is the first section from the top that has an icon that turns
+to the right. Double-click the section in the list, and then change the "Verge End Width Right" value to 20.
 
 <img alt="Moved wall values" src="/argtrack/images/tutorial-corner-right-verge.png" class="img-fluid" />
 

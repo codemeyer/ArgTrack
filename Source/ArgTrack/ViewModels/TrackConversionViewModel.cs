@@ -1,7 +1,4 @@
-﻿using System.Windows.Input;
-using ArgTrack.Commands;
-
-namespace ArgTrack.ViewModels
+﻿namespace ArgTrack.ViewModels
 {
     public class TrackConversionViewModel : BaseViewModel
     {

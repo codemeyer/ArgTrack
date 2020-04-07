@@ -20,6 +20,7 @@ namespace ArgTrack.ViewModels.Track
             UpdateCurvatureDescription();
         }
 
+
         private int _index;
 
         public int Index

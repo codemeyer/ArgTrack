@@ -2,27 +2,29 @@ using ArgTrack.ViewModels.Track;
 
 namespace ArgTrack.Commands.Tracks
 {
+    /// <summary>
+    /// Moves a track section (or a pit lane section) down in the list.
+    /// </summary>
     public class MoveTrackSectionDownCommand : CommandBase
     {
         public override void Execute(object parameter)
         {
-            var vm = parameter as TrackViewModel;
+            var vm = parameter as TrackSectionViewModel;
 
             if (vm == null)
                 return;
 
-            vm.TrackSections.Move(vm.SelectedTrackSectionIndex, vm.SelectedTrackSectionIndex + 1);
-            vm.RecalculateTrackSectionIndexz();
+            vm.ParentList.Move(vm.Index, vm.Index + 1);
         }
 
         public override bool CanExecute(object parameter)
         {
-            var vm = parameter as TrackViewModel;
+            var vm = parameter as TrackSectionViewModel;
 
             if (vm == null)
                 return false;
 
-            return vm.SelectedTrackSectionIndex < vm.TrackSections.Count - 1;
+            return vm.Index < vm.ParentList.Count - 1;
         }
     }
 }

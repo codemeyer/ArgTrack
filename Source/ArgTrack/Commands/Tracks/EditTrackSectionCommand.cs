@@ -28,11 +28,33 @@ namespace ArgTrack.Commands.Tracks
 
             if (update.HasValue && update.Value)
             {
+                bool needsRepainting = NeedsRepainting(vm, clone);
+
                 // map clone to actual value
                 TrackMapper.MapTrackSectionViewModel(clone, vm);
 
-                // TODO: repaint 3D track! ie LayoutCalculator etc
+                if (needsRepainting)
+                {
+                    vm.ParentList.RecalculateGraphics();
+                }
             }
+        }
+
+        private bool NeedsRepainting(TrackSectionViewModel original, TrackSectionViewModel updated)
+        {
+            if (original.Length != updated.Length)
+            {
+                return true;
+            }
+
+            if (original.Curvature != updated.Curvature)
+            {
+                return true;
+            }
+
+            // track width?
+
+            return false;
         }
     }
 }

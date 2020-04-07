@@ -11,12 +11,6 @@ namespace ArgTrack.Converters
         {
             var valueEnum = (TreeViewIconEnum)value;
 
-            if (valueEnum == null)
-            {
-                // throw?
-                return null;
-            }
-
             var path = "../Resources";
 
             switch (valueEnum)

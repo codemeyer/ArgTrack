@@ -17,6 +17,14 @@
     <Window.Resources>
         <converters:TreeViewIconEnumToImageConverter x:Key="IconEnumToImageConverter"></converters:TreeViewIconEnumToImageConverter>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="O" Modifiers="Control" Command="{Binding LoadTrackCommand}" CommandParameter="{Binding}"></KeyBinding>
+        <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveTrackCommand}" CommandParameter="{Binding}"></KeyBinding>
+        <KeyBinding Key="F4" Modifiers="Alt" Command="{Binding ExitApplicationCommand}" CommandParameter="{Binding}"></KeyBinding>
+        <KeyBinding Key="F1" Command="{Binding HelpDocsCommand}" CommandParameter="{Binding}"></KeyBinding>
+        <!--<KeyBinding Key="Z" Modifiers="Control" Command="{Binding UndoBrokerCommand}" CommandParameter="{Binding}"></KeyBinding>
+        <KeyBinding Key="Y" Modifiers="Control" Command="{Binding RedoBrokerCommand}" CommandParameter="{Binding}"></KeyBinding>-->
+    </Window.InputBindings>
     <Grid Margin="0">
         <!--Background="#204161">-->
         <Menu HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -107,7 +115,7 @@
                                   PreviewMouseRightButtonDown="ComputerCarsRacingLine_OnPreviewMouseRightButtonDown">
                             <TreeViewItem.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Add New Section" Command="{Binding TrackViewModel.BestLineSegments.AddComputerCarLineSegmentCommand}" CommandParameter="{Binding Path=TrackViewModel.BestLineSegments}"></MenuItem>
+                                    <MenuItem Header="Add New Segment" Command="{Binding TrackViewModel.BestLineSegments.AddComputerCarLineSegmentCommand}" CommandParameter="{Binding Path=TrackViewModel.BestLineSegments}"></MenuItem>
                                 </ContextMenu>
                             </TreeViewItem.ContextMenu>
                         </TreeViewItem>
@@ -127,11 +135,11 @@
                                         <ContextMenu>
                                             <MenuItem Header="Edit" Command="{Binding ParentList.EditComputerCarLineSegmentCommand}" CommandParameter="{Binding}"></MenuItem>
                                             <Separator></Separator>
-                                            <MenuItem Header="Add New Section" Command="{Binding ParentList.AddComputerCarLineSegmentCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
+                                            <MenuItem Header="Add New Segment" Command="{Binding ParentList.AddComputerCarLineSegmentCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
                                             <MenuItem Header="Insert New Segment Before" Command="{Binding ParentList.InsertNewComputerCarLineSegmentBeforeCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
                                             <MenuItem Header="Insert New Segment After" Command="{Binding ParentList.InsertNewComputerCarLineSegmentAfterCommand}" CommandParameter="{Binding Path=ParentList}"></MenuItem>
                                             <Separator></Separator>
-                                            <MenuItem Header="Remove Section" Command="{Binding ParentList.RemoveComputerCarLineSegmentCommand}" CommandParameter="{Binding}"></MenuItem>
+                                            <MenuItem Header="Remove Segment" Command="{Binding ParentList.RemoveComputerCarLineSegmentCommand}" CommandParameter="{Binding}"></MenuItem>
                                         </ContextMenu>
                                     </StackPanel.ContextMenu>
                                 </StackPanel>

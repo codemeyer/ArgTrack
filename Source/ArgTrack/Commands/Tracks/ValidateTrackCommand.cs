@@ -13,15 +13,10 @@ namespace ArgTrack.Commands.Tracks
         public override void Execute(object parameter)
         {
             var mvm = parameter as MainViewModel;
-            var trackTab = mvm?.TrackTabViewModel;
-
-            if (trackTab == null)
-            {
-                return;
-            }
+            var track = mvm.TrackViewModel;
 
             var validator = new TrackValidator();
-            var results = validator.Validate(trackTab.Track);
+            var results = validator.Validate(track);
 
             var viewModel = new TrackValidationViewModel();
 

@@ -6,24 +6,22 @@ namespace ArgTrack.Commands.Tracks
     {
         public override void Execute(object parameter)
         {
-            var vm = parameter as TrackViewModel;
+            var vm = parameter as BestLineSegmentViewModel;
 
             if (vm == null)
                 return;
 
-            vm.BestLineSegments.Move(vm.SelectedBestLineSectionIndex, vm.SelectedBestLineSectionIndex + 1);
-            vm.RecalculateBestLineSectionIndexz();
+            vm.ParentList.Move(vm.Index, vm.Index + 1);
         }
 
         public override bool CanExecute(object parameter)
         {
-            var vm = parameter as TrackViewModel;
+            var vm = parameter as BestLineSegmentViewModel;
 
             if (vm == null)
                 return false;
 
-            return vm.SelectedBestLineSectionIndex > 0 &&
-                vm.SelectedBestLineSectionIndex < vm.BestLineSegments.Count - 1;
+            return vm.Index < vm.ParentList.Count - 1;
         }
     }
 }

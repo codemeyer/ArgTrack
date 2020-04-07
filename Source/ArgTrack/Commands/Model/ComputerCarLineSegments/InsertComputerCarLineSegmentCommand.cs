@@ -1,4 +1,5 @@
 using System.Windows;
+using ArgData.Entities;
 using ArgTrack.ViewModels.Track;
 using ArgTrack.Windows.Track;
 
@@ -18,6 +19,8 @@ namespace ArgTrack.Commands.Model.ComputerCarLineSegments
             var parentList = GetParameterAs<BestLineSegmentViewModelCollection>(parameter);
 
             var newSection = new BestLineSegmentViewModel(parentList);
+            newSection.CanEditType = true;
+            newSection.SegmentType = TrackComputerCarLineSegmentType.Normal;
 
             var window = new TrackBestLineDetailsWindow
             {
@@ -35,10 +38,6 @@ namespace ArgTrack.Commands.Model.ComputerCarLineSegments
 
                 parentList.Insert(newIndex, newSection);
                 parentList.RecalculateGraphics();
-
-                // TODO: ?
-                //vm.RecalculateTrackSectionIndexz();
-                //vm.SelectedTrackSectionIndex--;
             }
         }
     }

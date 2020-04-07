@@ -4,22 +4,55 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArgTrack.Windows.Track"
+        xmlns:track="clr-namespace:ArgTrack.ViewModels.Track"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=track:ComputerCarRacingLineDataListViewModel, IsDesignTimeCreatable=True}"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         Width="900" Height="630"
         Title="Computer Car Racing Line">
     <Grid Width="880" Height="590">
-        <ListView Margin="5" ItemsSource="{Binding BestLineSegments}" IsSynchronizedWithCurrentItem="True"
-                  MouseDoubleClick="Control_OnMouseDoubleClick" SelectedIndex="{Binding SelectedBestLineSectionIndex}">
-            <ListView.InputBindings>
-                <KeyBinding Key="Enter"
+        <StackPanel Orientation="Vertical">
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <Button Width="100" Margin="5,0,0,0" Height="24"
+                        Command="{Binding AddComputerCarLineSegmentCommand}" CommandParameter="{Binding BestLineSegments}">
+                    Add
+                </Button>
+                <Button Width="100" Margin="5,0,0,0" Height="24"
+                        Command="{Binding InsertNewComputerCarLineSegmentBeforeCommand}" CommandParameter="{Binding BestLineSegments}">
+                    Insert Before
+                </Button>
+                <Button Width="100" Margin="5,0,0,0" Height="24"
+                        Command="{Binding InsertNewComputerCarLineSegmentAfterCommand}" CommandParameter="{Binding BestLineSegments}">
+                    Insert After
+                </Button>
+                <Button Width="100" Margin="3,0,0,0" Height="24"
+                        Command="{Binding RemoveComputerCarLineSegmentCommand}" CommandParameter="{Binding SelectedSegment}">
+                    Delete
+                </Button>
+                <Button Width="32" Margin="3,0,0,0" Height="24"
+                        Command="{Binding MoveComputerCarLineSegmentUpCommand}" CommandParameter="{Binding SelectedSegment}">
+                    <Button.ToolTip>Move Best Line Segment Up</Button.ToolTip>
+                    ▲
+                </Button>
+                <Button Width="32" Margin="3,0,0,0" Height="24"
+                        Command="{Binding MoveComputerCarLineSegmentDownCommand}" CommandParameter="{Binding SelectedSegment}">
+                    <Button.ToolTip>Move Best Line Segment Down</Button.ToolTip>
+                    ▼
+                </Button>
+            </StackPanel>
+
+            <ListView Height="520" Margin="5" ItemsSource="{Binding BestLineSegments}" IsSynchronizedWithCurrentItem="True"
+                  MouseDoubleClick="Control_OnMouseDoubleClick" SelectedIndex="{Binding SelectedSegmentIndex}" SelectedItem="{Binding SelectedSegment}">
+                <ListView.InputBindings>
+                    <KeyBinding Key="Enter"
                             Command="{Binding EditBestLineCommand}"
                             CommandParameter="{Binding BestLineSegments/}"></KeyBinding>
-            </ListView.InputBindings>
-            <ListView.View>
-                <GridView>
-                    <!--<GridViewColumn Header="Index" Width="60">
+                </ListView.InputBindings>
+                <ListView.View>
+                    <GridView>
+                        <!--<GridViewColumn Header="Index" Width="60">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Right" Text="{Binding Index}" />
@@ -27,39 +60,39 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>-->
 
-                    <GridViewColumn Header="Length" Width="60">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Right" Text="{Binding Length}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn Header="Length" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding Length}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <GridViewColumn Header="Type" Width="90">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding Type}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn Header="Type" Width="90">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Type}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <GridViewColumn Header="Radius" Width="90">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Right" Text="{Binding Radius}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn Header="Radius" Width="90">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding Radius}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <GridViewColumn Header="Correction" Width="90">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Right" Text="{Binding Correction}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn Header="Correction" Width="90">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding Correction}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <!--<GridViewColumn Header="Displacement" Width="90">
+                        <!--<GridViewColumn Header="Displacement" Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Right" Text="{Binding Displacement}" />
@@ -67,32 +100,32 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>-->
 
-                    <GridViewColumn Header="HighRadius" Width="90">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Right" Text="{Binding HighRadius}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn Header="HighRadius" Width="90">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding HighRadius}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <GridViewColumn Header="LowRadius" Width="90">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock HorizontalAlignment="Right" Text="{Binding LowRadius}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn Header="LowRadius" Width="90">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding LowRadius}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <!--<GridViewColumn Header="Description" Width="260">
+                        <!--<GridViewColumn Header="Description" Width="260">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Description}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>-->
-                </GridView>
-            </ListView.View>
-            <!--<ListView.ItemTemplate>
+                    </GridView>
+                </ListView.View>
+                <!--<ListView.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
                         <TextBlock Text="Length: " />
@@ -100,6 +133,7 @@
                     </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>-->
-        </ListView>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Window>

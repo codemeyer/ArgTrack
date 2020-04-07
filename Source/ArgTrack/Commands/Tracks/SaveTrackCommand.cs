@@ -1,7 +1,6 @@
 ﻿using ArgData;
 using ArgTrack.AppStuff;
 using ArgTrack.ViewModels;
-using ArgTrack.ViewModels.Track;
 
 namespace ArgTrack.Commands.Tracks
 {
@@ -17,41 +16,31 @@ namespace ArgTrack.Commands.Tracks
         public override void Execute(object parameter)
         {
             // TODO: MainViewModel directly?
-            var vm = parameter as TrackTabViewModel;
+            var main = parameter as MainViewModel;
+            if (main == null)
+                return;
 
-            if (vm == null)
-            {
-                var main = parameter as MainViewModel;
-                if (main == null)
-                    return;
-
-                vm = main.TrackTabViewModel;
-            }
+            var vm = main.TrackViewModel;
 
             var path = _fileDialog.SelectDatFileToSave();
 
             if (string.IsNullOrWhiteSpace(path))
                 return;
 
-            var track = Mappers.TrackMapper.MapEntireTrackViewModelToTrack(vm.Track);
+            var track = Mappers.TrackMapper.MapEntireTrackViewModelToTrack(vm);
 
             new TrackWriter().Write(track, path);
         }
 
         public override bool CanExecute(object parameter)
         {
-            var vm = parameter as TrackTabViewModel;
-
-            if (vm == null)
+            var main = parameter as MainViewModel;
+            if (main == null)
             {
-                var main = parameter as MainViewModel;
-                if (main == null)
-                    return false;
-
-                return main.HasLoadedTrack;
+                return false;
             }
 
-            return false;
+            return main.HasLoadedTrack;
         }
     }
 }
