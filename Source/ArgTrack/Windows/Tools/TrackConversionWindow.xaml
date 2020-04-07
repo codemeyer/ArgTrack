@@ -53,15 +53,17 @@
                         - Object Settings<LineBreak />
                         - Object Shapes<LineBreak />
                         - Horizon<LineBreak />
+                        - Camera Commands<LineBreak />
                         - Computer Car Setup<LineBreak />
                     </TextBlock>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
+                <!--<StackPanel Orientation="Horizontal">
                     <Label>Misc information</Label>
-                </StackPanel>
+                </StackPanel>-->
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="5,0">
+                        Various track commands will be removed<LineBreak />
                         <!-- Add note about removed track commands? -->
                         The newly created file will be opened after conversion is complete.
                     </TextBlock>

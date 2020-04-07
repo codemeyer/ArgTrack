@@ -9,7 +9,6 @@ namespace ArgTrack.Commands.Tracks
     {
         public override void Execute(object parameter)
         {
-            //var vm = parameter as TrackHeaderViewModel;
             var vm = parameter as TrackSettingsViewModel;
 
             if (vm == null)
@@ -22,15 +21,12 @@ namespace ArgTrack.Commands.Tracks
             {
                 Owner = Application.Current.MainWindow,
                 DataContext = clone
-                // TODO: also pass in original, to allow reseting all properties
             };
 
             bool? update = window.ShowDialog();
 
             if (update.HasValue && update.Value)
             {
-                // map clone to actual value
-                //TrackMapper.MapTrackHeaderViewModel(clone, vm);
                 TrackMapper.MapTrackSettingsViewModel(clone, vm);
 
                 // TODO: repaint 3D track! ie LayoutCalculator etc

@@ -15,13 +15,12 @@ namespace ArgTrack.Commands.Tracks
                 return;
 
             var clone = new TrackHeaderViewModel();
-            TrackMapper.MapTrackHeaderViewModel(vm, clone);
+            ViewModelCopyMapper.CopyTrackHeaderViewModel(vm, clone);
 
             var window = new TrackHeaderWindow
             {
                 Owner = Application.Current.MainWindow,
                 DataContext = clone
-                // TODO: also pass in original, to allow reseting all properties
             };
 
             bool? update = window.ShowDialog();
@@ -29,7 +28,7 @@ namespace ArgTrack.Commands.Tracks
             if (update.HasValue && update.Value)
             {
                 // map clone to actual value
-                TrackMapper.MapTrackHeaderViewModel(clone, vm);
+                ViewModelCopyMapper.CopyTrackHeaderViewModel(clone, vm);
 
                 // TODO: repaint 3D track! ie LayoutCalculator etc
             }

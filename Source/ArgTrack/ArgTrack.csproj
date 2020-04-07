@@ -114,6 +114,8 @@
     <Compile Include="Commands\Model\ComputerCarLineSegments\RemoveComputerCarLineSegmentCommand.cs" />
     <Compile Include="Commands\Tracks\SaveHorizonToFileCommand.cs" />
     <Compile Include="Commands\Tracks\SaveTrackCommand.cs" />
+    <Compile Include="Mappers\PropertyCopier.cs" />
+    <Compile Include="Mappers\ViewModelCopyMapper.cs" />
     <Compile Include="ViewModels\Track\CameraCommandEditingViewModel.cs" />
     <Compile Include="ViewModels\Track\CameraCommandListViewModel.cs" />
     <Compile Include="ViewModels\Track\ComputerCarRacingLineDataListViewModel.cs" />

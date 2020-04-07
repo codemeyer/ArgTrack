@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using ArgTrack.ViewModels;
+using ArgTrack.ViewModels.Track;
 
 namespace ArgTrack
 {
@@ -7,5 +9,10 @@ namespace ArgTrack
     /// </summary>
     public partial class App : Application
     {
+        //public MainViewModel MainViewModel
+        //{
+        //    get { return MainViewModelPasserArounder.MainViewModel; }
+        //}
+
     }
 }

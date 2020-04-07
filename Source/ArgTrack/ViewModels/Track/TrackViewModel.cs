@@ -29,7 +29,6 @@ namespace ArgTrack.ViewModels.Track
             CarSettings = new CarSettingsViewModel();
 
             TrackCameraCommands = new TrackCameraCommandViewModelCollection(this);
-            // TODO: track camera list (which is the effective list after the commands have been applied)
 
             TrackHeader = new TrackHeaderViewModel();
             ComputerCarSetup = new SetupViewModel("TrackSetup");
@@ -202,9 +201,6 @@ namespace ArgTrack.ViewModels.Track
             using (MemoryStream memory = new MemoryStream())
             {
                 altBitmap.Save(memory, ImageFormat.Bmp);
-                //bitmap.Save(memory, ImageFormat.Bmp);
-                //bm.Save(memory, ImageFormat.Bmp);
-                //newImage.Save(memory, ImageFormat.Bmp);
                 memory.Position = 0;
 
                 bitmapImage.BeginInit();
@@ -214,34 +210,6 @@ namespace ArgTrack.ViewModels.Track
             }
 
             HorizonImage = bitmapImage;
-            //viewModel.HorizonBytes = horizonBytes;
-        }
-
-
-
-        // TODO: these are the selected indexes in the listviews, not in the treeview!!
-        private int _selectedTrackSectionIndex;
-
-        public int SelectedTrackSectionIndex
-        {
-            get { return _selectedTrackSectionIndex; }
-            set { SetProperty(ref _selectedTrackSectionIndex, value, () => SelectedTrackSectionIndex); }
-        }
-
-        private int _selectedPitLaneSectionIndex;
-
-        public int SelectedPitLaneSectionIndex
-        {
-            get { return _selectedPitLaneSectionIndex; }
-            set { SetProperty(ref _selectedPitLaneSectionIndex, value, () => SelectedPitLaneSectionIndex); }
-        }
-
-        private int _selectedBestLineSectionIndex;
-
-        public int SelectedBestLineSectionIndex
-        {
-            get { return _selectedBestLineSectionIndex; }
-            set { SetProperty(ref _selectedBestLineSectionIndex, value, () => SelectedBestLineSectionIndex); }
         }
 
 

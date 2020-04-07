@@ -24,7 +24,6 @@ namespace ArgTrack.Commands.Tracks
             {
                 Owner = Application.Current.MainWindow,
                 DataContext = clone
-                // TODO: also pass in original, to allow reseting all properties
             };
 
             bool? update = window.ShowDialog();
@@ -54,7 +53,6 @@ namespace ArgTrack.Commands.Tracks
             {
                 Owner = Application.Current.MainWindow,
                 DataContext = clone
-                // TODO: also pass in original, to allow reseting all properties
             };
 
             bool? update = window.ShowDialog();

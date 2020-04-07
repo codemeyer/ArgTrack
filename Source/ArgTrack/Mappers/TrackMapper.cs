@@ -244,18 +244,9 @@ namespace ArgTrack.Mappers
             viewModel.TrackData = offsets.TrackData;
         }
 
-        //private static void MapRawDataToHeaderViewModel(TrackRawData rawData, TrackHeaderViewModel viewModel)
-        //{
-        //    viewModel.DataAfterSetup = rawData.DataAfterSetup;
-        //    viewModel.FinalData1 = rawData.FinalData1;
-        //    viewModel.FinalData2 = rawData.FinalData2;
-        //}
-
-        private static void MapTrackObjectShapeToViewModel(TrackObjectShape objectData,
-            TrackObjectShapeViewModel viewModel)
+        private static void MapTrackObjectShapeToViewModel(TrackObjectShape objectData, TrackObjectShapeViewModel viewModel)
         {
-            // TODO: use CopyProperties?
-
+            // use CopyProperties?
             viewModel.HeaderIndex = objectData.HeaderIndex;
             viewModel.DataIndex = objectData.DataIndex;
 
@@ -310,11 +301,6 @@ namespace ArgTrack.Mappers
             target.Arguments = newArgs;
         }
 
-        public static void MapTrackHeaderViewModel(TrackHeaderViewModel source, TrackHeaderViewModel target)
-        {
-            CopyProperties(source, target);
-        }
-
         public static void MapTrackSettingsViewModel(TrackSettingsViewModel source, TrackSettingsViewModel target)
         {
             CopyProperties(source, target);
@@ -326,11 +312,6 @@ namespace ArgTrack.Mappers
         }
 
         public static void MapTrackBestLineViewModel(BestLineSegmentViewModel source, BestLineSegmentViewModel target)
-        {
-            CopyProperties(source, target);
-        }
-
-        public static void MapTrackObjectSettingsViewModel(TrackObjectSettingsViewModel source, TrackObjectSettingsViewModel target)
         {
             CopyProperties(source, target);
         }
@@ -382,7 +363,6 @@ namespace ArgTrack.Mappers
 
             CopyProperties(viewModel.CarSettings, track.CarSettings);
             CopyProperties(viewModel.ComputerCarBehavior, track.ComputerCarBehavior);
-            // TODO: more?
 
             for (int i = 0; i <= 4095; i++)
             {
@@ -483,15 +463,10 @@ namespace ArgTrack.Mappers
             {
                 var command = TrackSectionCommand.Create(commandViewModel.Command);
 
-                //short[] args = new short[command.Arguments.Count];
-
                 for (int i = 0; i < commandViewModel.Arguments.Count; i++)
                 {
                     command.Arguments[i] = commandViewModel.Arguments[i].Value;
-                    //args[i] = command.Arguments[i].Value;
                 }
-
-                //var commandViewModel = new TrackCommand(command.Command, args);
 
                 section.Commands.Add(command);
             }

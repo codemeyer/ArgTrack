@@ -56,7 +56,7 @@ namespace ArgTrack.ViewModels
         public ICommand OpenDownloadPageCommand { get; } = new OpenDownloadPageCommand();
         public ICommand HelpDocsCommand { get; } = new HelpDocsCommand();
         public ICommand OpenArgToolsSiteCommand { get; } = new OpenOtherSiteCommand("https://www.argtools.com");
-        public ICommand OpenArgToolsAcknowledgementsSiteCommand { get; } = new OpenOtherSiteCommand("https://www.argtools.com/acknowledgements");
+        public ICommand OpenArgToolsAcknowledgementsSiteCommand { get; } = new OpenOtherSiteCommand("https://www.argtools.com/acknowledgements/");
         public ICommand OpenFanSiteCommand { get; } = new OpenOtherSiteCommand("https://sites.google.com/view/f1gpwc");
         public ICommand OpenGoogleGroupSiteCommand { get; } = new OpenOtherSiteCommand("https://groups.google.com/forum/#!forum/f1gpwc");
     }

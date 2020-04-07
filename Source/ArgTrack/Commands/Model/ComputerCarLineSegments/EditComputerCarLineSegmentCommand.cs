@@ -21,14 +21,12 @@ namespace ArgTrack.Commands.Model.ComputerCarLineSegments
             {
                 Owner = Application.Current.MainWindow,
                 DataContext = clone
-                // TODO: also pass in original, to allow reseting all properties
             };
 
             bool? update = window.ShowDialog();
 
             if (update.HasValue && update.Value)
             {
-                // map clone to actual value
                 TrackMapper.MapTrackBestLineViewModel(clone, vm);
             }
         }

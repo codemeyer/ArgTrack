@@ -9,27 +9,26 @@ namespace ArgTrack.Commands.Tracks
     {
         public override void Execute(object parameter)
         {
-            var vm = parameter as TrackObjectSettingsViewModel;
+            var viewModel = parameter as TrackObjectSettingsViewModel;
 
-            if (vm == null)
+            if (viewModel == null)
                 return;
 
             var clone = new TrackObjectSettingsViewModel();
-            TrackMapper.MapTrackObjectSettingsViewModel(vm, clone);
+
+            ViewModelCopyMapper.CopyTrackObjectSettingsViewModel(viewModel, clone);
 
             var window = new TrackObjectSettingsDetailsWindow
             {
                 Owner = Application.Current.MainWindow,
                 DataContext = clone
-                // TODO: also pass in original, to allow reseting all properties
             };
 
             bool? update = window.ShowDialog();
 
             if (update.HasValue && update.Value)
             {
-                // map clone to actual value
-                TrackMapper.MapTrackObjectSettingsViewModel(clone, vm);
+                ViewModelCopyMapper.CopyTrackObjectSettingsViewModel(clone, viewModel);
             }
         }
     }

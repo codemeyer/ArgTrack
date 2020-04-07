@@ -73,9 +73,6 @@ namespace ArgTrack.ViewModels
         }
 
 
-        //ShowNoTrackHasBeenLoadedMessage
-        //ShowTrackDataTreeView
-
         public string Error { get; }
 
         public string this[string columnName]
@@ -85,22 +82,6 @@ namespace ArgTrack.ViewModels
                 return "";
             }
         }
-
-
-        //[Obsolete("Delete after the tab-layout has been removed")]
-        //public TrackTabViewModel TrackTabViewModel { get; set; }
-
-
-        //private object _selectedTreeViewItem;
-
-        //public object SelectedTreeViewItem
-        //{
-        //    get { return _selectedTreeViewItem; }
-        //    set { SetProperty(ref _selectedTreeViewItem, value, () => SelectedTreeViewItem); }
-        //}
-
-
-        // TODO: use this instead of the one under the TrackTabViewModel
 
 
         private TrackViewModel _trackViewModel;
