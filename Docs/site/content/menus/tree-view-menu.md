@@ -18,4 +18,5 @@ Each root section of the tree view menu is described on its own page:
 - [Computer Cars](/argtrack/menus/tree-view-menu-computer-cars/)
 - [Objects](/argtrack/menus/tree-view-menu-objects/)
 - [Horizon](/argtrack/menus/tree-view-menu-horizon/)
+- [Cameras](/argtrack/menus/tree-view-menu-cameras/)
 - [Misc Data](/argtrack/menus/tree-view-menu-misc-data/)

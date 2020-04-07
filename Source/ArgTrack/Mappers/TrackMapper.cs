@@ -81,20 +81,20 @@ namespace ArgTrack.Mappers
             {
                 if (camera is DeleteTrackCameraCommand deleteCamera)
                 {
-                    var deleteCameraViewModel = new DeleteTrackCameraCommandViewModel(deleteCamera.CameraIndex);
-                    viewModel.TrackCameraCommands.Add(deleteCameraViewModel);
+                    var deleteVM = new CameraCommandEditingViewModel(deleteCamera);
+                    viewModel.TrackCameraCommands.Add(deleteVM);
                 }
 
                 if (camera is TrackCameraAdjustmentCommand adjustCamera)
                 {
-                    var adjustCameraViewModel = new TrackCameraAdjustmentCommandViewModel(adjustCamera.CameraIndex, adjustCamera.Adjustment, adjustCamera.TrackSide);
-                    viewModel.TrackCameraCommands.Add(adjustCameraViewModel);
+                    var adjustVM = new CameraCommandEditingViewModel(adjustCamera);
+                    viewModel.TrackCameraCommands.Add(adjustVM);
                 }
 
                 if (camera is TrackCameraRangeRightSideAdjustmentCommand rangeRightSide)
                 {
-                    var rangeAdjust = new TrackCameraRangeRightSideAdjustmentCommandViewModel(rangeRightSide.CameraIndexFrom, rangeRightSide.CameraIndexTo);
-                    viewModel.TrackCameraCommands.Add(rangeAdjust);
+                    var rangeVM = new CameraCommandEditingViewModel(rangeRightSide);
+                    viewModel.TrackCameraCommands.Add(rangeVM);
                 }
             }
 
@@ -345,6 +345,11 @@ namespace ArgTrack.Mappers
             CopyProperties(source, target);
         }
 
+        public static void MapCameraCommandViewModel(CameraCommandEditingViewModel source, CameraCommandEditingViewModel target)
+        {
+            CopyProperties(source, target);
+        }
+
         private static void CopyProperties(object from, object to) //, string[] excludedProperties)
         {
             var targetType = to.GetType();
@@ -427,21 +432,21 @@ namespace ArgTrack.Mappers
 
             foreach (var cameraViewModel in viewModel.TrackCameraCommands)
             {
-                if (cameraViewModel is DeleteTrackCameraCommandViewModel deleteVM)
+                if (cameraViewModel.CameraCommandType == CameraCommandType.Delete)
                 {
-                    var camera = new DeleteTrackCameraCommand(deleteVM.CameraIndex);
+                    var camera = new DeleteTrackCameraCommand(cameraViewModel.CameraIndex);
                     track.TrackCameraCommands.Add(camera);
                 }
 
-                if (cameraViewModel is TrackCameraAdjustmentCommandViewModel adjustVM)
+                if (cameraViewModel.CameraCommandType == CameraCommandType.Adjustment)
                 {
-                    var camera = new TrackCameraAdjustmentCommand(adjustVM.CameraIndex, adjustVM.Adjustment, adjustVM.TrackSide);
+                    var camera = new TrackCameraAdjustmentCommand(cameraViewModel.CameraIndex, cameraViewModel.Adjustment, cameraViewModel.TrackSide);
                     track.TrackCameraCommands.Add(camera);
                 }
 
-                if (cameraViewModel is TrackCameraRangeRightSideAdjustmentCommandViewModel rightAdjustVM)
+                if (cameraViewModel.CameraCommandType == CameraCommandType.RightRange)
                 {
-                    var camera = new TrackCameraRangeRightSideAdjustmentCommand(rightAdjustVM.CameraIndexFrom, rightAdjustVM.CameraIndexTo);
+                    var camera = new TrackCameraRangeRightSideAdjustmentCommand(cameraViewModel.CameraIndexFrom, cameraViewModel.CameraIndexTo);
                     track.TrackCameraCommands.Add(camera);
                 }
             }

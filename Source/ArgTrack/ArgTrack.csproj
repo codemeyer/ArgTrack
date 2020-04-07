@@ -74,6 +74,9 @@
     <Compile Include="Commands\Application\OpenOtherSiteCommand.cs" />
     <Compile Include="Commands\Application\ShowMessageCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\Model\Cameras\AddCameraCommandCommand.cs" />
+    <Compile Include="Commands\Model\Cameras\EditCameraCommandCommand.cs" />
+    <Compile Include="Commands\Model\Cameras\RemoveCameraCommandCommand.cs" />
     <Compile Include="Commands\Model\ComputerCarLineSegments\AddComputerCarLineSegmentCommand.cs" />
     <Compile Include="Commands\Model\ComputerCarLineSegments\EditComputerCarLineSegmentCommand.cs" />
     <Compile Include="Commands\Model\ComputerCarLineSegments\InsertComputerCarLineSegmentCommand.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Commands\Tracks\MoveBestLineSegmentUpCommand.cs" />
     <Compile Include="Commands\Tracks\MoveTrackSectionDownCommand.cs" />
     <Compile Include="Commands\Tracks\MoveTrackSectionUpCommand.cs" />
+    <Compile Include="Commands\Tracks\OpenCameraCommandListWindowCommand.cs" />
     <Compile Include="Commands\Tracks\OpenComputerCarRacingLineWindowCommand.cs" />
     <Compile Include="Commands\Tracks\OpenObjectSettingsListWindowCommand.cs" />
     <Compile Include="Commands\Tracks\OpenObjectShapesListWindowCommand.cs" />
@@ -110,6 +114,8 @@
     <Compile Include="Commands\Model\ComputerCarLineSegments\RemoveComputerCarLineSegmentCommand.cs" />
     <Compile Include="Commands\Tracks\SaveHorizonToFileCommand.cs" />
     <Compile Include="Commands\Tracks\SaveTrackCommand.cs" />
+    <Compile Include="ViewModels\Track\CameraCommandEditingViewModel.cs" />
+    <Compile Include="ViewModels\Track\CameraCommandListViewModel.cs" />
     <Compile Include="ViewModels\Track\ComputerCarRacingLineDataListViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackSectionDataListViewModel.cs" />
     <Compile Include="Commands\Tracks\ValidateTrackCommand.cs" />
@@ -144,7 +150,6 @@
     <Compile Include="ViewModels\Track\EditableByteData.cs" />
     <Compile Include="ViewModels\Track\GenericByteListEditingViewModel.cs" />
     <Compile Include="ViewModels\Track\SetupViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackCameraCommandViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackCameraCommandViewModelCollection.cs" />
     <Compile Include="ViewModels\Track\TrackCommandViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackHeaderViewModel.cs" />
@@ -161,11 +166,17 @@
     <Compile Include="Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Track\CameraCommandDetailsWindow.xaml.cs">
+      <DependentUpon>CameraCommandDetailsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\CarSetupWindow.xaml.cs">
       <DependentUpon>CarSetupWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainTreeWindow.xaml.cs">
       <DependentUpon>MainTreeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Track\CameraCommandListWindow.xaml.cs">
+      <DependentUpon>CameraCommandListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Track\ComputerCarRacingLineWindow.xaml.cs">
       <DependentUpon>ComputerCarRacingLineWindow.xaml</DependentUpon>
@@ -239,11 +250,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Track\CameraCommandDetailsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\CarSetupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\MainTreeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Track\CameraCommandListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

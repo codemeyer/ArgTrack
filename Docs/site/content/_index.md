@@ -15,10 +15,11 @@ ArgTrack is a track editor for the old PC racing game
  - Track sections
  - Pit lane sections
  - Computer car racing line
- - Track-side objects
  - Track horizon image
  - General car settings
  - Computer car behavior and car setup
+ - Track-side cameras
+ - Track-side objects (very limited)
  - and more!
 - Save the track and drive it in the game!
 

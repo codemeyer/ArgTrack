@@ -193,9 +193,8 @@
 
 
                     <!-- Cameras -->
-                    <!--<TreeViewItem Header="Cameras" Margin="0,3" ItemsSource="{Binding TrackViewModel.TrackCameras}">-->
-                                      <!--MouseDoubleClick="ObjectShapesTreeView_OnMouseDoubleClick"/>-->
-                    <!--</TreeViewItem>-->
+                    <TreeViewItem Header="Cameras" Margin="0,3"
+                                MouseDoubleClick="CameraCommandsTreeView_OnMouseDoubleClick" />
 
 
                     <!-- Misc Data -->

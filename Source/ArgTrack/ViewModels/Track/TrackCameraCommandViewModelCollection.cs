@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 
 namespace ArgTrack.ViewModels.Track
 {
-    public class TrackCameraCommandViewModelCollection : ObservableCollection<TrackCameraCommandViewModel>
+    public class TrackCameraCommandViewModelCollection : ObservableCollection<CameraCommandEditingViewModel>
     {
         private readonly TrackViewModel _trackViewModel;
 

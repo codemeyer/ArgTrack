@@ -43,10 +43,12 @@ Released 2020-04-??
 - Ability to manipulate more [track settings](/argtrack/screens/misc-track-layout-settings-window/)
 - Ability to edit [general car settings](/argtrack/screens/car-settings-window/)
 - Ability to edit [computer car behavior](/argtrack/screens/computer-car-behavior-window/)
+- Ability to edit [track cameras](/argtrack/screens/camera-list-window/)
 - Restructured, extended and improved documentation
 - _Known issue: Track view occasionally ends up outside scrollable area_
 - _Known issue: Track view not always redrawn after editing layout-affecting properties_
 - _Known issue: Left-hand corner with width change is drawn incorrectly_
+- _Known issue: Some input validation missing meaning that it's possible to save broken track files_
 
 
 ### 0.2

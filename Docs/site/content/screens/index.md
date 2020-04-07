@@ -15,13 +15,14 @@ Windows that are used to manipulate specific items.
 
 - [Misc Settings](/argtrack/screens/misc-track-layout-settings-window/) window
 - [Track Section Details](/argtrack/screens/track-section-details-window/) window
-- [Computer car Racing line header](/argtrack/screens/racing-line-header-window/) window
+- [Computer Car Racing line header](/argtrack/screens/racing-line-header-window/) window
 - [Computer Car Racing line segment details](/argtrack/screens/racing-line-segment-details-window/) window
-- [Object settings details](/argtrack/screens/object-settings-details-window/) window
-- [Object shape details](/argtrack/screens/object-shape-details-window/) window
-- [Computer car setup](/argtrack/screens/computer-car-setup-window/) window
-- [Computer car behavior](/argtrack/screens/computer-car-behavior-window/) window
+- [Object Settings details](/argtrack/screens/object-settings-details-window/) window
+- [Object Shape details](/argtrack/screens/object-shape-details-window/) window
+- [Computer Car setup](/argtrack/screens/computer-car-setup-window/) window
+- [Computer Car behavior](/argtrack/screens/computer-car-behavior-window/) window
 - [Track horizon](/argtrack/screens/track-horizon-window/) window
+- [Camera details](/argtrack/screens/camera-details-window/) window
 - [World location](/argtrack/screens/world-location-settings-window/) settings window
 - [General car settings](/argtrack/screens/car-settings-window/) window
 
@@ -29,13 +30,14 @@ Windows that are used to manipulate specific items.
 ## Data List windows
 
 These are windows that show lists of items.
-They are available from the "Data" [top menu](/argtrack/menus/top-menu/).
+Some of them are available from the "Data" [top menu](/argtrack/menus/top-menu/).
 
 - [Track section list](/argtrack/screens/track-section-list-window/) window
 - [Pit lane section list](/argtrack/screens/pit-lane-section-list-window/) window
 - [Racing line list](/argtrack/screens/racing-line-list-window/) window
 - [Object settings list](/argtrack/screens/object-settings-list-window/) window
 - [Object shapes list](/argtrack/screens/object-shapes-list-window/) window
+- [Camera list](/argtrack/screens/camera-list-window/) window
 
 
 ## Others

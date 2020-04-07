@@ -200,6 +200,19 @@ namespace ArgTrack.Windows
             }
         }
 
+        private void CameraCommandsTreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //var objectSetting = GetDataContextFromOriginalSource(e.OriginalSource);
+
+            //if (objectSetting == null)
+            //{
+            //    return;
+            //}
+
+            var cmd = new OpenCameraCommandListWindowCommand();
+            cmd.Execute(MainViewModelPasserArounder.MainViewModel);
+        }
+
         private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             //(DataContext as MainViewModel).SelectedTreeViewItem = e.NewValue;
