@@ -4,13 +4,14 @@ title: "ArgTrack: Download"
 
 # Download
 
-The latest version is **0.3**, released on 2020-04-??.
+The latest version is **0.3**, released on 2020-04-08.
 
 <p>
     <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.3.zip">Download</a>
 </p>
 
 <br />
+
 ArgTrack works on all recent versions of Microsoft Windows. For more details, have a look
 at the [System Requirements](/argtrack/system-requirements) page.
 
@@ -36,7 +37,7 @@ Below are the release notes for each released version of ArgTrack.
 
 ### 0.3
 
-Released 2020-04-??
+Released 2020-04-08 - [Download](/downloads/argtrack/ArgTrack-0.3.zip)
 
 - Track layout drawn on screen so that you know what you are doing!
 - [Tree view menu](/argtrack/menus/tree-view-menu/) on the left
@@ -53,7 +54,7 @@ Released 2020-04-??
 
 ### 0.2
 
-Released 2018-08-24
+Released 2018-08-24 - [Download](/downloads/argtrack/ArgTrack-0.2.zip)
 
 - Initial [GP2 track conversion](/argtrack/screens/gp2-track-conversion-window/) (track and pit lane sections only)
 - Initial [track validation](/argtrack/screens/track-validation-window/)
@@ -65,6 +66,6 @@ Released 2018-08-24
 
 ### 0.1
 
-Released 2018-05-02
+Released 2018-05-02 - [Download](/downloads/argtrack/ArgTrack-0.1.0.23.zip)
 
 - First release

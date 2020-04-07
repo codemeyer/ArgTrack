@@ -8,7 +8,7 @@ aliases:
 # Overview
 
 A track in F1GP consists of a number of track sections. These can be thought of as the sections that
-make out a [Scalextric](https://en.wikipedia.org/wiki/Scalextric) track.
+make up a [Scalextric](https://en.wikipedia.org/wiki/Scalextric) track.
 
 Each track section has a set of properties that define it, and a number of related "commands" that
 handle track-side object placement, etc.
