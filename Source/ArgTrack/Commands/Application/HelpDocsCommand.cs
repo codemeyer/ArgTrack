@@ -23,8 +23,7 @@ namespace ArgTrack.Commands
 
         private void OpenWebSitePage(string relativeChildUrl = "")
         {
-            //var fullUrl = $"https://www.argtools.com/argtrack/{relativeChildUrl}";
-            var fullUrl = $"http://localhost:3000/argtrack/{relativeChildUrl}";
+            var fullUrl = $"https://www.argtools.com/argtrack/{relativeChildUrl}";
 
             Process.Start(fullUrl);
         }
