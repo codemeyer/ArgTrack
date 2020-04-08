@@ -36,8 +36,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Arg2Data, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Arg2Data.0.1.0\lib\net45\Arg2Data.dll</HintPath>
+    <Reference Include="Arg2Data, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Arg2Data.0.2.0\lib\net45\Arg2Data.dll</HintPath>
     </Reference>
     <Reference Include="ArgData, Version=0.19.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ArgData.0.19.1\lib\net45\ArgData.dll</HintPath>

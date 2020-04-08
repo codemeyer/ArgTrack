@@ -8,7 +8,7 @@ namespace ArgTrack.TrackStuff
 {
     public static class TrackConverter
     {
-        public static void ConvertGP2ToF1GP(Arg2Data.Entities.Track gp2Track, ArgData.Entities.Track templateSourceTrack, string outputPath)
+        public static void ConvertGP2ToF1GP(EntitiesGP2.Track gp2Track, EntitiesF1GP.Track templateSourceTrack, string outputPath)
         {
             int commandsBefore = gp2Track.TrackSections.Sum(t => t.Commands.Count);
 
@@ -24,17 +24,18 @@ namespace ArgTrack.TrackStuff
             templateSourceTrack.TrackDataHeader.TrackCenterZ = gp2Track.TrackDataHeader.TrackCenterZ;
             templateSourceTrack.TrackDataHeader.StartWidth = gp2Track.TrackDataHeader.StartWidth;
 
-            // TODO: ArgData019 these properties have moved to other objects
-            //templateSourceTrack.TrackDataHeader.PoleSide = ConvertGp2TrackSide(gp2Track.TrackDataHeader.PoleSide);
-            //templateSourceTrack.TrackDataHeader.PitsSide = ConvertGp2TrackSide(gp2Track.TrackDataHeader.PitsSide);
             templateSourceTrack.TrackDataHeader.LeftVergeStartWidth = gp2Track.TrackDataHeader.LeftVergeStartWidth;
             templateSourceTrack.TrackDataHeader.RightVergeStartWidth = gp2Track.TrackDataHeader.RightVergeStartWidth;
-            //templateSourceTrack.TrackDataHeader.KerbType = gp2Track.TrackDataHeader.KerbType;
-            //templateSourceTrack.TrackDataHeader.KerbLowerColor = gp2Track.TrackDataHeader.KerbLowerColor;
-            //templateSourceTrack.TrackDataHeader.KerbLowerColor2 = gp2Track.TrackDataHeader.KerbLowerColor2;
-            //templateSourceTrack.TrackDataHeader.KerbUpperColor = gp2Track.TrackDataHeader.KerbUpperColor;
-            //templateSourceTrack.TrackDataHeader.KerbUpperColor2 = gp2Track.TrackDataHeader.KerbUpperColor2;
-            // TODO: set fixed kerb colors?
+
+            templateSourceTrack.TrackSettings.PoleSide = ConvertGp2TrackSide(gp2Track.TrackDataHeader.PoleSide);
+            templateSourceTrack.TrackSettings.PitsSide = ConvertGp2TrackSide(gp2Track.TrackDataHeader.PitsSide);
+            templateSourceTrack.TrackSettings.KerbType = ConvertGp2KerbType(gp2Track.TrackDataHeader.KerbType);
+            templateSourceTrack.TrackSettings.KerbLowerColor = gp2Track.TrackDataHeader.KerbLowerColor;
+            templateSourceTrack.TrackSettings.KerbLowerColor2 = gp2Track.TrackDataHeader.KerbLowerColor2;
+            templateSourceTrack.TrackSettings.KerbUpperColor = gp2Track.TrackDataHeader.KerbUpperColor;
+            templateSourceTrack.TrackSettings.KerbUpperColor2 = gp2Track.TrackDataHeader.KerbUpperColor2;
+
+            templateSourceTrack.TrackSettings.LapCount = gp2Track.TrackSettings.LapCount;
 
             templateSourceTrack.TrackSections.Clear();
 
@@ -57,6 +58,14 @@ namespace ArgTrack.TrackStuff
             new TrackWriter().Write(templateSourceTrack, outputPath);
         }
 
+        private static EntitiesF1GP.KerbType ConvertGp2KerbType(EntitiesGP2.KerbType kerbTypeGp2)
+        {
+            if (kerbTypeGp2 == EntitiesGP2.KerbType.DualColor)
+                return EntitiesF1GP.KerbType.DualColor;
+
+            return EntitiesF1GP.KerbType.TripleColor;
+        }
+
         private static EntitiesF1GP.TrackSide ConvertGp2TrackSide(EntitiesGP2.TrackSide trackSideGp2)
         {
             if (trackSideGp2 == EntitiesGP2.TrackSide.Left)
@@ -74,7 +83,7 @@ namespace ArgTrack.TrackStuff
             }
         }
 
-        private static ArgData.Entities.TrackSection MapTrackSection(Arg2Data.Entities.TrackSection section)
+        private static EntitiesF1GP.TrackSection MapTrackSection(EntitiesGP2.TrackSection section)
         {
             var viewModel = new EntitiesF1GP.TrackSection();
 
@@ -120,7 +129,7 @@ namespace ArgTrack.TrackStuff
                 return EntitiesF1GP.KerbHeight.Low;
         }
 
-        private static EntitiesF1GP.TrackSectionCommand MapCommand(EntitiesGP2.TrackCommand command)
+        private static EntitiesF1GP.TrackSectionCommand MapCommand(EntitiesGP2.TrackSectionCommand command)
         {
             var viewModel = EntitiesF1GP.TrackSectionCommand.Create(command.Command);
 

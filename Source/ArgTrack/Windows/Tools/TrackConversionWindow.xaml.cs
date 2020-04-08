@@ -68,12 +68,11 @@ namespace ArgTrack.Windows.Tools
 
             try
             {
-                TrackReader.Read(ViewModel.SourceTrackPath);
+                new TrackReader().Read(ViewModel.SourceTrackPath);
             }
             catch (Exception)
             {
-                MessageBox.Show("There was a problem reading the GP2 source track.", "ArgTrack",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("There was a problem reading the GP2 source track.", "ArgTrack", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -83,8 +82,7 @@ namespace ArgTrack.Windows.Tools
             }
             catch (Exception)
             {
-                MessageBox.Show("There was a problem reading the F1GP template track.", "ArgTrack",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("There was a problem reading the F1GP template track.", "ArgTrack", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

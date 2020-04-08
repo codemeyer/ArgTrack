@@ -26,7 +26,8 @@ namespace ArgTrack.Commands.Tracks
 
             if (update.HasValue && update.Value)
             {
-                var sourceTrack = Arg2Data.TrackReader.Read(viewModel.SourceTrackPath);
+                var sourceTrackReader = new Arg2Data.TrackReader();
+                var sourceTrack = sourceTrackReader.Read(viewModel.SourceTrackPath);
                 var templateTrack = new ArgData.TrackReader().Read(viewModel.TemplateTrackPath);
                 var outputPath = viewModel.TargetTrackPath;
 
