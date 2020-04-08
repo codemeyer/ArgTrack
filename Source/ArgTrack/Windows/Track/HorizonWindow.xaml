@@ -41,5 +41,6 @@
                     Content="OK"></Button>
             <Button Width="70" Height="22" Margin="3" IsCancel="True" Click="CancelButton_OnClick"
                     Content="Cancel"></Button>
-        </StackPanel>    </Grid>
+        </StackPanel>
+    </Grid>
 </Window>
