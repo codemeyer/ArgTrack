@@ -8,7 +8,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Manicomio Software")]
 [assembly: AssemblyProduct("ArgTrack")]
-[assembly: AssemblyCopyright("Copyright © 2017-2019 Fredrik Meyer")]
+[assembly: AssemblyCopyright("Copyright © 2017-2020 Fredrik Meyer")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
