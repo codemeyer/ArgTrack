@@ -1,4 +1,6 @@
-﻿using ArgData;
+﻿using System;
+using System.Windows;
+using ArgData;
 using ArgTrack.AppStuff;
 using ArgTrack.ViewModels.Track;
 
@@ -31,36 +33,37 @@ namespace ArgTrack.Commands.Tracks
             if (string.IsNullOrWhiteSpace(path))
                 return;
 
-            //try
-            //{
-            var track = new TrackReader().Read(path);
+            try
+            {
+                var track = new TrackReader().Read(path);
 
-            var viewModel = Mappers.TrackMapper.MapEntireTrackToViewModel(track);
+                var viewModel = Mappers.TrackMapper.MapEntireTrackToViewModel(track);
 
-            // blergh
-            TrackViewModelPasserArounder.TrackViewModel = viewModel;
-            MainViewModelPasserArounder.MainViewModel.HasLoadedTrack = true;
-            MainViewModelPasserArounder.MainViewModel.TrackViewModel = viewModel;
+                // blergh
+                TrackViewModelPasserArounder.TrackViewModel = viewModel;
+                MainViewModelPasserArounder.MainViewModel.HasLoadedTrack = true;
+                MainViewModelPasserArounder.MainViewModel.TrackViewModel = viewModel;
 
-            // TEMP.AF
-            var layoutVM = TrackLayoutViewModel.FromTrackViewModel(viewModel);
+                // TEMP.AF
+                var layoutVM = TrackLayoutViewModel.FromTrackViewModel(viewModel);
 
-            MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel = layoutVM;
+                MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel = layoutVM;
 
             //var twin = new MainTreeWindow();
             //twin.DataContext = MainViewModelPasserArounder.MainViewModel;
             //twin.Show();
 
-            //var win = new HackWin();
-            //win.DataContext = layoutVM;
-            //win.ShowDialog();
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show(
-            //        "An error occurred when loading the track. Make sure that the specified file is an F1GP track file and try again.",
-            //        "ArgTrack", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
+                //var win = new HackWin();
+                //win.DataContext = layoutVM;
+                //win.ShowDialog();
+                //
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(
+                    "An error occurred when loading the track. Make sure that the specified file is an F1GP track file and try again.",
+                    "ArgTrack", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
