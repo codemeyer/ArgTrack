@@ -1,4 +1,7 @@
-﻿namespace ArgTrack.ViewModels
+﻿using System.Windows.Input;
+using ArgTrack.Commands;
+
+namespace ArgTrack.ViewModels
 {
     public class TrackConversionViewModel : BaseViewModel
     {
@@ -25,5 +28,8 @@
             get { return _targetTrackPath; }
             set { SetProperty(ref _targetTrackPath, value, () => TargetTrackPath); }
         }
+
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/gp2-track-conversion-window/");
     }
 }

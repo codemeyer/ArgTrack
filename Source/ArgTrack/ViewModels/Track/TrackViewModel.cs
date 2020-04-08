@@ -1,12 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using ArgData;
-using ArgTrack.AppStuff;
+using ArgTrack.Commands;
 using ArgTrack.Commands.Tracks;
 using ArgTrack.TrackStuff;
 
@@ -117,7 +112,6 @@ namespace ArgTrack.ViewModels.Track
         public CarSettingsViewModel CarSettings { get; set; }
 
 
-
         private short _computerCarLineDisplacement;
 
         // place elsewhere in the future?
@@ -128,14 +122,6 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-        private BitmapImage _horizonImage;
-
-        public BitmapImage HorizonImage
-        {
-            get { return _horizonImage; }
-            set { SetProperty(ref _horizonImage, value, () => HorizonImage); }
-        }
-
         private byte[] _horizonBytes;
 
         public byte[] HorizonBytes
@@ -143,73 +129,8 @@ namespace ArgTrack.ViewModels.Track
             get { return _horizonBytes; }
             set
             {
-                if (SetProperty(ref _horizonBytes, value, () => HorizonBytes))
-                {
-                    UpdateHorizonImage();
-                }
+                SetProperty(ref _horizonBytes, value, () => HorizonBytes);
             }
-        }
-
-
-        private void UpdateHorizonImage()
-        {
-            var palette = Palette.CreateDrivingPalette();
-
-            // TODO: somewhere else ffs
-            byte[] horizonBytes = HorizonBytes;
-
-            int pos = 0;
-
-            var bitmap = new Bitmap(512, 8);
-            for (int y = 0; y <= 7; y++)
-            {
-                for (int x = 0; x <= 511; x++)
-                {
-                    var color = palette.GetColor(horizonBytes[pos]);
-
-                    bitmap.SetPixel(x, y, color);
-                    pos++;
-                }
-            }
-
-
-            pos = 0;
-            var altBitmap = new Bitmap(4096, 64);
-            for (int y = 0; y <= 7; y++)
-            {
-                for (int x = 0; x <= 511; x++)
-                {
-                    var color = palette.GetColor(horizonBytes[pos]);
-
-
-                    for (int py = 0; py <= 7; py++)
-                    {
-                        for (int px = 0; px <= 7; px++)
-                        {
-                            int dox = x * 8 + px;
-                            int doy = y * 8 + py;
-
-                            altBitmap.SetPixel(dox, doy, color);
-                        }
-                    }
-                    pos++;
-                }
-            }
-
-            BitmapImage bitmapImage = new BitmapImage();
-
-            using (MemoryStream memory = new MemoryStream())
-            {
-                altBitmap.Save(memory, ImageFormat.Bmp);
-                memory.Position = 0;
-
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-            }
-
-            HorizonImage = bitmapImage;
         }
 
 
@@ -227,7 +148,7 @@ namespace ArgTrack.ViewModels.Track
         public ICommand EditTrackObjectSettingsCommand { get; } = new EditTrackObjectSettingsCommand();
         public ICommand EditTrackObjectShapeCommand { get; } = new EditTrackObjectShapeCommand();
 
-        public ICommand UpdateHorizonFromFileCommand { get; } = new LoadHorizonFromFileCommand(new FileDialog());
-        public ICommand SaveHorizonToFileCommand { get; } = new SaveHorizonToFileCommand(new FileDialog());
+        public ICommand HelpDocsCommandObjectSettings { get; } = new HelpDocsCommand("screens/object-settings-list-window/");
+        public ICommand HelpDocsCommandObjectShapes { get; } = new HelpDocsCommand("screens/object-shapes-list-window/");
     }
 }

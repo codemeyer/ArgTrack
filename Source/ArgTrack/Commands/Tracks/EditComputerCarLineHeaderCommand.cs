@@ -13,20 +13,22 @@ namespace ArgTrack.Commands.Tracks
             if (vm == null)
                 return;
 
-            short original = vm.ComputerCarLineDisplacement;
+            var newViewModel = new ComputerCarLineHeaderViewModel
+            {
+                Displacement = vm.ComputerCarLineDisplacement
+            };
 
             var window = new ComputerCarLineHeaderWindow
             {
                 Owner = Application.Current.MainWindow,
-                DataContext = vm
+                DataContext = newViewModel
             };
 
             bool? update = window.ShowDialog();
 
-            if (!update.HasValue || !update.Value)
+            if (update.HasValue && update.Value)
             {
-                // no change, restore value
-                vm.ComputerCarLineDisplacement = original;
+                vm.ComputerCarLineDisplacement = newViewModel.Displacement;
             }
         }
     }

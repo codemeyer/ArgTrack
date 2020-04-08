@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 using ArgData.Entities;
+using ArgTrack.Commands;
 
 namespace ArgTrack.ViewModels.Track
 {
@@ -261,6 +263,9 @@ namespace ArgTrack.ViewModels.Track
             get { return _showTrackSide; }
             set { SetProperty(ref _showTrackSide, value, () => ShowTrackSide); }
         }
+
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/camera-details-window/");
     }
 
 

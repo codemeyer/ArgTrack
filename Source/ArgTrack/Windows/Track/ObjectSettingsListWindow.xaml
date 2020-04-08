@@ -9,6 +9,9 @@
         ResizeMode="NoResize"
         Width="900" Height="630"
         Title="Object Settings">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpDocsCommandObjectSettings}" CommandParameter="{Binding}"></KeyBinding>
+    </Window.InputBindings>
     <Grid Width="880" Height="590">
         <ListView Margin="5" ItemsSource="{Binding TrackObjectSettings}" IsSynchronizedWithCurrentItem="True"
                   MouseDoubleClick="Control_OnMouseDoubleClick">

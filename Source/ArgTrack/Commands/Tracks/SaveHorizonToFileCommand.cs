@@ -15,7 +15,7 @@ namespace ArgTrack.Commands.Tracks
 
         public override void Execute(object parameter)
         {
-            var vm = parameter as TrackViewModel;
+            var vm = parameter as HorizonEditingViewModel;
 
             if (vm == null)
                 return;

@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ArgTrack.Windows"
+        xmlns:track="clr-namespace:ArgTrack.ViewModels.Track"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=track:SetupViewModel, IsDesignTimeCreatable=True}"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False" ResizeMode="NoResize"
         Width="450" Height="350"
         Title="Computer Car Setup">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpDocsCommand}" CommandParameter="{Binding}"></KeyBinding>
+    </Window.InputBindings>
     <Grid>
         <StackPanel Orientation="Vertical">
             <GroupBox Margin="5,5,5,5" Header="Wings">

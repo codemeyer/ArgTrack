@@ -25,6 +25,9 @@ There is the Top Menu, the Tree View Menu and the Track Layout.
 
 When editing, there are also some [keyboard shortcuts](/argtrack/keyboard-shortcuts/) available.
 
+To open the help documentation (at this site), you can press F1 on any screen to open the
+related section in the documentation.
+
 
 ### Top Menu
 

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using ArgTrack.Commands;
 using ArgTrack.Commands.Model.Cameras;
 
 namespace ArgTrack.ViewModels.Track
@@ -28,5 +29,7 @@ namespace ArgTrack.ViewModels.Track
         public ICommand AddCameraCommandCommand { get; } = new AddCameraCommandCommand();
         public ICommand EditCameraCommandCommand { get; } = new EditCameraCommandCommand();
         public ICommand RemoveCameraCommandCommand { get; } = new RemoveCameraCommandCommand();
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/camera-list-window/");
     }
 }

@@ -1,5 +1,7 @@
 ﻿using ArgData.Entities;
 using System.ComponentModel;
+using System.Windows.Input;
+using ArgTrack.Commands;
 
 namespace ArgTrack.ViewModels.Track
 {
@@ -341,5 +343,8 @@ namespace ArgTrack.ViewModels.Track
         }
 
         public string Error { get; }
+
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/computer-car-setup-window/");
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using ArgTrack.Commands;
 using ArgTrack.Commands.Model;
 using ArgTrack.Commands.Model.TrackSections;
 using ArgTrack.Commands.Tracks;
@@ -40,5 +41,8 @@ namespace ArgTrack.ViewModels.Track
 
         public ICommand MoveTrackSectionUpCommand { get;  } = new MoveTrackSectionUpCommand();
         public ICommand MoveTrackSectionDownCommand { get;  } = new MoveTrackSectionDownCommand();
+
+        public ICommand HelpDocsCommandTrack { get; } = new HelpDocsCommand("screens/track-section-list-window/");
+        public ICommand HelpDocsCommandPitLane { get; } = new HelpDocsCommand("screens/pit-lane-section-list-window/");
     }
 }

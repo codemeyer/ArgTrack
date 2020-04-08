@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using ArgTrack.Commands;
 using ArgTrack.Commands.Model;
 using ArgTrack.Commands.Model.ComputerCarLineSegments;
 using ArgTrack.Commands.Tracks;
@@ -32,15 +33,6 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
-        //public ICommand AddTrackSectionCommand { get; } = new AddTrackSectionCommand();
-        //public ICommand InsertTrackSectionBeforeCommand { get; } = new Commands.Model.TrackSections.InsertTrackSectionCommand(RelativeLocation.Before);
-        //public ICommand InsertTrackSectionAfterCommand { get; } = new Commands.Model.TrackSections.InsertTrackSectionCommand(RelativeLocation.After);
-        //public ICommand RemoveTrackSection { get; } = new RemoveTrackSectionCommand();
-        //public ICommand EditTrackSectionCommand { get; } = new EditTrackSectionCommand();
-
-        //public ICommand MoveTrackSectionUpCommand { get;  } = new MoveTrackSectionUpCommand();
-        //public ICommand MoveTrackSectionDownCommand { get;  } = new MoveTrackSectionDownCommand();
-
         public ICommand AddComputerCarLineSegmentCommand { get; } = new AddComputerCarLineSegmentCommand();
         public ICommand InsertNewComputerCarLineSegmentBeforeCommand { get; } = new InsertComputerCarLineSegmentCommand(RelativeLocation.Before);
         public ICommand InsertNewComputerCarLineSegmentAfterCommand { get; } = new InsertComputerCarLineSegmentCommand(RelativeLocation.After);
@@ -49,5 +41,7 @@ namespace ArgTrack.ViewModels.Track
 
         public ICommand MoveComputerCarLineSegmentUpCommand { get; } = new MoveBestLineSegmentUpCommand();
         public ICommand MoveComputerCarLineSegmentDownCommand { get; } = new MoveBestLineSegmentDownCommand();
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/racing-line-list-window/");
     }
 }

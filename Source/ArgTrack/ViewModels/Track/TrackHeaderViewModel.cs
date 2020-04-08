@@ -1,3 +1,5 @@
+using System.Windows.Input;
+using ArgTrack.Commands;
 using ArgTrack.TrackStuff;
 
 namespace ArgTrack.ViewModels.Track
@@ -137,6 +139,8 @@ namespace ArgTrack.ViewModels.Track
             get { return _trackData; }
             set { SetProperty(ref _trackData, value, () => TrackData); }
         }
-    }
 
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/world-location-settings-window/");
+    }
 }

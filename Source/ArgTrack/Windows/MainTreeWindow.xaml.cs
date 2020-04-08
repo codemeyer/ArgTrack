@@ -183,31 +183,29 @@ namespace ArgTrack.Windows
 
         private void TrackHorizonTreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            // TODO: move to command?
             var track = MainViewModelPasserArounder.MainViewModel.TrackViewModel;
-            var originalBytes = track.HorizonBytes;
-            // TODO: in command?
-            var horizWindow = new HorizonWindow();
-            horizWindow.DataContext = track;
+
+            var viewModel = new HorizonEditingViewModel
+            {
+                HorizonBytes = track.HorizonBytes
+            };
+
+            var horizWindow = new HorizonWindow
+            {
+                DataContext = viewModel
+            };
+
             bool? well = horizWindow.ShowDialog();
 
             if (well.HasValue && well.Value)
             {
-            }
-            else
-            {
-                track.HorizonBytes = originalBytes;
+                track.HorizonBytes = viewModel.HorizonBytes;
             }
         }
 
         private void CameraCommandsTreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //var objectSetting = GetDataContextFromOriginalSource(e.OriginalSource);
-
-            //if (objectSetting == null)
-            //{
-            //    return;
-            //}
-
             var cmd = new OpenCameraCommandListWindowCommand();
             cmd.Execute(MainViewModelPasserArounder.MainViewModel);
         }

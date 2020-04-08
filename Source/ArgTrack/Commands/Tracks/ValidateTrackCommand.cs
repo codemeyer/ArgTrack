@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using ArgTrack.ViewModels;
 using ArgTrack.ViewModels.Track;
 using ArgTrack.Windows.Tools;
@@ -140,6 +141,9 @@ namespace ArgTrack.Commands.Tracks
             get { return _results; }
             set { SetProperty(ref _results, value, () => Results); }
         }
+
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/track-validation-window/");
     }
 
     public class TrackValidationResultViewModel : BaseViewModel

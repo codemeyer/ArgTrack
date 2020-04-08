@@ -4,11 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArgTrack.Windows.Track"
+        xmlns:track="clr-namespace:ArgTrack.ViewModels.Track"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=track:HorizonEditingViewModel, IsDesignTimeCreatable=True}"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False" ResizeMode="NoResize"
         Width="820" Height="440"
         Title="Horizon">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpDocsCommand}" CommandParameter="{Binding}"></KeyBinding>
+    </Window.InputBindings>
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,5">

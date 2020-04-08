@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
 using ArgData.Entities;
+using ArgTrack.Commands;
 using ArgTrack.Commands.Tracks;
 using ArgTrack.TrackStuff;
 
@@ -436,6 +437,8 @@ namespace ArgTrack.ViewModels.Track
         public ICommand DeleteTrackCommandCommand { get; } = new DeleteTrackCommandCommand();
 
         public ICommand EditThis { get; } = new EditTrackSectionCommand();
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/track-section-details-window/");
     }
 
 

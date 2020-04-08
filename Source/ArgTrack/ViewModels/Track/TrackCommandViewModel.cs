@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
+using ArgTrack.Commands;
 
 namespace ArgTrack.ViewModels.Track
 {
@@ -244,6 +246,8 @@ namespace ArgTrack.ViewModels.Track
             {0xac, 5}
         };
 
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/track-section-details-window/#commands");
     }
 
 

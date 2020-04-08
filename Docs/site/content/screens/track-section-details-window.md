@@ -157,11 +157,12 @@ This window contains details about a specific track section.
 </table>
 <br />
 
-<h3>Commands</h3>
-<p>
-    There are various track commands associated with each section.
-    These can have a lot of different functions.
-</p>
+
+### Commands
+
+There are various track commands associated with each section.
+These can have a lot of different functions.
+
 <p>
     A full list of track commands is available at
     <a href="/argdocs/track-data/track-commands/">ArgDocs</a>.

@@ -1,4 +1,7 @@
-﻿namespace ArgTrack.ViewModels.Track
+﻿using System.Windows.Input;
+using ArgTrack.Commands;
+
+namespace ArgTrack.ViewModels.Track
 {
     public class ComputerCarBehaviorViewModel : BaseViewModel
     {
@@ -72,5 +75,8 @@
             get { return _unknownData; }
             set { SetProperty(ref _unknownData, value, () => UnknownData); }
         }
+
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/computer-car-behavior-window/");
     }
 }

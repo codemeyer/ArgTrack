@@ -10,6 +10,9 @@
         ResizeMode="NoResize"
         Width="900" Height="640"
         Title="Track Sections">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpDocsCommandTrack}" CommandParameter="{Binding}"></KeyBinding>
+    </Window.InputBindings>
     <Grid Width="880" Height="590">
         <StackPanel Orientation="Vertical">
 

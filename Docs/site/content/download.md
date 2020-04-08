@@ -45,7 +45,7 @@ Released 2020-04-08 - [Download](/downloads/argtrack/ArgTrack-0.3.zip)
 - Ability to edit [general car settings](/argtrack/screens/car-settings-window/)
 - Ability to edit [computer car behavior](/argtrack/screens/computer-car-behavior-window/)
 - Ability to edit [track cameras](/argtrack/screens/camera-list-window/)
-- Restructured, extended and improved documentation
+- Restructured, extended and improved documentation - press F1 on any screen for help
 - _Known issue: Track view occasionally ends up outside scrollable area_
 - _Known issue: Track view not always redrawn after editing layout-affecting properties_
 - _Known issue: Left-hand corner with width change is drawn incorrectly_

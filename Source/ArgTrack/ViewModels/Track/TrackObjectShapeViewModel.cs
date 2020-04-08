@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Windows.Input;
+using ArgTrack.Commands;
 using ArgTrack.Commands.Tracks;
 
 namespace ArgTrack.ViewModels.Track
@@ -215,5 +216,7 @@ namespace ArgTrack.ViewModels.Track
         public ICommand EditGenericByteDataCommand { get; } = new EditGenericByteDataCommand();
 
         public ICommand Edit { get; } = new EditTrackObjectShapeCommand();
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/object-shape-details-window/");
     }
 }

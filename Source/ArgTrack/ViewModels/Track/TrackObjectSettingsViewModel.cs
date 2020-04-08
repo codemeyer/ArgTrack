@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using ArgTrack.Commands;
 using ArgTrack.Commands.Tracks;
 
 namespace ArgTrack.ViewModels.Track
@@ -220,6 +221,8 @@ namespace ArgTrack.ViewModels.Track
 
 
         public ICommand Edit { get; } = new EditTrackObjectSettingsCommand();
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/object-settings-details-window/");
     }
 
 

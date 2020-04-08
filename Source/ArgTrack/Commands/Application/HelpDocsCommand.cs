@@ -1,32 +1,30 @@
 ﻿using System.Diagnostics;
-using ArgTrack.ViewModels;
 
 namespace ArgTrack.Commands
 {
     public class HelpDocsCommand : CommandBase
     {
+        private readonly string _helpPath;
+
+        public HelpDocsCommand()
+        {
+            _helpPath = string.Empty;
+        }
+
+        public HelpDocsCommand(string helpPath)
+        {
+            _helpPath = helpPath;
+        }
+
         public override void Execute(object parameter)
         {
-            var vm = parameter as MainViewModel;
-
-            if (vm == null)
-            {
-                OpenWebSitePage();
-                return;
-            }
-
-            // TODO: other way of determining which page to open
-
-            // if (vm.SelectedMainTabIndex == 0)       // track
-            // ...
-
-            // fallback
-            OpenWebSitePage();
+            OpenWebSitePage(_helpPath);
         }
 
         private void OpenWebSitePage(string relativeChildUrl = "")
         {
-            var fullUrl = $"https://www.argtools.com/argtrack/{relativeChildUrl}";
+            //var fullUrl = $"https://www.argtools.com/argtrack/{relativeChildUrl}";
+            var fullUrl = $"http://localhost:3000/argtrack/{relativeChildUrl}";
 
             Process.Start(fullUrl);
         }

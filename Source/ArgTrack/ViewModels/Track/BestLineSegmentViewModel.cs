@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 using ArgData.Entities;
+using ArgTrack.Commands;
 using ArgTrack.TrackStuff;
 
 namespace ArgTrack.ViewModels.Track
@@ -298,6 +300,9 @@ namespace ArgTrack.ViewModels.Track
         {
             ParentList.SelectedIndex = Index;
         }
+
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/racing-line-segment-details-window/");
     }
 
 

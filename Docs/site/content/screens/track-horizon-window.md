@@ -10,4 +10,6 @@ Here you can see the horizon that the game renders for the track. You can load a
 
 The 1x view is a pixel-per-pixel represenation, whilst the 8x is zoomed in.
 
-Use the buttons to load or save the horizon from or to disk.
+The "Load Horizon" button lets you load a horizon from any type of file.
+
+The "Save Horizon" button lets you save the current horizon to disk as a .arghoriz file.

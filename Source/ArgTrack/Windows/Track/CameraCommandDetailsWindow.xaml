@@ -11,6 +11,9 @@
         Title="Camera Command Details"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False" ResizeMode="NoResize">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpDocsCommand}" CommandParameter="{Binding}"></KeyBinding>
+    </Window.InputBindings>
     <Grid>
         <StackPanel Orientation="Vertical" Margin="5">
 

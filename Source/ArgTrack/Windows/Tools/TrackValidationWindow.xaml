@@ -11,6 +11,9 @@
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False" ResizeMode="NoResize"
         Width="640" Height="400">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding HelpDocsCommand}" CommandParameter="{Binding}"></KeyBinding>
+    </Window.InputBindings>
     <Grid>
         <StackPanel Orientation="Vertical">
             <ListView Height="260" Margin="5" ItemsSource="{Binding Results}" IsSynchronizedWithCurrentItem="True">

@@ -1,4 +1,7 @@
-﻿namespace ArgTrack.ViewModels.Track
+﻿using System.Windows.Input;
+using ArgTrack.Commands;
+
+namespace ArgTrack.ViewModels.Track
 {
     public class CarSettingsViewModel : BaseViewModel
     {
@@ -54,5 +57,8 @@
             get { return _tyreWearQualifying; }
             set { SetProperty(ref _tyreWearQualifying, value, () => TyreWearQualifying); }
         }
+
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/car-settings-window/");
     }
 }

@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using ArgData.Entities;
 using ArgTrack.AppStuff;
+using ArgTrack.Commands;
 
 namespace ArgTrack.ViewModels.Track
 {
@@ -301,7 +303,6 @@ namespace ArgTrack.ViewModels.Track
             }
         }
 
-        [System.Obsolete("Moved to TrackSettingsViewModel")]
         public List<KerbTypeBoundValue> AvailableKerbTypes
         {
             get
@@ -315,6 +316,9 @@ namespace ArgTrack.ViewModels.Track
                 return list;
             }
         }
+
+
+        public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/misc-track-layout-settings-window/");
     }
 
 
