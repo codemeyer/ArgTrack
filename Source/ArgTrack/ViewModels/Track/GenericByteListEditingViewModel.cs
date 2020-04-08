@@ -4,15 +4,6 @@ namespace ArgTrack.ViewModels.Track
 {
     public class GenericByteListEditingViewModel : BaseViewModel
     {
-        public GenericByteListEditingViewModel()
-        {
-        }
-
-
-        // TODO: bool CanAddRemoveBytes ?
-
-        // ObservableCollectino =?
-
         public void SetData(byte[] data)
         {
             var list = new ObservableCollection<EditableByteData>();

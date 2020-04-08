@@ -137,9 +137,6 @@
     <Compile Include="TrackStuff\LayoutConstants.cs" />
     <Compile Include="TrackStuff\TrackConverter.cs" />
     <Compile Include="TrackStuff\UnitConvert.cs" />
-    <Compile Include="UserControls\CarSetup\CarSetupUserControl.xaml.cs">
-      <DependentUpon>CarSetupUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AppStuff\VersionChecker.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -160,7 +157,6 @@
     <Compile Include="ViewModels\Track\TrackLayoutViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackObjectSettingsViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackObjectShapeViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackRawDataViewModel.cs" />
     <Compile Include="ViewModels\Track\TrackSectionViewModel.cs" />
     <Compile Include="TrackStuff\TrackSectionLayoutData.cs" />
     <Compile Include="ViewModels\Track\TrackSectionViewModelCollection.cs" />
@@ -246,10 +242,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\CarSetup\CarSetupUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Windows\AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
