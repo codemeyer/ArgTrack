@@ -31,7 +31,7 @@ _Note: This software is still in beta, and more features will be added in due ti
 - [Download](/argtrack/download/) ArgTrack and follow the installation instructions
 - Have a look at the [overview](/argtrack/overview/) to get a feeling for track editing and the ArgTrack layout
 - Read a [tutorial](/argtrack/tutorials/) or two
-- Looking for something specific? Look at the [Screen-by-screen](/argtrack/screens/) or [Misc](/argtrack/misc/) sections
+- Looking for something specific? Look at the [Screen by screen](/argtrack/screens/) section.
 
 
 ## Feedback
