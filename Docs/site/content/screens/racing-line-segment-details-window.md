@@ -1,10 +1,10 @@
 ---
-title: "ArgTrack: Racing Line Line Details Window"
+title: "ArgTrack: Racing Line Details Window"
 aliases:
     - "/best-line-details-window"
 ---
 
-# Racing Line Line Details Window
+# Racing Line Details Window
 
 There are two types of Best Line segments: Normal and Wide Radius.
 

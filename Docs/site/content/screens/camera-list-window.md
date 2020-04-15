@@ -9,7 +9,7 @@ track-side cameras in the game.
 
 <img src="/argtrack/images/camera-command-list-window.png" alt="Camera commands list screenshot" class="img-fluid" />
 
-By default, F1GP will place a track-side camera at every ? track length unit.
+By default, F1GP will place a track-side camera at a fixed interval on the left-hand side of the track.
 
 To adjust or remove one of these default camera placements, you can apply a track camera command
 
