@@ -29,11 +29,12 @@ namespace ArgTrack.TrackStuff
 
             templateSourceTrack.TrackSettings.PoleSide = ConvertGp2TrackSide(gp2Track.TrackDataHeader.PoleSide);
             templateSourceTrack.TrackSettings.PitsSide = ConvertGp2TrackSide(gp2Track.TrackDataHeader.PitsSide);
-            templateSourceTrack.TrackSettings.KerbType = ConvertGp2KerbType(gp2Track.TrackDataHeader.KerbType);
-            templateSourceTrack.TrackSettings.KerbLowerColor = gp2Track.TrackDataHeader.KerbLowerColor;
-            templateSourceTrack.TrackSettings.KerbLowerColor2 = gp2Track.TrackDataHeader.KerbLowerColor2;
-            templateSourceTrack.TrackSettings.KerbUpperColor = gp2Track.TrackDataHeader.KerbUpperColor;
-            templateSourceTrack.TrackSettings.KerbUpperColor2 = gp2Track.TrackDataHeader.KerbUpperColor2;
+            // TODO: keep template kerb colors for now
+            //templateSourceTrack.TrackSettings.KerbType = ConvertGp2KerbType(gp2Track.TrackDataHeader.KerbType);
+            //templateSourceTrack.TrackSettings.KerbLowerColor = gp2Track.TrackDataHeader.KerbLowerColor;
+            //templateSourceTrack.TrackSettings.KerbLowerColor2 = gp2Track.TrackDataHeader.KerbLowerColor2;
+            //templateSourceTrack.TrackSettings.KerbUpperColor = gp2Track.TrackDataHeader.KerbUpperColor;
+            //templateSourceTrack.TrackSettings.KerbUpperColor2 = gp2Track.TrackDataHeader.KerbUpperColor2;
 
             templateSourceTrack.TrackSettings.LapCount = gp2Track.TrackSettings.LapCount;
 
