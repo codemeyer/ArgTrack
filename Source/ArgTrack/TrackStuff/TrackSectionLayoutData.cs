@@ -169,6 +169,7 @@ namespace ArgTrack.TrackStuff
         /// <param name="initialAngle">End angle of previous section</param>
         /// <param name="widthChangeLength"></param>
         /// <param name="widthChangeEnd"></param>
+        [Obsolete("Use other methods instead")]
         public void CalculateLayout(double initialPositionX, double initialPositionY, int initialWidth, int initialAngle, int widthChangeLength, int widthChangeEnd)
         {
             StartPosition = new Point(initialPositionX, initialPositionY);

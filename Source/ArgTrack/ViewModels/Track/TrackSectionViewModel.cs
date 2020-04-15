@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
+using System.Windows.Media;
 using ArgData.Entities;
 using ArgTrack.Commands;
 using ArgTrack.Commands.Tracks;
@@ -19,6 +21,8 @@ namespace ArgTrack.ViewModels.Track
             ParentList = parentList;
             SelectedTrackCommandValueToAdd = 0x80;
             UpdateCurvatureDescription();
+
+            SectionPoints = new PointCollection();
         }
 
 
@@ -143,27 +147,6 @@ namespace ArgTrack.ViewModels.Track
             get { return _rightVergeWidth; }
             set { SetProperty(ref _rightVergeWidth, value, () => RightVergeWidth); }
         }
-
-
-
-        // TODO: these should be the end widths of the previous section,
-        // except for the first section of the track, then the start widths are the ones defined in TrackSettings
-
-        //private byte _leftVergeStartWidth;
-
-        //public byte LeftVergeStartWidth
-        //{
-        //    get { return _leftVergeStartWidth; }
-        //    set { SetProperty(ref _leftVergeStartWidth, value, () => LeftVergeStartWidth); }
-        //}
-
-        //private byte _rightVergeStartWidth;
-
-        //public byte RightVergeStartWidth
-        //{
-        //    get { return _rightVergeStartWidth; }
-        //    set { SetProperty(ref _rightVergeStartWidth, value, () => RightVergeStartWidth); }
-        //}
 
 
 
@@ -429,10 +412,15 @@ namespace ArgTrack.ViewModels.Track
         }
 
 
+        // use this instead to mark single section
+        public PointCollection SectionPoints { get; set; }
+
+
 
         private TrackSectionLayoutData _layout;
 
         // TODO: is this only used for marking a single section??
+        [Obsolete("Can probably be removed in the future, replaced by SectionPoints above")]
         public TrackSectionLayoutData Layout
         {
             get { return _layout; }

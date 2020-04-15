@@ -181,6 +181,9 @@ namespace ArgTrack.TrackDrawing
             foreach (var road in roadSections)
             {
                 var x = BuildSectionPointCollectionFromRoadLayout(road);
+
+                road.RelatedSection.SectionPoints = x;
+
                 var y = LayoutToPointsConverter.Convert(x, drawingLayout);
 
                 z.AddRange(y);
