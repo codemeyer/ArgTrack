@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using ArgTrack.Mappers;
 using ArgTrack.ViewModels.Track;
 using ArgTrack.Windows.Track;
@@ -51,7 +52,52 @@ namespace ArgTrack.Commands.Tracks
                 return true;
             }
 
-            // track width?
+            if (original.LeftVergeWidth != updated.LeftVergeWidth)
+            {
+                return true;
+            }
+
+            if (original.RightVergeWidth != updated.RightVergeWidth)
+            {
+                return true;
+            }
+
+            if (original.BridgedLeftFence != updated.BridgedLeftFence)
+            {
+                return true;
+            }
+
+            if (original.BridgedRightFence != updated.BridgedRightFence)
+            {
+                return true;
+            }
+
+            // added or removed track width change
+            if (original.Commands.Count(c => c.Command == 0x85) != updated.Commands.Count(c => c.Command == 0x85))
+            {
+                return true;
+            }
+
+            if (original.Commands.Count(c => c.Command == 0x85) == updated.Commands.Count(c => c.Command == 0x85))
+            {
+                var originalCommand = original.Commands.Single(c => c.Command == 0x85);
+                var updatedCommand = updated.Commands.Single(c => c.Command == 0x85);
+
+                if (originalCommand.Arguments[0].Value != updatedCommand.Arguments[0].Value)
+                {
+                    return true;
+                }
+
+                if (originalCommand.Arguments[1].Value != updatedCommand.Arguments[1].Value)
+                {
+                    return true;
+                }
+
+                if (originalCommand.Arguments[2].Value != updatedCommand.Arguments[2].Value)
+                {
+                    return true;
+                }
+            }
 
             return false;
         }

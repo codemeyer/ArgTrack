@@ -15,6 +15,8 @@ namespace ArgTrack.Commands.Tracks
                 return;
 
             vm.ParentList.Move(vm.Index, vm.Index + 1);
+
+            vm.ParentList.RecalculateGraphics();
         }
 
         public override bool CanExecute(object parameter)

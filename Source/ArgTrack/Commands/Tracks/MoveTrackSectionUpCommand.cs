@@ -15,6 +15,8 @@ namespace ArgTrack.Commands.Tracks
                 return;
 
             trackSection.ParentList.Move(trackSection.Index, trackSection.Index - 1);
+
+            trackSection.ParentList.RecalculateGraphics();
         }
 
         public override bool CanExecute(object parameter)

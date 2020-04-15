@@ -27,10 +27,31 @@ namespace ArgTrack.Commands.Tracks
 
             if (update.HasValue && update.Value)
             {
+                bool needsRepainting = NeedsRepainting(vm, clone);
+
                 TrackMapper.MapTrackSettingsViewModel(clone, vm);
 
-                // TODO: repaint 3D track! ie LayoutCalculator etc
+                if (needsRepainting)
+                {
+                    // TODO: not global
+                    TrackViewModelPasserArounder.TrackViewModel.RecalculateLayout();
+                }
             }
+        }
+
+        private bool NeedsRepainting(TrackSettingsViewModel original, TrackSettingsViewModel updated)
+        {
+            if (original.SurroundingArea != updated.SurroundingArea)
+            {
+                return true;
+            }
+
+            if (original.PitsSide != updated.PitsSide)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

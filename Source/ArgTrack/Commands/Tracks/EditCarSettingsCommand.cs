@@ -28,8 +28,6 @@ namespace ArgTrack.Commands.Tracks
             if (update.HasValue && update.Value)
             {
                 TrackMapper.MapCarSettingsViewModel(clone, vm);
-
-                // TODO: repaint 3D track! ie LayoutCalculator etc
             }
         }
     }

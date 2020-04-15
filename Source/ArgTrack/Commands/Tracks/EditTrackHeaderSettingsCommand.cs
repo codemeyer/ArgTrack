@@ -27,11 +27,37 @@ namespace ArgTrack.Commands.Tracks
 
             if (update.HasValue && update.Value)
             {
+                bool needsRepainting = NeedsRepainting(vm, clone);
+
                 // map clone to actual value
                 ViewModelCopyMapper.CopyTrackHeaderViewModel(clone, vm);
 
-                // TODO: repaint 3D track! ie LayoutCalculator etc
+                if (needsRepainting)
+                {
+                    // TODO: not global
+                    TrackViewModelPasserArounder.TrackViewModel.RecalculateLayout();
+                }
             }
+        }
+
+        private bool NeedsRepainting(TrackHeaderViewModel original, TrackHeaderViewModel updated)
+        {
+            if (original.LeftVergeStartWidth != updated.LeftVergeStartWidth)
+            {
+                return true;
+            }
+
+            if (original.RightVergeStartWidth != updated.RightVergeStartWidth)
+            {
+                return true;
+            }
+
+            if (original.TrackStartWidth != updated.TrackStartWidth)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
