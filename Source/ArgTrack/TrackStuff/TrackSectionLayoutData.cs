@@ -2,10 +2,21 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using ArgTrack.TrackDrawing;
 using ArgTrack.ViewModels.Track;
 
 namespace ArgTrack.TrackStuff
 {
+    // TODO: split into separate one for verges? or can we reuse the same one?
+    // then the specific verge widths can be ignored, instead for a verge the
+    // width is the whole area from center to end of verge
+
+    // but then it can't have the connection to a specific track section anymore...
+
+
+    /// <summary>
+    /// Track section layout data for a specific track section.
+    /// </summary>
     public class TrackSectionLayoutData // TODO: name?
     {
         private readonly TrackSectionViewModel _section;
@@ -24,6 +35,10 @@ namespace ArgTrack.TrackStuff
 
         // helper properties for prettier code
         public int Length => _section.Length;
+
+        /// <summary>
+        /// Gets the Curvature value from the related track section (related to Radius)
+        /// </summary>
         public int Curvature => _section.Curvature;
 
         public TrackSectionViewModel TrackSectionBuddy => _section;
@@ -32,42 +47,42 @@ namespace ArgTrack.TrackStuff
         /// Gets the coordinates for the start of the section (center of track?)
         /// </summary>
         /// <returns></returns>
-        public Point StartPosition { get; private set; }
+        public Point StartPosition { get; set; }
         // call it StartCenterPosition?
 
         /// <summary>
         /// Gets the coordinates for the end of the section (center of track?)
         /// </summary>
         /// <returns></returns>
-        public Point EndPosition { get; private set; }
+        public Point EndPosition { get; set; }
 
 
         /// <summary>
         /// Gets the coordinates for the center of the circle that defines a curved segment.
         /// </summary>
-        public Point CircleCenterForCurve { get; private set; }
+        public Point CircleCenterForCurve { get; set; }
 
 
         // coordinates for point where track width change ends
         /// <summary>
         /// Gets the coordinates at the center of the track where a track width change ends.
         /// </summary>
-        public Point WidthChangeEndPosition { get; private set; }
+        public Point WidthChangeEndPosition { get; set; }
 
         /// <summary>
         /// when track width changes across segment border
         /// </summary>
-        public int WidthChangeLength { get; private set; }
+        public int WidthChangeLength { get; set; }
 
         /// <summary>
         /// when track width changes across segment border
         /// </summary>
-        public int WidthChangeEnd { get; private set; }
+        public int WidthChangeEnd { get; set; }
 
         /// <summary>
         /// Gets the track width at the start of the section.
         /// </summary>
-        public int StartWidth { get; private set; }
+        public int StartWidth { get; set; }
 
         // in track-width units
         public int LeftVergeStartWidth
@@ -116,9 +131,9 @@ namespace ArgTrack.TrackStuff
 
         // TODO: all these names are a mess!!!
 
-        public int LeftVergeStartWidthRaw { get; set; }  // ie PREVIOUS section Leftverge width 
+        public int LeftVergeStartWidthRaw { get; set; }  // ie PREVIOUS section Leftverge width
         public int LeftVergeEndWidthRaw { get; set; }  // ie section LeftVerge width
-        public int RightVergeStartWidthRaw { get; set; }  // ie PREVIOUS section rightverge width 
+        public int RightVergeStartWidthRaw { get; set; }  // ie PREVIOUS section rightverge width
         public int RightVergeEndWidthRaw { get; set; }  // ie section rightVerge width
 
 
@@ -126,24 +141,24 @@ namespace ArgTrack.TrackStuff
         /// <summary>
         /// Gets the track width at the end of the section.
         /// </summary>
-        public int EndWidth { get; private set; }
+        public int EndWidth { get; set; }
 
 
         /// <summary>
         /// Gets the angle direction at the start of the section.
         /// </summary>
-        public int StartAngle { get; private set; }
+        public int StartAngle { get; set; }
 
         /// <summary>
         /// Gets the angle direction at the end of the section.
         /// </summary>
-        public int EndAngle { get; private set; }
+        public int EndAngle { get; set; }
 
         /// <summary>
         /// Gets the radius of circle (middle of track)
         /// </summary>
         /// <returns></returns>
-        public double Radius { get; private set; }
+        public double Radius { get; set; }
 
         /// <summary>
         /// Calculate section coordinates and angles depending on start values.
@@ -177,7 +192,7 @@ namespace ArgTrack.TrackStuff
             {
                 // Curve: first calculate center of circle
                 Radius = 1 / (Curvature * LayoutConstants.AngleScaleRadians);   // TODO: remove "1/..." if flipping Curvature?
-                
+
                 double circleCenterX = StartPosition.X + Radius * Math.Cos(angle);
                 double circleCenterY = StartPosition.Y + Radius * Math.Sin(angle);
                 CircleCenterForCurve = new Point(circleCenterX, circleCenterY);
@@ -191,7 +206,7 @@ namespace ArgTrack.TrackStuff
 
 
             // TODO: from outside?
-            var cmd = _section.Commands.SingleOrDefault(c => c.Command == 0x85); // TrackCommand
+            var cmd = _section.Commands.SingleOrDefault(c => c.Command == 0x85); // TrackCommand for width change
             if (cmd != null)
             {
                 widthChangeLength = cmd.Arguments[1].Value;
@@ -269,8 +284,8 @@ namespace ArgTrack.TrackStuff
         /// <summary>
         /// Gets a PointCollection containing all the points that define the track section, describing a "circle" clockwise from start/left.
         /// </summary>
-        public PointCollection SectionPoints { get; private set; }
-
+        public PointCollection SectionPoints { get; set; }
+        // TODO: move elsewhere
         private PointCollection BuildSectionPointCollection()
         {
             // TODO: calculate stuff completely outside of the object,
@@ -318,14 +333,14 @@ namespace ArgTrack.TrackStuff
                 if (Curvature > 0)
                 {
                     // right
-                    var outerLine = BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                    var outerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
 
                     foreach (var p in outerLine)
                     {
                         points.Add(p);
                     }
 
-                    var innerLine = BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                    var innerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
 
                     foreach (var p in innerLine.Reverse())
                     {
@@ -335,9 +350,9 @@ namespace ArgTrack.TrackStuff
                 else
                 {
                     // left
-                    var outerLine = BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                    var outerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dOuterRadiusStart, dOuterRadiusEnd);
                     // TODO: below fixes the track width but makes all left-hand turns jagged
-                    //var outerLine = BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                    //var outerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
 
                     foreach (var p in outerLine)
                     {
@@ -346,10 +361,10 @@ namespace ArgTrack.TrackStuff
 
 
 
-                    var innerLine = BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                    var innerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dInnerRadiusStart, dInnerRadiusEnd);
                     // TODO: below fixes the track width but makes all left-hand turns jagged
-                    //var innerLine = BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
-                    
+                    //var innerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
+
                     foreach (var p in innerLine.Reverse())
                     {
                         points.Add(p);
@@ -360,64 +375,6 @@ namespace ArgTrack.TrackStuff
             }
 
             return points;
-        }
-
-
-        // TODO: only handles right-hand corners properly
-        private PointCollection BuildArc(double x, double y, double startAngle, double dEndAngle, double dStartRadius, double dEndRadius)
-        {
-            return LayoutCalculator.BuildArc(x, y, startAngle, dEndAngle, dStartRadius, dEndRadius);
-
-            //while (dEndAngle - startAngle > Math.PI * 2)
-            //{
-            //    dEndAngle -= Math.PI * 2;
-            //}
-
-            //// radius change per angle unit (radiens)
-            //double a = (dEndRadius - dStartRadius) / (dEndAngle - startAngle);
-
-            //double dAngleIncrement;
-            //if (Math.Abs(dStartRadius) > 50)
-            //{
-            //    dAngleIncrement = Math.Abs(2 * Math.Asin(5.0 / dStartRadius));
-            //}
-            //else
-            //{
-            //    //dAngleIncrement = 2 * Math.PI / 32;   // original
-            //    dAngleIncrement = 2 * Math.PI / 64;
-            //}
-
-            //double nPosXStart = x + (dStartRadius * Math.Cos(startAngle));
-            //double nPosYStart = y - (dStartRadius * Math.Sin(startAngle));
-
-
-            //var points = new PointCollection
-            //{
-            //    new Point(nPosXStart, nPosYStart)
-            //};
-
-            //// draw a number of short lines
-            //double dAngle = startAngle + dAngleIncrement;
-            //while (dAngle < dEndAngle)
-            //{
-            //    // calculate radius for current angle
-            //    double radius = dStartRadius + (dAngle - startAngle) * a;
-
-            //    // calculate point on circle for this angle
-            //    double nPosX = x + radius * Math.Cos(dAngle);
-            //    double nPosY = y - radius * Math.Sin(dAngle);
-
-            //    points.Add(new Point(nPosX, nPosY));
-
-            //    dAngle = dAngle + dAngleIncrement;
-            //}
-
-            //// add final point
-            //double nx = x + (dEndRadius * Math.Cos(dEndAngle));
-            //double ny = y - (dEndRadius * Math.Sin(dEndAngle));
-            //points.Add(new Point(nx, ny));
-
-            //return points;
         }
     }
 }

@@ -217,19 +217,20 @@ namespace ArgTrack.Windows
 
             if (e.NewValue is TrackSectionViewModel selected)
             {
-                var pointData = new PointData();
+                // TODO: restore this!
+                //var pointData = new PointData();
 
-                // TODO: after adding a new section, we crash here (because there is no Layout?)
-                foreach (var point in selected.Layout.SectionPoints)
-                {
-                    pointData.Points.Add(point);
-                }
+                //// TODO: after adding a new section, we crash here (because there is no Layout?)
+                //foreach (var point in selected.Layout.SectionPoints)
+                //{
+                //    pointData.Points.Add(point);
+                //}
 
-                pointData.Fill = Brushes.Transparent;
-                pointData.Stroke = Brushes.Cyan;
-                pointData.StrokeThickness = 0.35;
+                //pointData.Fill = Brushes.Transparent;
+                //pointData.Stroke = Brushes.Cyan;
+                //pointData.StrokeThickness = 0.35;
 
-                MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.SelectedTrackSection = pointData;
+                //MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.SelectedTrackSection = pointData;
             }
             else
             {

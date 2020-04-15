@@ -124,6 +124,9 @@ namespace ArgTrack.ViewModels.Track
 
         private byte _leftVergeWidth;
 
+        /// <summary>
+        /// Verge width at END(?)
+        /// </summary>
         public byte LeftVergeWidth
         {
             get { return _leftVergeWidth; }
@@ -132,6 +135,9 @@ namespace ArgTrack.ViewModels.Track
 
         private byte _rightVergeWidth;
 
+        /// <summary>
+        /// Verge width at END(?)
+        /// </summary>
         public byte RightVergeWidth
         {
             get { return _rightVergeWidth; }
@@ -426,6 +432,7 @@ namespace ArgTrack.ViewModels.Track
 
         private TrackSectionLayoutData _layout;
 
+        // TODO: is this only used for marking a single section??
         public TrackSectionLayoutData Layout
         {
             get { return _layout; }

@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using ArgData.Entities;
 using ArgTrack.Commands.TrackView;
+using ArgTrack.TrackDrawing;
 using ArgTrack.TrackStuff;
 
 namespace ArgTrack.ViewModels.Track
@@ -13,11 +14,38 @@ namespace ArgTrack.ViewModels.Track
     {
         public static TrackLayoutViewModel FromTrackViewModel(TrackViewModel trackViewModel)
         {
-            var layoutCalculator = new LayoutCalculator();
-            var points = layoutCalculator.CalculateTrackLayout(trackViewModel);
+            var centerPoints = CenterPointsCalculator.CalculateCenterPointsPerSection(trackViewModel);
 
+            var drawingPoints = new ObservableCollection<PointData>();
+
+
+            var roadSections = RoadLayoutCalculator.CalculateRoadSections(centerPoints.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
+
+            var roadPoints = RoadLayoutCalculator.Calculate(roadSections, RoadLayoutCalculator.TrackDrawingLayout);
+
+            var centrios = CenterPointsCalculator.CalculateCenterPointsPerSectionOneLengthEach(trackViewModel);
+            var roadSectionsTight = RoadLayoutCalculator.CalculateRoadSections(centrios.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
+            // TODO: use centrios and roadSectionsTight to calculate the verges?
+            var vergePoints = VergeLayoutCalculator.Calculate(roadSections, roadSectionsTight);
+            drawingPoints.AddRange(vergePoints);
+            drawingPoints.AddRange(roadPoints);
+
+            var pitPoints = RoadLayoutCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, RoadLayoutCalculator.PitLaneDrawingLayout);
+            drawingPoints.AddRange(pitPoints);
+
+            // light blue center line with no arcs, only connects each section start point to the end point
+            var centerLineStraight = CenterLineDrawingCalculator.CalculateDrawablePointsStraightUp(centerPoints.TrackSections);
+            drawingPoints.AddRange(centerLineStraight);
+
+            // purple arced center line
+            var centerLineArced = CenterLineDrawingCalculator.CalculateDrawablePointsWithArcs(centerPoints.TrackSections);
+            //drawingPoints.AddRange(centerLineArced);
+
+
+
+            // add all of the points to the TrackData? I guess cause that's what's being rendered on screen?
             var layoutVM = new TrackLayoutViewModel();
-            layoutVM.TrackData = points;
+            layoutVM.TrackData = drawingPoints;
 
             if (trackViewModel.TrackSettings.SurroundingArea == SurroundingArea.Green)
             {
@@ -29,6 +57,7 @@ namespace ArgTrack.ViewModels.Track
             }
 
             // TODO: smarter way of recalculating?
+            // TODO: ability to keep the zoom level and position when recalculating?
 
             layoutVM.RecalculateViewAndScrollbars();
 

@@ -33,8 +33,8 @@ namespace ArgTrack.Commands.Tracks
             if (string.IsNullOrWhiteSpace(path))
                 return;
 
-            try
-            {
+            //try
+            //{
                 var track = new TrackReader().Read(path);
 
                 var viewModel = Mappers.TrackMapper.MapEntireTrackToViewModel(track);
@@ -57,13 +57,13 @@ namespace ArgTrack.Commands.Tracks
                 //win.DataContext = layoutVM;
                 //win.ShowDialog();
                 //
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(
-                    "An error occurred when loading the track. Make sure that the specified file is an F1GP track file and try again.",
-                    "ArgTrack", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show(
+            //        "An error occurred when loading the track. Make sure that the specified file is an F1GP track file and try again.",
+            //        "ArgTrack", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
         }
     }
 }
