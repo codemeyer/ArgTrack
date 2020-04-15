@@ -1,0 +1,27 @@
+using ArgTrack.Infrastructure;
+
+namespace ArgTrack.Features.TrackEditing.RacingLine
+{
+    public class MoveBestLineSegmentUpCommand : CommandBase
+    {
+        public override void Execute(object parameter)
+        {
+            var vm = parameter as BestLineSegmentViewModel;
+
+            if (vm == null)
+                return;
+
+            vm.ParentList.Move(vm.Index, vm.Index - 1);
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            var vm = parameter as BestLineSegmentViewModel;
+
+            if (vm == null)
+                return false;
+
+            return vm.Index > 0;
+        }
+    }
+}

@@ -66,285 +66,298 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\Application\CheckForUpdateCommand.cs" />
-    <Compile Include="Commands\Application\ExitApplicationCommand.cs" />
-    <Compile Include="Commands\Application\HelpDocsCommand.cs" />
-    <Compile Include="Commands\Application\OpenAboutWindowCommand.cs" />
-    <Compile Include="Commands\Application\OpenDownloadPageCommand.cs" />
-    <Compile Include="Commands\Application\OpenOtherSiteCommand.cs" />
-    <Compile Include="Commands\Application\ShowMessageCommand.cs" />
-    <Compile Include="Commands\CommandBase.cs" />
-    <Compile Include="Commands\Model\Cameras\AddCameraCommandCommand.cs" />
-    <Compile Include="Commands\Model\Cameras\EditCameraCommandCommand.cs" />
-    <Compile Include="Commands\Model\Cameras\RemoveCameraCommandCommand.cs" />
-    <Compile Include="Commands\Model\ComputerCarLineSegments\AddComputerCarLineSegmentCommand.cs" />
-    <Compile Include="Commands\Model\ComputerCarLineSegments\EditComputerCarLineSegmentCommand.cs" />
-    <Compile Include="Commands\Model\ComputerCarLineSegments\InsertComputerCarLineSegmentCommand.cs" />
-    <Compile Include="Commands\Model\TrackSections\RemoveTrackSectionCommand.cs" />
-    <Compile Include="Commands\Tracks\AddObjectSettingsCommand.cs" />
-    <Compile Include="Commands\Tracks\AddTrackCommandCommand.cs" />
-    <Compile Include="Commands\Model\TrackSections\AddTrackSectionCommand.cs" />
-    <Compile Include="Commands\Tracks\ConvertTrackCommand.cs" />
-    <Compile Include="Commands\Tracks\DeleteTrackCommandCommand.cs" />
-    <Compile Include="Commands\Tracks\EditComputerCarBehaviorCommand.cs" />
-    <Compile Include="Commands\Tracks\EditComputerCarLineHeaderCommand.cs" />
-    <Compile Include="Commands\Tracks\EditBestLineCommand.cs" />
-    <Compile Include="Commands\Tracks\EditCarSettingsCommand.cs" />
-    <Compile Include="Commands\Tracks\EditGenericByteDataCommand.cs" />
-    <Compile Include="Commands\Tracks\EditTrackCommandCommand.cs" />
-    <Compile Include="Commands\Tracks\EditTrackHeaderSettingsCommand.cs" />
-    <Compile Include="Commands\Tracks\EditTrackLayoutSettingsCommand.cs" />
-    <Compile Include="Commands\Tracks\EditTrackObjectSettingsCommand.cs" />
-    <Compile Include="Commands\Tracks\EditTrackObjectShapeCommand.cs" />
-    <Compile Include="Commands\Tracks\EditTrackSectionCommand.cs" />
-    <Compile Include="Commands\Model\TrackSections\InsertTrackSectionCommand.cs" />
-    <Compile Include="Commands\Tracks\LoadHorizonFromFileCommand.cs" />
-    <Compile Include="Commands\Tracks\LoadTrackCommand.cs" />
-    <Compile Include="Commands\Tracks\MoveBestLineSegmentDownCommand.cs" />
-    <Compile Include="Commands\Tracks\MoveBestLineSegmentUpCommand.cs" />
-    <Compile Include="Commands\Tracks\MoveTrackSectionDownCommand.cs" />
-    <Compile Include="Commands\Tracks\MoveTrackSectionUpCommand.cs" />
-    <Compile Include="Commands\Tracks\OpenCameraCommandListWindowCommand.cs" />
-    <Compile Include="Commands\Tracks\OpenComputerCarRacingLineWindowCommand.cs" />
-    <Compile Include="Commands\Tracks\OpenObjectSettingsListWindowCommand.cs" />
-    <Compile Include="Commands\Tracks\OpenObjectShapesListWindowCommand.cs" />
-    <Compile Include="Commands\Tracks\OpenPitLaneSectionListWindowCommand.cs" />
-    <Compile Include="Commands\Tracks\OpenTrackSectionListWindowCommand.cs" />
-    <Compile Include="Commands\Model\RelativeLocation.cs" />
-    <Compile Include="Commands\Model\ComputerCarLineSegments\RemoveComputerCarLineSegmentCommand.cs" />
-    <Compile Include="Commands\Tracks\SaveHorizonToFileCommand.cs" />
-    <Compile Include="Commands\Tracks\SaveTrackCommand.cs" />
-    <Compile Include="Mappers\PropertyCopier.cs" />
-    <Compile Include="Mappers\ViewModelCopyMapper.cs" />
-    <Compile Include="TrackDrawing\CenterLineDrawingCalculator.cs" />
-    <Compile Include="TrackDrawing\CenterPointsCalculator.cs" />
-    <Compile Include="TrackDrawing\LayoutSectionData.cs" />
-    <Compile Include="TrackDrawing\RacingLineStuff.cs" />
-    <Compile Include="TrackDrawing\RoadLayoutCalculator.cs" />
-    <Compile Include="TrackDrawing\VergeLayoutCalculator.cs" />
-    <Compile Include="ViewModels\Track\CameraCommandEditingViewModel.cs" />
-    <Compile Include="ViewModels\Track\CameraCommandListViewModel.cs" />
-    <Compile Include="ViewModels\Track\ComputerCarLineHeaderViewModel.cs" />
-    <Compile Include="ViewModels\Track\ComputerCarRacingLineDataListViewModel.cs" />
-    <Compile Include="ViewModels\Track\HorizonEditingViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackSectionDataListViewModel.cs" />
-    <Compile Include="Commands\Tracks\ValidateTrackCommand.cs" />
-    <Compile Include="Commands\TrackView\ZoomTrackViewCommand.cs" />
-    <Compile Include="Converters\EnumBooleanConverter.cs" />
-    <Compile Include="Converters\TreeViewIconEnumToImageConverter.cs" />
-    <Compile Include="AppStuff\FileDialog.cs" />
-    <Compile Include="MainViewModelPasserArounder.cs" />
-    <Compile Include="Mappers\Mapper.cs" />
-    <Compile Include="Mappers\TrackMapper.cs" />
-    <Compile Include="AppStuff\PaletteHelper.cs" />
+    <Compile Include="Features\Application\About\CheckForUpdateCommand.cs" />
+    <Compile Include="Features\Application\Shared\ExitApplicationCommand.cs" />
+    <Compile Include="Features\Application\Shared\HelpDocsCommand.cs" />
+    <Compile Include="Features\Application\About\OpenAboutWindowCommand.cs" />
+    <Compile Include="Features\Application\About\OpenDownloadPageCommand.cs" />
+    <Compile Include="Features\Application\Shared\OpenOtherSiteCommand.cs" />
+    <Compile Include="Features\Application\Shared\ShowMessageCommand.cs" />
+    <Compile Include="Features\TrackDrawing\DrawingLayout.cs" />
+    <Compile Include="Features\TrackDrawing\LayoutToPointsConverter.cs" />
+    <Compile Include="Features\TrackDrawing\PointData.cs" />
+    <Compile Include="Features\TrackDrawing\PointDataObservableCollectionExtensions.cs" />
+    <Compile Include="Features\TrackDrawing\RoadLayoutSectionData.cs" />
+    <Compile Include="Features\TrackDrawing\VergeLayoutSectionData.cs" />
+    <Compile Include="Features\TrackEditing\Camera\CameraCommandMapper.cs" />
+    <Compile Include="Features\TrackEditing\CarSettings\CarSettingsMapper.cs" />
+    <Compile Include="Features\TrackEditing\ComputerCarBehavior\ComputerCarBehaviorMapper.cs" />
+    <Compile Include="Features\TrackEditing\ObjectSettings\ObjectSettingsMapper.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\ObjectShapeMapper.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\RacingLineMapper.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\TrackSectionMapper.cs" />
+    <Compile Include="Features\TrackEditing\TrackSettings\TrackSettingsMapper.cs" />
+    <Compile Include="Features\TrackEditing\WorldLocation\WorldLocationMapper.cs" />
+    <Compile Include="Infrastructure\CommandBase.cs" />
+    <Compile Include="Features\TrackEditing\Camera\AddCameraCommandCommand.cs" />
+    <Compile Include="Features\TrackEditing\Camera\EditCameraCommandCommand.cs" />
+    <Compile Include="Features\TrackEditing\Camera\RemoveCameraCommandCommand.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\AddComputerCarLineSegmentCommand.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\EditComputerCarLineSegmentCommand.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\InsertComputerCarLineSegmentCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\RemoveTrackSectionCommand.cs" />
+    <Compile Include="Features\TrackEditing\ObjectSettings\AddObjectSettingsCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\AddTrackSectionCommandCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\AddTrackSectionCommand.cs" />
+    <Compile Include="Features\TrackConversion\ConvertTrackCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\DeleteTrackSectionCommandCommand.cs" />
+    <Compile Include="Features\TrackEditing\ComputerCarBehavior\EditComputerCarBehaviorCommand.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\EditComputerCarLineHeaderCommand.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\EditBestLineCommand.cs" />
+    <Compile Include="Features\TrackEditing\CarSettings\EditCarSettingsCommand.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditGenericByteDataCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\EditTrackSectionCommandCommand.cs" />
+    <Compile Include="Features\TrackEditing\WorldLocation\EditTrackHeaderSettingsCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSettings\EditTrackLayoutSettingsCommand.cs" />
+    <Compile Include="Features\TrackEditing\ObjectSettings\EditTrackObjectSettingsCommand.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditTrackObjectShapeCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\EditTrackSectionCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\InsertTrackSectionCommand.cs" />
+    <Compile Include="Features\TrackEditing\Horizon\LoadHorizonFromFileCommand.cs" />
+    <Compile Include="Features\Persistence\LoadTrackCommand.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\MoveBestLineSegmentDownCommand.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\MoveBestLineSegmentUpCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\MoveTrackSectionDownCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\MoveTrackSectionUpCommand.cs" />
+    <Compile Include="Features\TrackEditing\Camera\OpenCameraCommandListWindowCommand.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\OpenComputerCarRacingLineWindowCommand.cs" />
+    <Compile Include="Features\TrackEditing\ObjectSettings\OpenObjectSettingsListWindowCommand.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\OpenObjectShapesListWindowCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\OpenPitLaneSectionListWindowCommand.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\OpenTrackSectionListWindowCommand.cs" />
+    <Compile Include="Features\TrackEditing\RelativeLocation.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\RemoveComputerCarLineSegmentCommand.cs" />
+    <Compile Include="Features\TrackEditing\Horizon\SaveHorizonToFileCommand.cs" />
+    <Compile Include="Features\Persistence\SaveTrackCommand.cs" />
+    <Compile Include="Infrastructure\Mapping\PropertyCopier.cs" />
+    <Compile Include="Features\TrackDrawing\CenterLineDrawingCalculator.cs" />
+    <Compile Include="Features\TrackDrawing\CenterPointsCalculator.cs" />
+    <Compile Include="Features\TrackDrawing\LayoutSectionData.cs" />
+    <Compile Include="Features\TrackDrawing\RacingLineStuff.cs" />
+    <Compile Include="Features\TrackDrawing\RoadLayoutCalculator.cs" />
+    <Compile Include="Features\TrackDrawing\VergeLayoutCalculator.cs" />
+    <Compile Include="Features\TrackEditing\Camera\CameraCommandEditingViewModel.cs" />
+    <Compile Include="Features\TrackEditing\Camera\CameraCommandListViewModel.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\ComputerCarLineHeaderViewModel.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\ComputerCarRacingLineDataListViewModel.cs" />
+    <Compile Include="Features\TrackEditing\Horizon\HorizonEditingViewModel.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\TrackSectionDataListViewModel.cs" />
+    <Compile Include="Features\TrackValidation\ValidateTrackCommand.cs" />
+    <Compile Include="Features\TrackDrawing\ZoomTrackViewCommand.cs" />
+    <Compile Include="Features\Main\TreeViewIconEnumToImageConverter.cs" />
+    <Compile Include="Features\Persistence\FileDialog.cs" />
+    <Compile Include="Features\Main\MainViewModelPasserArounder.cs" />
+    <Compile Include="Features\TrackEditing\CarSetup\CarSetupMapper.cs" />
+    <Compile Include="Features\Main\TrackMapper.cs" />
+    <Compile Include="Features\TrackEditing\TrackSettings\PaletteHelper.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="TrackStuff\ComputerCarLineLayoutData.cs" />
-    <Compile Include="TrackDrawing\LayoutCalculator.cs" />
-    <Compile Include="TrackStuff\LayoutConstants.cs" />
-    <Compile Include="TrackStuff\TrackConverter.cs" />
-    <Compile Include="TrackStuff\UnitConvert.cs" />
-    <Compile Include="AppStuff\VersionChecker.cs" />
-    <Compile Include="ViewModels\AboutViewModel.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\TrackConversionViewModel.cs" />
-    <Compile Include="ViewModels\Track\BestLineSegmentViewModel.cs" />
-    <Compile Include="ViewModels\Track\BestLineSegmentViewModelCollection.cs" />
-    <Compile Include="ViewModels\Track\BillboardObjects.cs" />
-    <Compile Include="ViewModels\Track\CarSettingsViewModel.cs" />
-    <Compile Include="ViewModels\Track\CommandDescriptions.cs" />
-    <Compile Include="ViewModels\Track\ComputerCarBehaviorViewModel.cs" />
-    <Compile Include="ViewModels\Track\EditableByteData.cs" />
-    <Compile Include="ViewModels\Track\GenericByteListEditingViewModel.cs" />
-    <Compile Include="ViewModels\Track\SetupViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackCameraCommandViewModelCollection.cs" />
-    <Compile Include="ViewModels\Track\TrackCommandViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackHeaderViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackLayoutViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackObjectSettingsViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackObjectShapeViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackSectionViewModel.cs" />
-    <Compile Include="TrackStuff\TrackSectionLayoutData.cs" />
-    <Compile Include="ViewModels\Track\TrackSectionViewModelCollection.cs" />
-    <Compile Include="ViewModels\Track\TrackSettingsViewModel.cs" />
-    <Compile Include="ViewModels\Track\TrackViewModel.cs" />
-    <Compile Include="ViewModels\Track\TreeViewIconEnum.cs" />
-    <Compile Include="Windows\AboutWindow.xaml.cs">
+    <Compile Include="Features\TrackDrawing\ComputerCarLineLayoutData.cs" />
+    <Compile Include="Features\TrackDrawing\LayoutCalculator.cs" />
+    <Compile Include="Features\TrackDrawing\LayoutConstants.cs" />
+    <Compile Include="Features\TrackConversion\TrackConverter.cs" />
+    <Compile Include="Features\TrackEditing\UnitConvert.cs" />
+    <Compile Include="Features\Application\About\VersionChecker.cs" />
+    <Compile Include="Features\Application\About\AboutViewModel.cs" />
+    <Compile Include="Infrastructure\BaseViewModel.cs" />
+    <Compile Include="Features\Main\MainViewModel.cs" />
+    <Compile Include="Features\TrackConversion\TrackConversionViewModel.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\BestLineSegmentViewModel.cs" />
+    <Compile Include="Features\TrackEditing\RacingLine\BestLineSegmentViewModelCollection.cs" />
+    <Compile Include="Features\TrackEditing\ObjectSettings\BillboardObjects.cs" />
+    <Compile Include="Features\TrackEditing\CarSettings\CarSettingsViewModel.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\TrackSectionCommandDescriptions.cs" />
+    <Compile Include="Features\TrackEditing\ComputerCarBehavior\ComputerCarBehaviorViewModel.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditableByteData.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\GenericByteListEditingViewModel.cs" />
+    <Compile Include="Features\TrackEditing\CarSetup\SetupViewModel.cs" />
+    <Compile Include="Features\TrackEditing\Camera\TrackCameraCommandViewModelCollection.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\TrackSectionCommandViewModel.cs" />
+    <Compile Include="Features\TrackEditing\WorldLocation\TrackHeaderViewModel.cs" />
+    <Compile Include="Features\TrackDrawing\TrackLayoutViewModel.cs" />
+    <Compile Include="Features\TrackEditing\ObjectSettings\TrackObjectSettingsViewModel.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\TrackObjectShapeViewModel.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\TrackSectionViewModel.cs" />
+    <Compile Include="Features\TrackDrawing\TrackSectionLayoutData.cs" />
+    <Compile Include="Features\TrackEditing\TrackSection\TrackSectionViewModelCollection.cs" />
+    <Compile Include="Features\TrackEditing\TrackSettings\TrackSettingsViewModel.cs" />
+    <Compile Include="Features\Main\TrackViewModel.cs" />
+    <Compile Include="Features\Main\TreeViewIconEnum.cs" />
+    <Compile Include="Features\Application\About\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\CameraCommandDetailsWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\Camera\CameraCommandDetailsWindow.xaml.cs">
       <DependentUpon>CameraCommandDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\CarSetupWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\CarSetup\CarSetupWindow.xaml.cs">
       <DependentUpon>CarSetupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MainTreeWindow.xaml.cs">
+    <Compile Include="Features\Main\MainTreeWindow.xaml.cs">
       <DependentUpon>MainTreeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\CameraCommandListWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\Camera\CameraCommandListWindow.xaml.cs">
       <DependentUpon>CameraCommandListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\ComputerCarRacingLineWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\RacingLine\ComputerCarRacingLineWindow.xaml.cs">
       <DependentUpon>ComputerCarRacingLineWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\HorizonWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\Horizon\HorizonWindow.xaml.cs">
       <DependentUpon>HorizonWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\ObjectSettingsListWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\ObjectSettings\ObjectSettingsListWindow.xaml.cs">
       <DependentUpon>ObjectSettingsListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\ObjectShapesListWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\ObjectShapes\ObjectShapesListWindow.xaml.cs">
       <DependentUpon>ObjectShapesListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackBestLineDetailsWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\RacingLine\TrackBestLineDetailsWindow.xaml.cs">
       <DependentUpon>TrackBestLineDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackCommandDetailsWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\TrackSection\TrackCommandDetailsWindow.xaml.cs">
       <DependentUpon>TrackCommandDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Tools\TrackConversionWindow.xaml.cs">
+    <Compile Include="Features\TrackConversion\TrackConversionWindow.xaml.cs">
       <DependentUpon>TrackConversionWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackGenericByteListDetailsWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\ObjectShapes\TrackGenericByteListDetailsWindow.xaml.cs">
       <DependentUpon>TrackGenericByteListDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackGenericByteValueDetailsWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\ObjectShapes\TrackGenericByteValueDetailsWindow.xaml.cs">
       <DependentUpon>TrackGenericByteValueDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\CarSettingsWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\CarSettings\CarSettingsWindow.xaml.cs">
       <DependentUpon>CarSettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\ComputerCarLineHeaderWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\RacingLine\ComputerCarLineHeaderWindow.xaml.cs">
       <DependentUpon>ComputerCarLineHeaderWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\ComputerCarBehaviorWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\ComputerCarBehavior\ComputerCarBehaviorWindow.xaml.cs">
       <DependentUpon>ComputerCarBehaviorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackHeaderWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\WorldLocation\TrackHeaderWindow.xaml.cs">
       <DependentUpon>TrackHeaderWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackLayoutWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\TrackSettings\TrackLayoutWindow.xaml.cs">
       <DependentUpon>TrackLayoutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackObjectSettingsDetailsWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\ObjectSettings\TrackObjectSettingsDetailsWindow.xaml.cs">
       <DependentUpon>TrackObjectSettingsDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackObjectShapeDetailsWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\ObjectShapes\TrackObjectShapeDetailsWindow.xaml.cs">
       <DependentUpon>TrackObjectShapeDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackSectionDetailsWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\TrackSection\TrackSectionDetailsWindow.xaml.cs">
       <DependentUpon>TrackSectionDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Tools\TrackValidationWindow.xaml.cs">
+    <Compile Include="Features\TrackValidation\TrackValidationWindow.xaml.cs">
       <DependentUpon>TrackValidationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\PitLaneSectionListWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\TrackSection\PitLaneSectionListWindow.xaml.cs">
       <DependentUpon>PitLaneSectionListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Track\TrackSectionListWindow.xaml.cs">
+    <Compile Include="Features\TrackEditing\TrackSection\TrackSectionListWindow.xaml.cs">
       <DependentUpon>TrackSectionListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\AboutWindow.xaml">
+    <Page Include="Features\Application\About\AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Track\CameraCommandDetailsWindow.xaml">
+    <Page Include="Features\TrackEditing\Camera\CameraCommandDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\CarSetupWindow.xaml">
+    <Page Include="Features\TrackEditing\CarSetup\CarSetupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MainTreeWindow.xaml">
+    <Page Include="Features\Main\MainTreeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Track\CameraCommandListWindow.xaml">
+    <Page Include="Features\TrackEditing\Camera\CameraCommandListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Track\ComputerCarRacingLineWindow.xaml">
+    <Page Include="Features\TrackEditing\RacingLine\ComputerCarRacingLineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Track\HorizonWindow.xaml">
+    <Page Include="Features\TrackEditing\Horizon\HorizonWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Track\ObjectSettingsListWindow.xaml">
+    <Page Include="Features\TrackEditing\ObjectSettings\ObjectSettingsListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Track\ObjectShapesListWindow.xaml">
+    <Page Include="Features\TrackEditing\ObjectShapes\ObjectShapesListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Track\TrackBestLineDetailsWindow.xaml">
+    <Page Include="Features\TrackEditing\RacingLine\TrackBestLineDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\TrackCommandDetailsWindow.xaml">
+    <Page Include="Features\TrackEditing\TrackSection\TrackCommandDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Tools\TrackConversionWindow.xaml">
+    <Page Include="Features\TrackConversion\TrackConversionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Track\TrackGenericByteListDetailsWindow.xaml">
+    <Page Include="Features\TrackEditing\ObjectShapes\TrackGenericByteListDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\TrackGenericByteValueDetailsWindow.xaml">
+    <Page Include="Features\TrackEditing\ObjectShapes\TrackGenericByteValueDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\CarSettingsWindow.xaml">
+    <Page Include="Features\TrackEditing\CarSettings\CarSettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\ComputerCarLineHeaderWindow.xaml">
+    <Page Include="Features\TrackEditing\RacingLine\ComputerCarLineHeaderWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\ComputerCarBehaviorWindow.xaml">
+    <Page Include="Features\TrackEditing\ComputerCarBehavior\ComputerCarBehaviorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\TrackHeaderWindow.xaml">
+    <Page Include="Features\TrackEditing\WorldLocation\TrackHeaderWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\TrackLayoutWindow.xaml">
+    <Page Include="Features\TrackEditing\TrackSettings\TrackLayoutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Track\TrackObjectSettingsDetailsWindow.xaml">
+    <Page Include="Features\TrackEditing\ObjectSettings\TrackObjectSettingsDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\TrackObjectShapeDetailsWindow.xaml">
+    <Page Include="Features\TrackEditing\ObjectShapes\TrackObjectShapeDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\TrackSectionDetailsWindow.xaml">
+    <Page Include="Features\TrackEditing\TrackSection\TrackSectionDetailsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Tools\TrackValidationWindow.xaml">
+    <Page Include="Features\TrackValidation\TrackValidationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Track\PitLaneSectionListWindow.xaml">
+    <Page Include="Features\TrackEditing\TrackSection\PitLaneSectionListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\Track\TrackSectionListWindow.xaml">
+    <Page Include="Features\TrackEditing\TrackSection\TrackSectionListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

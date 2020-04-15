@@ -1,9 +1,8 @@
 ﻿using System.IO;
 using ArgData;
 using ArgData.Entities;
-using ArgTrack.AppStuff;
-using ArgTrack.Commands.Tracks;
-using ArgTrack.ViewModels;
+using ArgTrack.Features.Main;
+using ArgTrack.Features.Persistence;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;
@@ -114,9 +113,9 @@ namespace ArgTrack.Tests
 
             var originalTrack = new TrackReader().Read(originalPath);
 
-            var originalViewModel = Mappers.TrackMapper.MapEntireTrackToViewModel(originalTrack);
+            var originalViewModel = TrackMapper.MapEntireTrackToViewModel(originalTrack);
 
-            var newTrack = Mappers.TrackMapper.MapEntireTrackViewModelToTrack(originalViewModel);
+            var newTrack = TrackMapper.MapEntireTrackViewModelToTrack(originalViewModel);
 
             return new TrackPair
             {
