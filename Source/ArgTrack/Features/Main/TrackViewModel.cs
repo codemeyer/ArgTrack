@@ -55,11 +55,27 @@ namespace ArgTrack.Features.Main
             set { SetProperty(ref _trackSections, value, () => TrackSections); }
         }
 
+
         public void RecalculateLayout()
         {
-            var layoutVM = TrackLayoutViewModel.FromTrackViewModel(this);
+            // save for restoring
+            var currentZoom = MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.ZoomFactor;
+            var currentCenter = MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.CenterPoint;
 
-            MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel = layoutVM;
+            var settings = new TrackDrawingElementsSettings
+            {
+                DrawTrack = MainViewModelPasserArounder.MainViewModel.DrawTrack,
+                DrawPitLane = MainViewModelPasserArounder.MainViewModel.DrawPitLane,
+                DrawVerges = MainViewModelPasserArounder.MainViewModel.DrawVerges
+            };
+
+            var layoutViewModel = TrackLayoutViewModel.FromTrackViewModel(this, settings);
+
+            // restore
+            layoutViewModel.CenterPoint = currentCenter;
+            layoutViewModel.ZoomFactor = currentZoom;
+
+            MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel = layoutViewModel;
         }
 
 

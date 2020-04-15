@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using ArgData;
+﻿using ArgData;
 using ArgTrack.Features.Main;
 using ArgTrack.Features.TrackDrawing;
 using ArgTrack.Infrastructure;
@@ -56,16 +54,20 @@ namespace ArgTrack.Features.Persistence
         {
             var track = new TrackReader().Read(path);
 
-            var viewModel = TrackMapper.MapEntireTrackToViewModel(track);
+            var trackViewModel = TrackMapper.MapEntireTrackToViewModel(track);
+            TrackViewModelPasserArounder.TrackViewModel = trackViewModel;
 
-            TrackViewModelPasserArounder.TrackViewModel = viewModel;
-            MainViewModelPasserArounder.MainViewModel.HasLoadedTrack = true;
-            MainViewModelPasserArounder.MainViewModel.TrackViewModel = viewModel;
+            var mainViewModel = MainViewModelPasserArounder.MainViewModel;
+            mainViewModel.HasLoadedTrack = true;
+            mainViewModel.DrawTrack = true;
+            mainViewModel.DrawPitLane = true;
+            mainViewModel.DrawVerges = false;
+            mainViewModel.TrackViewModel = trackViewModel;
 
             // perhaps should be initialized elsewhere?
-            var layoutVM = TrackLayoutViewModel.FromTrackViewModel(viewModel);
+            var layoutViewModel = TrackLayoutViewModel.FromTrackViewModel(trackViewModel, new TrackDrawingElementsSettings());
 
-            MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel = layoutVM;
+            MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel = layoutViewModel;
         }
     }
 }

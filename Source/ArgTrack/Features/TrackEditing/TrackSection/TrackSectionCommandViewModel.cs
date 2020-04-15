@@ -297,7 +297,6 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
 
         private void TrackCommand80Argument1ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            // LOLSOB?
             if (e.PropertyName == "Value")
             {
                 Offset = Value;

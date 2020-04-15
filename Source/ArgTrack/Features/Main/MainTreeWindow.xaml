@@ -70,7 +70,7 @@
                     <RowDefinition Height="140"></RowDefinition>-->
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="0,10,0,0" Visibility="{Binding VisibleAtStartup}">
+                <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="0,48,0,0" Visibility="{Binding VisibleAtStartup}">
                     No track has been loaded!
                 </TextBlock>
                 <TreeView Grid.Row="0" Margin="0" Visibility="{Binding VisibleWhenTrackHasBeenLoaded}"
@@ -264,17 +264,22 @@
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"></GridSplitter>
 
-            <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0,10,0,0" Visibility="{Binding VisibleAtStartup}">
+            <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0,50,0,0" Visibility="{Binding VisibleAtStartup}">
                 No track has been loaded!
             </TextBlock>
-            <Grid Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="GridGrid" LayoutUpdated="GridGrid_OnLayoutUpdated"
+            <StackPanel Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="32" Margin="0,0,18,0"
+                        Background="#ddd" Orientation="Horizontal" ZIndex="1" Visibility="{Binding VisibleWhenTrackHasBeenLoaded}">
+                <TextBlock Margin="4,8">Draw</TextBlock>
+                <CheckBox Margin="8,8,16,0" IsChecked="{Binding DrawTrack}">Track</CheckBox>
+                <CheckBox Margin="2,8,16,0" IsChecked="{Binding DrawPitLane}">Pit Lane</CheckBox>
+                <CheckBox Margin="2,8,16,0" IsChecked="{Binding DrawVerges}">Verges</CheckBox>
+                <Button Width="50" Height="22" Margin="32,2,16,2" Background="#eee" Command="{Binding TrackLayoutViewModel.RedrawViewCommand}" CommandParameter="{Binding TrackLayoutViewModel}">Refresh</Button>
+                <Button Width="26" Height="22" Margin="2" Background="#eee" Command="{Binding TrackLayoutViewModel.ZoomTrackViewInCommand}" CommandParameter="{Binding TrackLayoutViewModel}">+</Button>
+                <Button Width="26" Height="22" Margin="2" Background="#eee" Command="{Binding TrackLayoutViewModel.ZoomTrackViewOutCommand}" CommandParameter="{Binding TrackLayoutViewModel}">-</Button>
+            </StackPanel>
+            <Grid Grid.Column="2" Margin="0,30,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="GridGrid" LayoutUpdated="GridGrid_OnLayoutUpdated"
                   DataContext="{Binding TrackLayoutViewModel}" Background="{Binding SurroundingAreaColor}">
-                <StackPanel Width="48" HorizontalAlignment="Right" VerticalAlignment="Top" Height="25" Margin="0,0,18,0"
-                            Background="#aaa" Orientation="Horizontal" ZIndex="1">
-                    <!--Visibility="{Binding VisibleWhenTrackHasBeenLoaded}"> is not available at this level... -->
-                    <Button Width="20" Height="20" Margin="2" Command="{Binding ZoomTrackViewInCommand}" CommandParameter="{Binding}">+</Button>
-                    <Button Width="20" Height="20" Margin="2" Command="{Binding ZoomTrackViewOutCommand}" CommandParameter="{Binding}">-</Button>
-                </StackPanel>
+
                 <ScrollBar Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,0,18"
                            Minimum="{Binding ScrollMinY}" Maximum="{Binding ScrollMaxY}"
                            ViewportSize="{Binding ScrollHeight}" Value="{Binding OffsetY}">

@@ -14,7 +14,14 @@ namespace ArgTrack.Features.TrackDrawing
     /// </summary>
     public class TrackLayoutViewModel : BaseViewModel
     {
-        public static TrackLayoutViewModel FromTrackViewModel(TrackViewModel trackViewModel)
+        public TrackLayoutViewModel(MainViewModel parent)
+        {
+            ParentMain = parent;
+        }
+
+        public MainViewModel ParentMain { get; set; }
+
+        public static TrackLayoutViewModel FromTrackViewModel(TrackViewModel trackViewModel, TrackDrawingElementsSettings settings)
         {
             var centerPoints = CenterPointsCalculator.CalculateCenterPointsPerSection(trackViewModel);
 
@@ -27,13 +34,28 @@ namespace ArgTrack.Features.TrackDrawing
 
             var centrios = CenterPointsCalculator.CalculateCenterPointsPerSectionOneLengthEach(trackViewModel);
             var roadSectionsTight = RoadLayoutCalculator.CalculateRoadSections(centrios.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
-            // TODO: use centrios and roadSectionsTight to calculate the verges?
-            var vergePoints = VergeLayoutCalculator.Calculate(roadSections, roadSectionsTight);
-            drawingPoints.AddRange(vergePoints);
-            drawingPoints.AddRange(roadPoints);
 
-            var pitPoints = RoadLayoutCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, RoadLayoutCalculator.PitLaneDrawingLayout);
-            drawingPoints.AddRange(pitPoints);
+            var vergePoints = VergeLayoutCalculator.Calculate(roadSections, roadSectionsTight);
+
+            if (settings.DrawVerges)
+            {
+                drawingPoints.AddRange(vergePoints);
+            }
+
+            if (settings.DrawTrack)
+            {
+                drawingPoints.AddRange(roadPoints);
+            }
+
+            if (settings.DrawPitLane)
+            {
+                var pitPoints = RoadLayoutCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, RoadLayoutCalculator.PitLaneDrawingLayout);
+                drawingPoints.AddRange(pitPoints);
+            }
+
+
+            var trackSideObjects = TracksideObjectsCalculator.Calculate(roadSections, roadSectionsTight, TrackViewModelPasserArounder.TrackViewModel.TrackObjectSettings);
+            //drawingPoints.AddRange(trackSideObjects);
 
             // light blue center line with no arcs, only connects each section start point to the end point
             var centerLineStraight = CenterLineDrawingCalculator.CalculateDrawablePointsStraightUp(centerPoints.TrackSections);
@@ -44,31 +66,29 @@ namespace ArgTrack.Features.TrackDrawing
             //drawingPoints.AddRange(centerLineArced);
 
 
-
-            // add all of the points to the TrackData? I guess cause that's what's being rendered on screen?
-            var layoutVM = new TrackLayoutViewModel();
-            layoutVM.TrackData = drawingPoints;
+            var layoutViewModel = new TrackLayoutViewModel(MainViewModelPasserArounder.MainViewModel)
+            {
+                TrackData = drawingPoints
+            };
 
             if (trackViewModel.TrackSettings.SurroundingArea == SurroundingArea.Green)
             {
-                layoutVM.SurroundingAreaColor = "#5E8136";
+                layoutViewModel.SurroundingAreaColor = "#5E8136";
             }
             else
             {
-                layoutVM.SurroundingAreaColor = "#818274";
+                layoutViewModel.SurroundingAreaColor = "#818274";
             }
 
-            // TODO: smarter way of recalculating?
-            // TODO: ability to keep the zoom level and position when recalculating?
 
-            layoutVM.RecalculateViewAndScrollbars();
+            layoutViewModel.RecalculateViewAndScrollbars();
 
 
-            return layoutVM;
+            return layoutViewModel;
         }
 
 
-        // TODO: throttle the recalculation?
+        // TODO: throttle the recalculation? handle restore of zoom etc here?
 
         public void RecalculateViewAndScrollbars()
         {
@@ -387,5 +407,6 @@ namespace ArgTrack.Features.TrackDrawing
 
         public ICommand ZoomTrackViewInCommand { get; } = new ZoomTrackViewCommand(0.5);
         public ICommand ZoomTrackViewOutCommand { get; } = new ZoomTrackViewCommand(-0.5);
+        public ICommand RedrawViewCommand { get; } = new RedrawViewCommand();
     }
 }

@@ -77,7 +77,10 @@
     <Compile Include="Features\TrackDrawing\LayoutToPointsConverter.cs" />
     <Compile Include="Features\TrackDrawing\PointData.cs" />
     <Compile Include="Features\TrackDrawing\PointDataObservableCollectionExtensions.cs" />
+    <Compile Include="Features\TrackDrawing\RedrawViewCommand.cs" />
     <Compile Include="Features\TrackDrawing\RoadLayoutSectionData.cs" />
+    <Compile Include="Features\TrackDrawing\TrackDrawingElementsSettings.cs" />
+    <Compile Include="Features\TrackDrawing\TracksideObjectsCalculator.cs" />
     <Compile Include="Features\TrackDrawing\VergeLayoutSectionData.cs" />
     <Compile Include="Features\TrackEditing\Camera\CameraCommandMapper.cs" />
     <Compile Include="Features\TrackEditing\CarSettings\CarSettingsMapper.cs" />

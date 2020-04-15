@@ -192,23 +192,6 @@ namespace ArgTrack.Features.TrackDrawing
 
         private static PointCollection BuildSectionPointCollectionFromRoadLayout(RoadLayoutSectionData layoutSection)
         {
-            // TODO: calculate stuff completely outside of the object,
-            // we will need to navigate the list of sections to draw properly!
-            // or is that only needed when calculating the verges? yeah nah yeah!
-
-            // straight
-            //
-            //   1      2
-            //   x^^^---x
-            //   |      |
-            //   |      |
-            //   |      |
-            //   x***---x
-            //  0/4     3
-            //
-            // *** = startwidth
-            // ^^^ = endwidth
-
             PointCollection points;
 
             if (layoutSection.Curvature == 0)

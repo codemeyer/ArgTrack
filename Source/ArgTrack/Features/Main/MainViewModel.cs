@@ -60,6 +60,12 @@ namespace ArgTrack.Features.Main
         {
             VisibleAtStartup = HasLoadedTrack ? Visibility.Hidden : Visibility.Visible;
             VisibleWhenTrackHasBeenLoaded = HasLoadedTrack ? Visibility.Visible : Visibility.Hidden;
+
+            if (TrackLayoutViewModel != null)
+            {
+                //TrackLayoutViewModel.VisibleAtStartup = VisibleAtStartup;
+                //TrackLayoutViewModel.VisibleWhenTrackHasBeenLoaded = VisibleAtStartup;
+            }
         }
 
         private Visibility _visibleAtStartup = Visibility.Visible;
@@ -94,6 +100,9 @@ namespace ArgTrack.Features.Main
         }
 
 
+
+        // this is regenerated every time stuff is redrawn, so can't have too much stuff in the TrackLayoutViewModel...
+
         private TrackLayoutViewModel _trackLayoutViewModel;
 
         public TrackLayoutViewModel TrackLayoutViewModel
@@ -101,6 +110,52 @@ namespace ArgTrack.Features.Main
             get { return _trackLayoutViewModel; }
             set { SetProperty(ref _trackLayoutViewModel, value, () => TrackLayoutViewModel); }
         }
+
+
+        // not sure this is the best place for this...
+
+        private bool _drawTrack = true;
+
+        public bool DrawTrack
+        {
+            get { return _drawTrack; }
+            set
+            {
+                if (SetProperty(ref _drawTrack, value, () => DrawTrack))
+                {
+                    TrackViewModel?.RecalculateLayout();
+                }
+            }
+        }
+
+        private bool _drawPitLane = true;
+
+        public bool DrawPitLane
+        {
+            get { return _drawPitLane; }
+            set
+            {
+                if (SetProperty(ref _drawPitLane, value, () => DrawPitLane))
+                {
+                    TrackViewModel?.RecalculateLayout();
+                }
+            }
+        }
+
+        private bool _drawVerges;
+
+        public bool DrawVerges
+        {
+            get { return _drawVerges; }
+            set
+            {
+                if (SetProperty(ref _drawVerges, value, () => DrawVerges))
+                {
+                    TrackViewModel?.RecalculateLayout();
+                }
+            }
+        }
+
 
 
         public string Error { get; }
