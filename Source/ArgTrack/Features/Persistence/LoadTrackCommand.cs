@@ -41,11 +41,11 @@ namespace ArgTrack.Features.Persistence
             {
                 LoadTrack(path);
             }
-            catch (Exception)
+            catch (System.Exception)
             {
-                MessageBox.Show(
+                System.Windows.MessageBox.Show(
                     "An error occurred when loading the track. Make sure that the specified file is an F1GP track file and try again.",
-                    "ArgTrack", MessageBoxButton.OK, MessageBoxImage.Error);
+                    "ArgTrack", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
 #endif
         }

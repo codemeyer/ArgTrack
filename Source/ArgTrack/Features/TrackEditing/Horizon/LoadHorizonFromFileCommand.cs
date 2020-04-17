@@ -30,7 +30,9 @@ namespace ArgTrack.Features.TrackEditing.Horizon
 
             if (fileInfo.Length < 4096)
             {
-                // TODO: display message to user
+                System.Windows.MessageBox.Show(
+                    "The selected file is too small. A horizon file must be at least 4 kB.",
+                    "ArgTrack", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                 return;
             }
 
