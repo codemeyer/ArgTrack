@@ -45,6 +45,7 @@ Released 2020-04-17 - [Download](/downloads/argtrack/ArgTrack-0.4.zip)
 - Initial drawing of track verges (disabled by default)
 - Keyboard shortcuts for zooming in and out, Ctrl+ and Ctrl-
 - Fix GP2 track conversion bug (now uses kerb colors from template F1GP track instead)
+- _Known issue: For some tracks, verges are drawn across the entire inner area_
 - _Known issue: Track view occasionally ends up outside scrollable area_
 - _Known issue: Left-hand corner with width change is drawn incorrectly_
 - _Known issue: Some input validation missing meaning that it's possible to save broken track files_
