@@ -4,10 +4,10 @@ title: "ArgTrack: Download"
 
 # Download
 
-The latest version is **0.3**, released on 2020-04-08.
+The latest version is **0.4**, released on 2020-04-17.
 
 <p>
-    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.3.zip">Download</a>
+    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.4.zip">Download</a>
 </p>
 
 <br />
@@ -35,6 +35,21 @@ be found here:
 Below are the release notes for each released version of ArgTrack.
 
 
+### 0.4
+
+Released 2020-04-17 - [Download](/downloads/argtrack/ArgTrack-0.4.zip)
+
+- Track is redrawn after layout-affecting changes
+- View stays somewhat more the same after redrawing
+- Toolbar that allows toggling what is drawn (track, pit lane, verges)
+- Initial drawing of track verges (disabled by default)
+- Keyboard shortcuts for zooming in and out, Ctrl+ and Ctrl-
+- Fix GP2 track conversion bug (now uses kerb colors from template F1GP track instead)
+- _Known issue: Track view occasionally ends up outside scrollable area_
+- _Known issue: Left-hand corner with width change is drawn incorrectly_
+- _Known issue: Some input validation missing meaning that it's possible to save broken track files_
+
+
 ### 0.3
 
 Released 2020-04-08 - [Download](/downloads/argtrack/ArgTrack-0.3.zip)
@@ -46,10 +61,6 @@ Released 2020-04-08 - [Download](/downloads/argtrack/ArgTrack-0.3.zip)
 - Ability to edit [computer car behavior](/argtrack/screens/computer-car-behavior-window/)
 - Ability to edit [track cameras](/argtrack/screens/camera-list-window/)
 - Restructured, extended and improved documentation - press F1 on any screen for help
-- _Known issue: Track view occasionally ends up outside scrollable area_
-- _Known issue: Track view not always redrawn after editing layout-affecting properties_
-- _Known issue: Left-hand corner with width change is drawn incorrectly_
-- _Known issue: Some input validation missing meaning that it's possible to save broken track files_
 
 
 ### 0.2

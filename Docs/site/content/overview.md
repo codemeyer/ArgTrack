@@ -49,9 +49,19 @@ you to manipulate the various data that describes the track.
 
 <img src="/argtrack/images/argtrack-main-focus-layout.png" alt="ArgTrack main window" class="img-fluid" />
 
-The right part of the screen will display a track drawing. It currently only draws the track and the pit lane,
-not the verges, track side objects or anything else.
+The right part of the screen will display a track drawing. By default it draws the track and the pit lane.
 
-You can zoom in and out by using the + and - buttons in the top right corner.
+Using the toolbar at the top, you can toggle what is drawn:
+
+- Track
+- Pit Lane
+- Verges
+
+The verge drawing is preliminary functionality and needs some more improvements. Therefore it is turned off
+by default.
+
+The Refresh button will force a redraw of the content.
+
+You can zoom in and out by using the + and - buttons in the top right corner, or by using Ctrl+ and Ctrl-.
 
 If the content does not fit the screen you can use the scrollbars to look around.

@@ -28,5 +28,13 @@ user interface you are currently viewing.
             <td>Ctrl + S</td>
             <td>Save track to disk</td>
         </tr>
+        <tr>
+            <td>Ctrl + +</td>
+            <td>Zoom in on track view</td>
+        </tr>
+        <tr>
+            <td>Ctrl + -</td>
+            <td>Zoom out on track view</td>
+        </tr>
     </tbody>
 </table>
