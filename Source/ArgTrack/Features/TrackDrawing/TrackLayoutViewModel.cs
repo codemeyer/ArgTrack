@@ -61,6 +61,9 @@ namespace ArgTrack.Features.TrackDrawing
             //var centerLineStraight = CenterLineDrawingCalculator.CalculateDrawablePointsStraightUp(centerPoints.TrackSections);
             //drawingPoints.AddRange(centerLineStraight);
 
+            //var circleCenterIndicators = CircleCenterIndicatorDrawing.DrawCircleCenterIndicators(centerPoints.TrackSections);
+            //drawingPoints.AddRange(circleCenterIndicators);
+
             // purple arced center line
             //var centerLineArced = CenterLineDrawingCalculator.CalculateDrawablePointsWithArcs(centerPoints.TrackSections);
             //drawingPoints.AddRange(centerLineArced);

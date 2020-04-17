@@ -50,6 +50,10 @@ namespace ArgTrack.Features.TrackDrawing
 
             foreach (var tobj in l1)
             {
+                // TODO: refactor this using the new Geometry functions,
+                // TODO: see CircleCenterDrawingIndicator for inspiration...
+
+
                 var points = new PointCollection();
                 var sectionCenter = roadSectionsOneEach[tobj.SectionIndex];
 

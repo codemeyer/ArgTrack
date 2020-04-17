@@ -25,9 +25,6 @@ namespace ArgTrack.Features.TrackDrawing
 
     public static class CenterPointsCalculator
     {
-
-
-
         // return something that contains a list of "sections" with
         // - StartPosX
         // - StartPosY
@@ -44,20 +41,20 @@ namespace ArgTrack.Features.TrackDrawing
             double dPosY = 0;
             int startAngle = track.TrackHeader.FirstSectionAngle;
 
-            var trackSections = new List<LayoutSectionData>();
+            var layoutSections = new List<LayoutSectionData>();
 
-            foreach (var section in track.TrackSections)
+            foreach (var trackSection in track.TrackSections)
             {
-                var layDoo = CalculateLayoutCenterLine(dPosX, dPosY, startAngle, section.Length, section.Curvature);
+                var layoutSection = CalculateLayoutCenterLine(dPosX, dPosY, startAngle, trackSection.Length, trackSection.Curvature);
 
                 // start stuff for NEXT section
-                dPosX = layDoo.EndPosition.X;
-                dPosY = layDoo.EndPosition.Y;
-                startAngle = layDoo.EndAngle;
+                dPosX = layoutSection.EndPosition.X;
+                dPosY = layoutSection.EndPosition.Y;
+                startAngle = layoutSection.EndAngle;
 
-                layDoo.RelatedSection = section;
+                layoutSection.RelatedSection = trackSection;
 
-                trackSections.Add(layDoo);
+                layoutSections.Add(layoutSection);
             }
 
 
@@ -71,7 +68,7 @@ namespace ArgTrack.Features.TrackDrawing
 
             if (pitLaneStartTrackSectionIndex >= 0)
             {
-                var startSection = trackSections[pitLaneStartTrackSectionIndex];
+                var startSection = layoutSections[pitLaneStartTrackSectionIndex];
 
                 startAngle = startSection.StartAngle;
 
@@ -109,7 +106,7 @@ namespace ArgTrack.Features.TrackDrawing
 
             return new CenterPointsCalculationResult
             {
-                TrackSections = trackSections,
+                TrackSections = layoutSections,
                 PitLaneSections = pitLaneSections
             };
         }

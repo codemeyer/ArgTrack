@@ -3,7 +3,6 @@
 namespace ArgTrack.Features.TrackDrawing
 {
     // TODO: name! more than just point - ShapeData ?
-
     public class PointData
     {
         public PointData()

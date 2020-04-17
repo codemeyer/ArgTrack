@@ -102,7 +102,6 @@ namespace ArgTrack.Tests
             newPoint.Y.Should().BeApproximately(-10.0, Tolerance);
         }
 
-
         [Fact]
         public void GetPointPerpendicularLegacy_NorthFacing_Source_Move_Huh_Y()
         {
@@ -115,8 +114,6 @@ namespace ArgTrack.Tests
             newPoint.X.Should().BeApproximately(10.0, Tolerance);
             newPoint.Y.Should().BeApproximately(0.0, Tolerance);
         }
-
-
 
 
         [Fact]
@@ -171,7 +168,6 @@ namespace ArgTrack.Tests
             newPoint.Y.Should().BeApproximately(10.0, Tolerance);
         }
 
-
         [Fact]
         public void GetPointPerpendicular_NorthEastFacing_Source_Move_Increases_X_And_Decreases_Y()
         {
@@ -186,7 +182,6 @@ namespace ArgTrack.Tests
         }
 
 
-
         [Fact]
         public void GetRadiusForCurvature()
         {
@@ -199,7 +194,7 @@ namespace ArgTrack.Tests
 
 
         [Fact]
-        public void GetLegacyCircleCenter_Phoenix_Turn1_Part1()
+        public void GetLegacyCircleCenter_Phoenix_Turn1_RightHand_Part1()
         {
             var position = new Point(0, 126);
             double radius = 3.8192524168694444;
@@ -212,7 +207,7 @@ namespace ArgTrack.Tests
         }
 
         [Fact]
-        public void GetLegacyCircleCenter_Phoenix_Turn1_Part2()
+        public void GetLegacyCircleCenter_Phoenix_Turn1_RightHand_Part2()
         {
             var position = new Point(0.51180, 127.9098);
             double radius = 3.8192524168694444;
@@ -224,9 +219,23 @@ namespace ArgTrack.Tests
             circleCenter.Y.Should().BeApproximately(126, Tolerance);
         }
 
+        [Fact]
+        public void GetLegacyCircleCenter_Phoenix_Turn2_LeftHand_Part1()
+        {
+            var position = new Point(41.819984050768213, 129.81196593796017);
+            double radius = -3.8192524168694444;
+            double angle = -1.5709880743933822;   // legacy east
+
+            var circleCenter = Geometry.GetLegacyCircleCenter(position, radius, angle);
+
+            circleCenter.X.Should().BeApproximately(41.82071, Tolerance);
+            circleCenter.Y.Should().BeApproximately(133.6312, Tolerance);
+        }
+
+
 
         [Fact]
-        public void GetLegacyCurveEndpoint_Something()
+        public void GetLegacyCurveEndpoint()
         {
             var circleCenterPosition = new Point(3.8192524168694368, 126);
             var radius = 3.8192524168694444;

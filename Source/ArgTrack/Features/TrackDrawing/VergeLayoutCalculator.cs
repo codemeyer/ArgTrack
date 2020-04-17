@@ -220,7 +220,6 @@ namespace ArgTrack.Features.TrackDrawing
                     throw new ArgumentOutOfRangeException(nameof(vergeSide), vergeSide, null);
             }
 
-
             double diffStartX = Math.Cos(Math.PI - vergeLayout.StartAngle * LayoutConstants.AngleScaleRadians) * fullTrackStartWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
             double diffStartY = Math.Sin(Math.PI - vergeLayout.StartAngle * LayoutConstants.AngleScaleRadians) * fullTrackStartWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
 
