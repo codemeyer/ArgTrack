@@ -54,15 +54,15 @@ namespace ArgTrack.Features.TrackDrawing
             }
 
 
-            var trackSideObjects = TracksideObjectsCalculator.Calculate(roadSections, roadSectionsTight, TrackViewModelPasserArounder.TrackViewModel.TrackObjectSettings);
+            //var trackSideObjects = TracksideObjectsCalculator.Calculate(roadSections, roadSectionsTight, TrackViewModelPasserArounder.TrackViewModel.TrackObjectSettings);
             //drawingPoints.AddRange(trackSideObjects);
 
             // light blue center line with no arcs, only connects each section start point to the end point
-            var centerLineStraight = CenterLineDrawingCalculator.CalculateDrawablePointsStraightUp(centerPoints.TrackSections);
+            //var centerLineStraight = CenterLineDrawingCalculator.CalculateDrawablePointsStraightUp(centerPoints.TrackSections);
             //drawingPoints.AddRange(centerLineStraight);
 
             // purple arced center line
-            var centerLineArced = CenterLineDrawingCalculator.CalculateDrawablePointsWithArcs(centerPoints.TrackSections);
+            //var centerLineArced = CenterLineDrawingCalculator.CalculateDrawablePointsWithArcs(centerPoints.TrackSections);
             //drawingPoints.AddRange(centerLineArced);
 
 

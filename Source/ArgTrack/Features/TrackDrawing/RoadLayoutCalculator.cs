@@ -48,10 +48,7 @@ namespace ArgTrack.Features.TrackDrawing
                 var layout = CalculateLayout(section, startWidth, nWidthLength, nWidthEnd);
 
                 // start stuff for NEXT section
-                //dPosX = layout.EndPosition.X;
-                //dPosY = layout.EndPosition.Y;
                 startWidth = layout.EndWidth;
-                //startAngle = layout.EndAngle;
                 nWidthLength = layout.WidthChangeLength;
                 nWidthEnd = layout.WidthChangeEnd;
 
@@ -60,7 +57,6 @@ namespace ArgTrack.Features.TrackDrawing
 
             return roadSections;
         }
-
 
 
 
@@ -196,8 +192,6 @@ namespace ArgTrack.Features.TrackDrawing
 
             if (layoutSection.Curvature == 0)
             {
-                // width here == half track
-
                 // straight
                 points = GetStraightTrackPointCollection(layoutSection.StartAngle, layoutSection.StartPosition, layoutSection.StartWidth, layoutSection.EndAngle, layoutSection.EndPosition, layoutSection.EndWidth);
             }
@@ -213,61 +207,43 @@ namespace ArgTrack.Features.TrackDrawing
         private static PointCollection GetStraightTrackPointCollection(int startAngle, Point startPosition,
             int startTrackWidth, int endAngle, Point endPosition, int endTrackWidth)
         {
+            // TODO: one angle is enough since straights are always straight...?
+
             // straight
             //
-            //   1      2
+            //   2      3
             //   x^^^---x
             //   |      |
             //   |      |
             //   |      |
             //   x***---x
-            //  0/4     3
+            //   1     0/4
             //
             // *** = startwidth
             // ^^^ = endwidth
 
+            var startAngleRadians = GeometryConversions.RadiansFromGameAngle(startAngle);
+
+            double startWidthAci = startTrackWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+
+            var botRightHuh = Geometry.GetLegacyPointPerpendicular(startPosition, startAngleRadians, startWidthAci);
+            var botLeftHuh = Geometry.GetLegacyPointPerpendicular(startPosition, startAngleRadians, -startWidthAci);
+
+            var endAngleRadians = GeometryConversions.RadiansFromGameAngle(endAngle);
+
+            double endWidthAci = endTrackWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+
+            var topRightHuh = Geometry.GetLegacyPointPerpendicular(endPosition, endAngleRadians, endWidthAci);
+            var topLeftHuh = Geometry.GetLegacyPointPerpendicular(endPosition, endAngleRadians, -endWidthAci);
+
             var points = new PointCollection();
+            points.Add(botRightHuh);
+            points.Add(botLeftHuh);
+            points.Add(topLeftHuh);
+            points.Add(topRightHuh);
+            points.Add(botRightHuh);
 
-            double dXDiff = Math.Cos(Math.PI - startAngle * LayoutConstants.AngleScaleRadians) * startTrackWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-            double dYDiff = Math.Sin(Math.PI - startAngle * LayoutConstants.AngleScaleRadians) * startTrackWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-
-            // TODO: check this order...
-            // 0?
-            points.Add(new Point
-            {
-                X = startPosition.X - dXDiff,
-                Y = startPosition.Y + dYDiff
-            });
-            // 1?
-            points.Add(new Point
-            {
-                X = startPosition.X + dXDiff,
-                Y = startPosition.Y - dYDiff
-            });
-
-            double dXDiff2 = Math.Cos(Math.PI - endAngle * LayoutConstants.AngleScaleRadians) * endTrackWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-            double dYDiff2 = Math.Sin(Math.PI - endAngle * LayoutConstants.AngleScaleRadians) * endTrackWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-
-            //2?
-            points.Add(new Point
-            {
-                X = endPosition.X + dXDiff2,
-                Y = endPosition.Y - dYDiff2
-            });
-            //3?
-            points.Add(new Point
-            {
-                X = endPosition.X - dXDiff2,
-                Y = endPosition.Y + dYDiff2
-            });
-
-            // add start point again to finish the shape off!
-            //4
-            points.Add(new Point
-            {
-                X = startPosition.X - dXDiff,
-                Y = startPosition.Y + dYDiff
-            });
+            // not _entirely_ accurate, all straights are too thin and "skewed"
 
             return points;
         }

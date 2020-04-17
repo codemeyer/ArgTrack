@@ -83,6 +83,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeometryConversionFacts.cs" />
+    <Compile Include="GeometryFacts.cs" />
     <Compile Include="Infrastructure\CommandFacts.cs" />
     <Compile Include="ExampleDataHelper.cs" />
     <Compile Include="TrackMappingIntegrationFacts.cs" />

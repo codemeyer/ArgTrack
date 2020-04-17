@@ -1,0 +1,146 @@
+﻿using System;
+using System.Windows;
+
+namespace ArgTrack.Features.TrackDrawing
+{
+    /// <summary>
+    /// Lots of geometry functions.
+    /// </summary>
+    public static class Geometry
+    {
+        /// <summary>
+        /// Given a start position, an angle and a distance, will return the new position going in a
+        /// </summary>
+        /// <param name="startPosition">Starting position.</param>
+        /// <param name="angle">Angle in radians where 0=N, -1.57 is E</param>
+        /// <param name="distance">Distance in any unit.</param>
+        /// <returns></returns>
+        public static Point GetLegacyPointPerpendicular(Point startPosition, double angle, double distance)
+        {
+            double diffX = Math.Cos(angle) * distance;
+            double diffY = Math.Sin(angle) * distance;
+
+            return new Point
+            {
+                X = startPosition.X + diffX,
+                Y = startPosition.Y + diffY
+            };
+        }
+
+        /// <summary>
+        /// Given a start position, an angle and a distance, will return the new position going in a
+        /// </summary>
+        /// <param name="startPosition">Starting position.</param>
+        /// <param name="angle">Angle in radians where 0=N</param>
+        /// <param name="distance">Distance in any unit.</param>
+        /// <returns></returns>
+        public static Point GetPointPerpendicular(Point startPosition, double angle, double distance)
+        {
+            double diffX = Math.Cos(angle) * distance;
+            double diffY = Math.Sin(angle) * distance;
+
+            return new Point
+            {
+                X = startPosition.X + diffX,
+                Y = startPosition.Y - diffY
+            };
+        }
+
+        // TODO: redo this so that the angle value matches the existing calculation...
+
+        /// <summary>
+        /// Given a starting position, an angle, and a distance, will return the new position going forward (or backward).
+        /// </summary>
+        /// <param name="startPosition">Starting position.</param>
+        /// <param name="angle">Angle in radians, where 0 is N, -1.57 (!!!) is E.</param>
+        /// <param name="distance">Distance in any unit.</param>
+        /// <returns></returns>
+        public static Point GetLegacyPoint(Point startPosition, double angle, double distance)
+        {
+            double diffX = Math.Cos(Math.PI / 2 - angle) * distance;
+            double diffY = Math.Sin(Math.PI / 2 - angle) * distance;
+
+            return new Point
+            {
+                X = startPosition.X - diffX,
+                Y = startPosition.Y + diffY
+            };
+        }
+
+
+        /// <summary>
+        /// Given a starting position, an angle, and a distance, will return the new position going forward (or backward).
+        /// </summary>
+        /// <param name="startPosition">Starting position.</param>
+        /// <param name="angle">Angle in radians, where 0 is N, 1.57 is E.</param>
+        /// <param name="distance">Distance in any unit.</param>
+        /// <returns></returns>
+        public static Point GetPoint(Point startPosition, double angle, double distance)
+        {
+            double diffX = Math.Cos(Math.PI / 2 - angle) * distance;
+            double diffY = Math.Sin(Math.PI / 2 - angle) * distance;
+
+            return new Point
+            {
+                X = startPosition.X + diffX,
+                Y = startPosition.Y + diffY
+            };
+        }
+
+
+
+        // name: GameCurvature?
+        public static double GetRadiusForCurvature(int curvature)
+        {
+            return 1 / (curvature * LayoutConstants.AngleScaleRadians);
+        }
+
+
+
+        public static Point GetLegacyCircleCenter(Point position, double radius, double angle)
+        {
+            double circleCenterX = position.X + radius * Math.Cos(angle);
+            double circleCenterY = position.Y + radius * Math.Sin(angle);
+
+            return new Point(circleCenterX, circleCenterY);
+        }
+
+
+        public static Point GetLegacyCurveEndpoint(Point circleCenter, double radius, double endAngle)
+        {
+            double endX = circleCenter.X - radius * Math.Cos(endAngle);
+            double endY = circleCenter.Y - radius * Math.Sin(endAngle);
+
+            return new Point(endX, endY);
+        }
+
+
+
+        // curvature =
+        // Sector Arc 	short 	Angle value as a signed integer to be divided by 65536/360 = 182.04444 (PER LENGTH UNIT)
+
+        // first corner PHO
+
+        // 3 x
+        // len 2
+        // curv 2731
+
+        // using above formula, (2731 / 182) = 15, and corner is 6 units long, i.e. 15 * 6 == 90 (!)
+        // TODO: calculate and display this in the user interface somewhere
+
+
+        // angle = layout.StartAngle * LayoutConstants.AngleScaleRadians  (=2 * Math.PI / 65536)
+
+
+        // endangle 0 =  -5462
+        // angle 0
+
+        // endangle 1 = -10942
+        // angle -0.52366269146446076
+
+        // endangle 2 = -16386  (90 grader???)  (antar att 16384 _egentligen_ är 90 grader)
+        // angle -1.0473253829289215
+
+        // negative == right ???
+    }
+}

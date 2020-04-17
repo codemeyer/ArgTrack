@@ -74,6 +74,8 @@
     <Compile Include="Features\Application\Shared\OpenOtherSiteCommand.cs" />
     <Compile Include="Features\Application\Shared\ShowMessageCommand.cs" />
     <Compile Include="Features\TrackDrawing\DrawingLayout.cs" />
+    <Compile Include="Features\TrackDrawing\Geometry.cs" />
+    <Compile Include="Features\TrackDrawing\GeometryConversions.cs" />
     <Compile Include="Features\TrackDrawing\LayoutToPointsConverter.cs" />
     <Compile Include="Features\TrackDrawing\PointData.cs" />
     <Compile Include="Features\TrackDrawing\PointDataObservableCollectionExtensions.cs" />

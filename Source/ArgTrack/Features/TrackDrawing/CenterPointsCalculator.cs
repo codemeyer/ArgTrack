@@ -130,7 +130,6 @@ namespace ArgTrack.Features.TrackDrawing
             return -1;
         }
 
-
         private static short FindWidthOfPitLaneConnectingTrackSection(TrackViewModel track, int pitLaneStartTrackSectionIndex)
         {
             short sectionWidth = 0;
@@ -216,31 +215,28 @@ namespace ArgTrack.Features.TrackDrawing
 
             // resulting direction
             layout.EndAngle = layout.StartAngle - length * curvature;
+            // TODO: this becomes NEGATIVE for East direction, which "feels" wrong...
+            // TODO: that's why we use the GetLegacy* methods below...
 
             // end coordinates
-            double angle = layout.StartAngle * LayoutConstants.AngleScaleRadians;
+            double angle = GeometryConversions.RadiansFromGameAngle(layout.StartAngle);
 
             if (curvature == 0)
             {
                 // straight
-                double endX = layout.StartPosition.X - length * Math.Sin(angle);
-                double endY = layout.StartPosition.Y + length * Math.Cos(angle);
-                layout.EndPosition = new Point(endX, endY);
+                layout.EndPosition = Geometry.GetLegacyPoint(layout.StartPosition, angle, length);
             }
             else
             {
                 // curve: first calculate center of circle
-                layout.Radius = 1 / (curvature * LayoutConstants.AngleScaleRadians);
+                layout.Radius = Geometry.GetRadiusForCurvature(curvature);
 
-                double circleCenterX = layout.StartPosition.X + layout.Radius * Math.Cos(angle);
-                double circleCenterY = layout.StartPosition.Y + layout.Radius * Math.Sin(angle);
-                layout.CircleCenterForCurve = new Point(circleCenterX, circleCenterY);
+                layout.CircleCenterForCurve = Geometry.GetLegacyCircleCenter(layout.StartPosition, layout.Radius, angle);
 
                 // from center, calculate end point
-                angle = layout.EndAngle * LayoutConstants.AngleScaleRadians;
-                double endX = circleCenterX - layout.Radius * Math.Cos(angle);
-                double endY = circleCenterY - layout.Radius * Math.Sin(angle);
-                layout.EndPosition = new Point(endX, endY);
+                double endAngle = GeometryConversions.RadiansFromGameAngle(layout.EndAngle);
+
+                layout.EndPosition = Geometry.GetLegacyCurveEndpoint(layout.CircleCenterForCurve, layout.Radius, endAngle);
             }
 
             return layout;

@@ -5,6 +5,8 @@ namespace ArgTrack.Features.TrackDrawing
     public static class LayoutConstants
     {
         //public const double AngleScaleDegrees = 360.0 / 65536;
+
+        // move to GeometryConstants ?
         public const double AngleScaleRadians = 2 * Math.PI / 65536;
 
 
