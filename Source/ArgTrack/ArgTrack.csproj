@@ -73,6 +73,7 @@
     <Compile Include="Features\Application\About\OpenDownloadPageCommand.cs" />
     <Compile Include="Features\Application\Shared\OpenOtherSiteCommand.cs" />
     <Compile Include="Features\Application\Shared\ShowMessageCommand.cs" />
+    <Compile Include="Features\TrackDrawing\CircleCenterIndicatorDrawing.cs" />
     <Compile Include="Features\TrackDrawing\DrawingLayout.cs" />
     <Compile Include="Features\TrackDrawing\Geometry.cs" />
     <Compile Include="Features\TrackDrawing\GeometryConversions.cs" />
@@ -157,7 +158,6 @@
     <Compile Include="Features\TrackEditing\TrackSettings\PaletteHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Features\TrackDrawing\ComputerCarLineLayoutData.cs" />
-    <Compile Include="Features\TrackDrawing\LayoutCalculator.cs" />
     <Compile Include="Features\TrackDrawing\LayoutConstants.cs" />
     <Compile Include="Features\TrackConversion\TrackConverter.cs" />
     <Compile Include="Features\TrackEditing\UnitConvert.cs" />
@@ -182,7 +182,6 @@
     <Compile Include="Features\TrackEditing\ObjectSettings\TrackObjectSettingsViewModel.cs" />
     <Compile Include="Features\TrackEditing\ObjectShapes\TrackObjectShapeViewModel.cs" />
     <Compile Include="Features\TrackEditing\TrackSection\TrackSectionViewModel.cs" />
-    <Compile Include="Features\TrackDrawing\TrackSectionLayoutData.cs" />
     <Compile Include="Features\TrackEditing\TrackSection\TrackSectionViewModelCollection.cs" />
     <Compile Include="Features\TrackEditing\TrackSettings\TrackSettingsViewModel.cs" />
     <Compile Include="Features\Main\TrackViewModel.cs" />

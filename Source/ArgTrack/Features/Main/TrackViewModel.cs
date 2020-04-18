@@ -58,6 +58,8 @@ namespace ArgTrack.Features.Main
 
         public void RecalculateLayout()
         {
+            // TODO: move this to MainViewModel ?
+
             // save for restoring
             var currentZoom = MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.ZoomFactor;
             var currentCenter = MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.CenterPoint;
@@ -66,7 +68,11 @@ namespace ArgTrack.Features.Main
             {
                 DrawTrack = MainViewModelPasserArounder.MainViewModel.DrawTrack,
                 DrawPitLane = MainViewModelPasserArounder.MainViewModel.DrawPitLane,
-                DrawVerges = MainViewModelPasserArounder.MainViewModel.DrawVerges
+                DrawVerges = MainViewModelPasserArounder.MainViewModel.DrawVerges,
+                DrawTrackSideObjects = MainViewModelPasserArounder.MainViewModel.DrawTrackSideObjects,
+                DrawCircleCenterIndicators = MainViewModelPasserArounder.MainViewModel.DrawCircleCenterIndicators,
+                DrawLineAlongTrackCenter = MainViewModelPasserArounder.MainViewModel.DrawLineAlongTrackCenter,
+                DrawLineBetweenSectionCenters = MainViewModelPasserArounder.MainViewModel.DrawLineBetweenSectionCenters
             };
 
             var layoutViewModel = TrackLayoutViewModel.FromTrackViewModel(this, settings);

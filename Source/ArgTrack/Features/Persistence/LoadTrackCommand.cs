@@ -59,9 +59,10 @@ namespace ArgTrack.Features.Persistence
 
             var mainViewModel = MainViewModelPasserArounder.MainViewModel;
             mainViewModel.HasLoadedTrack = true;
-            mainViewModel.DrawTrack = true;
-            mainViewModel.DrawPitLane = true;
-            mainViewModel.DrawVerges = false;
+
+            // reset
+            mainViewModel.ResetDrawingElements();
+
             mainViewModel.TrackViewModel = trackViewModel;
 
             // perhaps should be initialized elsewhere?

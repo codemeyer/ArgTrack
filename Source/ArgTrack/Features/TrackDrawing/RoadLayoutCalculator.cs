@@ -59,36 +59,6 @@ namespace ArgTrack.Features.TrackDrawing
         }
 
 
-
-        // TODO: place all these together in another location?
-
-        public static DrawingLayout TrackDrawingLayout
-        {
-            get
-            {
-                return new DrawingLayout
-                {
-                    StrokeThickness = 0.1,
-                    StrokeBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
-                    FillBrush = new SolidColorBrush(Color.FromRgb(0x89, 0x89, 0x85))
-                };
-            }
-        }
-
-        public static DrawingLayout PitLaneDrawingLayout
-        {
-            get
-            {
-                return new DrawingLayout
-                {
-                    StrokeThickness = 0.1,
-                    StrokeBrush = new SolidColorBrush(Color.FromRgb(255, 255, 0)),
-                    FillBrush = new SolidColorBrush(Color.FromRgb(0x89, 0x89, 0x85))
-                };
-            }
-        }
-
-
         /// <summary>
         /// Calculates the full track (incl. width) based on the center point LayoutSectionData provided.
         /// </summary>
@@ -266,14 +236,14 @@ namespace ArgTrack.Features.TrackDrawing
             if (t.Curvature > 0)
             {
                 // right
-                var outerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                var outerLine = Geometry.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
 
                 foreach (var p in outerLine)
                 {
                     points.Add(p);
                 }
 
-                var innerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                var innerLine = Geometry.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
 
                 foreach (var p in innerLine.Reverse())
                 {
@@ -283,7 +253,7 @@ namespace ArgTrack.Features.TrackDrawing
             else
             {
                 // left
-                var outerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                var outerLine = Geometry.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dOuterRadiusStart, dOuterRadiusEnd);
                 // TODO: below fixes the track width but makes all left-hand turns jagged
                 //var outerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
 
@@ -294,7 +264,7 @@ namespace ArgTrack.Features.TrackDrawing
 
 
 
-                var innerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                var innerLine = Geometry.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dInnerRadiusStart, dInnerRadiusEnd);
                 // TODO: below fixes the track width but makes all left-hand turns jagged
                 //var innerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
 

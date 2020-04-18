@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 
 namespace ArgTrack.Features.TrackDrawing
 {
@@ -142,5 +143,73 @@ namespace ArgTrack.Features.TrackDrawing
         // angle -1.0473253829289215
 
         // negative == right ???
+
+
+
+
+
+        // TODO: only handles right-hand corners properly, left hand corners need to pass in "reverse" values by
+        // flipping the start and end values to not draw the corner in a single line, however this means that width changes are reversed
+        public static PointCollection BuildArc(double x, double y, double startAngle, double endAngle, double startRadius, double endRadius)
+        {
+            //if (startAngle > dEndAngle)
+            //{
+            //    // going left?
+            //    return BuildArcLeft(x, y, startAngle, dEndAngle, dStartRadius, dEndRadius);
+            //}
+
+            double workEndAngle = endAngle;
+
+            while (workEndAngle - startAngle > Math.PI * 2)
+            {
+                workEndAngle -= Math.PI * 2;
+            }
+
+            // radius change per angle unit (radians)
+            double a = (endRadius - startRadius) / (workEndAngle - startAngle);
+
+            double dAngleIncrement;
+            if (Math.Abs(startRadius) > 50)
+            {
+                dAngleIncrement = Math.Abs(2 * Math.Asin(5.0 / startRadius));
+            }
+            else
+            {
+                //dAngleIncrement = 2 * Math.PI / 32;   // original
+                dAngleIncrement = 2 * Math.PI / 64;
+            }
+
+            double nPosXStart = x + (startRadius * Math.Cos(startAngle));
+            double nPosYStart = y - (startRadius * Math.Sin(startAngle));
+
+
+            var points = new PointCollection
+            {
+                new Point(nPosXStart, nPosYStart)
+            };
+
+            // draw a number of short lines
+            double dAngle = startAngle + dAngleIncrement;
+            while (dAngle < workEndAngle)
+            {
+                // calculate radius for current angle
+                double radius = startRadius + (dAngle - startAngle) * a;
+
+                // calculate point on circle for this angle
+                double nPosX = x + radius * Math.Cos(dAngle);
+                double nPosY = y - radius * Math.Sin(dAngle);
+
+                points.Add(new Point(nPosX, nPosY));
+
+                dAngle = dAngle + dAngleIncrement;
+            }
+
+            // add final point
+            double nx = x + (endRadius * Math.Cos(workEndAngle));
+            double ny = y - (endRadius * Math.Sin(workEndAngle));
+            points.Add(new Point(nx, ny));
+
+            return points;
+        }
     }
 }

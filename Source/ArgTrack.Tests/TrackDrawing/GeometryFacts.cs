@@ -1,9 +1,10 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using ArgTrack.Features.TrackDrawing;
 using FluentAssertions;
 using Xunit;
 
-namespace ArgTrack.Tests
+namespace ArgTrack.Tests.TrackDrawing
 {
     public class GeometryFacts
     {
@@ -245,6 +246,32 @@ namespace ArgTrack.Tests
 
             endPosition.X.Should().BeApproximately(0.51180486, Tolerance);
             endPosition.Y.Should().BeApproximately(127.909837, Tolerance);
+        }
+
+
+
+        [Fact]
+        public void BuildArc_90DegRight_CreatesKnownNumberOfPoints()
+        {
+            var points = Geometry.BuildArc(0, 0, 0, 90, 1, 2);
+
+            points[0].X.Should().Be(1);
+            points[0].Y.Should().Be(0);
+            points.Last().X.Should().BeInRange(-0.897, -0.896);
+            points.Last().Y.Should().BeInRange(-1.788, -1.787);
+            points.Count.Should().Be(22);
+        }
+
+        [Fact]
+        public void BuildArc_90DegRight_CreatesKnownNumberOfPoint2s()
+        {
+            var points = Geometry.BuildArc(0, 0, 0, 90, 2, 2);
+
+            points[0].X.Should().Be(2, "the radius is 2 and the start point is 0");
+            points[0].Y.Should().Be(0);
+            points.Last().X.Should().BeInRange(-0.897, -0.896);
+            points.Last().Y.Should().BeInRange(-1.788, -1.787);
+            points.Count.Should().Be(22);
         }
     }
 }

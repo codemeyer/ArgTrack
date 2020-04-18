@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
-using ArgData.Entities;
 using ArgTrack.Features.Main;
 
 namespace ArgTrack.Features.TrackDrawing
@@ -17,10 +16,12 @@ namespace ArgTrack.Features.TrackDrawing
             var leftVerges = ToSectionList(layoutSections, VergeSide.Left);
             var rightVerges = ToSectionList(layoutSections, VergeSide.Right);
 
+            var surroundingArea = MainViewModelPasserArounder.MainViewModel.TrackViewModel.TrackSettings.SurroundingArea;
+
             foreach(var section in leftVerges)
             {
                 var x = GetVergePointCollection(section, VergeSide.Left, detailedRoadSections);
-                var y = LayoutToPointsConverter.Convert(x, VergeDrawingLayout);
+                var y = LayoutToPointsConverter.Convert(x, DrawingLayout.ForVerges(surroundingArea));
 
                 vergePoints.AddRange(y);
             }
@@ -28,33 +29,12 @@ namespace ArgTrack.Features.TrackDrawing
             foreach(var section in rightVerges)
             {
                 var x = GetVergePointCollection(section, VergeSide.Right, detailedRoadSections);
-                var y = LayoutToPointsConverter.Convert(x, VergeDrawingLayout);
+                var y = LayoutToPointsConverter.Convert(x, DrawingLayout.ForVerges(surroundingArea));
 
                 vergePoints.AddRange(y);
             }
 
             return vergePoints;
-        }
-
-
-        public static DrawingLayout VergeDrawingLayout
-        {
-            get
-            {
-                var surroundingColor = Color.FromRgb(0x55, 0x87, 0x39);
-
-                if (TrackViewModelPasserArounder.TrackViewModel.TrackSettings.SurroundingArea != SurroundingArea.Green)
-                {
-                    surroundingColor = Color.FromRgb(0x8e, 0x8e, 0x92);
-                }
-
-                return new DrawingLayout
-                {
-                    StrokeThickness = 0.025,
-                    StrokeBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
-                    FillBrush = new SolidColorBrush(surroundingColor)
-                };
-            }
         }
 
         private static List<VergeLayoutSectionData> ToSectionList(List<RoadLayoutSectionData> layoutSections, VergeSide vergeSide)
@@ -129,7 +109,7 @@ namespace ArgTrack.Features.TrackDrawing
             return vergeSections;
         }
 
-        public static PointCollection GetVergePointCollection(VergeLayoutSectionData vergeLayout, VergeSide vergeSide, List<RoadLayoutSectionData> detailedRoad)
+        private static PointCollection GetVergePointCollection(VergeLayoutSectionData vergeLayout, VergeSide vergeSide, List<RoadLayoutSectionData> detailedRoad)
         {
             // left or right from center point, based on vergeSide
 
@@ -184,7 +164,7 @@ namespace ArgTrack.Features.TrackDrawing
             }
 
 
-            // add first point again to close shape
+            // TODO: add first point again to close shape?
             //points.Add(new Point(vergeLayout.StartPosition.X, vergeLayout.StartPosition.Y));
 
             return points;
@@ -195,7 +175,6 @@ namespace ArgTrack.Features.TrackDrawing
             Left = 0,
             Right = 1
         }
-
 
         private static PointCollection GetStraight(VergeLayoutSectionData vergeLayout, VergeSide vergeSide)
         {

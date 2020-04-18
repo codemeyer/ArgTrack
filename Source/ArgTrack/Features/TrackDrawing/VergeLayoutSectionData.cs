@@ -119,24 +119,22 @@ namespace ArgTrack.Features.TrackDrawing
 
             // noo, 50=same width as FULL track, i.e. twice trackWidth?
 
-            // huh?
-            //float pct = vergeRaw * 2 / 100;
-            //double pct = vergeRaw * 0.02;
-            double pct = vergeRaw * 0.04; //?
+            double pct = vergeRaw * 0.04; // good enough?
             var vergeWidth = Convert.ToInt32(trackWidth * pct) + trackWidth;
             return vergeWidth;
         }
 
         // from http://www.grandprix2.de/Anleitung/tutus/Command_Lib/command_lib%20gp3%20gp2/cmdlib3a.htm
         // Formulas of Robin de Paus for track- and verge width
+
         // "I have done some research about how to convert GP2-track width and fence width to meters. I have come to the following formulas:
-        // Deler is a variable:
-        // for pitlane values, deler = 32768 / 20
-        // for track values, deler = 32768 / 30
+        // divisor is a variable:
+        // for pitlane values, divisor = 32768 / 20
+        // for track values, divisor = 32768 / 30
 
-        // TrackWidth(Meters)= (TrackWidthGP2 / deler) * 4.87;
+        // TrackWidth(Meters)= (TrackWidthGP2 / divisor) * 4.87;
 
-        // FenceWidth(Meters)=((FenceWidthGP2*(1024/30))*TrackWidthGP2/1000)/deler*4.87
+        // FenceWidth(Meters)=((FenceWidthGP2*(1024/30))*TrackWidthGP2/1000)/divisor*4.87
 
         //I have tested these formulas and they are highly accurate."
     }

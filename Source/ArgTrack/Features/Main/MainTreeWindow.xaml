@@ -54,6 +54,13 @@
                 <Separator></Separator>
                 <MenuItem Header="_About ArgTrack" Command="{Binding OpenAboutWindowCommand}" CommandParameter="{Binding}"></MenuItem>
             </MenuItem>
+            <MenuItem Header="Debug/Hack" Visibility="{Binding DisplayDebugHackMenu}">
+                <MenuItem Header="Drawing">
+                    <MenuItem IsCheckable="True" IsChecked="{Binding DrawCircleCenterIndicators}" Header="Circle Centers"></MenuItem>
+                    <MenuItem IsCheckable="True" IsChecked="{Binding DrawLineAlongTrackCenter}" Header="Track Center Line"></MenuItem>
+                    <MenuItem IsCheckable="True" IsChecked="{Binding DrawLineBetweenSectionCenters}" Header="Track Center Section Points"></MenuItem>
+                </MenuItem>
+            </MenuItem>
         </Menu>
 
         <Grid Margin="0,20,0,0">
@@ -273,6 +280,7 @@
                 <CheckBox Margin="8,8,16,0" IsChecked="{Binding DrawTrack}">Track</CheckBox>
                 <CheckBox Margin="2,8,16,0" IsChecked="{Binding DrawPitLane}">Pit Lane</CheckBox>
                 <CheckBox Margin="2,8,16,0" IsChecked="{Binding DrawVerges}">Verges</CheckBox>
+                <CheckBox Margin="2,8,16,0" IsChecked="{Binding DrawTrackSideObjects}">Track-Side Objects</CheckBox>
                 <Button Width="50" Height="22" Margin="32,2,16,2" Background="#eee" Command="{Binding TrackLayoutViewModel.RedrawViewCommand}" CommandParameter="{Binding TrackLayoutViewModel}">Refresh</Button>
                 <Button Width="26" Height="22" Margin="2" Background="#eee" Command="{Binding TrackLayoutViewModel.ZoomTrackViewInCommand}" CommandParameter="{Binding TrackLayoutViewModel}">+</Button>
                 <Button Width="26" Height="22" Margin="2" Background="#eee" Command="{Binding TrackLayoutViewModel.ZoomTrackViewOutCommand}" CommandParameter="{Binding TrackLayoutViewModel}">-</Button>

@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace ArgTrack.Tests
+namespace ArgTrack.Tests.TrackDrawing
 {
     public class GeometryConversionFacts
     {

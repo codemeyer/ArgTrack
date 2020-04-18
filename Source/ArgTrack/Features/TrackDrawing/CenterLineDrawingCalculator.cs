@@ -7,56 +7,6 @@ using System.Windows.Media;
 
 namespace ArgTrack.Features.TrackDrawing
 {
-    public static class CircleCenterIndicatorDrawing
-    {
-        public static ObservableCollection<PointData> DrawCircleCenterIndicators(List<LayoutSectionData> layoutSections)
-        {
-            var list = new ObservableCollection<PointData>();
-
-            foreach (var section in layoutSections)
-            {
-                //var points = DrawLineStraight(section.StartPosition, section.EndPosition);
-
-                if (section.IsCurved)
-                {
-                    var points = new PointCollection();
-
-                    var bolo1 = Geometry.GetPointPerpendicular(section.CircleCenterForCurve, 0, -1);
-                    var bolo2 = Geometry.GetPoint(section.CircleCenterForCurve, 0, 1);
-                    var bolo3 = Geometry.GetPointPerpendicular(section.CircleCenterForCurve, 0, 1);
-                    var bolo4 = Geometry.GetPoint(section.CircleCenterForCurve, 0, -1);
-
-                    points.Add(bolo1);
-                    points.Add(bolo2);
-                    points.Add(bolo3);
-                    points.Add(bolo4);
-
-                    var pointData = LayoutToPointsConverter.Convert(points, new SolidColorBrush(Color.FromRgb(0, 200, 255)), 0.2, new SolidColorBrush(Color.FromRgb(0, 200, 255)));
-                    list.AddRange(pointData);
-
-
-                    var pointsLine1 = new PointCollection();
-                    pointsLine1.Add(section.StartPosition);
-                    pointsLine1.Add(section.CircleCenterForCurve);
-
-                    var poda = LayoutToPointsConverter.Convert(pointsLine1, new SolidColorBrush(Color.FromRgb(0, 200, 255)), 0.2, new SolidColorBrush(Color.FromRgb(0, 200, 255)));
-                    list.AddRange(poda);
-
-
-                    var po2 = new PointCollection();
-                    po2.Add(section.EndPosition);
-                    po2.Add(section.CircleCenterForCurve);
-
-                    var poda2 = LayoutToPointsConverter.Convert(po2, new SolidColorBrush(Color.FromRgb(0, 200, 255)), 0.2, new SolidColorBrush(Color.FromRgb(0, 200, 255)));
-                    list.AddRange(poda2);
-
-                }
-            }
-
-            return list;
-        }
-    }
-
     public static class CenterLineDrawingCalculator
     {
         public static ObservableCollection<PointData> CalculateDrawablePointsStraightUp(List<LayoutSectionData> layoutSections)
@@ -67,7 +17,7 @@ namespace ArgTrack.Features.TrackDrawing
             {
                 var points = DrawLineStraight(section.StartPosition, section.EndPosition);
 
-                var pointData = LayoutToPointsConverter.Convert(points, new SolidColorBrush(Color.FromRgb(0, 200, 255)), 0.2, new SolidColorBrush(Color.FromRgb(0, 200, 255)));
+                var pointData = LayoutToPointsConverter.Convert(points, DrawingLayout.ForTechCenterPointLine());
 
                 list.AddRange(pointData);
             }
@@ -83,7 +33,7 @@ namespace ArgTrack.Features.TrackDrawing
             {
                 var pc = BuildSectionPointCollectionCenterLine(section);
 
-                var something = LayoutToPointsConverter.Convert(pc, new SolidColorBrush(Color.FromRgb(200, 0, 255)), 0.2, new SolidColorBrush(Color.FromRgb(200, 0, 255)));
+                var something = LayoutToPointsConverter.Convert(pc, DrawingLayout.ForTechCenterArcLine());
 
                 retur.AddRange(something);
             }
@@ -95,14 +45,12 @@ namespace ArgTrack.Features.TrackDrawing
         {
             var points = new PointCollection();
 
-            if (layDoo.Curvature == 0)
+            if (layDoo.IsStraight)
             {
-                // straight
                 points = DrawLineStraight(layDoo.StartPosition, layDoo.EndPosition);
             }
             else
             {
-                // curve!
                 double dOuterRadiusStart = layDoo.Radius + 0 / LayoutConstants.TrackWidthUnitsPerLengthUnit;
                 double dInnerRadiusStart = layDoo.Radius - 0 / LayoutConstants.TrackWidthUnitsPerLengthUnit;
                 double dOuterRadiusEnd = layDoo.Radius + 0 / LayoutConstants.TrackWidthUnitsPerLengthUnit;
@@ -118,14 +66,14 @@ namespace ArgTrack.Features.TrackDrawing
                 if (layDoo.Curvature > 0)
                 {
                     // right
-                    var outerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                    var outerLine = Geometry.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
 
                     foreach (var p in outerLine)
                     {
                         points.Add(p);
                     }
 
-                    var innerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                    var innerLine = Geometry.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
 
                     foreach (var p in innerLine.Reverse())
                     {
@@ -135,14 +83,14 @@ namespace ArgTrack.Features.TrackDrawing
                 else
                 {
                     // left
-                    var outerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                    var outerLine = Geometry.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dOuterRadiusStart, dOuterRadiusEnd);
 
                     foreach (var p in outerLine)
                     {
                         points.Add(p);
                     }
 
-                    var innerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                    var innerLine = Geometry.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dInnerRadiusStart, dInnerRadiusEnd);
 
                     foreach (var p in innerLine.Reverse())
                     {

@@ -3,6 +3,41 @@ using ArgTrack.Features.TrackEditing.TrackSection;
 
 namespace ArgTrack.Features.TrackDrawing
 {
+    // how about object with...
+
+
+    //  vel-------tel---tec---ter-------ver
+    //  |          |     |     |          |
+    //  |          |     |     |          |
+    //  |          |     |     |          |
+    //  |          |     |     |          |
+    //  vsl-------tsl---tsc---tsr-------vsr
+
+    // i.e.
+    // vel = VergeEndLeft
+    // tel = TrackEndLeft
+    // tec = TrackEndCenter
+    // ter = TrackEndRight
+    // ver = VergeEndRight
+    // vsl = VergeStartLeft
+    // tsl = TrackStartLeft
+    // tsc = TrackStartCenter
+    // tsr = TrackStartRight
+    // vsr = VergeStartRight
+
+    // all as Point(X,Y)
+
+    // guess it will also have
+    // curvature ?
+    // radius ?
+    // centercircle (X,Y)
+
+
+    // plus
+    // TrackWidth (always same left/right)
+    //
+
+
     /// <summary>
     /// something that contains a list of "sections" with
     /// - StartPosX

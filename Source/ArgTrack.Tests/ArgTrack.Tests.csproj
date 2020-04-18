@@ -83,12 +83,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeometryConversionFacts.cs" />
-    <Compile Include="GeometryFacts.cs" />
+    <Compile Include="TrackDrawing\GeometryConversionFacts.cs" />
+    <Compile Include="TrackDrawing\GeometryFacts.cs" />
     <Compile Include="Infrastructure\CommandFacts.cs" />
     <Compile Include="ExampleDataHelper.cs" />
     <Compile Include="TrackMappingIntegrationFacts.cs" />
-    <Compile Include="TrackDrawing\LayoutCalculatorFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrackEditing\UnitConversionFacts.cs" />
   </ItemGroup>

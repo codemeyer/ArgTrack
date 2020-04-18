@@ -112,7 +112,37 @@ namespace ArgTrack.Features.Main
         }
 
 
-        // not sure this is the best place for this...
+        public string Error { get; }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                return "";
+            }
+        }
+
+
+
+#if DEBUG
+        private Visibility _displayDebugHackMenu = Visibility.Visible;
+#else
+        private Visibility _displayDebugHackMenu = Visibility.Hidden;
+#endif
+
+        public Visibility DisplayDebugHackMenu
+        {
+            get { return _displayDebugHackMenu; }
+            set
+            {
+                SetProperty(ref _displayDebugHackMenu, value, () => DisplayDebugHackMenu);
+            }
+        }
+
+
+
+
+        // TODO: somewhere else...?
 
         private bool _drawTrack = true;
 
@@ -157,15 +187,75 @@ namespace ArgTrack.Features.Main
         }
 
 
+        private bool _drawTrackSideObjects;
 
-        public string Error { get; }
-
-        public string this[string columnName]
+        public bool DrawTrackSideObjects
         {
-            get
+            get { return _drawTrackSideObjects; }
+            set
             {
-                return "";
+                if (SetProperty(ref _drawTrackSideObjects, value, () => DrawTrackSideObjects))
+                {
+                    TrackViewModel?.RecalculateLayout();
+                }
             }
+        }
+
+
+        private bool _drawCircleCenterIndicators;
+
+        public bool DrawCircleCenterIndicators
+        {
+            get { return _drawCircleCenterIndicators; }
+            set
+            {
+                if (SetProperty(ref _drawCircleCenterIndicators, value, () => DrawCircleCenterIndicators))
+                {
+                    TrackViewModel?.RecalculateLayout();
+                }
+            }
+        }
+
+
+        private bool _drawLineBetweenSectionCenters;
+
+        public bool DrawLineBetweenSectionCenters
+        {
+            get { return _drawLineBetweenSectionCenters; }
+            set
+            {
+                if (SetProperty(ref _drawLineBetweenSectionCenters, value, () => DrawLineBetweenSectionCenters))
+                {
+                    TrackViewModel?.RecalculateLayout();
+                }
+            }
+        }
+
+        private bool _drawLineAlongTrackCenter;
+
+        public bool DrawLineAlongTrackCenter
+        {
+            get { return _drawLineAlongTrackCenter; }
+            set
+            {
+                if (SetProperty(ref _drawLineAlongTrackCenter, value, () => DrawLineAlongTrackCenter))
+                {
+                    TrackViewModel?.RecalculateLayout();
+                }
+            }
+        }
+
+        public void ResetDrawingElements()
+        {
+            DrawTrack = true;
+            DrawPitLane = true;
+
+            DrawVerges = false;
+            DrawTrackSideObjects = false;
+
+            DrawCircleCenterIndicators = false;
+            DrawLineAlongTrackCenter = false;
+            DrawLineBetweenSectionCenters = false;
         }
     }
 }

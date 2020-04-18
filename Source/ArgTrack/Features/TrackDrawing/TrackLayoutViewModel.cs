@@ -30,7 +30,7 @@ namespace ArgTrack.Features.TrackDrawing
 
             var roadSections = RoadLayoutCalculator.CalculateRoadSections(centerPoints.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
 
-            var roadPoints = RoadLayoutCalculator.Calculate(roadSections, RoadLayoutCalculator.TrackDrawingLayout);
+            var roadPoints = RoadLayoutCalculator.Calculate(roadSections, DrawingLayout.ForTrack());
 
             var centrios = CenterPointsCalculator.CalculateCenterPointsPerSectionOneLengthEach(trackViewModel);
             var roadSectionsTight = RoadLayoutCalculator.CalculateRoadSections(centrios.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
@@ -49,24 +49,37 @@ namespace ArgTrack.Features.TrackDrawing
 
             if (settings.DrawPitLane)
             {
-                var pitPoints = RoadLayoutCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, RoadLayoutCalculator.PitLaneDrawingLayout);
+                var pitPoints = RoadLayoutCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, DrawingLayout.ForPitLane());
                 drawingPoints.AddRange(pitPoints);
             }
 
+            // TODO: allow drawing these in new debug/hack menu?
 
-            //var trackSideObjects = TracksideObjectsCalculator.Calculate(roadSections, roadSectionsTight, TrackViewModelPasserArounder.TrackViewModel.TrackObjectSettings);
-            //drawingPoints.AddRange(trackSideObjects);
+            if (settings.DrawTrackSideObjects)
+            {
+                var trackSideObjects = TracksideObjectsCalculator.Calculate(roadSections, roadSectionsTight, TrackViewModelPasserArounder.TrackViewModel.TrackObjectSettings);
+                drawingPoints.AddRange(trackSideObjects);
+            }
 
-            // light blue center line with no arcs, only connects each section start point to the end point
-            //var centerLineStraight = CenterLineDrawingCalculator.CalculateDrawablePointsStraightUp(centerPoints.TrackSections);
-            //drawingPoints.AddRange(centerLineStraight);
+            if (settings.DrawCircleCenterIndicators)
+            {
+                var circleCenterIndicators = CircleCenterIndicatorDrawing.DrawCircleCenterIndicators(centerPoints.TrackSections);
+                drawingPoints.AddRange(circleCenterIndicators);
+            }
 
-            //var circleCenterIndicators = CircleCenterIndicatorDrawing.DrawCircleCenterIndicators(centerPoints.TrackSections);
-            //drawingPoints.AddRange(circleCenterIndicators);
+            if (settings.DrawLineBetweenSectionCenters)
+            {
+                // center line with no arcs, only connects each section start point to the end point
+                var centerLineStraight = CenterLineDrawingCalculator.CalculateDrawablePointsStraightUp(centerPoints.TrackSections);
+                drawingPoints.AddRange(centerLineStraight);
+            }
 
-            // purple arced center line
-            //var centerLineArced = CenterLineDrawingCalculator.CalculateDrawablePointsWithArcs(centerPoints.TrackSections);
-            //drawingPoints.AddRange(centerLineArced);
+            if (settings.DrawLineAlongTrackCenter)
+            {
+                // arced center line
+                var centerLineArced = CenterLineDrawingCalculator.CalculateDrawablePointsWithArcs(centerPoints.TrackSections);
+                drawingPoints.AddRange(centerLineArced);
+            }
 
 
             var layoutViewModel = new TrackLayoutViewModel(MainViewModelPasserArounder.MainViewModel)
