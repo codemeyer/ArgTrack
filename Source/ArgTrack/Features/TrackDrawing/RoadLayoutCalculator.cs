@@ -213,37 +213,33 @@ namespace ArgTrack.Features.TrackDrawing
             points.Add(topRightHuh);
             points.Add(botRightHuh);
 
-            // not _entirely_ accurate, all straights are too thin and "skewed"
-
             return points;
         }
 
         private static PointCollection GetCurve(RoadLayoutSectionData t)
         {
             var points = new PointCollection();
-            // TODO: this is pretty much identical to LayoutCalculator.GetCurvio() !!!
 
-            // what about widthmid?
             double dOuterRadiusStart = t.Radius + t.StartWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
             double dInnerRadiusStart = t.Radius - t.StartWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
             double dOuterRadiusEnd = t.Radius + t.EndWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
             double dInnerRadiusEnd = t.Radius - t.EndWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+
+            // while we still have the "legacy" calculation, left-hand turns will INCREASE the angle
             double dStartAngle = Math.PI - t.StartAngle * LayoutConstants.AngleScaleRadians;
             double dEndAngle = Math.PI - t.EndAngle * LayoutConstants.AngleScaleRadians;
-            double dCenterX = t.CircleCenterForCurve.X;
-            double dCenterY = t.CircleCenterForCurve.Y;
 
             if (t.Curvature > 0)
             {
                 // right
-                var outerLine = Geometry.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                var outerLine = Geometry.BuildArc(t.CircleCenterForCurve, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
 
                 foreach (var p in outerLine)
                 {
                     points.Add(p);
                 }
 
-                var innerLine = Geometry.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                var innerLine = Geometry.BuildArc(t.CircleCenterForCurve, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
 
                 foreach (var p in innerLine.Reverse())
                 {
@@ -252,21 +248,15 @@ namespace ArgTrack.Features.TrackDrawing
             }
             else
             {
-                // left
-                var outerLine = Geometry.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dOuterRadiusStart, dOuterRadiusEnd);
-                // TODO: below fixes the track width but makes all left-hand turns jagged
-                //var outerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                // left - flip the start and end values
+                var outerLine = Geometry.BuildArc(t.CircleCenterForCurve, dEndAngle, dStartAngle, dOuterRadiusEnd, dOuterRadiusStart);
 
                 foreach (var p in outerLine)
                 {
                     points.Add(p);
                 }
 
-
-
-                var innerLine = Geometry.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dInnerRadiusStart, dInnerRadiusEnd);
-                // TODO: below fixes the track width but makes all left-hand turns jagged
-                //var innerLine = LayoutCalculator.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                var innerLine = Geometry.BuildArc(t.CircleCenterForCurve, dEndAngle, dStartAngle, dInnerRadiusEnd, dInnerRadiusStart);
 
                 foreach (var p in innerLine.Reverse())
                 {
@@ -278,6 +268,5 @@ namespace ArgTrack.Features.TrackDrawing
 
             return points;
         }
-
     }
 }

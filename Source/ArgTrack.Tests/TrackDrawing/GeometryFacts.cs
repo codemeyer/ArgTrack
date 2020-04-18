@@ -253,7 +253,7 @@ namespace ArgTrack.Tests.TrackDrawing
         [Fact]
         public void BuildArc_90DegRight_CreatesKnownNumberOfPoints()
         {
-            var points = Geometry.BuildArc(0, 0, 0, 90, 1, 2);
+            var points = Geometry.BuildArc(new Point(0, 0), 0, 90, 1, 2);
 
             points[0].X.Should().Be(1);
             points[0].Y.Should().Be(0);
@@ -265,7 +265,7 @@ namespace ArgTrack.Tests.TrackDrawing
         [Fact]
         public void BuildArc_90DegRight_CreatesKnownNumberOfPoint2s()
         {
-            var points = Geometry.BuildArc(0, 0, 0, 90, 2, 2);
+            var points = Geometry.BuildArc(new Point(0, 0), 0, 90, 2, 2);
 
             points[0].X.Should().Be(2, "the radius is 2 and the start point is 0");
             points[0].Y.Should().Be(0);

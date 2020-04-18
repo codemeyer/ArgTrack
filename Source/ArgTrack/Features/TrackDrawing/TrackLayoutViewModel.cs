@@ -53,7 +53,8 @@ namespace ArgTrack.Features.TrackDrawing
                 drawingPoints.AddRange(pitPoints);
             }
 
-            // TODO: allow drawing these in new debug/hack menu?
+
+            // allow drawing these in new debug/hack menu?
 
             if (settings.DrawTrackSideObjects)
             {

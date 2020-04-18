@@ -11,6 +11,8 @@ namespace ArgTrack.Features.TrackDrawing
     {
         public static ObservableCollection<PointData> Calculate(List<RoadLayoutSectionData> layoutSections, List<RoadLayoutSectionData> detailedRoadSections)
         {
+            // TODO: verges for pitlane?
+
             var vergePoints = new ObservableCollection<PointData>();
 
             var leftVerges = ToSectionList(layoutSections, VergeSide.Left);
@@ -126,6 +128,7 @@ namespace ArgTrack.Features.TrackDrawing
             }
             else
             {
+                // TODO: reinstate GetCurve
                 var curvedPoints = GetStraight(vergeLayout, vergeSide); //, detailedRoad);
 
                 foreach (var point in curvedPoints)
@@ -224,7 +227,6 @@ namespace ArgTrack.Features.TrackDrawing
             return points;
         }
 
-
         //private static PointCollection GetCurved(VergeLayoutSectionData vergeLayout, VergeSide vergeSide, List<RoadLayoutSectionData> detailedRoad)
         //{
         //    var points = new PointCollection();
@@ -286,110 +288,7 @@ namespace ArgTrack.Features.TrackDrawing
         //        }
         //    }
 
-
-
-
-
-        //    int lastDetailedIndex = 0;
-
-        //    // backtrack along track center here - should be done both for straights and corners (or only corners?)
-        //    foreach (var roadSec in detailedRoad)
-        //    {
-        //        if (Math.Abs(roadSec.EndPosition.X - vergeLayout.EndPosition.X) < 0.00001 && Math.Abs(roadSec.EndPosition.Y - vergeLayout.EndPosition.Y) < 0.00001)
-        //        {
-        //            // found it, this is the last detailed road section where the verge ends
-        //            lastDetailedIndex = detailedRoad.IndexOf(roadSec);
-        //            break;
-        //        }
-        //    }
-
-
-        //    for (int i = lastDetailedIndex; i >= 0; i--)
-        //    {
-        //        var roadSec = detailedRoad[i];
-
-        //        if (Math.Abs(roadSec.StartPosition.X - vergeLayout.StartPosition.X) < 0.00001 && Math.Abs(roadSec.StartPosition.Y - vergeLayout.StartPosition.Y) < 0.00001)
-        //        {
-        //            // back at the start
-        //            break;
-        //        }
-
-        //        points.Add(new Point(roadSec.EndPosition.X, roadSec.EndPosition.Y));
-        //    }
-
-
-
-
-
         //    return points;
         //}
-
-
-        // TODO: copied from TrackSectionLayoutData
-
-        // TODO: only handles right-hand corners properly, left hand corners need to pass in "reverse" values by
-        // flipping the start and end values to not draw the corner in a single line, however this means that width changes are reversed
-        //public static PointCollection BuildArc(double x, double y, double startAngle, double endAngle, double startRadius, double endRadius)
-        //{
-        //    //if (startAngle > dEndAngle)
-        //    //{
-        //    //    // going left?
-        //    //    return BuildArcLeft(x, y, startAngle, dEndAngle, dStartRadius, dEndRadius);
-        //    //}
-
-        //    double workEndAngle = endAngle;
-
-        //    while (workEndAngle - startAngle > Math.PI * 2)
-        //    {
-        //        workEndAngle -= Math.PI * 2;
-        //    }
-
-        //    // radius change per angle unit (radians)
-        //    double a = (endRadius - startRadius) / (workEndAngle - startAngle);
-
-        //    double dAngleIncrement;
-        //    if (Math.Abs(startRadius) > 50)
-        //    {
-        //        dAngleIncrement = Math.Abs(2 * Math.Asin(5.0 / startRadius));
-        //    }
-        //    else
-        //    {
-        //        //dAngleIncrement = 2 * Math.PI / 32;   // original
-        //        dAngleIncrement = 2 * Math.PI / 64;
-        //    }
-
-        //    double nPosXStart = x + (startRadius * Math.Cos(startAngle));
-        //    double nPosYStart = y - (startRadius * Math.Sin(startAngle));
-
-
-        //    var points = new PointCollection
-        //    {
-        //        new Point(nPosXStart, nPosYStart)
-        //    };
-
-        //    // draw a number of short lines
-        //    double dAngle = startAngle + dAngleIncrement;
-        //    while (dAngle < workEndAngle)
-        //    {
-        //        // calculate radius for current angle
-        //        double radius = startRadius + (dAngle - startAngle) * a;
-
-        //        // calculate point on circle for this angle
-        //        double nPosX = x + radius * Math.Cos(dAngle);
-        //        double nPosY = y - radius * Math.Sin(dAngle);
-
-        //        points.Add(new Point(nPosX, nPosY));
-
-        //        dAngle = dAngle + dAngleIncrement;
-        //    }
-
-        //    // add final point
-        //    double nx = x + (endRadius * Math.Cos(workEndAngle));
-        //    double ny = y - (endRadius * Math.Sin(workEndAngle));
-        //    points.Add(new Point(nx, ny));
-
-        //    return points;
-        //}
-
     }
 }

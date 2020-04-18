@@ -57,8 +57,6 @@ namespace ArgTrack.Features.TrackDrawing
                 double dInnerRadiusEnd = layDoo.Radius - 0 / LayoutConstants.TrackWidthUnitsPerLengthUnit;
                 double dStartAngle = Math.PI - layDoo.StartAngle * LayoutConstants.AngleScaleRadians;
                 double dEndAngle = Math.PI - layDoo.EndAngle * LayoutConstants.AngleScaleRadians;
-                double dCenterX = layDoo.CircleCenterForCurve.X;
-                double dCenterY = layDoo.CircleCenterForCurve.Y;
 
                 // TODO: outerLine and innerLine are identical points, but both are needed because
                 // TODO: of the way drawing works, always from one point to the next
@@ -66,14 +64,14 @@ namespace ArgTrack.Features.TrackDrawing
                 if (layDoo.Curvature > 0)
                 {
                     // right
-                    var outerLine = Geometry.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                    var outerLine = Geometry.BuildArc(layDoo.CircleCenterForCurve, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
 
                     foreach (var p in outerLine)
                     {
                         points.Add(p);
                     }
 
-                    var innerLine = Geometry.BuildArc(dCenterX, dCenterY, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                    var innerLine = Geometry.BuildArc(layDoo.CircleCenterForCurve, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
 
                     foreach (var p in innerLine.Reverse())
                     {
@@ -83,14 +81,14 @@ namespace ArgTrack.Features.TrackDrawing
                 else
                 {
                     // left
-                    var outerLine = Geometry.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                    var outerLine = Geometry.BuildArc(layDoo.CircleCenterForCurve, dEndAngle, dStartAngle, dOuterRadiusStart, dOuterRadiusEnd);
 
                     foreach (var p in outerLine)
                     {
                         points.Add(p);
                     }
 
-                    var innerLine = Geometry.BuildArc(dCenterX, dCenterY, dEndAngle, dStartAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                    var innerLine = Geometry.BuildArc(layDoo.CircleCenterForCurve, dEndAngle, dStartAngle, dInnerRadiusStart, dInnerRadiusEnd);
 
                     foreach (var p in innerLine.Reverse())
                     {

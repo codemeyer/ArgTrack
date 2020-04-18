@@ -146,18 +146,9 @@ namespace ArgTrack.Features.TrackDrawing
 
 
 
-
-
-        // TODO: only handles right-hand corners properly, left hand corners need to pass in "reverse" values by
-        // flipping the start and end values to not draw the corner in a single line, however this means that width changes are reversed
-        public static PointCollection BuildArc(double x, double y, double startAngle, double endAngle, double startRadius, double endRadius)
+        // TODO: refactor to take in a Direction (Right/Left) so that we can always pass in the correct start and end values
+        public static PointCollection BuildArc(Point circleCenter, double startAngle, double endAngle, double startRadius, double endRadius)
         {
-            //if (startAngle > dEndAngle)
-            //{
-            //    // going left?
-            //    return BuildArcLeft(x, y, startAngle, dEndAngle, dStartRadius, dEndRadius);
-            //}
-
             double workEndAngle = endAngle;
 
             while (workEndAngle - startAngle > Math.PI * 2)
@@ -179,8 +170,8 @@ namespace ArgTrack.Features.TrackDrawing
                 dAngleIncrement = 2 * Math.PI / 64;
             }
 
-            double nPosXStart = x + (startRadius * Math.Cos(startAngle));
-            double nPosYStart = y - (startRadius * Math.Sin(startAngle));
+            double nPosXStart = circleCenter.X + startRadius * Math.Cos(startAngle);
+            double nPosYStart = circleCenter.Y - startRadius * Math.Sin(startAngle);
 
 
             var points = new PointCollection
@@ -196,8 +187,8 @@ namespace ArgTrack.Features.TrackDrawing
                 double radius = startRadius + (dAngle - startAngle) * a;
 
                 // calculate point on circle for this angle
-                double nPosX = x + radius * Math.Cos(dAngle);
-                double nPosY = y - radius * Math.Sin(dAngle);
+                double nPosX = circleCenter.X + radius * Math.Cos(dAngle);
+                double nPosY = circleCenter.Y - radius * Math.Sin(dAngle);
 
                 points.Add(new Point(nPosX, nPosY));
 
@@ -205,8 +196,9 @@ namespace ArgTrack.Features.TrackDrawing
             }
 
             // add final point
-            double nx = x + (endRadius * Math.Cos(workEndAngle));
-            double ny = y - (endRadius * Math.Sin(workEndAngle));
+            double nx = circleCenter.X + endRadius * Math.Cos(workEndAngle);
+            double ny = circleCenter.Y - endRadius * Math.Sin(workEndAngle);
+
             points.Add(new Point(nx, ny));
 
             return points;
