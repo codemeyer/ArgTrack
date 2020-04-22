@@ -3,43 +3,8 @@ using ArgTrack.Features.TrackEditing.TrackSection;
 
 namespace ArgTrack.Features.TrackDrawing
 {
-    // how about object with...
-
-
-    //  vel-------tel---tec---ter-------ver
-    //  |          |     |     |          |
-    //  |          |     |     |          |
-    //  |          |     |     |          |
-    //  |          |     |     |          |
-    //  vsl-------tsl---tsc---tsr-------vsr
-
-    // i.e.
-    // vel = VergeEndLeft
-    // tel = TrackEndLeft
-    // tec = TrackEndCenter
-    // ter = TrackEndRight
-    // ver = VergeEndRight
-    // vsl = VergeStartLeft
-    // tsl = TrackStartLeft
-    // tsc = TrackStartCenter
-    // tsr = TrackStartRight
-    // vsr = VergeStartRight
-
-    // all as Point(X,Y)
-
-    // guess it will also have
-    // curvature ?
-    // radius ?
-    // centercircle (X,Y)
-
-
-    // plus
-    // TrackWidth (always same left/right)
-    //
-
-
     /// <summary>
-    /// something that contains a list of "sections" with
+    /// something that discribes a "section"
     /// - StartPosX
     /// - StartPosY
     /// - EndPosX
@@ -71,10 +36,6 @@ namespace ArgTrack.Features.TrackDrawing
         /// </summary>
         public int EndAngle { get; set; }
 
-        public bool IsCurved => StartAngle != EndAngle;
-
-        public bool IsStraight => StartAngle == EndAngle;
-
         /// <summary>
         /// Gets or sets the length of the section.
         /// </summary>
@@ -84,8 +45,6 @@ namespace ArgTrack.Features.TrackDrawing
         /// Gets or sets the curvature of the section (radius of circle that defines it).
         /// </summary>
         public int Curvature { get; set; }
-
-        // to handle verges, maybe have several RelatedSections? but usually just one
 
         public TrackSectionViewModel RelatedSection { get; set; }
 
@@ -98,5 +57,15 @@ namespace ArgTrack.Features.TrackDrawing
         /// Gets (or sets) the circle center of the curve.
         /// </summary>
         public Point CircleCenterForCurve { get; set; }
+
+        /// <summary>
+        /// Gets whether the section is a corner.
+        /// </summary>
+        public bool IsCurved => StartAngle != EndAngle;
+
+        /// <summary>
+        /// Gets whether the section is a straight.
+        /// </summary>
+        public bool IsStraight => StartAngle == EndAngle;
     }
 }

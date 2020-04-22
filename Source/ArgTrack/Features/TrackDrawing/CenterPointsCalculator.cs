@@ -8,20 +8,6 @@ using ArgTrack.Features.TrackEditing.TrackSection;
 
 namespace ArgTrack.Features.TrackDrawing
 {
-    public class CenterPointsCalculationResult
-    {
-        public CenterPointsCalculationResult()
-        {
-            TrackSections = new List<LayoutSectionData>();
-            PitLaneSections = new List<LayoutSectionData>();
-        }
-
-        public List<LayoutSectionData> TrackSections { get; set; }
-
-        public List<LayoutSectionData> PitLaneSections { get; set; }
-    }
-
-
     // TODO: naming, since this Calculator is a bit different than the other Calculators...
 
     /// <summary>
