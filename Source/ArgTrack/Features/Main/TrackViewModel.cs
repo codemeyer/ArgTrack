@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using ArgTrack.Features.Application.Shared;
 using ArgTrack.Features.TrackDrawing;
 using ArgTrack.Features.TrackEditing;
 using ArgTrack.Features.TrackEditing.Camera;

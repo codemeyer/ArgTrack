@@ -6,17 +6,25 @@ using System.Windows.Media;
 
 namespace ArgTrack.Features.TrackDrawing
 {
+    /// <summary>
+    /// Calculates a line drawn along the center of the track.
+    /// </summary>
     public static class CenterLineDrawingCalculator
     {
-        public static ObservableCollection<PointData> CalculateDrawablePointsStraightUp(List<LayoutSectionData> layoutSections)
+        /// <summary>
+        /// Calculates the shape for a line drawn along the center of the track, but drawn between each section start/end.
+        /// </summary>
+        /// <param name="layoutSections"></param>
+        /// <returns></returns>
+        public static ObservableCollection<TrackShapeData> CalculateDrawablePointsStraight(List<LayoutSectionData> layoutSections)
         {
-            var list = new ObservableCollection<PointData>();
+            var list = new ObservableCollection<TrackShapeData>();
 
             foreach (var section in layoutSections)
             {
                 var points = DrawLineStraight(section.StartPosition, section.EndPosition);
 
-                var pointData = LayoutToPointsConverter.Convert(points, DrawingLayout.ForTechCenterPointLine());
+                var pointData = PointsToShapesConverter.Convert(points, DrawingLayout.ForTechCenterPointLine());
 
                 list.AddRange(pointData);
             }
@@ -24,15 +32,20 @@ namespace ArgTrack.Features.TrackDrawing
             return list;
         }
 
-        public static ObservableCollection<PointData> CalculateDrawablePointsWithArcs(List<LayoutSectionData> puntos)
+        /// <summary>
+        /// Calculates the shape for a line drawn along the center of the track.
+        /// </summary>
+        /// <param name="layoutSections"></param>
+        /// <returns></returns>
+        public static ObservableCollection<TrackShapeData> CalculateDrawablePointsWithArcs(List<LayoutSectionData> layoutSections)
         {
-            var retur = new ObservableCollection<PointData>();
+            var retur = new ObservableCollection<TrackShapeData>();
 
-            foreach (var section in puntos)
+            foreach (var section in layoutSections)
             {
                 var pc = BuildSectionPointCollectionCenterLine(section);
 
-                var something = LayoutToPointsConverter.Convert(pc, DrawingLayout.ForTechCenterArcLine());
+                var something = PointsToShapesConverter.Convert(pc, DrawingLayout.ForTechCenterArcLine());
 
                 retur.AddRange(something);
             }

@@ -10,7 +10,7 @@ using ArgTrack.Infrastructure;
 namespace ArgTrack.Features.TrackDrawing
 {
     /// <summary>
-    /// This is the view model that draws stuff on the screen.
+    /// This is the view model that is responsible for what is drawn on the screen.
     /// </summary>
     public class TrackLayoutViewModel : BaseViewModel
     {
@@ -23,16 +23,16 @@ namespace ArgTrack.Features.TrackDrawing
 
         public static TrackLayoutViewModel FromTrackViewModel(TrackViewModel trackViewModel, TrackDrawingElementsSettings settings)
         {
-            var centerPoints = CenterPointsCalculator.CalculateCenterPointsPerSection(trackViewModel);
+            var centerPoints = CenterPointsGeometryCalculator.CalculateCenterPointsPerSection(trackViewModel);
 
             // the points that will be drawn on the screen
-            var drawingPoints = new ObservableCollection<PointData>();
+            var drawingPoints = new ObservableCollection<TrackShapeData>();
 
-            var roadSections = RoadLayoutCalculator.CalculateRoadSections(centerPoints.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
+            var roadSections = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPoints.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
 
             // needed for both verges and track-side object
-            var centerPointsOneSectionPerLength = CenterPointsCalculator.CalculateCenterPointsPerSectionOneLengthEach(trackViewModel);
-            var roadSectionsOnePerLength = RoadLayoutCalculator.CalculateRoadSections(centerPointsOneSectionPerLength.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
+            var centerPointsOneSectionPerLength = CenterPointsGeometryCalculator.CalculateCenterPointsPerSectionOneLengthEach(trackViewModel);
+            var roadSectionsOnePerLength = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPointsOneSectionPerLength.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
 
             if (settings.DrawVerges)
             {
@@ -42,7 +42,7 @@ namespace ArgTrack.Features.TrackDrawing
 
             if (settings.DrawTrack)
             {
-                var roadPoints = RoadLayoutCalculator.Calculate(roadSections, DrawingLayout.ForTrack());
+                var roadPoints = RoadLayoutShapeCalculator.Calculate(roadSections, DrawingLayout.ForTrack());
                 drawingPoints.AddRange(roadPoints);
             }
 
@@ -53,7 +53,7 @@ namespace ArgTrack.Features.TrackDrawing
                     // TODO: pit lane verges here
                 }
 
-                var pitPoints = RoadLayoutCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, DrawingLayout.ForPitLane());
+                var pitPoints = RoadLayoutShapeCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, DrawingLayout.ForPitLane());
                 drawingPoints.AddRange(pitPoints);
             }
 
@@ -75,7 +75,7 @@ namespace ArgTrack.Features.TrackDrawing
             if (settings.DrawLineBetweenSectionCenters)
             {
                 // center line with no arcs, only connects each section start point to the end point
-                var centerLineStraight = CenterLineDrawingCalculator.CalculateDrawablePointsStraightUp(centerPoints.TrackSections);
+                var centerLineStraight = CenterLineDrawingCalculator.CalculateDrawablePointsStraight(centerPoints.TrackSections);
                 drawingPoints.AddRange(centerLineStraight);
             }
 
@@ -113,7 +113,7 @@ namespace ArgTrack.Features.TrackDrawing
 
         public void RecalculateViewAndScrollbars()
         {
-            if (ViewportHeight == 0)
+            if (Math.Abs(ViewportHeight) < 0.001)
             {
                 // hasn't been updated yet
                 return;
@@ -393,7 +393,7 @@ namespace ArgTrack.Features.TrackDrawing
             set { SetProperty(ref _surroundingAreaColor, value, () => SurroundingAreaColor); }
         }
 
-        private double _zoomFactor = 1.0;
+        private double _zoomFactor = 1.75;
 
         public double ZoomFactor
         {
@@ -405,12 +405,12 @@ namespace ArgTrack.Features.TrackDrawing
             }
         }
 
-        private ObservableCollection<PointData> _trackData;
+        private ObservableCollection<TrackShapeData> _trackData;
 
         /// <summary>
-        /// Gets or sets the PointData values that will be rendered on screen.
+        /// Gets or sets the TrackShapeData values that will be rendered on screen.
         /// </summary>
-        public ObservableCollection<PointData> TrackData
+        public ObservableCollection<TrackShapeData> TrackData
         {
             get { return _trackData; }
             set { SetProperty(ref _trackData, value, () => TrackData); }
@@ -418,16 +418,13 @@ namespace ArgTrack.Features.TrackDrawing
 
 
         // TODO: set to actual layout section, which then updates this data?
-        private PointData _selectedTrackSection;
+        private TrackShapeData _selectedTrackSection;
 
-        public PointData SelectedTrackSection
+        public TrackShapeData SelectedTrackSection
         {
             get { return _selectedTrackSection; }
             set { SetProperty(ref _selectedTrackSection, value, () => SelectedTrackSection); }
         }
-
-        // TODO: SelectedTrackSectionIndex, but then we need to know if it's a Track or PitLane section too...
-
 
 
         public ICommand ZoomTrackViewInCommand { get; } = new ZoomTrackViewCommand(0.5);

@@ -224,7 +224,7 @@ namespace ArgTrack.Features.Main
         {
             if (e.NewValue is TrackSectionViewModel selected)
             {
-                var pointData = new PointData();
+                var pointData = new TrackShapeData();
 
                 foreach (var point in selected.SectionPoints)
                 {

@@ -4,11 +4,14 @@ using System.Windows.Media;
 
 namespace ArgTrack.Features.TrackDrawing
 {
+    /// <summary>
+    /// Calculates the shape data for the circle centers.
+    /// </summary>
     public static class CircleCenterIndicatorDrawing
     {
-        public static ObservableCollection<PointData> DrawCircleCenterIndicators(List<LayoutSectionData> layoutSections, DrawingLayout style)
+        public static ObservableCollection<TrackShapeData> DrawCircleCenterIndicators(List<LayoutSectionData> layoutSections, DrawingLayout style)
         {
-            var list = new ObservableCollection<PointData>();
+            var list = new ObservableCollection<TrackShapeData>();
 
             foreach (var section in layoutSections)
             {
@@ -19,17 +22,17 @@ namespace ArgTrack.Features.TrackDrawing
 
                 var points = new PointCollection();
 
-                var bolo1 = Geometry.GetPointPerpendicular(section.CircleCenterForCurve, 0, -1);
-                var bolo2 = Geometry.GetPoint(section.CircleCenterForCurve, 0, 1);
-                var bolo3 = Geometry.GetPointPerpendicular(section.CircleCenterForCurve, 0, 1);
-                var bolo4 = Geometry.GetPoint(section.CircleCenterForCurve, 0, -1);
+                var left = Geometry.GetPointPerpendicular(section.CircleCenterForCurve, 0, -1);
+                var top = Geometry.GetPoint(section.CircleCenterForCurve, 0, 1);
+                var right = Geometry.GetPointPerpendicular(section.CircleCenterForCurve, 0, 1);
+                var bottom = Geometry.GetPoint(section.CircleCenterForCurve, 0, -1);
 
-                points.Add(bolo1);
-                points.Add(bolo2);
-                points.Add(bolo3);
-                points.Add(bolo4);
+                points.Add(left);
+                points.Add(top);
+                points.Add(right);
+                points.Add(bottom);
 
-                var pointData = LayoutToPointsConverter.Convert(points, style);
+                var pointData = PointsToShapesConverter.Convert(points, style);
                 list.AddRange(pointData);
 
 
@@ -37,7 +40,7 @@ namespace ArgTrack.Features.TrackDrawing
                 pointsLine1.Add(section.StartPosition);
                 pointsLine1.Add(section.CircleCenterForCurve);
 
-                var poda = LayoutToPointsConverter.Convert(pointsLine1, style);
+                var poda = PointsToShapesConverter.Convert(pointsLine1, style);
                 list.AddRange(poda);
 
 
@@ -45,7 +48,7 @@ namespace ArgTrack.Features.TrackDrawing
                 po2.Add(section.EndPosition);
                 po2.Add(section.CircleCenterForCurve);
 
-                var poda2 = LayoutToPointsConverter.Convert(po2, style);
+                var poda2 = PointsToShapesConverter.Convert(po2, style);
                 list.AddRange(poda2);
             }
 

@@ -13,7 +13,7 @@
         Icon="../../Resources/argtrack.ico"
         ResizeMode="CanResizeWithGrip"
         SizeChanged="MainTreeWindow_OnSizeChanged"
-        Width="1000" Height="728"
+        Width="1200" Height="880"
         MinWidth="800" MinHeight="600"
         PreviewKeyDown="Window_PreviewKeyDown"
         Title="ArgTrack">

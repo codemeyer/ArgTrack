@@ -8,12 +8,10 @@ using ArgTrack.Features.TrackEditing.TrackSection;
 
 namespace ArgTrack.Features.TrackDrawing
 {
-    // TODO: naming, since this Calculator is a bit different than the other Calculators...
-
     /// <summary>
     /// Calculates the center points where each track section starts/stops. Used as the basis for all other calculations.
     /// </summary>
-    public static class CenterPointsCalculator
+    public static class CenterPointsGeometryCalculator
     {
         public static CenterPointsCalculationResult CalculateCenterPointsPerSection(TrackViewModel track)
         {
@@ -70,7 +68,6 @@ namespace ArgTrack.Features.TrackDrawing
             return LayoutSectionDataFromTrackSectionList(track.PitLaneSections, startAngle, dPosX, dPosY);
         }
 
-        // TODO: startpos as Point instead?
         private static List<LayoutSectionData> LayoutSectionDataFromTrackSectionList(TrackSectionViewModelCollection sections, int startAngle, double startX, double startY)
         {
             var layoutSections = new List<LayoutSectionData>();

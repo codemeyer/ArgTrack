@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Runtime.Serialization.Formatters;
 using ArgTrack.Infrastructure;
 
 namespace ArgTrack.Features.TrackEditing.TrackSection

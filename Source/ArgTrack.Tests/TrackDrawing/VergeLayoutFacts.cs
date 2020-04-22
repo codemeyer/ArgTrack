@@ -161,24 +161,24 @@ namespace ArgTrack.Tests.TrackDrawing
 
         private List<VergeLayoutSectionData> GetLeftVerges(TrackViewModel track)
         {
-            var centerPoints = CenterPointsCalculator.GetTrackLayoutSections(track);
-            var road = RoadLayoutCalculator.CalculateRoadSections(centerPoints, track.TrackHeader.TrackStartWidth);
+            var centerPoints = CenterPointsGeometryCalculator.GetTrackLayoutSections(track);
+            var road = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPoints, track.TrackHeader.TrackStartWidth);
 
             return VergeLayoutCalculator.CalculateLeftVerges(road, track.TrackHeader.RightVergeStartWidth);
         }
 
         private List<VergeLayoutSectionData> GetRightVerges(TrackViewModel track)
         {
-            var centerPoints = CenterPointsCalculator.GetTrackLayoutSections(track);
-            var road = RoadLayoutCalculator.CalculateRoadSections(centerPoints, track.TrackHeader.TrackStartWidth);
+            var centerPoints = CenterPointsGeometryCalculator.GetTrackLayoutSections(track);
+            var road = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPoints, track.TrackHeader.TrackStartWidth);
 
             return VergeLayoutCalculator.CalculateRightVerges(road, track.TrackHeader.RightVergeStartWidth);
         }
 
         private List<VergeLayoutSectionData> GetRightVergesOneToOne(TrackViewModel track)
         {
-            var centerPoints = CenterPointsCalculator.GetTrackLayoutSections(track);
-            var road = RoadLayoutCalculator.CalculateRoadSections(centerPoints, track.TrackHeader.TrackStartWidth);
+            var centerPoints = CenterPointsGeometryCalculator.GetTrackLayoutSections(track);
+            var road = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPoints, track.TrackHeader.TrackStartWidth);
 
             return VergeLayoutCalculator.ToSectionListOneToOne(road, VergeSide.Right, track.TrackHeader.RightVergeStartWidth);
         }

@@ -10,9 +10,9 @@ namespace ArgTrack.Features.TrackDrawing
 {
     public static class VergeLayoutCalculator
     {
-        public static ObservableCollection<PointData> Calculate(List<RoadLayoutSectionData> layoutSections, List<RoadLayoutSectionData> detailedRoadSections)
+        public static ObservableCollection<TrackShapeData> Calculate(List<RoadLayoutSectionData> layoutSections, List<RoadLayoutSectionData> detailedRoadSections)
         {
-            var vergePoints = new ObservableCollection<PointData>();
+            var vergePoints = new ObservableCollection<TrackShapeData>();
 
             var leftVerges = CalculateLeftVerges(layoutSections, MainViewModelPasserArounder.MainViewModel.TrackViewModel.TrackHeader.LeftVergeStartWidth);
             var rightVerges = CalculateRightVerges(layoutSections, MainViewModelPasserArounder.MainViewModel.TrackViewModel.TrackHeader.RightVergeStartWidth);
@@ -22,7 +22,7 @@ namespace ArgTrack.Features.TrackDrawing
             foreach (var section in leftVerges)
             {
                 var x = GetVergePointCollection(section, VergeSide.Left, detailedRoadSections);
-                var y = LayoutToPointsConverter.Convert(x, DrawingLayout.ForVerges(surroundingArea));
+                var y = PointsToShapesConverter.Convert(x, DrawingLayout.ForVerges(surroundingArea));
 
                 vergePoints.AddRange(y);
             }
@@ -30,7 +30,7 @@ namespace ArgTrack.Features.TrackDrawing
             foreach (var section in rightVerges)
             {
                 var x = GetVergePointCollection(section, VergeSide.Right, detailedRoadSections);
-                var y = LayoutToPointsConverter.Convert(x, DrawingLayout.ForVerges(surroundingArea));
+                var y = PointsToShapesConverter.Convert(x, DrawingLayout.ForVerges(surroundingArea));
 
                 vergePoints.AddRange(y);
             }

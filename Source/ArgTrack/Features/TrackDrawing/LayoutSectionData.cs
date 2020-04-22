@@ -12,7 +12,7 @@ namespace ArgTrack.Features.TrackDrawing
     /// - StartAngle
     /// - EndAngle
     /// </summary>
-    public class LayoutSectionData
+    public class LayoutSectionData  // LayoutSectionGeometry (?)
     {
         /// <summary>
         /// Gets or sets the start position of the section.
@@ -46,6 +46,9 @@ namespace ArgTrack.Features.TrackDrawing
         /// </summary>
         public int Curvature { get; set; }
 
+        /// <summary>
+        /// The TrackSectionViewModel that is related to this.
+        /// </summary>
         public TrackSectionViewModel RelatedSection { get; set; }
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using System.Windows.Media;
 using ArgTrack.Features.Application.Shared;
 using ArgTrack.Features.Main;
@@ -41,7 +40,7 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                     }
 
                     // TODO: same as MainTreeWindow TreeView_OnSelectedItemChanged
-                    var pointData = new PointData();
+                    var pointData = new TrackShapeData();
 
                     foreach (var point in SelectedTrackSection.SectionPoints)
                     {

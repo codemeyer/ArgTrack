@@ -8,7 +8,7 @@ namespace ArgTrack.Features.TrackDrawing
 {
     public static class TracksideObjectsCalculator
     {
-        public static ObservableCollection<PointData> Calculate(List<RoadLayoutSectionData> roadSections, List<RoadLayoutSectionData> roadSectionsOneEach, ObservableCollection<TrackObjectSettingsViewModel> objectSettings)
+        public static ObservableCollection<TrackShapeData> Calculate(List<RoadLayoutSectionData> roadSections, List<RoadLayoutSectionData> roadSectionsOneEach, ObservableCollection<TrackObjectSettingsViewModel> objectSettings)
         {
             // TODO: does not draw pitlane objects
 
@@ -68,11 +68,11 @@ namespace ArgTrack.Features.TrackDrawing
                 drawingObject.Points = objectPoints;
             }
 
-            var shapeData = new ObservableCollection<PointData>();
+            var shapeData = new ObservableCollection<TrackShapeData>();
 
             foreach (var drawingObject in orderedList)
             {
-                var shape = LayoutToPointsConverter.Convert(drawingObject.Points, drawingObject.GetDrawingLayout());
+                var shape = PointsToShapesConverter.Convert(drawingObject.Points, drawingObject.GetDrawingLayout());
 
                 shapeData.AddRange(shape);
             }
