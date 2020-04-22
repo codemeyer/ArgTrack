@@ -1,4 +1,5 @@
-﻿using ArgTrack.Infrastructure;
+﻿using ArgTrack.Features.Main;
+using ArgTrack.Infrastructure;
 
 namespace ArgTrack.Features.TrackDrawing
 {
@@ -16,7 +17,15 @@ namespace ArgTrack.Features.TrackDrawing
             var vm = parameter as TrackLayoutViewModel;
 
             if (vm == null)
+            {
+                // a bit of a hack since we receive null from MainTreeWindow Window_PreviewKeyDown
+                vm = MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel;
+            }
+
+            if (vm == null)
+            {
                 return;
+            }
 
             vm.ZoomFactor += _factor;
         }

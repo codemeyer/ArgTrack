@@ -4,10 +4,11 @@
     {
         public TrackDrawingElementsSettings()
         {
+            // TODO: default values are specified in two (or even three) locations
             DrawTrack = true;
             DrawPitLane = true;
             DrawVerges = true;
-            DrawTrackSideObjects = false;
+            DrawTrackSideObjects = true;
 
             DrawCircleCenterIndicators = false;
             DrawLineAlongTrackCenter = false;

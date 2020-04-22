@@ -38,7 +38,8 @@ namespace ArgTrack.Features.TrackDrawing
                     var drawingObject = new TrackSideObjectDrawingLayout
                     {
                         SectionIndex = sectionIndex,
-                        DistanceFromCenter = DrawingUnitFromTracksideObjectDistance(objectSetting.DistanceFromTrack)
+                        DistanceFromCenter = DrawingUnitFromTracksideObjectDistance(objectSetting.DistanceFromTrack),
+                        ObjectSetting = objectSetting
                     };
 
                     list.Add(drawingObject);
@@ -49,9 +50,6 @@ namespace ArgTrack.Features.TrackDrawing
 
             var orderedList = list.OrderBy(o => o.SectionIndex).ToList();
 
-
-
-            var pointCollections = new List<PointCollection>();
 
             foreach (var drawingObject in orderedList)
             {
@@ -67,14 +65,14 @@ namespace ArgTrack.Features.TrackDrawing
                 objectPoints.Add(Geometry.GetPoint(objectCenterPoint, 0, -1));
                 objectPoints.Add(Geometry.GetPointPerpendicular(objectCenterPoint, 0, -1));
 
-                pointCollections.Add(objectPoints);
+                drawingObject.Points = objectPoints;
             }
 
             var shapeData = new ObservableCollection<PointData>();
 
-            foreach (var points in pointCollections)
+            foreach (var drawingObject in orderedList)
             {
-                var shape = LayoutToPointsConverter.Convert(points, DrawingLayout.ForTrackSideObjects());
+                var shape = LayoutToPointsConverter.Convert(drawingObject.Points, drawingObject.GetDrawingLayout());
 
                 shapeData.AddRange(shape);
             }
@@ -94,5 +92,20 @@ namespace ArgTrack.Features.TrackDrawing
         public int SectionIndex { get; set; }
 
         public double DistanceFromCenter { get; set; }
+
+        public TrackObjectSettingsViewModel ObjectSetting { get; set; }
+
+        public PointCollection Points { get; set; }
+
+        public DrawingLayout GetDrawingLayout()
+        {
+            if (ObjectSetting.Id == 5)
+            {
+                // bush/tree
+                return DrawingLayout.ForTrackSideObjectsId5();
+            }
+
+            return DrawingLayout.ForTrackSideObjects();
+        }
     }
 }

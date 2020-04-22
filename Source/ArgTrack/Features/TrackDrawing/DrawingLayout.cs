@@ -56,6 +56,16 @@ namespace ArgTrack.Features.TrackDrawing
             };
         }
 
+        public static DrawingLayout ForTrackSideObjectsId5()
+        {
+            return new DrawingLayout
+            {
+                StrokeThickness = 0.1,
+                StrokeBrush = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
+                FillBrush = new SolidColorBrush(Color.FromRgb(0, 145, 38))
+            };
+        }
+
         public static DrawingLayout ForTechCenterPointLine()
         {
             return new DrawingLayout

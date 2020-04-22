@@ -140,5 +140,8 @@
                 <Label Content="{Binding TotalLengthText}"></Label>
             </StackPanel>-->
         </StackPanel>
+        <StackPanel Margin="5" Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Width="70" Height="22" Margin="3" IsCancel="True" Click="CloseButton_OnClick" Content="Close"></Button>
+        </StackPanel>
     </Grid>
 </Window>

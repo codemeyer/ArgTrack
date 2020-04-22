@@ -30,5 +30,10 @@ namespace ArgTrack.Features.TrackEditing.ObjectSettings
             var command = new EditTrackObjectSettingsCommand();
             command.Execute(ts);
         }
+
+        private void CloseButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

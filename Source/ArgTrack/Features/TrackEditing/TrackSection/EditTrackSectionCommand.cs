@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using ArgTrack.Infrastructure;
 
 namespace ArgTrack.Features.TrackEditing.TrackSection
@@ -78,6 +79,7 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
             if (original.Commands.Count(c => c.Command == 0x85) > 0 &&
                 original.Commands.Count(c => c.Command == 0x85) == updated.Commands.Count(c => c.Command == 0x85))
             {
+                // TODO: can there be multiple here?
                 var originalCommand = original.Commands.Single(c => c.Command == 0x85);
                 var updatedCommand = updated.Commands.Single(c => c.Command == 0x85);
 
@@ -95,6 +97,18 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                 {
                     return true;
                 }
+            }
+
+            // added or removed object placement
+            if (original.Commands.Count(c => c.Command == 0x80) != updated.Commands.Count(c => c.Command == 0x80))
+            {
+                return true;
+            }
+
+            // if there are any object placements in the updated version, take the easy way out and assume redraw
+            if (updated.Commands.Count(c => c.Command == 0x80) > 0)
+            {
+                return true;
             }
 
             return false;

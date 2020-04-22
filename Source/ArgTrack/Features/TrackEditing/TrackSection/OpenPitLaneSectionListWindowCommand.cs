@@ -7,6 +7,11 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
     {
         public override void Execute(MainViewModel parameter)
         {
+            if (MainViewModelPasserArounder.MainViewModel.WindowPitLaneSectionListOpen)
+            {
+                return;
+            }
+
             var viewModel = new TrackSectionDataListViewModel
             {
                 TrackSections = parameter.TrackViewModel.PitLaneSections
@@ -18,7 +23,14 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                 DataContext = viewModel
             };
 
-            window.ShowDialog();
+            MainViewModelPasserArounder.MainViewModel.WindowPitLaneSectionListOpen = true;
+
+            window.Closed += (sender, e) =>
+            {
+                MainViewModelPasserArounder.MainViewModel.WindowPitLaneSectionListOpen = false;
+            };
+
+            window.Show();
         }
 
         public override bool CanExecute(MainViewModel parameter)

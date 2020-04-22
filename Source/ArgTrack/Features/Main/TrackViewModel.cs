@@ -60,26 +60,34 @@ namespace ArgTrack.Features.Main
         {
             // TODO: move this to MainViewModel ?
 
+            var mainViewModel = MainViewModelPasserArounder.MainViewModel;
+
             // save for restoring
-            var currentZoom = MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.ZoomFactor;
-            var currentCenter = MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.CenterPoint;
+            var currentZoom = mainViewModel.TrackLayoutViewModel.ZoomFactor;
+            var currentCenter = mainViewModel.TrackLayoutViewModel.CenterPoint;
 
             var settings = new TrackDrawingElementsSettings
             {
-                DrawTrack = MainViewModelPasserArounder.MainViewModel.DrawTrack,
-                DrawPitLane = MainViewModelPasserArounder.MainViewModel.DrawPitLane,
-                DrawVerges = MainViewModelPasserArounder.MainViewModel.DrawVerges,
-                DrawTrackSideObjects = MainViewModelPasserArounder.MainViewModel.DrawTrackSideObjects,
-                DrawCircleCenterIndicators = MainViewModelPasserArounder.MainViewModel.DrawCircleCenterIndicators,
-                DrawLineAlongTrackCenter = MainViewModelPasserArounder.MainViewModel.DrawLineAlongTrackCenter,
-                DrawLineBetweenSectionCenters = MainViewModelPasserArounder.MainViewModel.DrawLineBetweenSectionCenters
+                DrawTrack = mainViewModel.DrawTrack,
+                DrawPitLane = mainViewModel.DrawPitLane,
+                DrawVerges = mainViewModel.DrawVerges,
+                DrawTrackSideObjects = mainViewModel.DrawTrackSideObjects,
+                DrawCircleCenterIndicators = mainViewModel.DrawCircleCenterIndicators,
+                DrawLineAlongTrackCenter = mainViewModel.DrawLineAlongTrackCenter,
+                DrawLineBetweenSectionCenters = mainViewModel.DrawLineBetweenSectionCenters
             };
+
+            // TODO: need the index or some other thing to identify the currently selected data,
+            // because if it changes shape during the redraw this will still have the old shape
+            //var selectedPointData = mainViewModel.TrackLayoutViewModel.SelectedTrackSection;
 
             var layoutViewModel = TrackLayoutViewModel.FromTrackViewModel(this, settings);
 
             // restore
             layoutViewModel.CenterPoint = currentCenter;
             layoutViewModel.ZoomFactor = currentZoom;
+
+            //layoutViewModel.SelectedTrackSection = selectedPointData;
 
             MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel = layoutViewModel;
         }
@@ -180,8 +188,5 @@ namespace ArgTrack.Features.Main
         public ICommand EditBestLineCommand { get; } = new EditBestLineCommand();
         public ICommand EditTrackObjectSettingsCommand { get; } = new EditTrackObjectSettingsCommand();
         public ICommand EditTrackObjectShapeCommand { get; } = new EditTrackObjectShapeCommand();
-
-        public ICommand HelpDocsCommandObjectSettings { get; } = new HelpDocsCommand("screens/object-settings-list-window/");
-        public ICommand HelpDocsCommandObjectShapes { get; } = new HelpDocsCommand("screens/object-shapes-list-window/");
     }
 }

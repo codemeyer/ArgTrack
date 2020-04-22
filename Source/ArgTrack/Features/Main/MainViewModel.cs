@@ -187,7 +187,7 @@ namespace ArgTrack.Features.Main
         }
 
 
-        private bool _drawTrackSideObjects;
+        private bool _drawTrackSideObjects = true;
 
         public bool DrawTrackSideObjects
         {
@@ -245,13 +245,18 @@ namespace ArgTrack.Features.Main
             }
         }
 
+        public bool WindowTrackSectionListOpen { get; set; }
+        public bool WindowPitLaneSectionListOpen { get; set; }
+        //public bool WindowRacingLineListOpen { get; set; }
+        //public bool WindowObjectSettingsListOpen { get; set; }
+        //public bool WindowObjectShapesListOpen { get; set; }
+
         public void ResetDrawingElements()
         {
             DrawTrack = true;
             DrawPitLane = true;
             DrawVerges = true;
-
-            DrawTrackSideObjects = false;
+            DrawTrackSideObjects = true;
 
             DrawCircleCenterIndicators = false;
             DrawLineAlongTrackCenter = false;

@@ -7,6 +7,11 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
     {
         public override void Execute(MainViewModel parameter)
         {
+            if (MainViewModelPasserArounder.MainViewModel.WindowTrackSectionListOpen)
+            {
+                return;
+            }
+
             var viewModel = new TrackSectionDataListViewModel
             {
                 TrackSections = parameter.TrackViewModel.TrackSections
@@ -15,11 +20,17 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
             var window = new TrackSectionListWindow
             {
                 Owner = System.Windows.Application.Current.MainWindow,
-                //DataContext = parameter.TrackViewModel
                 DataContext = viewModel
             };
 
-            window.ShowDialog();
+            MainViewModelPasserArounder.MainViewModel.WindowTrackSectionListOpen = true;
+
+            window.Closed += (sender, e) =>
+            {
+                MainViewModelPasserArounder.MainViewModel.WindowTrackSectionListOpen = false;
+            };
+
+            window.Show();
         }
 
         public override bool CanExecute(MainViewModel parameter)

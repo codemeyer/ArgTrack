@@ -26,31 +26,34 @@ namespace ArgTrack.Features.TrackDrawing
         {
             var centerPoints = CenterPointsCalculator.CalculateCenterPointsPerSection(trackViewModel);
 
+            // the points that will be drawn on the screen
             var drawingPoints = new ObservableCollection<PointData>();
-
 
             var roadSections = RoadLayoutCalculator.CalculateRoadSections(centerPoints.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
 
-            var roadPoints = RoadLayoutCalculator.Calculate(roadSections, DrawingLayout.ForTrack());
-
-            var centrios = CenterPointsCalculator.CalculateCenterPointsPerSectionOneLengthEach(trackViewModel);
-            var roadSectionsTight = RoadLayoutCalculator.CalculateRoadSections(centrios.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
-
-            var vergePoints = VergeLayoutCalculator.Calculate(roadSections, roadSectionsTight);
-
+            // needed for both verges and track-side object
+            var centerPointsOneSectionPerLength = CenterPointsCalculator.CalculateCenterPointsPerSectionOneLengthEach(trackViewModel);
+            var roadSectionsOnePerLength = RoadLayoutCalculator.CalculateRoadSections(centerPointsOneSectionPerLength.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
 
             if (settings.DrawVerges)
             {
+                var vergePoints = VergeLayoutCalculator.Calculate(roadSections, roadSectionsOnePerLength);
                 drawingPoints.AddRange(vergePoints);
             }
 
             if (settings.DrawTrack)
             {
+                var roadPoints = RoadLayoutCalculator.Calculate(roadSections, DrawingLayout.ForTrack());
                 drawingPoints.AddRange(roadPoints);
             }
 
             if (settings.DrawPitLane)
             {
+                if (settings.DrawVerges)
+                {
+                    // TODO: pit lane verges here
+                }
+
                 var pitPoints = RoadLayoutCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, DrawingLayout.ForPitLane());
                 drawingPoints.AddRange(pitPoints);
             }
@@ -60,7 +63,7 @@ namespace ArgTrack.Features.TrackDrawing
 
             if (settings.DrawTrackSideObjects)
             {
-                var trackSideObjects = TracksideObjectsCalculator.Calculate(roadSections, roadSectionsTight, TrackViewModelPasserArounder.TrackViewModel.TrackObjectSettings);
+                var trackSideObjects = TracksideObjectsCalculator.Calculate(roadSections, roadSectionsOnePerLength, TrackViewModelPasserArounder.TrackViewModel.TrackObjectSettings);
                 drawingPoints.AddRange(trackSideObjects);
             }
 
@@ -423,6 +426,10 @@ namespace ArgTrack.Features.TrackDrawing
             get { return _selectedTrackSection; }
             set { SetProperty(ref _selectedTrackSection, value, () => SelectedTrackSection); }
         }
+
+        // TODO: SelectedTrackSectionIndex, but then we need to know if it's a Track or PitLane section too...
+
+
 
         public ICommand ZoomTrackViewInCommand { get; } = new ZoomTrackViewCommand(0.5);
         public ICommand ZoomTrackViewOutCommand { get; } = new ZoomTrackViewCommand(-0.5);

@@ -1,5 +1,9 @@
-﻿using System.Windows.Input;
+﻿using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using ArgTrack.Features.Application.Shared;
+using ArgTrack.Features.Main;
+using ArgTrack.Features.TrackDrawing;
 using ArgTrack.Infrastructure;
 
 namespace ArgTrack.Features.TrackEditing.TrackSection
@@ -27,7 +31,30 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
         public TrackSectionViewModel SelectedTrackSection
         {
             get { return _selectedTrackSection; }
-            set { SetProperty(ref _selectedTrackSection, value, () => SelectedTrackSection); }
+            set
+            {
+                if (SetProperty(ref _selectedTrackSection, value, () => SelectedTrackSection))
+                {
+                    if (SelectedTrackSection == null)
+                    {
+                        return;
+                    }
+
+                    // TODO: same as MainTreeWindow TreeView_OnSelectedItemChanged
+                    var pointData = new PointData();
+
+                    foreach (var point in SelectedTrackSection.SectionPoints)
+                    {
+                        pointData.Points.Add(point);
+                    }
+
+                    pointData.Fill = Brushes.Transparent;
+                    pointData.Stroke = Brushes.Cyan;
+                    pointData.StrokeThickness = 0.35;
+
+                    MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.SelectedTrackSection = pointData;
+                }
+            }
         }
 
 

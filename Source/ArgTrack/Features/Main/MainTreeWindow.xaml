@@ -15,6 +15,7 @@
         SizeChanged="MainTreeWindow_OnSizeChanged"
         Width="1000" Height="728"
         MinWidth="800" MinHeight="600"
+        PreviewKeyDown="Window_PreviewKeyDown"
         Title="ArgTrack">
     <Window.Resources>
         <main:TreeViewIconEnumToImageConverter x:Key="IconEnumToImageConverter"></main:TreeViewIconEnumToImageConverter>
@@ -24,13 +25,10 @@
         <KeyBinding Key="S" Modifiers="Control" Command="{Binding SaveTrackCommand}" CommandParameter="{Binding}"></KeyBinding>
         <KeyBinding Key="F4" Modifiers="Alt" Command="{Binding ExitApplicationCommand}" CommandParameter="{Binding}"></KeyBinding>
         <KeyBinding Key="F1" Command="{Binding HelpDocsCommand}" CommandParameter="{Binding}"></KeyBinding>
-        <!--<KeyBinding Key="Z" Modifiers="Control" Command="{Binding UndoBrokerCommand}" CommandParameter="{Binding}"></KeyBinding>
-        <KeyBinding Key="Y" Modifiers="Control" Command="{Binding RedoBrokerCommand}" CommandParameter="{Binding}"></KeyBinding>-->
         <KeyBinding Key="OemPlus" Modifiers="Control" Command="{Binding TrackLayoutViewModel.ZoomTrackViewInCommand}" CommandParameter="{Binding TrackLayoutViewModel}"></KeyBinding>
         <KeyBinding Key="OemMinus" Modifiers="Control" Command="{Binding TrackLayoutViewModel.ZoomTrackViewOutCommand}" CommandParameter="{Binding TrackLayoutViewModel}"></KeyBinding>
     </Window.InputBindings>
     <Grid Margin="0">
-        <!--Background="#204161">-->
         <Menu HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_Open" Command="{Binding LoadTrackCommand}" CommandParameter="{Binding}"></MenuItem>
