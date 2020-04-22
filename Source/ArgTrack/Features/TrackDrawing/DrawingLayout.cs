@@ -81,8 +81,8 @@ namespace ArgTrack.Features.TrackDrawing
             return new DrawingLayout
             {
                 StrokeThickness = 0.2,
-                StrokeBrush = new SolidColorBrush(Color.FromRgb(0, 200, 255)),
-                FillBrush = new SolidColorBrush(Color.FromRgb(0, 200, 255))
+                StrokeBrush = new SolidColorBrush(Color.FromRgb(0, 255, 165)),
+                FillBrush = new SolidColorBrush(Color.FromRgb(0, 255, 165))
             };
         }
     }

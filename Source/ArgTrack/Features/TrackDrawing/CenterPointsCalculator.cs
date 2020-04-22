@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using ArgData.Entities;
 using ArgTrack.Features.Main;
+using ArgTrack.Features.TrackEditing.TrackSection;
 
 namespace ArgTrack.Features.TrackDrawing
 {
@@ -23,33 +24,78 @@ namespace ArgTrack.Features.TrackDrawing
 
     // TODO: naming, since this Calculator is a bit different than the other Calculators...
 
+    /// <summary>
+    /// Calculates the center points where each track section starts/stops. Used as the basis for all other calculations.
+    /// </summary>
     public static class CenterPointsCalculator
     {
-        // return something that contains a list of "sections" with
-        // - StartPosX
-        // - StartPosY
-        // - EndPosX
-        // - EndPosY
-        // - StartAngle
-        // - EndAngle
-
-        // this can then be used as the basis for all other calculations...
-
         public static CenterPointsCalculationResult CalculateCenterPointsPerSection(TrackViewModel track)
         {
-            double dPosX = 0;
-            double dPosY = 0;
-            int startAngle = track.TrackHeader.FirstSectionAngle;
+            var layoutSections = GetTrackLayoutSections(track);
+            var pitLaneSections = GetPitLane(track, layoutSections);
 
+            return new CenterPointsCalculationResult
+            {
+                TrackSections = layoutSections,
+                PitLaneSections = pitLaneSections
+            };
+        }
+
+        public static List<LayoutSectionData> GetTrackLayoutSections(TrackViewModel track)
+        {
+            return LayoutSectionDataFromTrackSectionList(track.TrackSections, track.TrackHeader.FirstSectionAngle, 0, 0);
+        }
+
+        private static List<LayoutSectionData> GetPitLane(TrackViewModel track, List<LayoutSectionData> layoutSections)
+        {
+            int pitLaneStartTrackSectionIndex = FindPitLaneConnectingSectionIndex(track);
+
+            short sectionWidth = FindWidthOfPitLaneConnectingTrackSection(track, pitLaneStartTrackSectionIndex);
+
+            if (pitLaneStartTrackSectionIndex == 0)
+            {
+                return new List<LayoutSectionData>();
+            }
+
+            var startSection = layoutSections[pitLaneStartTrackSectionIndex];
+
+            int startAngle = startSection.StartAngle;
+
+            // calculate pitlane "shift" along section where pitlane starts
+            double pitlaneShift = sectionWidth - LayoutConstants.PitLaneWidth;
+
+            double pitLaneShiftX = Math.Cos(Math.PI - startSection.StartAngle * LayoutConstants.AngleScaleRadians) * pitlaneShift / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+            double pitLaneShiftY = Math.Sin(Math.PI - startSection.StartAngle * LayoutConstants.AngleScaleRadians) * pitlaneShift / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+
+            double dPosX;
+            double dPosY;
+
+            if (track.TrackSettings.PitsSide == TrackSide.Right)
+            {
+                dPosX = startSection.StartPosition.X - pitLaneShiftX;
+                dPosY = startSection.StartPosition.Y + pitLaneShiftY;
+            }
+            else
+            {
+                dPosX = startSection.StartPosition.X - pitLaneShiftX * -1;
+                dPosY = startSection.StartPosition.Y + pitLaneShiftY * -1;
+            }
+
+            return LayoutSectionDataFromTrackSectionList(track.PitLaneSections, startAngle, dPosX, dPosY);
+        }
+
+        // TODO: startpos as Point instead?
+        private static List<LayoutSectionData> LayoutSectionDataFromTrackSectionList(TrackSectionViewModelCollection sections, int startAngle, double startX, double startY)
+        {
             var layoutSections = new List<LayoutSectionData>();
 
-            foreach (var trackSection in track.TrackSections)
+            foreach (var trackSection in sections)
             {
-                var layoutSection = CalculateLayoutCenterLine(dPosX, dPosY, startAngle, trackSection.Length, trackSection.Curvature);
+                var layoutSection = CalculateLayoutCenterLine(startX, startY, startAngle, trackSection.Length, trackSection.Curvature);
 
-                // start stuff for NEXT section
-                dPosX = layoutSection.EndPosition.X;
-                dPosY = layoutSection.EndPosition.Y;
+                // initial data for NEXT section
+                startX = layoutSection.EndPosition.X;
+                startY = layoutSection.EndPosition.Y;
                 startAngle = layoutSection.EndAngle;
 
                 layoutSection.RelatedSection = trackSection;
@@ -57,58 +103,7 @@ namespace ArgTrack.Features.TrackDrawing
                 layoutSections.Add(layoutSection);
             }
 
-
-            // draw/calculate pitlane (move to separate method?)
-
-            int pitLaneStartTrackSectionIndex = FindPitLaneConnectingSectionIndex(track);
-
-            short sectionWidth = FindWidthOfPitLaneConnectingTrackSection(track, pitLaneStartTrackSectionIndex);
-
-            var pitLaneSections = new List<LayoutSectionData>();
-
-            if (pitLaneStartTrackSectionIndex >= 0)
-            {
-                var startSection = layoutSections[pitLaneStartTrackSectionIndex];
-
-                startAngle = startSection.StartAngle;
-
-                // calculate pitlane "shift" along section where pitlane starts
-                double pitlaneShift = sectionWidth - LayoutConstants.PitLaneWidth;
-
-                double pitLaneShiftX = Math.Cos(Math.PI - startSection.StartAngle * LayoutConstants.AngleScaleRadians) * pitlaneShift / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-                double pitLaneShiftY = Math.Sin(Math.PI - startSection.StartAngle * LayoutConstants.AngleScaleRadians) * pitlaneShift / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-
-                if (track.TrackSettings.PitsSide == TrackSide.Right)
-                {
-                    dPosX = startSection.StartPosition.X - pitLaneShiftX;
-                    dPosY = startSection.StartPosition.Y + pitLaneShiftY;
-                }
-                else
-                {
-                    dPosX = startSection.StartPosition.X - pitLaneShiftX * -1;
-                    dPosY = startSection.StartPosition.Y + pitLaneShiftY * -1;
-                }
-
-                foreach (var section in track.PitLaneSections)
-                {
-                    var pitLaneData = CalculateLayoutCenterLine(dPosX, dPosY, startAngle, section.Length, section.Curvature);
-
-                    dPosX = pitLaneData.EndPosition.X;
-                    dPosY = pitLaneData.EndPosition.Y;
-                    startAngle = pitLaneData.EndAngle;
-
-                    pitLaneData.RelatedSection = section;
-
-                    pitLaneSections.Add(pitLaneData);
-                }
-            }
-
-
-            return new CenterPointsCalculationResult
-            {
-                TrackSections = layoutSections,
-                PitLaneSections = pitLaneSections
-            };
+            return layoutSections;
         }
 
         private static int FindPitLaneConnectingSectionIndex(TrackViewModel track)

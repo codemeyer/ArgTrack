@@ -83,10 +83,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TrackDrawing\GeometryArcsAndCurvesFacts.cs" />
     <Compile Include="TrackDrawing\GeometryConversionFacts.cs" />
-    <Compile Include="TrackDrawing\GeometryFacts.cs" />
+    <Compile Include="TrackDrawing\GeometryPointFacts.cs" />
     <Compile Include="Infrastructure\CommandFacts.cs" />
     <Compile Include="ExampleDataHelper.cs" />
+    <Compile Include="TrackDrawing\VergeLayoutFacts.cs" />
     <Compile Include="TrackMappingIntegrationFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrackEditing\UnitConversionFacts.cs" />

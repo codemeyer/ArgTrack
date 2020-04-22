@@ -6,7 +6,7 @@ namespace ArgTrack.Features.TrackDrawing
 {
     public static class CircleCenterIndicatorDrawing
     {
-        public static ObservableCollection<PointData> DrawCircleCenterIndicators(List<LayoutSectionData> layoutSections)
+        public static ObservableCollection<PointData> DrawCircleCenterIndicators(List<LayoutSectionData> layoutSections, DrawingLayout style)
         {
             var list = new ObservableCollection<PointData>();
 
@@ -29,7 +29,7 @@ namespace ArgTrack.Features.TrackDrawing
                 points.Add(bolo3);
                 points.Add(bolo4);
 
-                var pointData = LayoutToPointsConverter.Convert(points, DrawingLayout.ForTechCircleCenter());
+                var pointData = LayoutToPointsConverter.Convert(points, style);
                 list.AddRange(pointData);
 
 
@@ -37,7 +37,7 @@ namespace ArgTrack.Features.TrackDrawing
                 pointsLine1.Add(section.StartPosition);
                 pointsLine1.Add(section.CircleCenterForCurve);
 
-                var poda = LayoutToPointsConverter.Convert(pointsLine1, DrawingLayout.ForTechCircleCenter());
+                var poda = LayoutToPointsConverter.Convert(pointsLine1, style);
                 list.AddRange(poda);
 
 
@@ -45,7 +45,7 @@ namespace ArgTrack.Features.TrackDrawing
                 po2.Add(section.EndPosition);
                 po2.Add(section.CircleCenterForCurve);
 
-                var poda2 = LayoutToPointsConverter.Convert(po2, DrawingLayout.ForTechCircleCenter());
+                var poda2 = LayoutToPointsConverter.Convert(po2, style);
                 list.AddRange(poda2);
             }
 

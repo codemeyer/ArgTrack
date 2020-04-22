@@ -56,7 +56,7 @@
             </MenuItem>
             <MenuItem Header="Debug/Hack" Visibility="{Binding DisplayDebugHackMenu}">
                 <MenuItem Header="Drawing">
-                    <MenuItem IsCheckable="True" IsChecked="{Binding DrawCircleCenterIndicators}" Header="Circle Centers"></MenuItem>
+                    <MenuItem IsCheckable="True" IsChecked="{Binding DrawCircleCenterIndicators}" Header="Circle Centers Track"></MenuItem>
                     <MenuItem IsCheckable="True" IsChecked="{Binding DrawLineAlongTrackCenter}" Header="Track Center Line"></MenuItem>
                     <MenuItem IsCheckable="True" IsChecked="{Binding DrawLineBetweenSectionCenters}" Header="Track Center Section Points"></MenuItem>
                 </MenuItem>

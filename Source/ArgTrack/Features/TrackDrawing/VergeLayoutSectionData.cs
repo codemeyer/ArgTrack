@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using ArgTrack.Features.TrackEditing.TrackSection;
 
 namespace ArgTrack.Features.TrackDrawing
@@ -34,6 +35,17 @@ namespace ArgTrack.Features.TrackDrawing
 
 
 
+        // TODO: calculate Point properties for OuterStart, OuterEnd ?
+
+        public Point OuterStartPosition { get; set; }
+        public Point OuterEndPosition { get; set; }
+
+
+        public bool DrawStraight { get; set; }
+        public bool DrawArc { get; set; }
+
+
+
         // TODO: more to do here re: verges... the Raw values below should come from the section
         // but remember to support bridged/joined sections/verges
 
@@ -46,9 +58,9 @@ namespace ArgTrack.Features.TrackDrawing
 
 
 
-        public void SetVergeStartWidthRaw(byte value, VergeLayoutCalculator.VergeSide side)
+        public void SetVergeStartWidthRaw(byte value, VergeSide side)
         {
-            if (side == VergeLayoutCalculator.VergeSide.Left)
+            if (side == VergeSide.Left)
             {
                 LeftVergeStartWidthRaw = value;
             }

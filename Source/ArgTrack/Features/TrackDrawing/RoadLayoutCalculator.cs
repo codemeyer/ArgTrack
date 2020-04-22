@@ -140,78 +140,73 @@ namespace ArgTrack.Features.TrackDrawing
 
         private static ObservableCollection<PointData> ConvertRoadLayoutToPointDataList(List<RoadLayoutSectionData> roadSections, DrawingLayout drawingLayout)
         {
-            var z = new ObservableCollection<PointData>();
+            var shapeList = new ObservableCollection<PointData>();
 
             foreach (var road in roadSections)
             {
-                var x = BuildSectionPointCollectionFromRoadLayout(road);
+                var sectionPoints = BuildSectionPointCollectionFromRoadLayout(road);
 
-                road.RelatedSection.SectionPoints = x;
+                road.RelatedSection.SectionPoints = sectionPoints;
 
-                var y = LayoutToPointsConverter.Convert(x, drawingLayout);
+                var sectionShapeData = LayoutToPointsConverter.Convert(sectionPoints, drawingLayout);
 
-                z.AddRange(y);
+                shapeList.AddRange(sectionShapeData);
             }
 
-            return z;
+            return shapeList;
         }
 
         private static PointCollection BuildSectionPointCollectionFromRoadLayout(RoadLayoutSectionData layoutSection)
         {
             PointCollection points;
 
-            if (layoutSection.Curvature == 0)
+            if (layoutSection.IsStraight)
             {
-                // straight
-                points = GetStraightTrackPointCollection(layoutSection.StartAngle, layoutSection.StartPosition, layoutSection.StartWidth, layoutSection.EndAngle, layoutSection.EndPosition, layoutSection.EndWidth);
+                points = GetStraight(layoutSection);
             }
             else
             {
-                // curve!
                 points = GetCurve(layoutSection);
             }
 
             return points;
         }
 
-        private static PointCollection GetStraightTrackPointCollection(int startAngle, Point startPosition,
-            int startTrackWidth, int endAngle, Point endPosition, int endTrackWidth)
+        private static PointCollection GetStraight(RoadLayoutSectionData t)
         {
-            // TODO: one angle is enough since straights are always straight...?
-
             // straight
             //
-            //   2      3
+            //   2      1
             //   x^^^---x
             //   |      |
             //   |      |
             //   |      |
             //   x***---x
-            //   1     0/4
+            //   3     0/4
             //
             // *** = startwidth
             // ^^^ = endwidth
 
-            var startAngleRadians = GeometryConversions.RadiansFromGameAngle(startAngle);
+            var angleRadians = GeometryConversions.RadiansFromGameAngle(t.StartAngle);
 
-            double startWidthAci = startTrackWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+            double startWidthTrackUnits = t.StartWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
 
-            var botRightHuh = Geometry.GetLegacyPointPerpendicular(startPosition, startAngleRadians, startWidthAci);
-            var botLeftHuh = Geometry.GetLegacyPointPerpendicular(startPosition, startAngleRadians, -startWidthAci);
+            var pointBottomRight = Geometry.GetLegacyPointPerpendicular(t.StartPosition, angleRadians, startWidthTrackUnits);
+            var pointBottomLeft = Geometry.GetLegacyPointPerpendicular(t.StartPosition, angleRadians, -startWidthTrackUnits);
 
-            var endAngleRadians = GeometryConversions.RadiansFromGameAngle(endAngle);
+            double endWidthTrackUnits = t.EndWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
 
-            double endWidthAci = endTrackWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+            var pointTopRight = Geometry.GetLegacyPointPerpendicular(t.EndPosition, angleRadians, endWidthTrackUnits);
+            var pointTopLeft = Geometry.GetLegacyPointPerpendicular(t.EndPosition, angleRadians, -endWidthTrackUnits);
 
-            var topRightHuh = Geometry.GetLegacyPointPerpendicular(endPosition, endAngleRadians, endWidthAci);
-            var topLeftHuh = Geometry.GetLegacyPointPerpendicular(endPosition, endAngleRadians, -endWidthAci);
-
-            var points = new PointCollection();
-            points.Add(botRightHuh);
-            points.Add(botLeftHuh);
-            points.Add(topLeftHuh);
-            points.Add(topRightHuh);
-            points.Add(botRightHuh);
+            var points = new PointCollection
+            {
+                pointBottomRight,
+                pointTopRight,
+                pointTopLeft,
+                pointBottomLeft,
+                pointBottomRight
+            };
 
             return points;
         }
@@ -220,51 +215,44 @@ namespace ArgTrack.Features.TrackDrawing
         {
             var points = new PointCollection();
 
-            double dOuterRadiusStart = t.Radius + t.StartWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-            double dInnerRadiusStart = t.Radius - t.StartWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-            double dOuterRadiusEnd = t.Radius + t.EndWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-            double dInnerRadiusEnd = t.Radius - t.EndWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-
-            // while we still have the "legacy" calculation, left-hand turns will INCREASE the angle
-            double dStartAngle = Math.PI - t.StartAngle * LayoutConstants.AngleScaleRadians;
-            double dEndAngle = Math.PI - t.EndAngle * LayoutConstants.AngleScaleRadians;
-
             if (t.Curvature > 0)
             {
-                // right
-                var outerLine = Geometry.BuildArc(t.CircleCenterForCurve, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                //
+                //          ________ outer.last (before Reverse())
+                //         /   ____|
+                //        /   /      inner (last)
+                //        |  |
+                // outer  |__| inner[0]
+                //   [0]
 
-                foreach (var p in outerLine)
-                {
-                    points.Add(p);
-                }
+                var inner = Geometry.BuildTrackArcRightInner(t.CircleCenterForCurve, t.StartAngle, t.EndAngle, t.Radius, t.StartWidth, t.EndWidth);
+                points.AddRange(inner);
 
-                var innerLine = Geometry.BuildArc(t.CircleCenterForCurve, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
+                var outer = Geometry.BuildTrackArcRightOuter(t.CircleCenterForCurve, t.StartAngle, t.EndAngle, t.Radius, t.StartWidth, t.EndWidth);
+                points.AddRange(outer.Reverse());    // reverse since we are building a polygon that must be closed
 
-                foreach (var p in innerLine.Reverse())
-                {
-                    points.Add(p);
-                }
+                // close the polygon
+                points.Add(inner[0]);
             }
             else
             {
-                // left - flip the start and end values
-                var outerLine = Geometry.BuildArc(t.CircleCenterForCurve, dEndAngle, dStartAngle, dOuterRadiusEnd, dOuterRadiusStart);
+                //   outer.last
+                //        ________
+                //       |_____   \
+                //  inner.last \   \
+                //   (bef.Rev)  |  |
+                //              |__| outer[0]
+                //      inner[0] (before Reverse())
 
-                foreach (var p in outerLine)
-                {
-                    points.Add(p);
-                }
+                var outer = Geometry.BuildTrackArcLeftOuter(t.CircleCenterForCurve, t.StartAngle, t.EndAngle, t.Radius, t.StartWidth, t.EndWidth);
+                points.AddRange(outer);
 
-                var innerLine = Geometry.BuildArc(t.CircleCenterForCurve, dEndAngle, dStartAngle, dInnerRadiusEnd, dInnerRadiusStart);
+                var inner = Geometry.BuildTrackArcLeftInner(t.CircleCenterForCurve, t.StartAngle, t.EndAngle, t.Radius, t.StartWidth, t.EndWidth);
+                points.AddRange(inner.Reverse());   // reverse since we are building a polygon that must be closed
 
-                foreach (var p in innerLine.Reverse())
-                {
-                    points.Add(p);
-                }
+                // close the polygon
+                points.Add(outer[0]);
             }
-
-            // TODO: for curvature <> 0, final point is never added!
 
             return points;
         }

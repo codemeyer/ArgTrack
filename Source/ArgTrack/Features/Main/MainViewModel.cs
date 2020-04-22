@@ -172,7 +172,7 @@ namespace ArgTrack.Features.Main
             }
         }
 
-        private bool _drawVerges;
+        private bool _drawVerges = true;
 
         public bool DrawVerges
         {
@@ -249,8 +249,8 @@ namespace ArgTrack.Features.Main
         {
             DrawTrack = true;
             DrawPitLane = true;
+            DrawVerges = true;
 
-            DrawVerges = false;
             DrawTrackSideObjects = false;
 
             DrawCircleCenterIndicators = false;

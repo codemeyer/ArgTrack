@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -37,6 +38,7 @@ namespace ArgTrack.Features.TrackDrawing
 
             var vergePoints = VergeLayoutCalculator.Calculate(roadSections, roadSectionsTight);
 
+
             if (settings.DrawVerges)
             {
                 drawingPoints.AddRange(vergePoints);
@@ -54,7 +56,7 @@ namespace ArgTrack.Features.TrackDrawing
             }
 
 
-            // allow drawing these in new debug/hack menu?
+            // these are toggled in the debug/hack menu
 
             if (settings.DrawTrackSideObjects)
             {
@@ -64,7 +66,7 @@ namespace ArgTrack.Features.TrackDrawing
 
             if (settings.DrawCircleCenterIndicators)
             {
-                var circleCenterIndicators = CircleCenterIndicatorDrawing.DrawCircleCenterIndicators(centerPoints.TrackSections);
+                var circleCenterIndicators = CircleCenterIndicatorDrawing.DrawCircleCenterIndicators(centerPoints.TrackSections, DrawingLayout.ForTechCircleCenter());
                 drawingPoints.AddRange(circleCenterIndicators);
             }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -41,62 +40,38 @@ namespace ArgTrack.Features.TrackDrawing
             return retur;
         }
 
-        private static PointCollection BuildSectionPointCollectionCenterLine(LayoutSectionData layDoo)
+        private static PointCollection BuildSectionPointCollectionCenterLine(LayoutSectionData ls)
         {
             var points = new PointCollection();
 
-            if (layDoo.IsStraight)
+            if (ls.IsStraight)
             {
-                points = DrawLineStraight(layDoo.StartPosition, layDoo.EndPosition);
+                points = DrawLineStraight(ls.StartPosition, ls.EndPosition);
             }
             else
             {
-                double dOuterRadiusStart = layDoo.Radius + 0 / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-                double dInnerRadiusStart = layDoo.Radius - 0 / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-                double dOuterRadiusEnd = layDoo.Radius + 0 / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-                double dInnerRadiusEnd = layDoo.Radius - 0 / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-                double dStartAngle = Math.PI - layDoo.StartAngle * LayoutConstants.AngleScaleRadians;
-                double dEndAngle = Math.PI - layDoo.EndAngle * LayoutConstants.AngleScaleRadians;
-
-                // TODO: outerLine and innerLine are identical points, but both are needed because
-                // TODO: of the way drawing works, always from one point to the next
-
-                if (layDoo.Curvature > 0)
+                if (ls.Curvature > 0)
                 {
                     // right
-                    var outerLine = Geometry.BuildArc(layDoo.CircleCenterForCurve, dStartAngle, dEndAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                    var outer = Geometry.BuildTrackArcRightOuter(ls.CircleCenterForCurve, ls.StartAngle, ls.EndAngle, ls.Radius, 1, 1);
+                    points.AddRange(outer);
 
-                    foreach (var p in outerLine)
-                    {
-                        points.Add(p);
-                    }
+                    var inner = Geometry.BuildTrackArcRightInner(ls.CircleCenterForCurve, ls.StartAngle, ls.EndAngle, ls.Radius, 1, 1);
+                    points.AddRange(inner.Reverse());
 
-                    var innerLine = Geometry.BuildArc(layDoo.CircleCenterForCurve, dStartAngle, dEndAngle, dInnerRadiusStart, dInnerRadiusEnd);
-
-                    foreach (var p in innerLine.Reverse())
-                    {
-                        points.Add(p);
-                    }
+                    points.Add(outer[0]);
                 }
                 else
                 {
                     // left
-                    var outerLine = Geometry.BuildArc(layDoo.CircleCenterForCurve, dEndAngle, dStartAngle, dOuterRadiusStart, dOuterRadiusEnd);
+                    var inner = Geometry.BuildTrackArcLeftInner(ls.CircleCenterForCurve, ls.StartAngle, ls.EndAngle, ls.Radius, 1, 1);
+                    points.AddRange(inner);
 
-                    foreach (var p in outerLine)
-                    {
-                        points.Add(p);
-                    }
+                    var outer = Geometry.BuildTrackArcLeftOuter(ls.CircleCenterForCurve, ls.StartAngle, ls.EndAngle, ls.Radius, 1, 1);
+                    points.AddRange(outer.Reverse());
 
-                    var innerLine = Geometry.BuildArc(layDoo.CircleCenterForCurve, dEndAngle, dStartAngle, dInnerRadiusStart, dInnerRadiusEnd);
-
-                    foreach (var p in innerLine.Reverse())
-                    {
-                        points.Add(p);
-                    }
+                    points.Add(inner[0]);
                 }
-
-                // TODO: for curvature <> 0, final point is never added! ???
             }
 
             return points;
@@ -110,20 +85,19 @@ namespace ArgTrack.Features.TrackDrawing
         /// <returns></returns>
         private static PointCollection DrawLineStraight(Point startPosition, Point endPosition)
         {
-            var points = new PointCollection();
-
-            points.Add(new Point
+            var points = new PointCollection
             {
-                X = startPosition.X,
-                Y = startPosition.Y
-            });
-
-            points.Add(new Point
-            {
-                X = endPosition.X,
-                Y = endPosition.Y
-            }
-            );
+                new Point
+                {
+                    X = startPosition.X,
+                    Y = startPosition.Y
+                },
+                new Point
+                {
+                    X = endPosition.X,
+                    Y = endPosition.Y
+                }
+            };
 
             return points;
         }

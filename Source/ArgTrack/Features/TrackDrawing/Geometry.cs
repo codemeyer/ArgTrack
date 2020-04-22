@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -146,8 +147,96 @@ namespace ArgTrack.Features.TrackDrawing
 
 
 
-        // TODO: refactor to take in a Direction (Right/Left) so that we can always pass in the correct start and end values
-        public static PointCollection BuildArc(Point circleCenter, double startAngle, double endAngle, double startRadius, double endRadius)
+        public static PointCollection BuildArcForLeftVerge(Point circleCenter, double startAngle, double endAngle, double radius, int startWidth, int endWidth)
+        {
+            if (startAngle > endAngle)
+            {
+                // turns right
+                return BuildTrackArcRightOuter(circleCenter, startAngle, endAngle, radius, startWidth, endWidth);
+            }
+            else
+            {
+                // turns left
+                return BuildTrackArcLeftInner(circleCenter, startAngle, endAngle, radius, startWidth, endWidth);
+            }
+        }
+
+        public static PointCollection BuildArcForRightVerge(Point circleCenter, double startAngle, double endAngle, double radius, int startWidth, int endWidth)
+        {
+            if (startAngle > endAngle)
+            {
+                // turns right
+                return BuildTrackArcRightInner(circleCenter, startAngle, endAngle, radius, startWidth, endWidth);
+            }
+            else
+            {
+                // turns left
+                return BuildTrackArcLeftOuter(circleCenter, startAngle, endAngle, radius, startWidth, endWidth);
+            }
+        }
+
+
+        // while we still have the "legacy" calculation, left-hand turns will INCREASE the angle
+        // startWidth endWidth handling here is based on how TRACK sections are drawn, not how VERGES are drawn
+
+        public static PointCollection BuildTrackArcRightInner(Point circleCenter, double startAngle, double endAngle, double radius, int startWidth, int endWidth)
+        {
+            double dStartAngle = GetCalculationAngle(startAngle);
+            double dEndAngle = GetCalculationAngle(endAngle);
+
+            double radiusStart = radius - startWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+            double radiusEnd = radius - endWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+
+            return BuildArc(circleCenter, dStartAngle, dEndAngle, radiusStart, radiusEnd);
+        }
+
+        public static PointCollection BuildTrackArcRightOuter(Point circleCenter, double startAngle, double endAngle, double radius, int startWidth, int endWidth)
+        {
+            double dStartAngle = GetCalculationAngle(startAngle);
+            double dEndAngle = GetCalculationAngle(endAngle);
+
+            double radiusStart = radius + startWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+            double radiusEnd = radius + endWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+
+            return BuildArc(circleCenter, dStartAngle, dEndAngle, radiusStart, radiusEnd);
+        }
+
+        public static PointCollection BuildTrackArcLeftOuter(Point circleCenter, double startAngle, double endAngle, double radius, int startWidth, int endWidth)
+        {
+            double dStartAngle = GetCalculationAngle(startAngle);
+            double dEndAngle = GetCalculationAngle(endAngle);
+
+            double radiusStart = radius - startWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+            double radiusEnd = radius - endWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+
+            // parameters must be "flipped" for left-hand corners
+            var arcPoints = BuildArc(circleCenter, dEndAngle, dStartAngle, radiusEnd, radiusStart);
+
+            // reverse so that the list is ordered from near to far
+            return new PointCollection(arcPoints.Reverse());
+        }
+
+        public static PointCollection BuildTrackArcLeftInner(Point circleCenter, double startAngle, double endAngle, double radius, int startWidth, int endWidth)
+        {
+            double dStartAngle = GetCalculationAngle(startAngle);
+            double dEndAngle = GetCalculationAngle(endAngle);
+
+            double radiusStart = radius + startWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+            double radiusEnd = radius + endWidth / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+
+            // parameters must be "flipped" for left-hand corners
+            var arcPoints = BuildArc(circleCenter, dEndAngle, dStartAngle, radiusEnd, radiusStart);
+
+            // reverse so that the list is ordered from near to far
+            return new PointCollection(arcPoints.Reverse());
+        }
+
+        private static double GetCalculationAngle(double angle)
+        {
+            return Math.PI - angle * LayoutConstants.AngleScaleRadians;
+        }
+
+        private static PointCollection BuildArc(Point circleCenter, double startAngle, double endAngle, double startRadius, double endRadius)
         {
             double workEndAngle = endAngle;
 
@@ -172,7 +261,6 @@ namespace ArgTrack.Features.TrackDrawing
 
             double nPosXStart = circleCenter.X + startRadius * Math.Cos(startAngle);
             double nPosYStart = circleCenter.Y - startRadius * Math.Sin(startAngle);
-
 
             var points = new PointCollection
             {

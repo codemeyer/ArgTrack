@@ -75,7 +75,8 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                 return true;
             }
 
-            if (original.Commands.Count(c => c.Command == 0x85) == updated.Commands.Count(c => c.Command == 0x85))
+            if (original.Commands.Count(c => c.Command == 0x85) > 0 &&
+                original.Commands.Count(c => c.Command == 0x85) == updated.Commands.Count(c => c.Command == 0x85))
             {
                 var originalCommand = original.Commands.Single(c => c.Command == 0x85);
                 var updatedCommand = updated.Commands.Single(c => c.Command == 0x85);

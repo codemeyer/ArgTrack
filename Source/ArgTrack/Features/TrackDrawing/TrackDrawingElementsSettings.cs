@@ -6,7 +6,7 @@
         {
             DrawTrack = true;
             DrawPitLane = true;
-            DrawVerges = false;
+            DrawVerges = true;
             DrawTrackSideObjects = false;
 
             DrawCircleCenterIndicators = false;
