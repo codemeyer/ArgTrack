@@ -7,7 +7,7 @@ aliases:
 
 # Overview
 
-A track in F1GP consists of a number of track sections. These can be thought of as the sections that
+A track in F1GP consists of a number of [track sections](/argtrack/topics/track-section/). These can be thought of as the sections that
 make up a [Scalextric](https://en.wikipedia.org/wiki/Scalextric) track.
 
 Each track section has a set of properties that define it, and a number of related "commands" that
@@ -59,7 +59,7 @@ Using the toolbar at the top, you can toggle what is drawn:
 - Track-side objects
 
 Track-side objects do not resemble what they actually are, but are just indications of where the center point of
-the track-side object is.
+the track-side object is. Note that track-side objects placed in the pit lane are currently not displayed.
 
 The Refresh button will force a redraw of the content.
 

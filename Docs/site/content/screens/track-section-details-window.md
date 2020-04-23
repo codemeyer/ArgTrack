@@ -6,12 +6,13 @@ aliases:
 
 # Track Section Details Window
 
-This window contains details about a specific track section.
+This window contains details about a specific [track section](/argtrack/topics/track-section/).
 
 <img src="/argtrack/images/argtrack-sections-detail.png" alt="ArgTrack Sections tab screenshot" class="img-fluid" />
-<br />
 
-<h3>Section Info</h3>
+
+### Section Info
+
 <table class="table table-bordered table-striped table--medium">
     <thead>
         <tr>
@@ -30,7 +31,10 @@ This window contains details about a specific track section.
         </tr>
         <tr>
             <td>Curvature</td>
-            <td></td>
+            <td>
+                Describes if a section is straight (0) or turns (-32,768 to 32,768).
+                See <a href="/argtrack/topics/corner-geometry">Topic: Corner Geometry</a>
+            </td>
         </tr>
         <tr>
             <td>Left Verge Width</td>
@@ -42,9 +46,10 @@ This window contains details about a specific track section.
         </tr>
     </tbody>
 </table>
-<br />
 
-<h3>Kerbs</h3>
+
+### Kerbs
+
 <table class="table table-bordered table-striped table--medium">
     <thead>
         <tr>
@@ -67,9 +72,10 @@ This window contains details about a specific track section.
         </tr>
     </tbody>
 </table>
-<br />
 
-<h3>Walls/Fences</h3>
+
+### Walls/Fences
+
 <table class="table table-bordered table-striped table--medium">
     <thead>
         <tr>
@@ -79,32 +85,36 @@ This window contains details about a specific track section.
     </thead>
     <tbody>
         <tr>
+            <td>Bridge Left</td>
+            <td>
+                When several walls are bridged, the wall will go directly from the
+                starting point of the first bridged wall to the starting point of the
+                next non-bridged wall.
+                See: <a href="/argtrack/topics/bridging-walls/">Topic: Bridging walls</a>
+            </td>
+        <tr>
             <td>Remove Left</td>
-            <td>Hides the wall on the left side</td>
+            <td>Hides the wall on the left side(?)</td>
+        </tr>
+        <tr>
+            <td>Bridge Right</td>
+            <td>
+                When several walls are bridged, the wall will go directly from the
+                starting point of the first bridged wall to the starting point of the
+                next non-bridged wall.
+                See: <a href="/argtrack/topics/bridging-walls/">Topic: Bridging walls</a>
+            </td>
         </tr>
         <tr>
             <td>Remove Right</td>
-            <td>Hides the wall on the right side</td>
-        </tr>
-        <tr>
-            <td>Join Left with Next</td>
-            <td>
-                Joins the starting point of the left-side wall in this track section with the starting point of the
-                next non-bridged section
-            </td>
-        </tr>
-        <tr>
-            <td>Join Right with Next</td>
-            <td>
-                Joins the starting point of the right-side wall in this track section with the starting point of the
-                next non-bridged section
-            </td>
+            <td>Hides the wall on the right side(?)</td>
         </tr>
     </tbody>
 </table>
-<br />
 
-<h3>Road Signs</h3>
+
+### Road Signs
+
 <table class="table table-bordered table-striped table--medium">
     <thead>
         <tr>
@@ -127,12 +137,12 @@ This window contains details about a specific track section.
         </tr>
     </tbody>
 </table>
-<p>
-    Note that these can be combined in various ways.
-</p>
-<br />
 
-<h3>Misc</h3>
+Note that these can be combined in various ways.
+
+
+### Misc
+
 <table class="table table-bordered table-striped table--medium">
     <thead>
         <tr>
@@ -155,7 +165,6 @@ This window contains details about a specific track section.
         </tr>
     </tbody>
 </table>
-<br />
 
 
 ### Commands
@@ -163,36 +172,22 @@ This window contains details about a specific track section.
 There are various track commands associated with each section.
 These can have a lot of different functions.
 
-<p>
-    A full list of track commands is available at
-    <a href="/argdocs/track-data/track-commands/">ArgDocs</a>.
-</p>
-<p>
-    To add a command of a specific type, select the type in the "Add Command of Type" dropdown list and click
-    the "Add" button.
-</p>
-<p>
-    When adding or editing track commands, this is the generic window
-    that will appear.
-</p>
+A full list of track commands is available at [ArgDocs](/argdocs/track-data/track-commands/).
 
-<p>
-    <img alt="Generic track command details window screenshot" src="/argtrack/images/argtrack-command-generic-details-window.png" class="img-fluid" />
-</p>
 
-<p>
-    However, some commands have specialized windows.
-    In the future, ArgTrack will feature more and more specialized windows.
-</p>
+To add a command of a specific type, select the type in the "Add Command of Type" dropdown list and click
+the "Add" button.
 
-<p>
-    For example, this is the window that appears when editing a 0x80 object placement command:
-</p>
+When adding or editing track commands, this is the generic window
+that will appear.
 
-<p>
-    <img alt="Track command 0x80 details window screenshot" src="/argtrack/images/argtrack-command-0x80-details-window.png" class="img-fluid" />
-</p>
+<img alt="Generic track command details window screenshot" src="/argtrack/images/argtrack-command-generic-details-window.png" class="img-fluid" />
 
-<p>
-    To delete the selected track command, click the "Delete Selected" button.
-</p>
+However, some commands have specialized windows.
+In the future, ArgTrack will feature more and more specialized windows.
+
+For example, this is the window that appears when editing a 0x80 object placement command:
+
+<img alt="Track command 0x80 details window screenshot" src="/argtrack/images/argtrack-command-0x80-details-window.png" class="img-fluid" />
+
+To delete the selected track command, click the "Delete Selected" button.

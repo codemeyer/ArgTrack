@@ -4,10 +4,10 @@ title: "ArgTrack: Download"
 
 # Download
 
-The latest version is **0.4**, released on 2020-04-17.
+The latest version is **0.5**, released on 2020-04-24.
 
 <p>
-    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.4.zip">Download</a>
+    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.5.zip">Download</a>
 </p>
 
 <br />
@@ -35,6 +35,23 @@ be found here:
 Below are the release notes for each released version of ArgTrack.
 
 
+### 0.5
+
+Released 2020-04-24 - [Download](/downloads/argtrack/ArgTrack-0.5.zip)
+
+- Verge drawing is improved and corrected and activated by default
+- Track-side objects are marked on the track with small "diamond" shapes
+- Data windows for track sections and pit lane are not modal and can be open while editing other data
+- Main window is larger by default, and the track is zoomed in more after loading
+- Documentation expanded with new [Topics](/argtrack/topics/) section
+- Fix: Left-hand corners with width changes are now drawn correctly
+- Fix: Some tracks no longer have verges drawn over the entire inner area
+- Fix: Keyboard shortcuts for zooming now also work properly after toggling what to draw on screen
+- _Known issue: Track view occasionally ends up outside scrollable area_
+- _Known issue: Some input validation missing meaning that it's possible to save broken track files_
+
+
+
 ### 0.4
 
 Released 2020-04-17 - [Download](/downloads/argtrack/ArgTrack-0.4.zip)
@@ -45,10 +62,6 @@ Released 2020-04-17 - [Download](/downloads/argtrack/ArgTrack-0.4.zip)
 - Initial drawing of track verges (disabled by default)
 - Keyboard shortcuts for zooming in and out, Ctrl+ and Ctrl-
 - Fix GP2 track conversion bug (now uses kerb colors from template F1GP track instead)
-- _Known issue: For some tracks, verges are drawn across the entire inner area_
-- _Known issue: Track view occasionally ends up outside scrollable area_
-- _Known issue: Left-hand corner with width change is drawn incorrectly_
-- _Known issue: Some input validation missing meaning that it's possible to save broken track files_
 
 
 ### 0.3
