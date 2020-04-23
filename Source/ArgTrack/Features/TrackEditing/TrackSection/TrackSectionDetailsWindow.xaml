@@ -83,10 +83,10 @@
 
                 <GroupBox Grid.Column="1" Margin="0,5,5,0" Header="Walls/Fences">
                     <StackPanel Orientation="Vertical">
-                        <CheckBox Margin="3,5,3,3" IsChecked="{Binding RemoveLeftWall}">Remove Left</CheckBox>
+                        <CheckBox Margin="3,5,3,3" IsChecked="{Binding BridgedLeftFence}">Bridge Left</CheckBox>
+                        <CheckBox Margin="3" IsChecked="{Binding RemoveLeftWall}">Remove Left</CheckBox>
+                        <CheckBox Margin="3" IsChecked="{Binding BridgedRightFence}">Bridge Right</CheckBox>
                         <CheckBox Margin="3" IsChecked="{Binding RemoveRightWall}">Remove Right</CheckBox>
-                        <CheckBox Margin="3" IsChecked="{Binding BridgedLeftFence}">Join Left with Next</CheckBox>
-                        <CheckBox Margin="3" IsChecked="{Binding BridgedRightFence}">Join Right with Next</CheckBox>
                     </StackPanel>
                 </GroupBox>
 

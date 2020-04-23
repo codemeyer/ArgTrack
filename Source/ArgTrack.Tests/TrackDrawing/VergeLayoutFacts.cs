@@ -51,13 +51,13 @@ namespace ArgTrack.Tests.TrackDrawing
             verges[0].StartPosition.X.Should().Be(0.0);
             verges[0].StartPosition.Y.Should().Be(0.0);
 
-            verges[0].OuterStartPosition.X.Should().BeApproximately(1.62, TrackDrawingFactConstants.Tolerance);
+            verges[0].OuterStartPosition.X.Should().BeApproximately(1.596, TrackDrawingFactConstants.Tolerance);
             verges[0].OuterStartPosition.Y.Should().BeApproximately(0.0, TrackDrawingFactConstants.Tolerance);
 
-            verges[0].OuterEndPosition.X.Should().BeApproximately(1.62, TrackDrawingFactConstants.Tolerance);
+            verges[0].OuterEndPosition.X.Should().BeApproximately(1.596, TrackDrawingFactConstants.Tolerance);
             verges[0].OuterEndPosition.Y.Should().BeApproximately(126.0, TrackDrawingFactConstants.Tolerance);
 
-            verges[1].OuterStartPosition.X.Should().BeApproximately(1.62, TrackDrawingFactConstants.Tolerance);
+            verges[1].OuterStartPosition.X.Should().BeApproximately(1.596, TrackDrawingFactConstants.Tolerance);
             verges[1].OuterStartPosition.Y.Should().BeApproximately(126.0, TrackDrawingFactConstants.Tolerance);
         }
 
@@ -71,13 +71,14 @@ namespace ArgTrack.Tests.TrackDrawing
             verges[0].StartPosition.X.Should().Be(0.0);
             verges[0].StartPosition.Y.Should().Be(0.0);
 
-            verges[0].OuterStartPosition.X.Should().BeApproximately(-1.62, TrackDrawingFactConstants.Tolerance);
+            //verges[0].OuterStartPosition.X.Should().BeApproximately(-1.62, TrackDrawingFactConstants.Tolerance);
+            verges[0].OuterStartPosition.X.Should().BeApproximately(-1.596, TrackDrawingFactConstants.Tolerance);
             verges[0].OuterStartPosition.Y.Should().BeApproximately(0.0, TrackDrawingFactConstants.Tolerance);
 
-            verges[0].OuterEndPosition.X.Should().BeApproximately(-1.62, TrackDrawingFactConstants.Tolerance);
+            verges[0].OuterEndPosition.X.Should().BeApproximately(-1.596, TrackDrawingFactConstants.Tolerance);
             verges[0].OuterEndPosition.Y.Should().BeApproximately(126.0, TrackDrawingFactConstants.Tolerance);
 
-            verges[1].OuterStartPosition.X.Should().BeApproximately(-1.62, TrackDrawingFactConstants.Tolerance);
+            verges[1].OuterStartPosition.X.Should().BeApproximately(-1.596, TrackDrawingFactConstants.Tolerance);
             verges[1].OuterStartPosition.Y.Should().BeApproximately(126.0, TrackDrawingFactConstants.Tolerance);
         }
 

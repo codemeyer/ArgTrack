@@ -120,20 +120,33 @@ namespace ArgTrack.Features.TrackDrawing
         }
 
         /// <summary>
-        ///
+        /// Gets the total width of the verge AND track from the center line.
         /// </summary>
         /// <param name="vergeRaw">Verge width value as specified in the section</param>
         /// <param name="trackWidth">Track width of section</param>
         /// <returns></returns>
         private int GetVergeWidth(int vergeRaw, int trackWidth)
         {
-            // TODO: is this correct, or should we use the formula below?
+            // original "guesstimate" formula
+            //double pct = vergeRaw * 0.04;
+            //var vergeWidth = Convert.ToInt32(trackWidth * pct) + trackWidth;
 
-            // noo, 50=same width as FULL track, i.e. twice trackWidth?
+            //return vergeWidth;
 
-            double pct = vergeRaw * 0.04; // good enough?
-            var vergeWidth = Convert.ToInt32(trackWidth * pct) + trackWidth;
-            return vergeWidth;
+            var widthMeters = GetFenceWidthMeters(Convert.ToDouble(vergeRaw), trackWidth);
+            var reverseInWidthUnits = widthMeters / LayoutConstants.MetersPerTrackWidthUnit;
+            var totalBasedOnMeters = trackWidth + reverseInWidthUnits;
+
+            return Convert.ToInt32(totalBasedOnMeters);
+        }
+
+        private double GetFenceWidthMeters(double fenceWidth, int trackWidth)
+        {
+            double divisor = 32768.0 / 30.0;  //track, pitlane is "/ 20"
+
+            double fenceWidthMeters = fenceWidth * (1024.0 / 30.0) * trackWidth / 1000.0 / divisor * 4.87;
+
+            return fenceWidthMeters;
         }
 
         // from http://www.grandprix2.de/Anleitung/tutus/Command_Lib/command_lib%20gp3%20gp2/cmdlib3a.htm
@@ -141,12 +154,13 @@ namespace ArgTrack.Features.TrackDrawing
 
         // "I have done some research about how to convert GP2-track width and fence width to meters. I have come to the following formulas:
         // divisor is a variable:
-        // for pitlane values, divisor = 32768 / 20
-        // for track values, divisor = 32768 / 30
+        // for pitlane values, divisor = 32768 / 20 (=1638.4)
+        // for track values, divisor = 32768 / 30 (=1092.266666)
 
         // TrackWidth(Meters)= (TrackWidthGP2 / divisor) * 4.87;
 
         // FenceWidth(Meters)=((FenceWidthGP2*(1024/30))*TrackWidthGP2/1000)/divisor*4.87
+        //  FenceWidth(Meters) = (FenceWidth  *  34.1333  *  TrackWidth / 1000) / divisor * 4.87
 
         //I have tested these formulas and they are highly accurate."
     }

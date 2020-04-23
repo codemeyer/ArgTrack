@@ -56,9 +56,10 @@ Using the toolbar at the top, you can toggle what is drawn:
 - Track
 - Pit Lane
 - Verges
+- Track-side objects
 
-The verge drawing is preliminary functionality and needs some more improvements. Therefore it is turned off
-by default.
+Track-side objects do not resemble what they actually are, but are just indications of where the center point of
+the track-side object is.
 
 The Refresh button will force a redraw of the content.
 
