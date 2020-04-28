@@ -25,7 +25,12 @@ namespace ArgTrack.Features.TrackDrawing
                     short fromSectionStart = cmd.Arguments[0].Value;
                     short objectOffset = cmd.Arguments[1].Value;
 
-                    var objectSetting = objectSettings.Single(o => o.Offset == objectOffset);
+                    var objectSetting = objectSettings.SingleOrDefault(o => o.Offset == objectOffset);
+
+                    if (objectSetting == null)
+                    {
+                        continue;
+                    }
 
                     // if SectionIndex becomes larger than actual number sections, then "wrap" it
                     var sectionIndex = sectionStartAt + fromSectionStart;

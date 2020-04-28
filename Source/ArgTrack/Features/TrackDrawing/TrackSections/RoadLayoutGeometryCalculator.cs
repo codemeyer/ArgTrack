@@ -49,7 +49,9 @@ namespace ArgTrack.Features.TrackDrawing
             };
 
             // TODO: from outside?
-            var cmd = layoutData.RelatedSection.Commands.SingleOrDefault(c => c.Command == 0x85); // TrackCommand for width change
+            // handle multiple 0x85 commands (only use the first one)
+            var cmd = layoutData.RelatedSection.Commands.FirstOrDefault(c => c.Command == 0x85); // TrackCommand for width change
+
             if (cmd != null)
             {
                 widthChangeLength = cmd.Arguments[1].Value;

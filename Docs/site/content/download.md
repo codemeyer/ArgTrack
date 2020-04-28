@@ -4,10 +4,10 @@ title: "ArgTrack: Download"
 
 # Download
 
-The latest version is **0.5**, released on 2020-04-24.
+The latest version is **0.5.1**, released on 2020-04-28.
 
 <p>
-    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.5.zip">Download</a>
+    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.5.1.zip">Download</a>
 </p>
 
 <br />
@@ -33,6 +33,15 @@ be found here:
 ## Release notes
 
 Below are the release notes for each released version of ArgTrack.
+
+
+### 0.5.1
+
+Released 2020-04-28 - [Download](/downloads/argtrack/ArgTrack-0.5.zip)
+
+- Fix: Can load tracks with multiple track-width changes in single section
+- Fix: Can load tracks with references to non-existing track-side objects
+
 
 
 ### 0.5
