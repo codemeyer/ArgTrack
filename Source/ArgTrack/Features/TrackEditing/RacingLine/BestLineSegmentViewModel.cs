@@ -92,6 +92,9 @@ namespace ArgTrack.Features.TrackEditing.RacingLine
                 if (SetProperty(ref _radius, value, () => Radius))
                 {
                     UpdateIcon();
+
+                    // ????
+                    CalculatedRadius = value;
                 }
             }
         }
@@ -103,9 +106,11 @@ namespace ArgTrack.Features.TrackEditing.RacingLine
             get { return _highRadius; }
             set
             {
+                _hasSetHighRadius = true;
                 if (SetProperty(ref _highRadius, value, () => HighRadius))
                 {
                     UpdateIcon();
+                    CalculateRadius();
                 }
             }
         }
@@ -117,12 +122,47 @@ namespace ArgTrack.Features.TrackEditing.RacingLine
             get { return _lowRadius; }
             set
             {
+                _hasSetLowRadius = true;
                 if (SetProperty(ref _lowRadius, value, () => LowRadius))
                 {
                     UpdateIcon();
+                    CalculateRadius();
                 }
             }
         }
+
+
+        private bool _hasSetLowRadius = false;
+        private bool _hasSetHighRadius = false;
+
+        private void CalculateRadius()
+        {
+            if (!_hasSetHighRadius || !_hasSetLowRadius)
+            {
+                return;
+            }
+
+            int unsigned16bit = _lowRadius & 0x0FFFF;
+
+            CalculatedRadius = _highRadius << 16 + unsigned16bit;
+        }
+
+
+
+        private int _calculatedRadius;
+
+        public int CalculatedRadius
+        {
+            get { return _calculatedRadius; }
+            set
+            {
+                SetProperty(ref _calculatedRadius, value, () => CalculatedRadius);
+                //UpdateIcon();
+            }
+        }
+
+
+
 
 
         private TrackComputerCarLineSegmentType _segmentType;

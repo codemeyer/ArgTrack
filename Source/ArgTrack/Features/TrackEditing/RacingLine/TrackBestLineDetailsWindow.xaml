@@ -30,14 +30,14 @@
                 <Label Margin="20,0,0,0" Width="100" Height="26" Content="{Binding LengthDescription}"></Label>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Visibility="{Binding ShowRadius}">
-                <Label Width="180">Radius</Label>
-                <TextBox Width="60" Height="22" Text="{Binding Radius}"></TextBox>
-            </StackPanel>
-
             <StackPanel Orientation="Horizontal" Visibility="{Binding ShowCorrection}">
                 <Label Width="180">Correction</Label>
                 <TextBox Width="60" Height="22" Text="{Binding Correction}"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Visibility="{Binding ShowRadius}">
+                <Label Width="180">Radius</Label>
+                <TextBox Width="60" Height="22" Text="{Binding Radius}"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Visibility="{Binding ShowLowRadius}">
@@ -48,6 +48,11 @@
             <StackPanel Orientation="Horizontal" Visibility="{Binding ShowHighRadius}">
                 <Label Width="180">High Radius</Label>
                 <TextBox Width="60" Height="22" Text="{Binding HighRadius}"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Width="180">Calculated Radius</Label>
+                <TextBox Width="60" Height="22" Text="{Binding CalculatedRadius}" IsReadOnly="True"></TextBox>
             </StackPanel>
 
         </StackPanel>
