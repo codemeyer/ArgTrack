@@ -43,7 +43,7 @@ namespace ArgTrack.Features.TrackDrawing
         /// <returns></returns>
         private static RoadLayoutSectionData CalculateLayout(LayoutSectionData layoutData, int initialWidth, int widthChangeLength, int widthChangeEnd)
         {
-            var t2 = new RoadLayoutSectionData(layoutData)
+            var road = new RoadLayoutSectionData(layoutData)
             {
                 StartWidth = initialWidth
             };
@@ -61,57 +61,56 @@ namespace ArgTrack.Features.TrackDrawing
             // track width change detected
             if (widthChangeLength > 0)
             {
-                if (widthChangeLength > t2.Length)
+                if (widthChangeLength > road.Length)
                 {
                     // width change to be continued on next segment
                     // calculate width at end of segment
-                    t2.EndWidth = t2.StartWidth + t2.Length * (widthChangeEnd - t2.StartWidth) / widthChangeLength;
+                    road.EndWidth = road.StartWidth + road.Length * (widthChangeEnd - road.StartWidth) / widthChangeLength;
                     // store values needed by next segment
-                    t2.WidthChangeEnd = widthChangeEnd;
-                    t2.WidthChangeLength = widthChangeLength - t2.Length;
+                    road.WidthChangeEnd = widthChangeEnd;
+                    road.WidthChangeLength = widthChangeLength - road.Length;
                     // need flag to indicate width change ends in middle of segment? @@@
                 }
                 else
                 {
                     // whole change takes place on this segment
-                    if (widthChangeLength < t2.Length)
+                    if (widthChangeLength < road.Length)
                     {
                         // change complete in the middle of the segment.
                         // calculate point where the change ends.
-                        if (t2.Curvature != 0)
+                        if (road.Curvature != 0)
                         {
                             // curved segment
-                            double dAngleMid = t2.StartAngle + widthChangeLength * t2.Curvature;
-                            double widthChangeX = t2.CircleCenterForCurve.X - t2.Radius * Math.Cos(dAngleMid * LayoutConstants.AngleScaleRadians);
-                            double widthChangeY = t2.CircleCenterForCurve.Y + t2.Radius * Math.Sin(dAngleMid * LayoutConstants.AngleScaleRadians);
-                            t2.WidthChangeEndPosition = new Point(widthChangeX, widthChangeY);
+                            double dAngleMid = road.StartAngle + widthChangeLength * road.Curvature;
+                            double widthChangeX = road.CircleCenterForCurve.X - road.Radius * Math.Cos(dAngleMid * LayoutConstants.AngleScaleRadians);
+                            double widthChangeY = road.CircleCenterForCurve.Y + road.Radius * Math.Sin(dAngleMid * LayoutConstants.AngleScaleRadians);
+                            road.WidthChangeEndPosition = new Point(widthChangeX, widthChangeY);
                         }
                         else
                         {
                             // straight
-                            double widthChangeX = t2.StartPosition.X - widthChangeLength * Math.Sin(t2.StartAngle * LayoutConstants.AngleScaleRadians);
-                            double widthChangeY = t2.StartPosition.Y + widthChangeLength * Math.Cos(t2.StartAngle * LayoutConstants.AngleScaleRadians);
-                            t2.WidthChangeEndPosition = new Point(widthChangeX, widthChangeY);
+                            double widthChangeX = road.StartPosition.X - widthChangeLength * Math.Sin(road.StartAngle * LayoutConstants.AngleScaleRadians);
+                            double widthChangeY = road.StartPosition.Y + widthChangeLength * Math.Cos(road.StartAngle * LayoutConstants.AngleScaleRadians);
+                            road.WidthChangeEndPosition = new Point(widthChangeX, widthChangeY);
                         }
                     }
 
-                    t2.EndWidth = widthChangeEnd;
+                    road.EndWidth = widthChangeEnd;
                     // nothing to do on next segment
-                    t2.WidthChangeLength = 0;
-                    t2.WidthChangeEnd = 0;
+                    road.WidthChangeLength = 0;
+                    road.WidthChangeEnd = 0;
                 }
             }
             else
             {
                 // no width change
-                t2.EndWidth = t2.StartWidth;
+                road.EndWidth = road.StartWidth;
                 // nothing to do on next segment
-                t2.WidthChangeLength = 0;
-                t2.WidthChangeEnd = 0;
+                road.WidthChangeLength = 0;
+                road.WidthChangeEnd = 0;
             }
 
-            return t2;
+            return road;
         }
-
     }
 }

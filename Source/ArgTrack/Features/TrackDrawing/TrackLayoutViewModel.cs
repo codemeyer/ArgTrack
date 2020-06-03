@@ -119,8 +119,8 @@ namespace ArgTrack.Features.TrackDrawing
                 return;
             }
 
-            var min = new Point(0, 0);
-            var max = new Point(0, 0);
+            var min = new Point(double.MaxValue, double.MaxValue);
+            var max = new Point(double.MinValue, double.MinValue);
 
             foreach (var pointData in TrackData)
             {
@@ -165,38 +165,34 @@ namespace ArgTrack.Features.TrackDrawing
 
             CenterPoint = center;
 
+            UpdateScrollWidthParameters(max.X, min.X);
+            UpdateScrollHeightParameters(max.Y, min.Y);
 
-            // TODO: THERE IS SOMETHING WRONG, SOMEWHERE!
-            // Zoom factor affects transform???
-            // Centerpoint adjustment?
+            RecalculateMatrixTransform();
+        }
 
+        private void UpdateScrollWidthParameters(double maxX, double minX)
+        {
+            TrackRenderWidth = Math.Abs((Math.Abs(maxX) - Math.Abs(minX)) * ZoomFactor);
 
-            TrackRenderWidth = (Math.Abs(min.X) + Math.Abs(max.X)) * ZoomFactor;
-
-            // scroll-"mån"
-            var scrollableX = TrackRenderWidth - ViewportWidth;
-            var scrollableXMinAdjusted = -(scrollableX / 2); //- CenterPoint.Y;
-            var scrollableXMaxAdjusted = (scrollableX / 2); //+ CenterPoint.Y;
-            var scrollableXRange = scrollableXMaxAdjusted - scrollableXMinAdjusted;
+            var scrollableXRange = Math.Round(TrackRenderWidth - ViewportWidth);
 
             ScrollMinX = Convert.ToInt32(scrollableXRange / 2) * -1;
             ScrollMaxX = Convert.ToInt32(scrollableXRange / 2);
             ScrollWidth = Convert.ToInt32(scrollableXRange);
+        }
 
+        private void UpdateScrollHeightParameters(double maxY, double minY)
+        {
+            TrackRenderHeight = Math.Abs((Math.Abs(maxY) - Math.Abs(minY)) * ZoomFactor);
 
-            TrackRenderHeight = (Math.Abs(min.Y) + Math.Abs(max.Y)) * ZoomFactor;
-
-            var scrollableY = TrackRenderHeight - ViewportHeight;
-            var scrollableYMinAdjusted = -(scrollableY / 2); //- CenterPoint.Y;
-            var scrollableYMaxAdjusted = (scrollableY / 2); //+ CenterPoint.Y;
-            var scrollableYRange = scrollableYMaxAdjusted - scrollableYMinAdjusted;
+            var scrollableYRange = Math.Round(TrackRenderHeight - ViewportHeight);
 
             ScrollMinY = Convert.ToInt32(scrollableYRange / 2) * -1;
             ScrollMaxY = Convert.ToInt32(scrollableYRange / 2);
             ScrollHeight = Convert.ToInt32(scrollableYRange);
-
-            RecalculateMatrixTransform();
         }
+
 
         private long _lastRecalculation;
 
@@ -249,7 +245,6 @@ namespace ArgTrack.Features.TrackDrawing
 
         private double _viewportWidth;
 
-        // TODO: _maybe_ this doesn't need to be a WPF-style property
         // width of viewable drawing area
         public double ViewportWidth
         {
@@ -263,7 +258,6 @@ namespace ArgTrack.Features.TrackDrawing
 
         private double _viewportHeight;
 
-        // TODO: _maybe_ this doesn't need to be a WPF-style property
         // height of viewable drawing area
         public double ViewportHeight
         {
@@ -277,8 +271,9 @@ namespace ArgTrack.Features.TrackDrawing
 
         private double _trackRenderWidth;
 
-        // TODO: this doesn't need to be a WPF-style property
-        // width of track as rendered in window (i.e. basic width * zoom)
+        /// <summary>
+        /// Width of track as rendered in window (i.e. basic width * zoom)
+        /// </summary>
         public double TrackRenderWidth
         {
             get { return _trackRenderWidth; }
@@ -291,8 +286,9 @@ namespace ArgTrack.Features.TrackDrawing
 
         private double _trackRenderHeight;
 
-        // TODO: this doesn't need to be a WPF-style property
-        // height of track as rendered in window (i.e. basic height * zoom)
+        /// <summary>
+        /// Height of track as rendered in window (i.e. basic height * zoom)
+        /// </summary>
         public double TrackRenderHeight
         {
             get { return _trackRenderHeight; }
@@ -301,7 +297,6 @@ namespace ArgTrack.Features.TrackDrawing
                 SetProperty(ref _trackRenderHeight, value, () => TrackRenderHeight);
             }
         }
-
 
 
         private int _scrollMinX;
@@ -342,7 +337,6 @@ namespace ArgTrack.Features.TrackDrawing
         }
 
 
-
         private int _scrollMinY;
 
         public int ScrollMinY
@@ -359,6 +353,7 @@ namespace ArgTrack.Features.TrackDrawing
             set { SetProperty(ref _scrollMaxY, value, () => ScrollMaxY); }
         }
 
+
         private int _scrollHeight;
 
         public int ScrollHeight
@@ -366,6 +361,7 @@ namespace ArgTrack.Features.TrackDrawing
             get { return _scrollHeight; }
             set { SetProperty(ref _scrollHeight, value, () => ScrollHeight); }
         }
+
 
         private int _offsetY;
 

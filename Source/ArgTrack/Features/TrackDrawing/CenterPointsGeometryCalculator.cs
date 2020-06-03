@@ -27,7 +27,10 @@ namespace ArgTrack.Features.TrackDrawing
 
         public static List<LayoutSectionData> GetTrackLayoutSections(TrackViewModel track)
         {
-            return LayoutSectionDataFromTrackSectionList(track.TrackSections, track.TrackHeader.FirstSectionAngle, 0, 0);
+            double startX = CalculateStartX(track.TrackHeader.TrackCenterX);
+            double startY = CalculateStartX(track.TrackHeader.TrackCenterY);
+
+            return LayoutSectionDataFromTrackSectionList(track.TrackSections, track.TrackHeader.FirstSectionAngle, startX, startY);
         }
 
         private static List<LayoutSectionData> GetPitLane(TrackViewModel track, List<LayoutSectionData> layoutSections)
@@ -72,13 +75,16 @@ namespace ArgTrack.Features.TrackDrawing
         {
             var layoutSections = new List<LayoutSectionData>();
 
+            double nextStartX = startX;
+            double nextStartY = startY;
+
             foreach (var trackSection in sections)
             {
-                var layoutSection = CalculateLayoutCenterLine(startX, startY, startAngle, trackSection.Length, trackSection.Curvature);
+                var layoutSection = CalculateLayoutCenterLine(nextStartX, nextStartY, startAngle, trackSection.Length, trackSection.Curvature);
 
-                // initial data for NEXT section
-                startX = layoutSection.EndPosition.X;
-                startY = layoutSection.EndPosition.Y;
+                // end data of THIS section will be the initial data for the NEXT section
+                nextStartX = layoutSection.EndPosition.X;
+                nextStartY = layoutSection.EndPosition.Y;
                 startAngle = layoutSection.EndAngle;
 
                 layoutSection.RelatedSection = trackSection;
@@ -136,23 +142,28 @@ namespace ArgTrack.Features.TrackDrawing
             return sectionWidth;
         }
 
+        /// <summary>
+        /// Creates one LayoutSection per section length.
+        /// </summary>
+        /// <param name="track"></param>
+        /// <returns></returns>
         public static CenterPointsCalculationResult CalculateCenterPointsPerSectionOneLengthEach(TrackViewModel track)
         {
-            double dPosX = 0;
-            double dPosY = 0;
-            int startAngle = track.TrackHeader.FirstSectionAngle;
-
             var trackSections = new List<LayoutSectionData>();
+
+            double nextStartX = CalculateStartX(track.TrackHeader.TrackCenterX);
+            double nextStartY = CalculateStartY(track.TrackHeader.TrackCenterY);
+            int startAngle = track.TrackHeader.FirstSectionAngle;
 
             foreach (var section in track.TrackSections)
             {
                 for (int i = 0; i <= section.Length - 1; i++)
                 {
-                    var layout = CalculateLayoutCenterLine(dPosX, dPosY, startAngle, 1, section.Curvature);
+                    var layout = CalculateLayoutCenterLine(nextStartX, nextStartY, startAngle, 1, section.Curvature);
 
-                    // start stuff for NEXT section
-                    dPosX = layout.EndPosition.X;
-                    dPosY = layout.EndPosition.Y;
+                    // end data of THIS section will be the initial data for the NEXT section
+                    nextStartX = layout.EndPosition.X;
+                    nextStartY = layout.EndPosition.Y;
                     startAngle = layout.EndAngle;
 
                     layout.RelatedSection = section;
@@ -165,6 +176,16 @@ namespace ArgTrack.Features.TrackDrawing
             {
                 TrackSections = trackSections
             };
+        }
+
+        private static double CalculateStartX(short originalStartX)
+        {
+            return originalStartX << 3;
+        }
+
+        private static double CalculateStartY(short originalStartY)
+        {
+            return originalStartY << 3;
         }
 
         /// <summary>
