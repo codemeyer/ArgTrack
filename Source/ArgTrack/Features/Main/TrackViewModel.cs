@@ -64,6 +64,8 @@ namespace ArgTrack.Features.Main
             // save for restoring
             var currentZoom = mainViewModel.TrackLayoutViewModel.ZoomFactor;
             var currentCenter = mainViewModel.TrackLayoutViewModel.CenterPoint;
+            var currentOffsetX = mainViewModel.TrackLayoutViewModel.OffsetX;
+            var currentOffsetY = mainViewModel.TrackLayoutViewModel.OffsetY;
 
             var settings = new TrackDrawingElementsSettings
             {
@@ -80,11 +82,15 @@ namespace ArgTrack.Features.Main
             // because if it changes shape during the redraw this will still have the old shape
             //var selectedPointData = mainViewModel.TrackLayoutViewModel.SelectedTrackSection;
 
+            // TODO: this will re-render the ENTIRE track... instead, split into separate
+            // parts that can be updated separately
             var layoutViewModel = TrackLayoutViewModel.FromTrackViewModel(this, settings);
 
             // restore
             layoutViewModel.CenterPoint = currentCenter;
             layoutViewModel.ZoomFactor = currentZoom;
+            layoutViewModel.OffsetX = currentOffsetX;
+            layoutViewModel.OffsetY = currentOffsetY;
 
             //layoutViewModel.SelectedTrackSection = selectedPointData;
 
