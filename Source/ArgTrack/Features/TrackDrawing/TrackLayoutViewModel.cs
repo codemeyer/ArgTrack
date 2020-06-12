@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -14,99 +16,83 @@ namespace ArgTrack.Features.TrackDrawing
     /// </summary>
     public class TrackLayoutViewModel : BaseViewModel
     {
-        public TrackLayoutViewModel(MainViewModel parent)
+        private readonly TrackViewModel _trackViewModel;
+
+        public TrackLayoutViewModel(TrackViewModel trackViewModel)
         {
-            ParentMain = parent;
+            _trackViewModel = trackViewModel;
+
+            PerformFullCalculation();
         }
 
-        public MainViewModel ParentMain { get; set; }
-
-        public static TrackLayoutViewModel FromTrackViewModel(TrackViewModel trackViewModel, TrackDrawingElementsSettings settings)
+        public void PerformFullCalculation()
         {
-            var centerPoints = CenterPointsGeometryCalculator.CalculateCenterPointsPerSection(trackViewModel);
+            // TODO: split into sub-methods
 
-            // the points that will be drawn on the screen
-            var drawingPoints = new ObservableCollection<TrackShapeData>();
+            var centerPoints = CenterPointsGeometryCalculator.CalculateCenterPointsPerSection(_trackViewModel);
+            //centerPoints.TrackSections
+            //centerPoints.PitLaneSections
+            // these aren't exposed, just used for calculations
+            TrackSections = centerPoints.TrackSections;
+            PitLaneSections = centerPoints.PitLaneSections;
 
-            var roadSections = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPoints.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
+            RoadSections = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPoints.TrackSections, _trackViewModel.TrackHeader.TrackStartWidth);
 
             // needed for both verges and track-side object
-            var centerPointsOneSectionPerLength = CenterPointsGeometryCalculator.CalculateCenterPointsPerSectionOneLengthEach(trackViewModel);
-            var roadSectionsOnePerLength = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPointsOneSectionPerLength.TrackSections, trackViewModel.TrackHeader.TrackStartWidth);
+            var centerPointsOneSectionPerLength = CenterPointsGeometryCalculator.CalculateCenterPointsPerSectionOneLengthEach(_trackViewModel);
 
-            if (settings.DrawVerges)
+            RoadSectionsOnePerLength = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPointsOneSectionPerLength.TrackSections, _trackViewModel.TrackHeader.TrackStartWidth);
+
+            VergeData = VergeLayoutCalculator.Calculate(RoadSections, RoadSectionsOnePerLength);
+            // TODO: calculate PitLane verges somewhere
+
+            TrackData = RoadLayoutShapeCalculator.Calculate(RoadSections, DrawingLayout.ForTrack());
+
+            PitLaneShapeData = RoadLayoutShapeCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, DrawingLayout.ForPitLane());
+
+            TrackSideObjectsShapeData  = TracksideObjectsCalculator.Calculate(RoadSections, RoadSectionsOnePerLength, _trackViewModel.TrackObjectSettings);
+
+            // TODO: add debug items
+
+            DebugCircleCenterIndicators = CircleCenterIndicatorDrawing.DrawCircleCenterIndicators(centerPoints.TrackSections, DrawingLayout.ForTechCircleCenter());
+            DebugLineBetweenSectionCenters = CenterLineDrawingCalculator.CalculateDrawablePointsStraight(centerPoints.TrackSections);
+            DebugLineAlongTrackCenter = CenterLineDrawingCalculator.CalculateDrawablePointsWithArcs(centerPoints.TrackSections);
+
+
+            // TODO: make surrounding area much "dimmer"
+            if (_trackViewModel.TrackSettings.SurroundingArea == SurroundingArea.Green)
             {
-                var vergePoints = VergeLayoutCalculator.Calculate(roadSections, roadSectionsOnePerLength);
-                drawingPoints.AddRange(vergePoints);
-            }
-
-            if (settings.DrawTrack)
-            {
-                var roadPoints = RoadLayoutShapeCalculator.Calculate(roadSections, DrawingLayout.ForTrack());
-                drawingPoints.AddRange(roadPoints);
-            }
-
-            if (settings.DrawPitLane)
-            {
-                if (settings.DrawVerges)
-                {
-                    // TODO: pit lane verges here
-                }
-
-                var pitPoints = RoadLayoutShapeCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, DrawingLayout.ForPitLane());
-                drawingPoints.AddRange(pitPoints);
-            }
-
-
-            // these are toggled in the debug/hack menu
-
-            if (settings.DrawTrackSideObjects)
-            {
-                var trackSideObjects = TracksideObjectsCalculator.Calculate(roadSections, roadSectionsOnePerLength, TrackViewModelPasserArounder.TrackViewModel.TrackObjectSettings);
-                drawingPoints.AddRange(trackSideObjects);
-            }
-
-            if (settings.DrawCircleCenterIndicators)
-            {
-                var circleCenterIndicators = CircleCenterIndicatorDrawing.DrawCircleCenterIndicators(centerPoints.TrackSections, DrawingLayout.ForTechCircleCenter());
-                drawingPoints.AddRange(circleCenterIndicators);
-            }
-
-            if (settings.DrawLineBetweenSectionCenters)
-            {
-                // center line with no arcs, only connects each section start point to the end point
-                var centerLineStraight = CenterLineDrawingCalculator.CalculateDrawablePointsStraight(centerPoints.TrackSections);
-                drawingPoints.AddRange(centerLineStraight);
-            }
-
-            if (settings.DrawLineAlongTrackCenter)
-            {
-                // arced center line
-                var centerLineArced = CenterLineDrawingCalculator.CalculateDrawablePointsWithArcs(centerPoints.TrackSections);
-                drawingPoints.AddRange(centerLineArced);
-            }
-
-
-            var layoutViewModel = new TrackLayoutViewModel(MainViewModelPasserArounder.MainViewModel)
-            {
-                TrackData = drawingPoints
-            };
-
-            if (trackViewModel.TrackSettings.SurroundingArea == SurroundingArea.Green)
-            {
-                layoutViewModel.SurroundingAreaColor = "#5E8136";
+                SurroundingAreaColor = "#5E8136";
             }
             else
             {
-                layoutViewModel.SurroundingAreaColor = "#818274";
+                SurroundingAreaColor = "#818274";
             }
 
-
-            layoutViewModel.RecalculateViewAndScrollbars();
-
-
-            return layoutViewModel;
+            RecalculateViewAndScrollbars();
         }
+
+        // TODO: not used now, but will be later
+        private List<LayoutSectionData> TrackSections { get; set; }
+        private List<LayoutSectionData> PitLaneSections { get; set; }
+
+        private List<RoadLayoutSectionData> RoadSections { get; set; }
+        private List<RoadLayoutSectionData> RoadSectionsOnePerLength { get; set; }
+
+
+        // RECALCulate after section change
+        // CenterPoints (including and after the edited one)
+        // CenterPointsOneSectionPerLength (including and after the edited one)
+
+        // VergeData (including and after the edited one) - IS THIS ENOUGH (e.g. bridged walls...) maybe do it all?
+        //    if current has a bridge, go back to first non-bridged one and start from there?
+
+        // RoadSections (incl. and after edited one)
+        // RoadSectionOnePerLength (incl. and after edited one)
+        // track side objects (including and after the edited one)
+
+        // RECALCulate after object placement change
+        // track side objects  (including and after the edited one)
 
 
         // TODO: throttle the recalculation? handle restore of zoom etc here?
@@ -122,7 +108,7 @@ namespace ArgTrack.Features.TrackDrawing
             var min = new Point(double.MaxValue, double.MaxValue);
             var max = new Point(double.MinValue, double.MinValue);
 
-            foreach (var pointData in TrackData)
+            foreach (var pointData in TrackData.Union(VergeData).Union(PitLaneShapeData).Union(TrackSideObjectsShapeData))
             {
                 foreach (var point in pointData.Points)
                 {
@@ -375,8 +361,6 @@ namespace ArgTrack.Features.TrackDrawing
             }
         }
 
-        // TODO: have another OffsetY which is the ActualOffsetY that does not include the CenterPoint.Y calculation and is used for the matrix calculation
-
 
         private string _surroundingAreaColor;
 
@@ -401,16 +385,198 @@ namespace ArgTrack.Features.TrackDrawing
             }
         }
 
+
+
+        public void SetDisplayVergeData(bool display)
+        {
+            DisplayVergeData = display ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private Visibility _displayVergeData = Visibility.Visible;
+
+        public Visibility DisplayVergeData
+        {
+            get { return _displayVergeData; }
+            set { SetProperty(ref _displayVergeData, value, () => DisplayVergeData); }
+        }
+
+        private ObservableCollection<TrackShapeData> _vergeData;
+
+        /// <summary>
+        /// Gets or sets the TrackShapeData values that represent the verge
+        /// when data is rendered to the screen.
+        /// </summary>
+        public ObservableCollection<TrackShapeData> VergeData
+        {
+            get { return _vergeData; }
+            set { SetProperty(ref _vergeData, value, () => VergeData); }
+        }
+
+
+
+
+        public void SetDisplayTrackShapeData(bool display)
+        {
+            DisplayTrackShapeData = display ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private Visibility _displayTrackShapeData = Visibility.Visible;
+
+        public Visibility DisplayTrackShapeData
+        {
+            get { return _displayTrackShapeData; }
+            set { SetProperty(ref _displayTrackShapeData, value, () => DisplayTrackShapeData); }
+        }
+
         private ObservableCollection<TrackShapeData> _trackData;
 
         /// <summary>
-        /// Gets or sets the TrackShapeData values that will be rendered on screen.
+        /// Gets or sets the TrackShapeData values that represent the road
+        /// when data is rendered to the screen.
         /// </summary>
         public ObservableCollection<TrackShapeData> TrackData
         {
             get { return _trackData; }
             set { SetProperty(ref _trackData, value, () => TrackData); }
         }
+
+
+
+        public void SetDisplayPitLaneShapeData(bool display)
+        {
+            DisplayPitLaneShapeData = display ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private Visibility _displayPitLaneShapeData = Visibility.Visible;
+
+        public Visibility DisplayPitLaneShapeData
+        {
+            get { return _displayPitLaneShapeData; }
+            set { SetProperty(ref _displayPitLaneShapeData, value, () => DisplayPitLaneShapeData); }
+        }
+
+
+        private ObservableCollection<TrackShapeData> _pitLaneShapeData;
+
+        /// <summary>
+        /// Gets or sets the TrackShapeData values that represent the pit lane
+        /// when data is rendered to the screen.
+        /// </summary>
+        public ObservableCollection<TrackShapeData> PitLaneShapeData
+        {
+            get { return _pitLaneShapeData; }
+            set { SetProperty(ref _pitLaneShapeData, value, () => PitLaneShapeData); }
+        }
+
+
+
+
+        public void SetDisplayTrackSideObjectData(bool display)
+        {
+            DisplayTrackSideObjectData = display ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private Visibility _displayTrackSideObjectData = Visibility.Visible;
+
+        public Visibility DisplayTrackSideObjectData
+        {
+            get { return _displayTrackSideObjectData; }
+            set { SetProperty(ref _displayTrackSideObjectData, value, () => DisplayTrackSideObjectData); }
+        }
+
+        private ObservableCollection<TrackShapeData> _trackSideObjectsShapeData;
+
+        /// <summary>
+        /// Gets or sets the TrackShapeData values that represent the track-side objects
+        /// when data is rendered to the screen.
+        /// </summary>
+        public ObservableCollection<TrackShapeData> TrackSideObjectsShapeData
+        {
+            get { return _trackSideObjectsShapeData; }
+            set { SetProperty(ref _trackSideObjectsShapeData, value, () => TrackSideObjectsShapeData); }
+        }
+
+
+
+        public void SetDisplayDebugCircleCenterIndicatorsData(bool display)
+        {
+            DisplayDebugCircleCenterIndicatorsData = display ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private Visibility _displayDebugCircleCenterIndicatorsData = Visibility.Hidden;
+
+        public Visibility DisplayDebugCircleCenterIndicatorsData
+        {
+            get { return _displayDebugCircleCenterIndicatorsData; }
+            set { SetProperty(ref _displayDebugCircleCenterIndicatorsData, value, () => DisplayDebugCircleCenterIndicatorsData); }
+        }
+
+        private ObservableCollection<TrackShapeData> _debugCircleCenterIndicatorsData;
+
+        /// <summary>
+        /// Gets or sets the TrackShapeData values that represent the circle center DEBUG
+        /// when data is rendered to the screen.
+        /// </summary>
+        public ObservableCollection<TrackShapeData> DebugCircleCenterIndicators
+        {
+            get { return _debugCircleCenterIndicatorsData; }
+            set { SetProperty(ref _debugCircleCenterIndicatorsData, value, () => DebugCircleCenterIndicators); }
+        }
+
+
+
+        public void SetDisplayDebugLineBetweenSectionCentersData(bool display)
+        {
+            DisplayDebugLineBetweenSectionCentersData = display ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private Visibility _displayDebugLineBetweenSectionCentersData = Visibility.Hidden;
+
+        public Visibility DisplayDebugLineBetweenSectionCentersData
+        {
+            get { return _displayDebugLineBetweenSectionCentersData; }
+            set { SetProperty(ref _displayDebugLineBetweenSectionCentersData, value, () => DisplayDebugLineBetweenSectionCentersData); }
+        }
+
+        private ObservableCollection<TrackShapeData> _debugLineBetweenSectionCentersData;
+
+        /// <summary>
+        /// Gets or sets the TrackShapeData values that represent the circle center DEBUG
+        /// when data is rendered to the screen.
+        /// </summary>
+        public ObservableCollection<TrackShapeData> DebugLineBetweenSectionCenters
+        {
+            get { return _debugLineBetweenSectionCentersData; }
+            set { SetProperty(ref _debugLineBetweenSectionCentersData, value, () => DebugLineBetweenSectionCenters); }
+        }
+
+
+        public void SetDisplayDebugLineAlongTrackCenterData(bool display)
+        {
+            DisplayDebugLineAlongTrackCenterData = display ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private Visibility _displayDebugLineAlongTrackCenterData = Visibility.Hidden;
+
+        public Visibility DisplayDebugLineAlongTrackCenterData
+        {
+            get { return _displayDebugLineAlongTrackCenterData; }
+            set { SetProperty(ref _displayDebugLineAlongTrackCenterData, value, () => DisplayDebugLineAlongTrackCenterData); }
+        }
+
+        private ObservableCollection<TrackShapeData> _debugLineAlongTrackCenterData;
+
+        /// <summary>
+        /// Gets or sets the TrackShapeData values that represent the circle center DEBUG
+        /// when data is rendered to the screen.
+        /// </summary>
+        public ObservableCollection<TrackShapeData> DebugLineAlongTrackCenter
+        {
+            get { return _debugLineAlongTrackCenterData; }
+            set { SetProperty(ref _debugLineAlongTrackCenterData, value, () => DebugLineAlongTrackCenter); }
+        }
+
+
 
 
         // TODO: set to actual layout section, which then updates this data?

@@ -66,7 +66,8 @@ namespace ArgTrack.Features.Persistence
             mainViewModel.TrackViewModel = trackViewModel;
 
             // perhaps should be initialized elsewhere?
-            var layoutViewModel = TrackLayoutViewModel.FromTrackViewModel(trackViewModel, new TrackDrawingElementsSettings());
+            //var layoutViewModel = TrackLayoutViewModel.FromTrackViewModel(trackViewModel, new TrackDrawingElementsSettings());
+            var layoutViewModel = new TrackLayoutViewModel(trackViewModel);
 
             MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel = layoutViewModel;
         }

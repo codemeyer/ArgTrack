@@ -25,6 +25,9 @@ namespace ArgTrack.Features.TrackDrawing
             };
         }
 
+        // TODO: overload that takes TrackViewModel, current list, starting point
+        // and recalculates all sections including and after the starting point
+
         public static List<LayoutSectionData> GetTrackLayoutSections(TrackViewModel track)
         {
             double startX = CalculateStartX(track.TrackHeader.TrackCenterX);

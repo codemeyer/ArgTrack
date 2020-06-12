@@ -86,7 +86,6 @@
     <Compile Include="Features\TrackDrawing\Extensions\TrackShapeDataObservableCollectionExtensions.cs" />
     <Compile Include="Features\TrackDrawing\UserInterface\RedrawViewCommand.cs" />
     <Compile Include="Features\TrackDrawing\TrackSections\RoadLayoutSectionData.cs" />
-    <Compile Include="Features\TrackDrawing\UserInterface\TrackDrawingElementsSettings.cs" />
     <Compile Include="Features\TrackDrawing\TracksideObjects\TracksideObjectsCalculator.cs" />
     <Compile Include="Features\TrackDrawing\Verges\VergeLayoutMerger.cs" />
     <Compile Include="Features\TrackDrawing\Verges\VergeLayoutSectionData.cs" />

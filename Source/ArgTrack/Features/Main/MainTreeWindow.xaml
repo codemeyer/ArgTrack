@@ -372,7 +372,7 @@
                             </TransformGroup>
                         </Canvas.RenderTransform>
 
-                        <ItemsControl ItemsSource="{Binding TrackData}">
+                        <ItemsControl ItemsSource="{Binding VergeData}" Visibility="{Binding DisplayVergeData}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <Canvas />
@@ -383,6 +383,103 @@
                                     <Polyline Points="{Binding Points}"
                                       Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
                                       Fill="{Binding Fill}">
+                                    </Polyline>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <ItemsControl ItemsSource="{Binding PitLaneShapeData}" Visibility="{Binding DisplayPitLaneShapeData}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Polyline Points="{Binding Points}"
+                                              Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
+                                              Fill="{Binding Fill}">
+                                    </Polyline>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <ItemsControl ItemsSource="{Binding TrackData}" Visibility="{Binding DisplayTrackShapeData}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Polyline Points="{Binding Points}"
+                                      Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
+                                      Fill="{Binding Fill}">
+                                    </Polyline>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <ItemsControl ItemsSource="{Binding TrackSideObjectsShapeData}" Visibility="{Binding DisplayTrackSideObjectData}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Polyline Points="{Binding Points}"
+                                      Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
+                                      Fill="{Binding Fill}">
+                                    </Polyline>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <!-- debug items -->
+                        <ItemsControl ItemsSource="{Binding DebugCircleCenterIndicators}" Visibility="{Binding DisplayDebugCircleCenterIndicatorsData}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Polyline Points="{Binding Points}"
+                                              Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
+                                              Fill="{Binding Fill}">
+                                    </Polyline>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <ItemsControl ItemsSource="{Binding DebugLineBetweenSectionCenters}" Visibility="{Binding DisplayDebugLineBetweenSectionCentersData}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Polyline Points="{Binding Points}"
+                                              Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
+                                              Fill="{Binding Fill}">
+                                    </Polyline>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <ItemsControl ItemsSource="{Binding DebugLineAlongTrackCenter}" Visibility="{Binding DisplayDebugLineAlongTrackCenterData}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Polyline Points="{Binding Points}"
+                                              Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
+                                              Fill="{Binding Fill}">
                                     </Polyline>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

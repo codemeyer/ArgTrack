@@ -37,6 +37,12 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
         /// </summary>
         public void RecalculateGraphics()
         {
+            // TODO: split this into
+            // - one method for track sections (where an index can be specified as a starting point)
+            // - one method for track side objects
+            // - one method for updating just pit lane
+            // - one method for changing surrounding color
+
             _trackViewModel.RecalculateLayout();
         }
 

@@ -32,6 +32,7 @@ namespace ArgTrack.Features.TrackEditing.TrackSettings
                 if (needsRepainting)
                 {
                     // TODO: not global, raise event instead?
+                    // TODO: more specific, see NeedsRepainting()
                     TrackViewModelPasserArounder.TrackViewModel.RecalculateLayout();
                 }
             }
@@ -39,11 +40,14 @@ namespace ArgTrack.Features.TrackEditing.TrackSettings
 
         private bool NeedsRepainting(TrackSettingsViewModel original, TrackSettingsViewModel updated)
         {
+            // TODO: should only update the verges and background
+            // enough to loop through verge shape data and change color?
             if (original.SurroundingArea != updated.SurroundingArea)
             {
                 return true;
             }
 
+            // TODO: should only affect drawing of pit lane
             if (original.PitsSide != updated.PitsSide)
             {
                 return true;

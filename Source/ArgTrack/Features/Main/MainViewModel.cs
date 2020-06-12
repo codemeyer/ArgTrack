@@ -100,9 +100,6 @@ namespace ArgTrack.Features.Main
         }
 
 
-
-        // this is regenerated every time stuff is redrawn, so can't have too much stuff in the TrackLayoutViewModel...
-
         private TrackLayoutViewModel _trackLayoutViewModel;
 
         public TrackLayoutViewModel TrackLayoutViewModel
@@ -141,9 +138,6 @@ namespace ArgTrack.Features.Main
 
 
 
-
-        // TODO: somewhere else...?
-
         private bool _drawTrack = true;
 
         public bool DrawTrack
@@ -153,7 +147,7 @@ namespace ArgTrack.Features.Main
             {
                 if (SetProperty(ref _drawTrack, value, () => DrawTrack))
                 {
-                    TrackViewModel?.RecalculateLayout();
+                    TrackLayoutViewModel.SetDisplayTrackShapeData(value);
                 }
             }
         }
@@ -167,7 +161,7 @@ namespace ArgTrack.Features.Main
             {
                 if (SetProperty(ref _drawPitLane, value, () => DrawPitLane))
                 {
-                    TrackViewModel?.RecalculateLayout();
+                    TrackLayoutViewModel.SetDisplayPitLaneShapeData(value);
                 }
             }
         }
@@ -181,7 +175,7 @@ namespace ArgTrack.Features.Main
             {
                 if (SetProperty(ref _drawVerges, value, () => DrawVerges))
                 {
-                    TrackViewModel?.RecalculateLayout();
+                    TrackLayoutViewModel.SetDisplayVergeData(value);
                 }
             }
         }
@@ -196,7 +190,7 @@ namespace ArgTrack.Features.Main
             {
                 if (SetProperty(ref _drawTrackSideObjects, value, () => DrawTrackSideObjects))
                 {
-                    TrackViewModel?.RecalculateLayout();
+                    TrackLayoutViewModel.SetDisplayTrackSideObjectData(value);
                 }
             }
         }
@@ -211,7 +205,7 @@ namespace ArgTrack.Features.Main
             {
                 if (SetProperty(ref _drawCircleCenterIndicators, value, () => DrawCircleCenterIndicators))
                 {
-                    TrackViewModel?.RecalculateLayout();
+                    TrackLayoutViewModel.SetDisplayDebugCircleCenterIndicatorsData(value);
                 }
             }
         }
@@ -226,7 +220,7 @@ namespace ArgTrack.Features.Main
             {
                 if (SetProperty(ref _drawLineBetweenSectionCenters, value, () => DrawLineBetweenSectionCenters))
                 {
-                    TrackViewModel?.RecalculateLayout();
+                    TrackLayoutViewModel.SetDisplayDebugLineBetweenSectionCentersData(value);
                 }
             }
         }
@@ -240,7 +234,7 @@ namespace ArgTrack.Features.Main
             {
                 if (SetProperty(ref _drawLineAlongTrackCenter, value, () => DrawLineAlongTrackCenter))
                 {
-                    TrackViewModel?.RecalculateLayout();
+                    TrackLayoutViewModel.SetDisplayDebugLineAlongTrackCenterData(value);
                 }
             }
         }

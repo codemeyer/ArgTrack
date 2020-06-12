@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using ArgTrack.Features.TrackDrawing;
 using ArgTrack.Features.TrackEditing;
 using ArgTrack.Features.TrackEditing.Camera;
 using ArgTrack.Features.TrackEditing.CarSettings;
@@ -57,44 +56,36 @@ namespace ArgTrack.Features.Main
 
         public void RecalculateLayout()
         {
-            // TODO: move this to MainViewModel ?
+            // TODO: move this to MainViewModel or directly on TrackLayoutViewModel?
 
             var mainViewModel = MainViewModelPasserArounder.MainViewModel;
+            var layoutViewModel = MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel;
 
             // save for restoring
-            var currentZoom = mainViewModel.TrackLayoutViewModel.ZoomFactor;
-            var currentCenter = mainViewModel.TrackLayoutViewModel.CenterPoint;
-            var currentOffsetX = mainViewModel.TrackLayoutViewModel.OffsetX;
-            var currentOffsetY = mainViewModel.TrackLayoutViewModel.OffsetY;
-
-            var settings = new TrackDrawingElementsSettings
-            {
-                DrawTrack = mainViewModel.DrawTrack,
-                DrawPitLane = mainViewModel.DrawPitLane,
-                DrawVerges = mainViewModel.DrawVerges,
-                DrawTrackSideObjects = mainViewModel.DrawTrackSideObjects,
-                DrawCircleCenterIndicators = mainViewModel.DrawCircleCenterIndicators,
-                DrawLineAlongTrackCenter = mainViewModel.DrawLineAlongTrackCenter,
-                DrawLineBetweenSectionCenters = mainViewModel.DrawLineBetweenSectionCenters
-            };
-
+            var currentZoom = layoutViewModel.ZoomFactor;
+            var currentCenter = layoutViewModel.CenterPoint;
+            var currentOffsetX = layoutViewModel.OffsetX;
+            var currentOffsetY = layoutViewModel.OffsetY;
             // TODO: need the index or some other thing to identify the currently selected data,
             // because if it changes shape during the redraw this will still have the old shape
             //var selectedPointData = mainViewModel.TrackLayoutViewModel.SelectedTrackSection;
 
-            // TODO: this will re-render the ENTIRE track... instead, split into separate
-            // parts that can be updated separately
-            var layoutViewModel = TrackLayoutViewModel.FromTrackViewModel(this, settings);
+            // hack kludge until we just update what we want...
+            layoutViewModel.PerformFullCalculation();
+
+            layoutViewModel.SetDisplayTrackShapeData(mainViewModel.DrawTrack);
+            layoutViewModel.SetDisplayPitLaneShapeData(mainViewModel.DrawPitLane);
+            layoutViewModel.SetDisplayVergeData(mainViewModel.DrawVerges);
+            layoutViewModel.SetDisplayTrackSideObjectData(mainViewModel.DrawTrackSideObjects);
+            // TODO: debug stuff?
 
             // restore
             layoutViewModel.CenterPoint = currentCenter;
             layoutViewModel.ZoomFactor = currentZoom;
             layoutViewModel.OffsetX = currentOffsetX;
             layoutViewModel.OffsetY = currentOffsetY;
-
+            // TODO: update SelectedTrackSection somehow
             //layoutViewModel.SelectedTrackSection = selectedPointData;
-
-            MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel = layoutViewModel;
         }
 
 
