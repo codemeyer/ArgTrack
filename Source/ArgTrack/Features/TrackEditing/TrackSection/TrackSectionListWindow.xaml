@@ -45,7 +45,7 @@
                 </Button>
             </StackPanel>
 
-            <ListView Height="520" Margin="5" ItemsSource="{Binding TrackSections}" IsSynchronizedWithCurrentItem="True"
+            <ListView Height="520" Margin="5" ItemsSource="{Binding TrackSections}" IsSynchronizedWithCurrentItem="True" SelectionChanged="Selector_OnSelectionChanged"
                       MouseDoubleClick="Control_OnMouseDoubleClick" SelectedIndex="{Binding SelectedTrackSectionIndex}" SelectedItem="{Binding SelectedTrackSection}">
                 <ListView.InputBindings>
                     <KeyBinding Key="Enter"
@@ -135,10 +135,13 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <!--<StackPanel Orientation="Horizontal" Margin="0,-5">
+            <StackPanel Orientation="Horizontal" Margin="0,-5">
                 <Label>Total Length:</Label>
                 <Label Content="{Binding TotalLengthText}"></Label>
-            </StackPanel>-->
+                <Label Width="24"></Label>
+                <Label>Selected Length:</Label>
+                <Label Content="{Binding SelectedLengthText}"></Label>
+            </StackPanel>
         </StackPanel>
         <StackPanel Margin="5" Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <Button Width="70" Height="22" Margin="3" IsCancel="True" Click="CloseButton_OnClick" Content="Close"></Button>

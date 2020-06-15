@@ -35,5 +35,15 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
         {
             this.Close();
         }
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = sender as ListView;
+
+            var list = listView.DataContext as TrackSectionDataListViewModel;
+
+            list.UpdateTotalLengthText();
+            list.UpdateSelectedLengthText(listView.SelectedItems);
+        }
     }
 }

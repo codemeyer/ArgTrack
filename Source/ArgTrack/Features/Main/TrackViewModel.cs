@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
-using ArgTrack.Features.TrackEditing;
 using ArgTrack.Features.TrackEditing.Camera;
 using ArgTrack.Features.TrackEditing.CarSettings;
 using ArgTrack.Features.TrackEditing.CarSetup;
@@ -36,13 +34,6 @@ namespace ArgTrack.Features.Main
 
             TrackHeader = new TrackHeaderViewModel();
             ComputerCarSetup = new SetupViewModel("TrackSetup");
-
-            TrackSections.CollectionChanged += TrackSections_CollectionChanged;
-        }
-
-        private void TrackSections_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            TotalLengthText = UnitConvert.TrackLengthToMetersDescription(TrackSections.Sum(t => t.Length));
         }
 
         private TrackSectionViewModelCollection _trackSections;
@@ -168,15 +159,6 @@ namespace ArgTrack.Features.Main
             {
                 SetProperty(ref _horizonBytes, value, () => HorizonBytes);
             }
-        }
-
-
-        private string _totalLengthText;
-
-        public string TotalLengthText
-        {
-            get { return _totalLengthText; }
-            set { SetProperty(ref _totalLengthText, value, () => TotalLengthText); }
         }
 
 

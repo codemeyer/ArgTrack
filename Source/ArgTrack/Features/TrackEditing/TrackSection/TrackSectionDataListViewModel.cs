@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections;
+using System.Windows.Input;
 using System.Windows.Media;
 using ArgTrack.Features.Application.Shared;
 using ArgTrack.Features.Main;
@@ -52,9 +53,55 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                     pointData.StrokeThickness = 0.35;
 
                     MainViewModelPasserArounder.MainViewModel.TrackLayoutViewModel.SelectedTrackSection = pointData;
+
+                    UpdateTotalLengthText();
                 }
             }
         }
+
+        public void UpdateTotalLengthText()
+        {
+            int units = 0;
+
+            foreach (var section in TrackSections)
+            {
+                units += section.Length;
+            }
+
+            TotalLengthText = UnitConvert.TrackLengthToMetersDescription(units);
+        }
+
+
+        private string _totalLengthText = "...t";
+
+        public string TotalLengthText
+        {
+            get { return _totalLengthText; }
+            set { SetProperty(ref _totalLengthText, value, () => TotalLengthText); }
+        }
+
+
+
+        public void UpdateSelectedLengthText(IList listViewSelectedItems)
+        {
+            int units = 0;
+
+            foreach (TrackSectionViewModel section in listViewSelectedItems)
+            {
+                units += section.Length;
+            }
+
+            SelectedLengthText = UnitConvert.TrackLengthToMetersDescription(units);
+        }
+
+        private string _selectedLengthText = "...s";
+
+        public string SelectedLengthText
+        {
+            get { return _selectedLengthText; }
+            set { SetProperty(ref _selectedLengthText, value, () => SelectedLengthText); }
+        }
+
 
 
         public ICommand AddTrackSectionCommand { get; } = new AddTrackSectionCommand();
