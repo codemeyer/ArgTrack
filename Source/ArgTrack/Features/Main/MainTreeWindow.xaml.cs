@@ -53,12 +53,10 @@ namespace ArgTrack.Features.Main
                 return;
             }
 
-            // TODO: hmmmm
-            tlvm.ViewportWidth = GridGrid.ActualWidth;
-            tlvm.ViewportHeight = GridGrid.ActualHeight;
+            tlvm.ViewportWidth = GridGrid.ActualWidth - 16.0; // minus to compensate for scrollbar, etc
+            tlvm.ViewportHeight = GridGrid.ActualHeight - 20.0; // minus to compensate for "toolbars", etc
             tlvm.RecalculateViewAndScrollbars();
         }
-
 
         private void TrackMiscDataTreeView_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

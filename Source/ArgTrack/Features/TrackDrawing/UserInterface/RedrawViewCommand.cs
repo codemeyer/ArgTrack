@@ -14,9 +14,11 @@ namespace ArgTrack.Features.TrackDrawing
                 return;
             }
 
-            // TODO: fix
+            // TODO: improve more
+            viewModel.ZoomFactor = 2.0;
+            viewModel.OffsetX = 0;
+            viewModel.OffsetY = 0;
             TrackViewModelPasserArounder.TrackViewModel.RecalculateLayout();
-
             viewModel.RecalculateViewAndScrollbars();
         }
     }

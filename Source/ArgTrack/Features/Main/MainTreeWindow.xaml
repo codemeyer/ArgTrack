@@ -57,6 +57,7 @@
                     <MenuItem IsCheckable="True" IsChecked="{Binding DrawCircleCenterIndicators}" Header="Circle Centers Track"></MenuItem>
                     <MenuItem IsCheckable="True" IsChecked="{Binding DrawLineAlongTrackCenter}" Header="Track Center Line"></MenuItem>
                     <MenuItem IsCheckable="True" IsChecked="{Binding DrawLineBetweenSectionCenters}" Header="Track Center Section Points"></MenuItem>
+                    <MenuItem IsCheckable="True" IsChecked="{Binding DisplayViewportDebugging}" Header="Viewport Debugging"></MenuItem>
                 </MenuItem>
             </MenuItem>
         </Menu>
@@ -288,14 +289,15 @@
 
                 <ScrollBar Orientation="Vertical" HorizontalAlignment="Right" Margin="0,0,0,18"
                            Minimum="{Binding ScrollMinY}" Maximum="{Binding ScrollMaxY}"
-                           ViewportSize="{Binding ScrollHeight}" Value="{Binding OffsetY}">
+                           ViewportSize="{Binding ScrollHeight}" Value="{Binding OffsetY}" >
                 </ScrollBar>
                 <ScrollBar Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,18,0"
                            Minimum="{Binding ScrollMinX}" Maximum="{Binding ScrollMaxX}"
                            ViewportSize="{Binding ScrollWidth}" Value="{Binding OffsetX}"></ScrollBar>
                 <Grid ClipToBounds="True" Margin="0,0,18,18">
-                    <!-- debugging stuff!
-                    <StackPanel Orientation="Vertical">
+
+                    <!-- viewport debugging -->
+                    <StackPanel Orientation="Vertical" Visibility="{Binding DisplayDebugViewportDebugging}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock HorizontalAlignment="Left" Width="90" Foreground="White">ViewportWidth: </TextBlock>
                             <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding ViewportWidth}"></TextBlock>
@@ -305,12 +307,24 @@
                             <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding ViewportHeight}"></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                                <TextBlock HorizontalAlignment="Left" Width="80" Foreground="White">ScrollMinX:</TextBlock>
-                                <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding ScrollMinX}"></TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="105" Foreground="White">TrackRenderWidth:</TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding TrackRenderWidth}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock HorizontalAlignment="Left" Width="105" Foreground="White">TrackRenderHeight:</TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding TrackRenderHeight}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock HorizontalAlignment="Left" Width="80" Foreground="White">ScrollMinX:</TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding ScrollMinX}"></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock HorizontalAlignment="Left" Width="80" Foreground="White">ScrollMaxX: </TextBlock>
                             <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding ScrollMaxX}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock HorizontalAlignment="Left" Width="80" Foreground="White">ScrollWidth: </TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding ScrollWidth}"></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock HorizontalAlignment="Left" Width="80" Foreground="White">OffsetX: </TextBlock>
@@ -337,14 +351,6 @@
                             <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding ZoomFactor}"></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock HorizontalAlignment="Left" Width="105" Foreground="White">TrackRenderWidth:</TextBlock>
-                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding TrackRenderWidth}"></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock HorizontalAlignment="Left" Width="105" Foreground="White">TrackRenderHeight:</TextBlock>
-                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding TrackRenderHeight}"></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
                             <TextBlock HorizontalAlignment="Left" Width="90" Foreground="White">CenterPoint.X:</TextBlock>
                             <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding CenterPoint.X}"></TextBlock>
                         </StackPanel>
@@ -352,22 +358,37 @@
                             <TextBlock HorizontalAlignment="Left" Width="90" Foreground="White">CenterPoint.Y:</TextBlock>
                             <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding CenterPoint.Y}"></TextBlock>
                         </StackPanel>
-                    </StackPanel>-->
-                    <!-- end of debugging stuff -->
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock HorizontalAlignment="Left" Width="90" Foreground="White">Max.X:</TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding MaxPoint.X}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock HorizontalAlignment="Left" Width="90" Foreground="White">Max.Y:</TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding MaxPoint.Y}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock HorizontalAlignment="Left" Width="90" Foreground="White">Min.X:</TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding MinPoint.X}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock HorizontalAlignment="Left" Width="90" Foreground="White">Min.Y:</TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding MinPoint.Y}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock HorizontalAlignment="Left" Width="90" Foreground="White">MatrixOffsetX:</TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding MatrixOffsetX}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock HorizontalAlignment="Left" Width="90" Foreground="White">MatrixOffsetY:</TextBlock>
+                            <TextBlock HorizontalAlignment="Left" Width="100" Foreground="White" Text="{Binding MatrixOffsetY}"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <!-- end of viewport debugging -->
+
                     <Canvas HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Canvas.RenderTransform>
                             <TransformGroup>
-                                <!-- M11,M12,M21,M22,OffsetX,OffsetY -->
-                                <!-- 1 0 0 -1 0 0 -->
-                                <!--<MatrixTransform Matrix="1 0 0 -1 0 0">-->
-                                <MatrixTransform Matrix="{Binding Matrix}">
-                                    <!--<MatrixTransform.Matrix>
-                                        <Matrix M11="1.0" M12="0.0"
-                                                M21="0.0" M22="-1.0"
-                                                OffsetX="{Binding OffsetX}"
-                                                OffsetY="{Binding OffsetY}"></Matrix>
-                                    </MatrixTransform.Matrix>-->
-                                </MatrixTransform>
+                                <MatrixTransform Matrix="{Binding Matrix}" />
                                 <ScaleTransform ScaleX="{Binding ZoomFactor}" ScaleY="{Binding ZoomFactor}"></ScaleTransform>
                             </TransformGroup>
                         </Canvas.RenderTransform>

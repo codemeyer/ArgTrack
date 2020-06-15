@@ -239,6 +239,21 @@ namespace ArgTrack.Features.Main
             }
         }
 
+        private bool _displayViewportDebugging;
+
+        public bool DisplayViewportDebugging
+        {
+            get { return _displayViewportDebugging; }
+            set
+            {
+                if (SetProperty(ref _displayViewportDebugging, value, () => DisplayViewportDebugging))
+                {
+                    TrackLayoutViewModel.SetDisplayDebugViewportDebugging(value);
+                }
+            }
+        }
+
+
         public bool WindowTrackSectionListOpen { get; set; }
         public bool WindowPitLaneSectionListOpen { get; set; }
         //public bool WindowRacingLineListOpen { get; set; }

@@ -50,7 +50,7 @@ namespace ArgTrack.Features.TrackDrawing
 
             PitLaneShapeData = RoadLayoutShapeCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, DrawingLayout.ForPitLane());
 
-            TrackSideObjectsShapeData  = TracksideObjectsCalculator.Calculate(RoadSections, RoadSectionsOnePerLength, _trackViewModel.TrackObjectSettings);
+            TrackSideObjectsShapeData = TracksideObjectsCalculator.Calculate(RoadSections, RoadSectionsOnePerLength, _trackViewModel.TrackObjectSettings);
 
             // TODO: add debug items
 
@@ -142,6 +142,8 @@ namespace ArgTrack.Features.TrackDrawing
                 new Point(min.X, max.Y),
                 new Point(min.X, min.Y)
             };
+            MaxPoint = max;
+            MinPoint = min;
 
             BoundingRectangle = rectanglePoints;
 
@@ -154,29 +156,57 @@ namespace ArgTrack.Features.TrackDrawing
             UpdateScrollWidthParameters(max.X, min.X);
             UpdateScrollHeightParameters(max.Y, min.Y);
 
+            // TODO: when zooming out, adjust OffsetX and OffsetY before recalculating?
+
             RecalculateMatrixTransform();
         }
 
         private void UpdateScrollWidthParameters(double maxX, double minX)
         {
-            TrackRenderWidth = Math.Abs((Math.Abs(maxX) - Math.Abs(minX)) * ZoomFactor);
+            TrackRenderWidth = Math.Abs(AbsDiff(maxX, minX) * ZoomFactor);
 
             var scrollableXRange = Math.Round(TrackRenderWidth - ViewportWidth);
 
+            if (scrollableXRange < 0)
+            {
+                scrollableXRange = 0;
+            }
+
+            ScrollWidth = Convert.ToInt32(scrollableXRange);
+
+            // shouldn't be /2, but based on percentage of something?
+            //VisiblePercentX =
+            //double visiPX = ViewportWidth / TrackRenderWidth;
+            //System.Diagnostics.Debug.WriteLine($"Visible % X: {visiPX}");
+
+            // divide by 4?
             ScrollMinX = Convert.ToInt32(scrollableXRange / 2) * -1;
             ScrollMaxX = Convert.ToInt32(scrollableXRange / 2);
-            ScrollWidth = Convert.ToInt32(scrollableXRange);
         }
 
         private void UpdateScrollHeightParameters(double maxY, double minY)
         {
-            TrackRenderHeight = Math.Abs((Math.Abs(maxY) - Math.Abs(minY)) * ZoomFactor);
+            TrackRenderHeight = Math.Abs(AbsDiff(maxY, minY) * ZoomFactor);
 
             var scrollableYRange = Math.Round(TrackRenderHeight - ViewportHeight);
 
+            if (scrollableYRange < 0)
+            {
+                scrollableYRange = 0;
+            }
+
+            ScrollHeight = Convert.ToInt32(scrollableYRange);
             ScrollMinY = Convert.ToInt32(scrollableYRange / 2) * -1;
             ScrollMaxY = Convert.ToInt32(scrollableYRange / 2);
-            ScrollHeight = Convert.ToInt32(scrollableYRange);
+        }
+
+        private static double AbsDiff(double x, double y)
+        {
+            if (x > y)
+            {
+                return x - y;
+            }
+            return y - x;
         }
 
 
@@ -194,10 +224,45 @@ namespace ArgTrack.Features.TrackDrawing
             //< !--M11,M12,M21,M22,OffsetX,OffsetY-- >
             //< !--1 0 0 - 1 0 0-- >
 
-            Matrix = new Matrix(1, 0, 0, -1, (OffsetX + CenterPoint.X) * -1, (OffsetY - CenterPoint.Y) * -1);
+            // recalculate OffsetX and OffsetY when zooming in/out?
+
+            MatrixOffsetX = (OffsetX + CenterPoint.X) * -1;
+            MatrixOffsetY = (OffsetY - CenterPoint.Y) * -1;
+            Matrix = new Matrix(1, 0, 0, -1, MatrixOffsetX, MatrixOffsetY);
 
             _lastRecalculation = ticks;
         }
+
+
+        private double _matrixOffsetX;
+
+        /// <summary>
+        /// MatrixOffsetX
+        /// </summary>
+        public double MatrixOffsetX
+        {
+            get { return _matrixOffsetX; }
+            set
+            {
+                SetProperty(ref _matrixOffsetX, value, () => MatrixOffsetX);
+            }
+        }
+
+        private double _matrixOffsetY;
+
+        /// <summary>
+        /// MatrixOffsetY
+        /// </summary>
+        public double MatrixOffsetY
+        {
+            get { return _matrixOffsetY; }
+            set
+            {
+                SetProperty(ref _matrixOffsetY, value, () => MatrixOffsetY);
+            }
+        }
+
+
 
         private PointCollection _boundingRectangle;
 
@@ -213,6 +278,22 @@ namespace ArgTrack.Features.TrackDrawing
         {
             get { return _centerPoint; }
             set { SetProperty(ref _centerPoint, value, () => CenterPoint); }
+        }
+
+        private Point _maxPoint;
+
+        public Point MaxPoint
+        {
+            get { return _maxPoint; }
+            set { SetProperty(ref _maxPoint, value, () => MaxPoint); }
+        }
+
+        private Point _minPoint;
+
+        public Point MinPoint
+        {
+            get { return _minPoint; }
+            set { SetProperty(ref _minPoint, value, () => MinPoint); }
         }
 
         // TODO: group all these properties under some other obj?
@@ -231,7 +312,9 @@ namespace ArgTrack.Features.TrackDrawing
 
         private double _viewportWidth;
 
-        // width of viewable drawing area
+        /// <summary>
+        /// Width of viewable drawing area.
+        /// </summary>
         public double ViewportWidth
         {
             get { return _viewportWidth; }
@@ -244,7 +327,9 @@ namespace ArgTrack.Features.TrackDrawing
 
         private double _viewportHeight;
 
-        // height of viewable drawing area
+        /// <summary>
+        /// Height of viewable drawing area.
+        /// </summary>
         public double ViewportHeight
         {
             get { return _viewportHeight; }
@@ -373,14 +458,21 @@ namespace ArgTrack.Features.TrackDrawing
             set { SetProperty(ref _surroundingAreaColor, value, () => SurroundingAreaColor); }
         }
 
-        private double _zoomFactor = 1.75;
+        private double _zoomFactor = 2.0;
 
         public double ZoomFactor
         {
             get { return _zoomFactor; }
             set
             {
+                if (value < _zoomFactor)
+                {
+                    // zooming out
+                }
+
                 SetProperty(ref _zoomFactor, value, () => ZoomFactor);
+                //OffsetX = 0;
+                //OffsetY = 0;
                 RecalculateViewAndScrollbars();
             }
         }
@@ -576,6 +668,21 @@ namespace ArgTrack.Features.TrackDrawing
             set { SetProperty(ref _debugLineAlongTrackCenterData, value, () => DebugLineAlongTrackCenter); }
         }
 
+
+
+
+        public void SetDisplayDebugViewportDebugging(bool display)
+        {
+            DisplayDebugViewportDebugging = display ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private Visibility _displayDebugViewportDebugging = Visibility.Hidden;
+
+        public Visibility DisplayDebugViewportDebugging
+        {
+            get { return _displayDebugViewportDebugging; }
+            set { SetProperty(ref _displayDebugViewportDebugging, value, () => DisplayDebugViewportDebugging); }
+        }
 
 
 
