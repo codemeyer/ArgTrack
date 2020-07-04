@@ -43,8 +43,8 @@
     <Reference Include="Arg2Data, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Arg2Data.0.3.0\lib\net40\Arg2Data.dll</HintPath>
     </Reference>
-    <Reference Include="ArgData, Version=0.19.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ArgData.0.19.3\lib\net40\ArgData.dll</HintPath>
+    <Reference Include="ArgData, Version=0.20.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ArgData.0.20.1\lib\net40\ArgData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -93,7 +93,27 @@
     <Compile Include="Features\TrackEditing\CarSettings\CarSettingsMapper.cs" />
     <Compile Include="Features\TrackEditing\ComputerCarBehavior\ComputerCarBehaviorMapper.cs" />
     <Compile Include="Features\TrackEditing\ObjectSettings\ObjectSettingsMapper.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditableReferencePointViewModel.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditableScalePointViewModel.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditableScaleValueDataViewModel.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditableShapeVectorViewModel.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditTrackObjectShapeReferencePointWindow.xaml.cs">
+      <DependentUpon>EditTrackObjectShapeReferencePointWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditTrackObjectShapeVectorWindow.xaml.cs">
+      <DependentUpon>EditTrackObjectShapeVectorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditTrackObjectShapeScalePointWindow.xaml.cs">
+      <DependentUpon>EditTrackObjectShapeScalePointWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditTrackObjectShapeScaleValueCommand.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\ObjectShapeDescriptions.cs" />
     <Compile Include="Features\TrackEditing\ObjectShapes\ObjectShapeMapper.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\EditTrackShapeScaleValueWindow.xaml.cs">
+      <DependentUpon>EditTrackShapeScaleValueWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Features\TrackEditing\ObjectShapes\TrackObjectShapePointViewModel.cs" />
+    <Compile Include="Features\TrackEditing\ObjectShapes\TrackObjectShapeVectorViewModel.cs" />
     <Compile Include="Features\TrackEditing\RacingLine\RacingLineMapper.cs" />
     <Compile Include="Features\TrackEditing\TrackSection\TrackSectionMapper.cs" />
     <Compile Include="Features\TrackEditing\TrackSettings\TrackSettingsMapper.cs" />
@@ -288,6 +308,22 @@
     <Page Include="Features\TrackEditing\Camera\CameraCommandListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\TrackEditing\ObjectShapes\EditTrackObjectShapeReferencePointWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Features\TrackEditing\ObjectShapes\EditTrackObjectShapeVectorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Features\TrackEditing\ObjectShapes\EditTrackObjectShapeScalePointWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Features\TrackEditing\ObjectShapes\EditTrackShapeScaleValueWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Features\TrackEditing\RacingLine\ComputerCarRacingLineWindow.xaml">
       <SubType>Designer</SubType>

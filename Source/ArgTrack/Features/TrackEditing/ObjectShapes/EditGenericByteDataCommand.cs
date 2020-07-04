@@ -45,7 +45,7 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
             if (vm == null)
                 return;
 
-            var clone = new EditableByteData(vm.Value);
+            var clone = new EditableByteData(vm.Index, vm.Value);
 
             var window = new TrackGenericByteValueDetailsWindow
             {

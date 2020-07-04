@@ -29,6 +29,13 @@
                 </ListView.InputBindings>-->
                 <ListView.View>
                     <GridView>
+                        <GridViewColumn Header="Index" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding Index}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn Header="Value" Width="80">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>

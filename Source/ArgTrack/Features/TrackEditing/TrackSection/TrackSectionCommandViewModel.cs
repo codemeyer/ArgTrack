@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using ArgTrack.Features.Application.Shared;
 using ArgTrack.Features.Main;
 using ArgTrack.Features.TrackEditing.ObjectSettings;
+using ArgTrack.Features.TrackEditing.ObjectShapes;
 using ArgTrack.Infrastructure;
 
 namespace ArgTrack.Features.TrackEditing.TrackSection
@@ -51,10 +53,16 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
         }
 
 
-        private void UpdateCommandDetails()
+        public void UpdateCommandDetails()
         {
             CommandDisplay = $"0x{Command:X}";
             Description = TrackSectionCommandDescriptions.GetCommandDescription(Command);
+
+            if (Command == 0x80 && Arguments.Count > 0)
+            {
+                var desc = GetDescription();
+                Description = desc;
+            }
         }
 
 
@@ -108,11 +116,109 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
         }
 
 
-        public List<TrackObjectSettingsViewModel> AvailableObjects
+        public List<TrackSectionSelectableObjectSetting> AvailableObjects
         {
-            get { return TrackViewModelPasserArounder.TrackViewModel.TrackObjectSettings.ToList(); }
+            get
+            {
+                var list = new List<TrackSectionSelectableObjectSetting>();
+
+                foreach (var objectSetting in TrackViewModelPasserArounder.TrackViewModel.TrackObjectSettings)
+                {
+                    string description = GetObjectPlacementDescription(objectSetting);
+
+                    // TODO: Id != 5 and <17
+
+                    if (!string.IsNullOrEmpty(description))
+                    {
+                        description = " - " + description;
+                    }
+
+                    list.Add(new TrackSectionSelectableObjectSetting(objectSetting.Offset, $"{objectSetting.Offset} {description}"));
+                }
+
+                return list;
+            }
         }
 
+        private string GetDescription()
+        {
+            if (Command == 0x80)
+            {
+                var objectSetting = TrackViewModelPasserArounder.TrackViewModel?.TrackObjectSettings.FirstOrDefault(s => s.Offset == Arguments[1].Value);
+                var description = GetObjectPlacementDescription(objectSetting);
+
+                if (string.IsNullOrEmpty(description))
+                {
+                    return TrackSectionCommandDescriptions.GetCommandDescription(Command);
+                }
+                else
+                {
+                    return TrackSectionCommandDescriptions.GetCommandDescription(Command) + " - " + description;
+                }
+            }
+
+            return TrackSectionCommandDescriptions.GetCommandDescription(Command);
+        }
+
+        private string GetObjectPlacementDescription(TrackObjectSettingsViewModel objectSetting)
+        {
+            var description = "";
+
+            if (objectSetting == null)
+            {
+                return string.Empty;
+            }
+
+            if (objectSetting.Id == 5 || objectSetting.Id == 1 || objectSetting.Id == 13)  // difference between these?
+            {
+                var billboardDescription = BillboardObjects.GetDescription(objectSetting.AngleY);
+
+                if (!string.IsNullOrEmpty(billboardDescription))
+                {
+                    description = $"{billboardDescription} [id {objectSetting.AngleY}]";
+                }
+                else
+                {
+                    description = $"[id {objectSetting.AngleY}]";
+                }
+            }
+
+            if (objectSetting.Id >= 17)
+            {
+                var shape = TrackViewModelPasserArounder.TrackViewModel.TrackObjectShapes.FirstOrDefault(s => s.Id == objectSetting.Id);
+
+                if (shape != null)
+                {
+                    var shapeDescription = ObjectShapeDescriptions.GetDescription(shape.Signature);
+
+                    if (!string.IsNullOrEmpty(shapeDescription))
+                    {
+                        description = $"{shapeDescription} [shape id {objectSetting.Id}]";
+                    }
+                    else
+                    {
+                        description = $"3D Object [shape id {objectSetting.Id}]";
+                    }
+                }
+                else
+                {
+                    description = $"3D Object [shape id  {objectSetting.Id}]";
+                }
+            }
+
+            // indicate side of track
+            if (objectSetting.DistanceFromTrack > 0)
+            {
+                description += "   \u2206\u2192";
+            }
+
+            if (objectSetting.DistanceFromTrack < 0)
+            {
+                description += " \u2190\u2206";
+            }
+
+            return description;
+        }
 
 
         private void UpdateShowArgs()
@@ -252,6 +358,21 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
 
         public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/track-section-details-window/#commands");
     }
+
+
+
+    public class TrackSectionSelectableObjectSetting
+    {
+        public TrackSectionSelectableObjectSetting(short value, string display)
+        {
+            Value = value;
+            DisplayValue = display;
+        }
+
+        public short Value { get; set; }
+        public string DisplayValue { get; set; }
+    }
+
 
 
     public class TrackSectionCommandBoundValue

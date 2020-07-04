@@ -16,8 +16,27 @@ namespace ArgTrack.Features.TrackEditing.ObjectSettings
             return list;
         }
 
+        public static string GetDescription(short id)
+        {
+            if (_objects.ContainsKey(id))
+            {
+                return _objects[id];
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
         private static readonly Dictionary<short, string> _objects = new Dictionary<short, string>
         {
+            { 75, "100 sign" },
+            { 76, "200 sign" },
+            { 77, "300 sign" },
+            { 78, "Arrow hard right sign" },
+            { 79, "Arrow easy right sign" },
+            { 80, "Arrow hard left sign" },
+            { 81, "Arrow easy left sign" },
             { 84, "Fir tree" },
             { 85, "Fir tree" },
             { 86, "Fir tree" },

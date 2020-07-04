@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Windows.Media;
+using ArgTrack.Features.TrackDrawing;
 using ArgTrack.Infrastructure;
 
 namespace ArgTrack.Features.TrackEditing.TrackSection
@@ -14,6 +16,12 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
 
             var clone = new TrackSectionViewModel(vm.ParentList);
             TrackSectionMapper.MapTrackSectionViewModel(vm, clone);
+
+            // update command descriptions
+            foreach (var cmd in clone.Commands)
+            {
+                cmd.UpdateCommandDetails();
+            }
 
             var window = new TrackSectionDetailsWindow
             {

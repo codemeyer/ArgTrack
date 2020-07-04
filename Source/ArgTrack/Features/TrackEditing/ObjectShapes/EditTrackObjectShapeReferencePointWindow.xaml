@@ -1,0 +1,37 @@
+﻿<Window x:Class="ArgTrack.Features.TrackEditing.ObjectShapes.EditTrackObjectShapeReferencePointWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArgTrack.Features.TrackEditing.ObjectShapes"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=local:EditableReferencePointViewModel, IsDesignTimeCreatable=True}"
+        Title="Reference Point" Width="200" Height="200"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="5">
+
+            <StackPanel Orientation="Horizontal">
+                <Label Width="60">X, Y</Label>
+                <ComboBox Width="120" Height="22"
+                          DisplayMemberPath="DisplayValue" SelectedValuePath="Value"
+                          ItemsSource="{Binding AvailableScalePoints}" SelectedValue="{Binding SelectedPointIndex}"></ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Width="100">Z</Label>
+                <TextBox Width="80" Height="22" Text="{Binding ZValue}"></TextBox>
+            </StackPanel>
+
+        </StackPanel>
+        <StackPanel Margin="5" Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Width="70" Height="22" Margin="3" IsDefault="True" Click="OKButton_OnClick"
+                    Content="OK"></Button>
+            <Button Width="70" Height="22" Margin="3" IsCancel="True" Click="CancelButton_OnClick"
+                    Content="Cancel"></Button>
+        </StackPanel>
+
+    </Grid>
+
+</Window>

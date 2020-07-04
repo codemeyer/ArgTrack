@@ -6,8 +6,8 @@
         xmlns:objectShapes="clr-namespace:ArgTrack.Features.TrackEditing.ObjectShapes"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=objectShapes:TrackObjectShapeViewModel, IsDesignTimeCreatable=True}"
-        d:DesignWidth="420" d:DesignHeight="594"
-        Width="420" Height="594"
+        d:DesignWidth="740" d:DesignHeight="580"
+        Width="740" Height="580"
         Title="Track Object Shape Details"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False" ResizeMode="NoResize">
@@ -17,101 +17,263 @@
     <Grid>
         <StackPanel Orientation="Vertical" Margin="5">
 
-            <GroupBox Header="Description">
+            <GroupBox Header="Shape Info">
                 <StackPanel Orientation="Vertical">
+                    <!--<StackPanel Orientation="Horizontal">
+                        <Label Width="75">Description</Label>
+                        <Label>3D Object</Label>
+                    </StackPanel>-->
                     <StackPanel Orientation="Horizontal">
-                        <Label Width="120">HeaderIndex</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding DataIndex}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
+                        <Label Width="80">Id</Label>
+                        <TextBox Width="40" Height="22" IsReadOnly="True" Text="{Binding Id}"></TextBox>
+                        <Label Width="90" Margin="20,0,0,0">HeaderIndex</Label>
+                        <TextBox Width="40" Height="22" IsReadOnly="True" Text="{Binding HeaderIndex}"></TextBox>
+                        <Label Width="100" Margin="20,0,0,0">DataIndex</Label>
+                        <TextBox Width="40" Height="22" IsReadOnly="True" Text="{Binding DataIndex}"></TextBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Label Width="120">DataIndex</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding DataIndex}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
+                        <Label Width="80">Description</Label>
+                        <TextBox Width="190" Height="22" IsReadOnly="True" Text="{Binding Description}"></TextBox>
+                        <Label Width="100" Margin="20,0,0,0">Shape Signature</Label>
+                        <TextBox Width="190" Height="22" IsReadOnly="True" Text="{Binding Signature}"></TextBox>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Object Data">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Header 1</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding HeaderValue1}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
-                    </StackPanel>
+            <TabControl Margin="0,5" Height="420">
+                <TabItem>
+                    <TabItem.Header>Scales, Points and Vectors</TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Margin="4" Height="380">
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Offset 1</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding Offset1}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Scale Values</Label>
+                            <ListView Width="140" HorizontalAlignment="Left" Height="320" ItemsSource="{Binding ScaleValues}" IsSynchronizedWithCurrentItem="True"
+                                      MouseDoubleClick="ScaleValues_OnMouseDoubleClick" SelectedIndex="{Binding SelectedScaleValueIndex}">
+                                <!--MouseDoubleClick="Control_OnMouseDoubleClick" SelectedItem="{Binding SelectedCameraCommand}" SelectedIndex="{Binding SelectedCommandIndex}">-->
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Scale Value" Width="100">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Left" Text="{Binding}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button Width="60" Height="24" Margin="0,4,0,0">Add</Button>
+                                <Button Width="60" Height="24" Margin="4,4,0,0">Remove</Button>
+                            </StackPanel>-->
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Header 2</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding HeaderValue2}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
-                    </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Points</Label>
+                            <ListView Width="390" HorizontalAlignment="Left" Height="320" ItemsSource="{Binding Points}" IsSynchronizedWithCurrentItem="True" Margin="8,0"
+                                      MouseDoubleClick="PointValues_OnMouseDoubleClick" SelectedItem="{Binding SelectedPoint}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Index" Width="50">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Index}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="X" Width="76">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Left" Text="{Binding X}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Y" Width="76">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Y}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Z" Width="76">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Left" Text="{Binding Z}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Type" Width="80">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Left" Text="{Binding PointType}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,8,0">
+                                <!--
+                                <Button Width="24" Height="24" Margin="4,4,0,0">↑</Button>
+                                <Button Width="24" Height="24" Margin="4,4,10,0">↓</Button>
+                                -->
+                                <!--<Button Width="64" Height="24" Margin="8,4,0,0">Add Scale</Button>
+                                <Button Width="64" Height="24" Margin="4,4,0,0">Add Ref.</Button>
+                                <Button Width="64" Height="24" Margin="4,4,0,0">Remove</Button>-->
+                            </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Offset 2</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding Offset2}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
+                        <StackPanel Orientation="Vertical">
+                            <Label>Vectors</Label>
+                            <ListView Width="160" HorizontalAlignment="Left" Height="320" ItemsSource="{Binding Vectors}" IsSynchronizedWithCurrentItem="True"
+                                      MouseDoubleClick="Vectors_OnMouseDoubleClick" SelectedItem="{Binding SelectedVector}">
+                                <!--MouseDoubleClick="Control_OnMouseDoubleClick" SelectedItem="{Binding SelectedCameraCommand}" SelectedIndex="{Binding SelectedCommandIndex}">-->
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="From" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Left" Text="{Binding From}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="To" Width="60">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock HorizontalAlignment="Left" Text="{Binding To}" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button Width="60" Height="24" Margin="0,4,0,0">Add</Button>
+                                <Button Width="60" Height="24" Margin="4,4,0,0">Remove</Button>
+                            </StackPanel>-->
+                        </StackPanel>
                     </StackPanel>
+                </TabItem>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Header 3</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding HeaderValue3}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
+                <TabItem>
+                    <TabItem.Header>GraphicElements</TabItem.Header>
+
+                    <StackPanel Orientation="Vertical" Margin="4" Height="380">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Graphic Elements?</Label>
+                            <TextBlock Width="60" Margin="0,5,0,0">
+                                <TextBlock Text="{Binding OffsetData2.Length}"></TextBlock>
+                                <TextBlock>bytes</TextBlock>
+                            </TextBlock>
+                            <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
+                                    Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding OffsetData2}"></Button>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Graphic Element Lists?</Label>
+                            <TextBlock Width="60" Margin="0,5,0,0">
+                                <TextBlock Text="{Binding OffsetData5.Length}"></TextBlock>
+                                <TextBlock>bytes</TextBlock>
+                            </TextBlock>
+                            <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
+                                    Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding OffsetData5}"></Button>
+                        </StackPanel>
                     </StackPanel>
+                </TabItem>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Offset 3</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding Offset3}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
-                    </StackPanel>
+                <TabItem>
+                    <TabItem.Header>Misc/Other</TabItem.Header>
+                    <StackPanel Orientation="Vertical" Margin="4" Height="380">
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Header 4</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding HeaderValue4}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Header 1</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding HeaderValue1}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Offset 4</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding Offset4}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Header 2</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding HeaderValue2}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Header 5</Label>
-                        <TextBlock Width="60" Margin="0,5,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Header 3</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding HeaderValue3}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Header 4</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding HeaderValue4}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Header 5</Label>
+                            <TextBlock Width="60" Margin="0,5,0,0">
                             <TextBlock Text="{Binding HeaderValue5.Length}"></TextBlock>
                             <TextBlock>bytes</TextBlock>
                         </TextBlock>
-                        <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
+                            <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
                                 Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding HeaderValue5}"></Button>
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Offset 5</Label>
-                        <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding Offset5}"></TextBox>
-                        <Label Margin="10,0,0,0"></Label>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Header 6</Label>
-                        <TextBlock Width="60" Margin="0,5,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Header 6</Label>
+                            <TextBlock Width="60" Margin="0,5,0,0">
                             <TextBlock Text="{Binding HeaderValue6.Length}"></TextBlock>
                             <TextBlock>bytes</TextBlock>
                         </TextBlock>
-                        <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
+                            <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
                                 Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding HeaderValue6}"></Button>
+                        </StackPanel>
                     </StackPanel>
+                </TabItem>
 
+                <TabItem>
+                    <TabItem.Header>Offsets</TabItem.Header>
+                    <StackPanel Orientation="Vertical" Margin="4" Height="380">
 
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Scale Values Offset</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding Offset1}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
 
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Graphic Elem? Offset</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding Offset2}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Points Offset</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding Offset3}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Vectors Offset</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding Offset4}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Graphic Elem Lists? Offset</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding Offset5}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
+
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+            <!--
+            <GroupBox Header="Object Data">
+                <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Data at Offset 1</Label>
+                        <Label Width="150">Scale Values</Label>
                         <TextBlock Width="60" Margin="0,5,0,0">
                             <TextBlock Text="{Binding OffsetData1.Length}"></TextBlock>
                             <TextBlock>bytes</TextBlock>
@@ -121,17 +283,7 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Data at Offset 2</Label>
-                        <TextBlock Width="60" Margin="0,5,0,0">
-                            <TextBlock Text="{Binding OffsetData2.Length}"></TextBlock>
-                            <TextBlock>bytes</TextBlock>
-                        </TextBlock>
-                        <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
-                                Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding OffsetData2}"></Button>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Data at Offset 3</Label>
+                        <Label Width="150">Points</Label>
                         <TextBlock Width="60" Margin="0,5,0,0">
                             <TextBlock Text="{Binding OffsetData3.Length}"></TextBlock>
                             <TextBlock>bytes</TextBlock>
@@ -141,7 +293,7 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Data at Offset 4</Label>
+                        <Label Width="150">Vectors</Label>
                         <TextBlock Width="60" Margin="0,5,0,0">
                             <TextBlock Text="{Binding OffsetData4.Length}"></TextBlock>
                             <TextBlock>bytes</TextBlock>
@@ -149,19 +301,10 @@
                         <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
                                 Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding OffsetData4}"></Button>
                     </StackPanel>
-
-                    <StackPanel Orientation="Horizontal">
-                        <Label Width="120">Data at Offset 5</Label>
-                        <TextBlock Width="60" Margin="0,5,0,0">
-                            <TextBlock Text="{Binding OffsetData5.Length}"></TextBlock>
-                            <TextBlock>bytes</TextBlock>
-                        </TextBlock>
-                        <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
-                                Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding OffsetData5}"></Button>
-                    </StackPanel>
-
                 </StackPanel>
             </GroupBox>
+            -->
+
         </StackPanel>
 
         <StackPanel Margin="5" Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right">

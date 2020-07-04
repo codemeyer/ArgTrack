@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=trackSection:TrackSectionCommandViewModel, IsDesignTimeCreatable=False}"
         d:DesignWidth="424" d:DesignHeight="330"
-        Width="424" Height="330"
+        Width="424" Height="430"
         Title="Track Section Command Details"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False" ResizeMode="NoResize">
@@ -15,7 +15,11 @@
         <KeyBinding Key="F1" Command="{Binding HelpDocsCommand}" CommandParameter="{Binding}"></KeyBinding>
     </Window.InputBindings>
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="236*"/>
+            <RowDefinition Height="65*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Margin="5" Grid.RowSpan="2">
 
             <GroupBox Header="Command">
                 <StackPanel Orientation="Horizontal">
@@ -23,7 +27,8 @@
                     <!--<TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding CommandDisplay}"></TextBox>-->
                     <TextBlock Margin="5,5,5,5" Text="{Binding CommandDisplay}"></TextBlock>
                     <TextBlock Margin="10,5,5,5" Width="240" Text="{Binding Description}"></TextBlock>
-                    <!--<ComboBox Width="300" Margin="3" Height="22" ItemsSource="{Binding AvailableTrackCommands}" DisplayMemberPath="DisplayValue" SelectedValuePath="Value" SelectedValue="{Binding Command}"></ComboBox>--><!-- TODO -->
+                    <!--<ComboBox Width="300" Margin="3" Height="22" ItemsSource="{Binding AvailableTrackCommands}" DisplayMemberPath="DisplayValue" SelectedValuePath="Value" SelectedValue="{Binding Command}"></ComboBox>-->
+                    <!-- TODO -->
                     <!-- ItemsSource="{Binding AvailableSurroundingAreas}" DisplayMemberPath="DisplayValue" SelectedValuePath="Value" SelectedValue="{Binding SurroundingArea}" -->
                 </StackPanel>
             </GroupBox>
@@ -67,18 +72,20 @@
 
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="5" Width="200" Text="{Binding Arguments[0].Description}"></TextBlock>
+                        <TextBlock Margin="5" Width="170" Text="{Binding Arguments[0].Description}"></TextBlock>
                         <TextBox Margin="5,0,0,0" Width="60" Height="20" Text="{Binding Arguments[0].Value}"></TextBox>
                         <!--<TextBlock Margin="5" Width="100" Text="{Binding Command0x80DistanceDetail}"></TextBlock>-->
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="5" Width="200" Text="{Binding Arguments[1].Description}"></TextBlock>
-                        <ComboBox Margin="5,5,5,5" Width="120" ItemsSource="{Binding AvailableObjects}"
-                                  DisplayMemberPath="Offset" SelectedValuePath="Offset" SelectedValue="{Binding Arguments[1].Value}"></ComboBox>
-                        <!-- TODO: show details for selected item,
-                                 -->
-                        <!--<Label Width="100" Content="{Binding Arguments[1].SelectedTrackObjectSettingsViewModel.Offset}"></Label>-->
+                        <TextBlock Margin="5" Width="170" Text="{Binding Arguments[1].Description}"></TextBlock>
+                        <ComboBox Margin="5,5,5,5" Width="200" ItemsSource="{Binding AvailableObjects}"
+                                  DisplayMemberPath="DisplayValue" SelectedValuePath="Value" SelectedValue="{Binding Arguments[1].Value}"></ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="180"></Label>
+                        <!-- TODO: show details for selected item  -->
+                        <Label Width="200"></Label>
                     </StackPanel>
 
                 </StackPanel>
@@ -86,7 +93,7 @@
             </GroupBox>
         </StackPanel>
 
-        <StackPanel Margin="5" Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+        <StackPanel Margin="0,0,5,5" Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="1">
             <Button Width="70" Height="22" Margin="3" IsDefault="True" Click="OKButton_OnClick"
                     Content="OK"></Button>
             <Button Width="70" Height="22" Margin="3" IsCancel="True" Click="CancelButton_OnClick"

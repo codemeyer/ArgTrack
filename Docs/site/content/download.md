@@ -4,10 +4,10 @@ title: "ArgTrack: Download"
 
 # Download
 
-The latest version is **0.5.1**, released on 2020-04-28.
+The latest version is **0.6**, released on 2020-07-04.
 
 <p>
-    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.5.1.zip">Download</a>
+    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.6.zip">Download</a>
 </p>
 
 <br />
@@ -33,6 +33,22 @@ be found here:
 ## Release notes
 
 Below are the release notes for each released version of ArgTrack.
+
+
+### 0.6
+
+Released 2020-07-04 - [Download](/downloads/argtrack/ArgTrack-0.6.zip)
+
+- Ability to edit scale values, points and vectors for 3D objects
+- Show the description for (some) 3D objects (e.g. "Building", "Crane") in various locations
+- Zoom and scroll position are better remembered
+- Display total track length in Track Sections list window (removed in a previous version, now restored)
+- "Refresh" button restores sideways scroll if track ends up outside scrollable area
+- Fix: Overwriting an existing track file with a smaller file (e.g. after removing something) caused the saved file to be corrupted
+- Fix: Some GP2 tracks could not be converted due to zero-length track sections
+- Fix: Can no longer zoom out beyond zoom level 0
+- Fix: HeaderIndex textbox in Object shape window incorrectly displayed the DataIndex value
+
 
 
 ### 0.5.1

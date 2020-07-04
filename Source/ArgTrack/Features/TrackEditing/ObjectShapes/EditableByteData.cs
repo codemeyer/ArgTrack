@@ -4,10 +4,20 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
 {
     public class EditableByteData : BaseViewModel
     {
-        public EditableByteData(byte value)
+        public EditableByteData(int index, byte value)
         {
+            Index = index;
             _value = value;
             UpdateHexValue();
+        }
+
+
+        private int _index;
+
+        public int Index
+        {
+            get { return _index; }
+            set { SetProperty(ref _index, value, () => Index); }
         }
 
 
@@ -24,6 +34,7 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
                 }
             }
         }
+
 
         private string _hexValue;
 

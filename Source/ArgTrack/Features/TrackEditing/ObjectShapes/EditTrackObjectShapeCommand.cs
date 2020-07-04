@@ -14,9 +14,6 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
             var clone = new TrackObjectShapeViewModel();
             ObjectShapeMapper.MapTrackObjectShapeViewModel(vm, clone);
 
-            // temp
-            clone.SetDescriptionBasedOnData();
-
             var window = new TrackObjectShapeDetailsWindow
             {
                 Owner = System.Windows.Application.Current.MainWindow,
@@ -28,6 +25,7 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
             if (update.HasValue && update.Value)
             {
                 ObjectShapeMapper.MapTrackObjectShapeViewModel(clone, vm);
+                vm.CalculateSignature();
             }
         }
     }

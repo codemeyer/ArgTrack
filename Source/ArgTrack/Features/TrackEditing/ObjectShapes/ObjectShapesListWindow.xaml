@@ -6,12 +6,12 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
-        Width="900" Height="630"
+        Width="600" Height="630"
         Title="Object Shapes">
     <Window.InputBindings>
         <KeyBinding Key="F1" Command="{Binding HelpDocsCommandObjectShapes}" CommandParameter="{Binding}"></KeyBinding>
     </Window.InputBindings>
-    <Grid Width="880" Height="590">
+    <Grid Width="580" Height="590">
         <ListView Margin="5,4,4,36" ItemsSource="{Binding TrackObjectShapes}" IsSynchronizedWithCurrentItem="True"
                   MouseDoubleClick="Control_OnMouseDoubleClick">
             <ListView.InputBindings>
@@ -54,53 +54,61 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>-->
 
-                    <GridViewColumn Header="Data1 bytes" Width="80">
+                    <GridViewColumn Header="Scale Values" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding OffsetData1.Count}" />
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding ScaleValues.Count}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Data2 bytes" Width="80">
+                    <!--<GridViewColumn Header="Data2 bytes" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Left" Text="{Binding OffsetData2.Count}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    </GridViewColumn>-->
 
-                    <GridViewColumn Header="Data3 bytes" Width="80">
+                    <GridViewColumn Header="Points" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding OffsetData3.Count}" />
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding Points.Count}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Data4 bytes" Width="80">
+                    <GridViewColumn Header="Vectors" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Left" Text="{Binding OffsetData4.Count}" />
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding Vectors.Count}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Data5 bytes" Width="80">
+                    <GridViewColumn Header="Description" Width="200">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding Description}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <!--<GridViewColumn Header="Data5 bytes" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Left" Text="{Binding OffsetData5.Count}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    </GridViewColumn>-->
 
-                    <GridViewColumn Header="Total Data" Width="80">
+                    <!--<GridViewColumn Header="Total Data" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock HorizontalAlignment="Left" Text="{Binding Data.Length}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                    </GridViewColumn>-->
 
                 </GridView>
             </ListView.View>

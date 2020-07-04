@@ -81,6 +81,8 @@ namespace ArgTrack.Features.Main
                 id++;
 
                 viewModel.TrackObjectShapes.Add(objectViewModel);
+
+                System.Diagnostics.Debug.WriteLine(objectViewModel.Signature);
             }
 
             CarSetupMapper.MapCarSetupToViewModel(track.ComputerCarSetup, viewModel.ComputerCarSetup);
@@ -170,7 +172,69 @@ namespace ArgTrack.Features.Main
             foreach (var obj in viewModel.TrackObjectShapes)
             {
                 var target = new TrackObjectShape(obj.HeaderIndex, obj.DataIndex);
-                PropertyCopier.Copy(obj, target);
+
+                target.HeaderIndex = obj.HeaderIndex;
+                target.DataIndex = obj.DataIndex;
+                target.HeaderValue1 = obj.HeaderValue1;
+                target.HeaderValue2 = obj.HeaderValue2;
+                target.HeaderValue3 = obj.HeaderValue3;
+                target.HeaderValue4 = obj.HeaderValue4;
+                target.HeaderValue5 = obj.HeaderValue5;
+                target.HeaderValue6 = obj.HeaderValue6;
+
+                target.ScaleValueOffset = obj.Offset1;
+                target.Offset2 = obj.Offset2;
+                target.VectorDataOffset = obj.Offset3;
+                target.PointDataOffset = obj.Offset4;
+                target.Offset5 = obj.Offset5;
+
+                target.OffsetData2 = obj.OffsetData2;
+                target.OffsetData5 = obj.OffsetData5;
+
+                foreach (var scaleValueVM in obj.ScaleValues)
+                {
+                    target.ScaleValues.Add(scaleValueVM);
+                }
+
+                foreach (var pointVM in obj.Points)
+                {
+                    if (pointVM.PointType == TrackObjectShapePointTypeEnum.Scale)
+                    {
+                        var scalePoint = new TrackObjectShapeScalePoint(target)
+                        {
+                            XScaleValueIndex = pointVM.XScaleValueIndex,
+                            XIsNegative = pointVM.XIsNegative,
+                            YScaleValueIndex = pointVM.YScaleValueIndex,
+                            YIsNegative = pointVM.YIsNegative,
+                            Z = pointVM.Z
+                        };
+
+                        target.Points.Add(scalePoint);
+                    }
+
+                    if (pointVM.PointType == TrackObjectShapePointTypeEnum.Reference)
+                    {
+                        var refPoint = new TrackObjectShapeReferencePoint(target)
+                        {
+                            PointIndex = pointVM.PointIndex,
+                            Z = pointVM.Z
+                        };
+
+                        target.Points.Add(refPoint);
+                    }
+                }
+
+                foreach (var vectorVM in obj.Vectors)
+                {
+                    var vector = new TrackObjectShapeVector
+                    {
+                        From = vectorVM.From,
+                        To = vectorVM.To
+                    };
+
+                    target.Vectors.Add(vector);
+                }
+
                 track.ObjectShapes.Add(target);
             }
 

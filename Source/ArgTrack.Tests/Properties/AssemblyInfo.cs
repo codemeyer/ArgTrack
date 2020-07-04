@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Manicomio Software")]
 [assembly: AssemblyProduct("ArgTrack")]
-[assembly: AssemblyCopyright("Copyright © 2017-2018 Fredrik Meyer")]
+[assembly: AssemblyCopyright("Copyright © 2017-2020 Fredrik Meyer")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

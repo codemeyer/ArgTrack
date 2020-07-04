@@ -9,10 +9,14 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
         {
             var list = new ObservableCollection<EditableByteData>();
 
+            int index = 0;
+
             foreach(var value in data)
             {
-                var byteData = new EditableByteData(value);
+                var byteData = new EditableByteData(index, value);
                 list.Add(byteData);
+
+                index++;
             }
 
             ByteData = list;

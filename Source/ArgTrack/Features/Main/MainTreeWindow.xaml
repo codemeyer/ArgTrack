@@ -170,9 +170,9 @@
                             <DataTemplate DataType="{x:Type objectSettings:TrackObjectSettingsViewModel}">
                                 <StackPanel Orientation="Horizontal" Margin="-16,3,0,3">
                                     <Image Width="16" Height="16" Margin="0" Source="/Resources/object-setting.png"></Image>
-                                    <TextBlock Text="Offset: "></TextBlock>
-                                    <TextBlock Text="{Binding Offset}" />
-                                    <TextBlock Text=" Id: "></TextBlock>
+                                    <!--<TextBlock Margin="4,0,0,0" Text="Offset: "></TextBlock>-->
+                                    <TextBlock Margin="4,0,0,0" Text="{Binding Offset}" />
+                                    <TextBlock Margin="8,0,0,0" Text="Id: "></TextBlock>
                                     <TextBlock Text="{Binding Id}" />
                                     <StackPanel.ContextMenu>
                                         <ContextMenu>
@@ -186,6 +186,7 @@
                                     <Image Width="16" Height="16" Margin="0" Source="/Resources/object-shape.png"></Image>
                                     <TextBlock Text="Id: "></TextBlock>
                                     <TextBlock Text="{Binding Id}" />
+                                    <TextBlock Margin="8,0,0,0" Text="{Binding Description}"></TextBlock>
                                     <StackPanel.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Edit" Command="{Binding Edit}" CommandParameter="{Binding}"></MenuItem>

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using ArgTrack.Features.Application.Shared;
 using ArgTrack.Features.Main;
+using ArgTrack.Features.TrackEditing.ObjectShapes;
 using ArgTrack.Infrastructure;
 
 namespace ArgTrack.Features.TrackEditing.ObjectSettings
@@ -195,7 +196,7 @@ namespace ArgTrack.Features.TrackEditing.ObjectSettings
 
                 foreach (var obj in objs)
                 {
-                    list.Add(new ObjectIdBoundValue((byte)obj.Id, GetDescriptionForId(obj.Id)));
+                    list.Add(new ObjectIdBoundValue((byte)obj.Id, GetDescriptionForShape(obj)));
                 }
 
                 return list;
@@ -204,15 +205,31 @@ namespace ArgTrack.Features.TrackEditing.ObjectSettings
 
         private string GetDescriptionForId(int id)
         {
-            if (id >= 17)
-                return $"{id}: 3D Object";
-
-            if (id == 5)
+            if (id == 5) // || id == 1)
                 return $"{id}: Tree, bush, etc";
 
-            // TODO: special cases
+            // TODO: special cases?
 
             return $"{id}";
+        }
+
+        private string GetDescriptionForShape(TrackObjectShapeViewModel obj)
+        {
+            if (obj.Id >= 17)
+            {
+                string description = ObjectShapeDescriptions.GetDescription(obj.Signature);
+
+                if (!string.IsNullOrEmpty(description))
+                {
+                    return $"{obj.Id}: 3D Object - {description}";
+                }
+                else
+                {
+                    return $"{obj.Id}: 3D Object";
+                }
+            }
+
+            return $"{obj.Id}";
         }
 
         public List<BillboardObjectBoundValue> AvailableBillboardObjectIds

@@ -83,7 +83,7 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                 {
                     0x80, new Dictionary<int, string>
                     {
-                        { 0, "Distance from start of sector" },
+                        { 0, "Distance from start of section" },
                         { 1, "Object description offset" }
                     }
                 },
@@ -116,7 +116,7 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                 {
                     0x85, new Dictionary<int, string>
                     {
-                        { 0, "Distance from start of sector?" },
+                        { 0, "Distance from start of section?" },
                         { 1, "Transition length" },
                         { 2, "New width" }
                     }

@@ -68,6 +68,8 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
 
                 viewModel.Arguments.Add(arg);
             }
+
+            viewModel.UpdateCommandDetails();
         }
 
         public static void MapTrackCommandViewModel(TrackSectionCommandViewModel source, TrackSectionCommandViewModel target)

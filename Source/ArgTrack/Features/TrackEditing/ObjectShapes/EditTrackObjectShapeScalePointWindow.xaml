@@ -1,0 +1,44 @@
+﻿<Window x:Class="ArgTrack.Features.TrackEditing.ObjectShapes.EditTrackObjectShapeScalePointWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArgTrack.Features.TrackEditing.ObjectShapes"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=local:EditableScalePointViewModel, IsDesignTimeCreatable=True}"
+        Title="Scale Point" Width="200" Height="200"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="5">
+
+            <StackPanel Orientation="Horizontal">
+                <Label Width="80">X</Label>
+                <ComboBox Width="80" Height="22"
+                          DisplayMemberPath="DisplayValue" SelectedValuePath="Value"
+                          ItemsSource="{Binding AvailablePointValues}" SelectedValue="{Binding XValue}"></ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Width="80">Y</Label>
+                <ComboBox Width="80" Height="22"
+                          DisplayMemberPath="DisplayValue" SelectedValuePath="Value"
+                          ItemsSource="{Binding AvailablePointValues}" SelectedValue="{Binding YValue}"></ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Width="80">Z</Label>
+                <TextBox Width="80" Height="22" Text="{Binding ZValue}"></TextBox>
+            </StackPanel>
+
+        </StackPanel>
+        <StackPanel Margin="5" Orientation="Horizontal" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Width="70" Height="22" Margin="3" IsDefault="True" Click="OKButton_OnClick"
+                    Content="OK"></Button>
+            <Button Width="70" Height="22" Margin="3" IsCancel="True" Click="CancelButton_OnClick"
+                    Content="Cancel"></Button>
+        </StackPanel>
+
+    </Grid>
+
+</Window>
