@@ -410,6 +410,22 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
 
+                        <ItemsControl ItemsSource="{Binding TrackData}" Visibility="{Binding DisplayTrackShapeData}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Polyline Points="{Binding Points}"
+                                              Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
+                                              Fill="{Binding Fill}">
+                                    </Polyline>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
                         <ItemsControl ItemsSource="{Binding PitLaneShapeData}" Visibility="{Binding DisplayPitLaneShapeData}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -426,22 +442,6 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
 
-                        <ItemsControl ItemsSource="{Binding TrackData}" Visibility="{Binding DisplayTrackShapeData}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <Canvas />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Polyline Points="{Binding Points}"
-                                      Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
-                                      Fill="{Binding Fill}">
-                                    </Polyline>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-
                         <ItemsControl ItemsSource="{Binding TrackSideObjectsShapeData}" Visibility="{Binding DisplayTrackSideObjectData}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -451,8 +451,8 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Polyline Points="{Binding Points}"
-                                      Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
-                                      Fill="{Binding Fill}">
+                                              Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
+                                              Fill="{Binding Fill}">
                                     </Polyline>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
