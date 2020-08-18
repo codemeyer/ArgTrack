@@ -10,7 +10,7 @@
                 case 6624903810283278943: // US id 17?
                     return "Banner across track";
                 case 14970757426583874831: // US id 18?
-                    return "Banner across track";
+                    return "Small banner at side of track";
                 case 1230275162513647522: // US id 19
                     return "Building (long)";
                 case 6977028658734253094: // US id 20 / 24 (one byte differs in OffsetData2...)
@@ -135,6 +135,9 @@
 
                 case 14437752569008329573: // MEX id 17
                     return "Dome-shaped building";
+
+                case 4727340676512233500:  // HUN id 17
+                    return "Pit building (top)";
 
                 default:
                     return string.Empty;

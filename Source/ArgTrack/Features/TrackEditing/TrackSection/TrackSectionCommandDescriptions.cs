@@ -38,18 +38,18 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                 {0x85, "Track width change"},
                 {0x86, "Connect start of pit lane to track"},
                 {0x87, "Connect end of pit lane to track"},
-                {0x88, "Pit parking zone marking left-hand pit lane"},
-                {0x89, "Pit parking zone marking right-hand pit lane"},
-                {0x8a, "Track markings"},
-                {0x8b, "Starting grid markings"},
+                {0x88, "Pit lane garages, left-hand side"},
+                {0x89, "Pit lane garages, right-hand side"},
+                {0x8a, "Track markings Type A"},
+                {0x8b, "Track Markings Type B"},
                 {0x8c, "Changes unknown element on the left"},
                 {0x8d, "Changes unknown element on the right"},
                 {0x8e, "Left kerb starts"},
                 {0x8f, "Right kerb starts"},
                 {0x90, "Reverse object placement?"},
                 {0x91, "Unknown Monaco command"},
-                {0x92, "Sector in which unknown action 1 is taken?"},
-                {0x93, "Sector in which unknown action 2 is taken?"},
+                {0x92, "Unknown action 1?"},
+                {0x93, "Unknown action 2?"},
                 {0x94, "Computer car coaching left"},
                 {0x95, "Computer car coaching right"},
                 {0x96, "Pit lane start"},
@@ -67,13 +67,13 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                 {0xa2, "Pit lane entry, join left pit lane fence"},
                 {0xa3, "Pit lane exit, join right pit lane fence"},
                 {0xa4, "Pit lane exit, join left pit lane fence"},
-                {0xa5, "Change the sign of the first two sector arguments"},
+                {0xa5, "Change sign of first two sector arguments"},
                 {0xa6, "Set unknown segment flags 1"},
                 {0xa7, "Set unknown segment flags 2"},
                 {0xa8, "Section that triggers the chequered flag"},
                 {0xa9, "Pit lane view distance"},
                 {0xaa, "Computer cars pitlane modifier?"},
-                {0xab, "Unknown, may be unused"},
+                {0xab, "Unknown, maybe unused"},
                 {0xac, "Palette change"}
             };
 
@@ -136,37 +136,37 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                 {
                     0x88, new Dictionary<int, string>
                     {
-                        { 0, "Unknown/unused?" },
-                        { 1, "Length of zone marking?" }
+                        { 0, "Unused" },
+                        { 1, "NUmber of garages" }
                     }
                 },
                 {
                     0x89, new Dictionary<int, string>
                     {
-                        { 0, "Unknown/unused?" },
-                        { 1, "Length of zone marking?" }
+                        { 0, "Unused" },
+                        { 1, "NUmber of garages" }
                     }
                 },
                 {
                     0x8A, new Dictionary<int, string>
                     {
-                        { 0, "Unknown" },
-                        { 1, "Unknown" },
-                        { 2, "Length of zone marking?" },
-                        { 3, "Unknown" },
-                        { 4, "Unknown" },
-                        { 5, "Unknown" }
+                        { 0, "Distance from start of section" },
+                        { 1, "Marking type" },
+                        { 2, "Number of markings" },
+                        { 3, "Displacement" },
+                        { 4, "Angle" },
+                        { 5, "Marking type 2" }
                     }
                 },
                 {
                     0x8B, new Dictionary<int, string>
                     {
-                        { 0, "Unknown" },
-                        { 1, "Unknown" },
-                        { 2, "Width or length of grid markings?" },
-                        { 3, "Unknown" },
-                        { 4, "Unknown" },
-                        { 5, "Unknown" }
+                        { 0, "Distance from start of section" },
+                        { 1, "Marking type" },
+                        { 2, "Number of markings" },
+                        { 3, "Displacement" },
+                        { 4, "Angle" },
+                        { 5, "Marking type 2" }
                     }
                 },
                 {
@@ -187,7 +187,7 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                     0x8E, new Dictionary<int, string>
                     {
                         { 0, "Unknown/unused?" },
-                        { 1, "Offset into sector" },
+                        { 1, "Offset into section" },
                         { 2, "Length" }
                     }
                 },
@@ -195,7 +195,7 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                     0x8F, new Dictionary<int, string>
                     {
                         { 0, "Unknown/unused?" },
-                        { 1, "Offset into sector" },
+                        { 1, "Offset into section" },
                         { 2, "Length" }
                     }
                 },

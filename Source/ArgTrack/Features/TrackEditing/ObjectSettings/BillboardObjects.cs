@@ -37,6 +37,8 @@ namespace ArgTrack.Features.TrackEditing.ObjectSettings
             { 79, "Arrow easy right sign" },
             { 80, "Arrow hard left sign" },
             { 81, "Arrow easy left sign" },
+            { 82, "Monaco tunnel pillar" },
+            { 83, "Yacht" },
             { 84, "Fir tree" },
             { 85, "Fir tree" },
             { 86, "Fir tree" },
@@ -84,6 +86,7 @@ namespace ArgTrack.Features.TrackEditing.ObjectSettings
             { 128, "Large bush" },
             { 129, "Large bush" },
             { 163, "Stack of thin tyres" },
+            { 168, "Mobil building" },
             { 173, "Palm tree" },
             { 174, "Palm tree" },
             { 175, "Palm tree" }
