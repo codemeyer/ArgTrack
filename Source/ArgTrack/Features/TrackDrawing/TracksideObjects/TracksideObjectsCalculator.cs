@@ -8,10 +8,8 @@ namespace ArgTrack.Features.TrackDrawing
 {
     public static class TracksideObjectsCalculator
     {
-        public static ObservableCollection<TrackShapeData> Calculate(List<RoadLayoutSectionData> roadSections, List<RoadLayoutSectionData> roadSectionsOneEach, ObservableCollection<TrackObjectSettingsViewModel> objectSettings)
+        public static ObservableCollection<TrackShapeData> Calculate(List<RoadLayoutSectionData> roadSections, List<RoadLayoutSectionData> roadSectionsOneEach, ObservableCollection<TrackObjectSettingsViewModel> objectSettings, bool isTrack)
         {
-            // TODO: does not draw pitlane objects
-
             var list = new List<TrackSideObjectDrawingLayout>();
 
             int sectionStartAt = 0;
@@ -43,7 +41,7 @@ namespace ArgTrack.Features.TrackDrawing
                     var drawingObject = new TrackSideObjectDrawingLayout
                     {
                         SectionIndex = sectionIndex,
-                        DistanceFromCenter = DrawingUnitFromTracksideObjectDistance(objectSetting.DistanceFromTrack),
+                        DistanceFromCenter = DrawingUnitFromTracksideObjectDistance(objectSetting.DistanceFromTrack, isTrack),
                         ObjectSetting = objectSetting
                     };
 
@@ -79,16 +77,33 @@ namespace ArgTrack.Features.TrackDrawing
             {
                 var shape = PointsToShapesConverter.Convert(drawingObject.Points, drawingObject.GetDrawingLayout());
 
+                // somewhat temp
+                if (!isTrack)
+                {
+                    foreach(var p in shape)
+                    {
+                        p.Stroke = new SolidColorBrush(Color.FromRgb(255, 255, 0));
+                        p.StrokeThickness = 0.25;
+                    }
+                }
+
                 shapeData.AddRange(shape);
             }
 
             return shapeData;
         }
 
-        private static double DrawingUnitFromTracksideObjectDistance(short distanceFromTrack)
+        private static double DrawingUnitFromTracksideObjectDistance(short distanceFromTrack, bool track)
         {
             // is there a more "exact" formula for this?
-            return distanceFromTrack / 180.0;
+            if (track)
+            {
+                return distanceFromTrack / 180.0;
+            }
+            else
+            {
+                return distanceFromTrack / 360.0;
+            }
         }
     }
 }

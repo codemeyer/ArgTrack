@@ -16,7 +16,7 @@ namespace ArgTrack.Features.TrackDrawing
         public static CenterPointsCalculationResult CalculateCenterPointsPerSection(TrackViewModel track)
         {
             var layoutSections = GetTrackLayoutSections(track);
-            var pitLaneSections = GetPitLane(track, layoutSections);
+            var pitLaneSections = GetPitLane(track, layoutSections, false);
 
             return new CenterPointsCalculationResult
             {
@@ -33,116 +33,7 @@ namespace ArgTrack.Features.TrackDrawing
             double startX = CalculateStartX(track.TrackHeader.TrackCenterX);
             double startY = CalculateStartX(track.TrackHeader.TrackCenterY);
 
-            return LayoutSectionDataFromTrackSectionList(track.TrackSections, track.TrackHeader.FirstSectionAngle, startX, startY);
-        }
-
-        private static List<LayoutSectionData> GetPitLane(TrackViewModel track, List<LayoutSectionData> layoutSections)
-        {
-            int pitLaneStartTrackSectionIndex = FindPitLaneConnectingSectionIndex(track);
-
-            short sectionWidth = FindWidthOfPitLaneConnectingTrackSection(track, pitLaneStartTrackSectionIndex);
-
-            if (pitLaneStartTrackSectionIndex == 0)
-            {
-                return new List<LayoutSectionData>();
-            }
-
-            var startSection = layoutSections[pitLaneStartTrackSectionIndex];
-
-            int startAngle = startSection.StartAngle;
-
-            // calculate pitlane "shift" along section where pitlane starts
-            double pitlaneShift = sectionWidth - LayoutConstants.PitLaneWidth;
-
-            double pitLaneShiftX = Math.Cos(Math.PI - startSection.StartAngle * LayoutConstants.AngleScaleRadians) * pitlaneShift / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-            double pitLaneShiftY = Math.Sin(Math.PI - startSection.StartAngle * LayoutConstants.AngleScaleRadians) * pitlaneShift / LayoutConstants.TrackWidthUnitsPerLengthUnit;
-
-            double dPosX;
-            double dPosY;
-
-            if (track.TrackSettings.PitsSide == TrackSide.Right)
-            {
-                dPosX = startSection.StartPosition.X - pitLaneShiftX;
-                dPosY = startSection.StartPosition.Y + pitLaneShiftY;
-            }
-            else
-            {
-                dPosX = startSection.StartPosition.X - pitLaneShiftX * -1;
-                dPosY = startSection.StartPosition.Y + pitLaneShiftY * -1;
-            }
-
-            return LayoutSectionDataFromTrackSectionList(track.PitLaneSections, startAngle, dPosX, dPosY);
-        }
-
-        private static List<LayoutSectionData> LayoutSectionDataFromTrackSectionList(TrackSectionViewModelCollection sections, int startAngle, double startX, double startY)
-        {
-            var layoutSections = new List<LayoutSectionData>();
-
-            double nextStartX = startX;
-            double nextStartY = startY;
-
-            foreach (var trackSection in sections)
-            {
-                var layoutSection = CalculateLayoutCenterLine(nextStartX, nextStartY, startAngle, trackSection.Length, trackSection.Curvature);
-
-                // end data of THIS section will be the initial data for the NEXT section
-                nextStartX = layoutSection.EndPosition.X;
-                nextStartY = layoutSection.EndPosition.Y;
-                startAngle = layoutSection.EndAngle;
-
-                layoutSection.RelatedSection = trackSection;
-
-                layoutSections.Add(layoutSection);
-            }
-
-            return layoutSections;
-        }
-
-        private static int FindPitLaneConnectingSectionIndex(TrackViewModel track)
-        {
-            foreach (var section in track.TrackSections)
-            {
-                foreach (var cmd in section.Commands)
-                {
-                    if (cmd.Command == 0x86)  // TrackCommand for connecting pit lane
-                    {
-                        return track.TrackSections.IndexOf(section);
-                    }
-                }
-            }
-
-            return -1;
-        }
-
-        private static short FindWidthOfPitLaneConnectingTrackSection(TrackViewModel track, int pitLaneStartTrackSectionIndex)
-        {
-            short sectionWidth = 0;
-
-            // find width of section containing pit lane
-            for (int i = pitLaneStartTrackSectionIndex; i >= 0; i--)
-            {
-                var section = track.TrackSections[i];
-
-                // has track width change?
-                var cmd = section.Commands.SingleOrDefault(c => c.Command == 0x85); // TrackCommand for width change
-                if (cmd != null)
-                {
-                    sectionWidth = cmd.Arguments[2].Value;  // width on each side of middle, in width scales = 0.0047625 meters
-                }
-
-                if (sectionWidth > 0)
-                {
-                    break;
-                }
-            }
-
-            if (sectionWidth == 0)
-            {
-                // no change command found, use start width of track
-                sectionWidth = track.TrackHeader.TrackStartWidth;
-            }
-
-            return sectionWidth;
+            return LayoutSectionDataFromTrackSectionList(track.TrackSections, track.TrackHeader.FirstSectionAngle, startX, startY, true);
         }
 
         /// <summary>
@@ -175,9 +66,13 @@ namespace ArgTrack.Features.TrackDrawing
                 }
             }
 
+            // TODO: lots in GetPitLane is similar to the stuff above, can probably be "merged"
+            var pits = GetPitLane(track, trackSections, true);
+
             return new CenterPointsCalculationResult
             {
-                TrackSections = trackSections
+                TrackSections = trackSections,
+                PitLaneSections = pits
             };
         }
 
@@ -189,6 +84,128 @@ namespace ArgTrack.Features.TrackDrawing
         private static double CalculateStartY(short originalStartY)
         {
             return originalStartY << 3;
+        }
+
+
+        private static List<LayoutSectionData> GetPitLane(TrackViewModel track, List<LayoutSectionData> layoutSections, bool oneSectionPerTlu)
+        {
+            int pitLaneStartTrackSectionIndex = FindPitLaneConnectingSectionIndex(layoutSections);
+
+            if (pitLaneStartTrackSectionIndex == 0)
+            {
+                return new List<LayoutSectionData>();
+            }
+
+            short sectionWidth = FindWidthOfPitLaneConnectingTrackSection(layoutSections, track, pitLaneStartTrackSectionIndex);
+
+            var startSection = layoutSections[pitLaneStartTrackSectionIndex];
+
+            int startAngle = startSection.StartAngle;
+
+            var pitLaneStartPosition = GetPitLaneStartCoords(sectionWidth, startSection, track.TrackSettings.PitsSide);
+
+            return LayoutSectionDataFromTrackSectionList(track.PitLaneSections, startAngle, pitLaneStartPosition.X, pitLaneStartPosition.Y, !oneSectionPerTlu);
+        }
+
+        private static List<LayoutSectionData> LayoutSectionDataFromTrackSectionList(TrackSectionViewModelCollection sections, int startAngle, double startX, double startY, bool lengthFromSection)
+        {
+            var layoutSections = new List<LayoutSectionData>();
+
+            double nextStartX = startX;
+            double nextStartY = startY;
+
+            foreach (var trackSection in sections)
+            {
+                int length = lengthFromSection ? trackSection.Length : 1;
+                int toIterate = !lengthFromSection ? trackSection.Length : 1;
+
+                for (int i = 0; i < toIterate; i++)
+                {
+                    var layoutSection = CalculateLayoutCenterLine(nextStartX, nextStartY, startAngle, length, trackSection.Curvature);
+
+                    // end data of THIS section will be the initial data for the NEXT section
+                    nextStartX = layoutSection.EndPosition.X;
+                    nextStartY = layoutSection.EndPosition.Y;
+                    startAngle = layoutSection.EndAngle;
+
+                    layoutSection.RelatedSection = trackSection;
+
+                    layoutSections.Add(layoutSection);
+                }
+            }
+
+            return layoutSections;
+        }
+
+        private static short FindWidthOfPitLaneConnectingTrackSection(List<LayoutSectionData> layoutSections, TrackViewModel track, int pitLaneStartTrackSectionIndex)
+        {
+            short sectionWidth = 0;
+
+            // find width of section containing pit lane
+            for (int i = pitLaneStartTrackSectionIndex; i >= 0; i--)
+            {
+                var section = layoutSections[i].RelatedSection; //track.TrackSections[i];
+
+                // has track width change?
+                var cmd = section.Commands.SingleOrDefault(c => c.Command == 0x85); // TrackCommand for width change
+                if (cmd != null)
+                {
+                    sectionWidth = cmd.Arguments[2].Value;  // width on each side of middle, in width scales = 0.0047625 meters
+                }
+
+                if (sectionWidth > 0)
+                {
+                    break;
+                }
+            }
+
+            if (sectionWidth == 0)
+            {
+                // no change command found, use start width of track
+                sectionWidth = track.TrackHeader.TrackStartWidth;
+            }
+
+            return sectionWidth;
+        }
+
+        private static Point GetPitLaneStartCoords(int sectionWidth, LayoutSectionData startSection, TrackSide pitsSide)
+        {
+            double pitlaneShift = sectionWidth - LayoutConstants.PitLaneWidth;
+
+            double pitLaneShiftX = Math.Cos(Math.PI - startSection.StartAngle * LayoutConstants.AngleScaleRadians) * pitlaneShift / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+            double pitLaneShiftY = Math.Sin(Math.PI - startSection.StartAngle * LayoutConstants.AngleScaleRadians) * pitlaneShift / LayoutConstants.TrackWidthUnitsPerLengthUnit;
+
+            double dPosX;
+            double dPosY;
+
+            if (pitsSide == TrackSide.Right)
+            {
+                dPosX = startSection.StartPosition.X - pitLaneShiftX;
+                dPosY = startSection.StartPosition.Y + pitLaneShiftY;
+            }
+            else
+            {
+                dPosX = startSection.StartPosition.X - pitLaneShiftX * -1;
+                dPosY = startSection.StartPosition.Y + pitLaneShiftY * -1;
+            }
+
+            return new Point(dPosX, dPosY);
+        }
+
+        private static int FindPitLaneConnectingSectionIndex(List<LayoutSectionData> layoutSections)
+        {
+            foreach (var section in layoutSections)
+            {
+                foreach (var cmd in section.RelatedSection.Commands)
+                {
+                    if (cmd.Command == 0x86)  // TrackCommand for connecting pit lane
+                    {
+                        return layoutSections.IndexOf(section);
+                    }
+                }
+            }
+
+            return -1;
         }
 
         /// <summary>

@@ -281,6 +281,7 @@
                 <CheckBox Margin="2,8,16,0" IsChecked="{Binding DrawPitLane}">Pit Lane</CheckBox>
                 <CheckBox Margin="2,8,16,0" IsChecked="{Binding DrawVerges}">Verges</CheckBox>
                 <CheckBox Margin="2,8,16,0" IsChecked="{Binding DrawTrackSideObjects}">Track-Side Objects</CheckBox>
+                <CheckBox Margin="2,8,16,0" IsChecked="{Binding DrawTrackSidePitObjects}">Track-Side Objects (Pits)</CheckBox>
                 <Button Width="50" Height="22" Margin="32,2,16,2" Background="#eee" Command="{Binding TrackLayoutViewModel.RedrawViewCommand}" CommandParameter="{Binding TrackLayoutViewModel}">Refresh</Button>
                 <Button Width="26" Height="22" Margin="2" Background="#eee" Command="{Binding TrackLayoutViewModel.ZoomTrackViewInCommand}" CommandParameter="{Binding TrackLayoutViewModel}">+</Button>
                 <Button Width="26" Height="22" Margin="2" Background="#eee" Command="{Binding TrackLayoutViewModel.ZoomTrackViewOutCommand}" CommandParameter="{Binding TrackLayoutViewModel}">-</Button>
@@ -443,6 +444,22 @@
                         </ItemsControl>
 
                         <ItemsControl ItemsSource="{Binding TrackSideObjectsShapeData}" Visibility="{Binding DisplayTrackSideObjectData}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Polyline Points="{Binding Points}"
+                                              Stroke="{Binding Stroke}" StrokeThickness="{Binding StrokeThickness}"
+                                              Fill="{Binding Fill}">
+                                    </Polyline>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <ItemsControl ItemsSource="{Binding TrackSideObjectsPitShapeData}" Visibility="{Binding DisplayTrackSidePitObjectData}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <Canvas />

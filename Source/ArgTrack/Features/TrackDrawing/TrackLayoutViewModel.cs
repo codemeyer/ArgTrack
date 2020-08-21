@@ -25,6 +25,7 @@ namespace ArgTrack.Features.TrackDrawing
             PerformFullCalculation();
         }
 
+        // TODO: move this entire calculation elsewhere...
         public void PerformFullCalculation()
         {
             // TODO: split into sub-methods
@@ -37,20 +38,22 @@ namespace ArgTrack.Features.TrackDrawing
             PitLaneSections = centerPoints.PitLaneSections;
 
             RoadSections = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPoints.TrackSections, _trackViewModel.TrackHeader.TrackStartWidth);
+            var pits = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth);
 
             // needed for both verges and track-side object
             var centerPointsOneSectionPerLength = CenterPointsGeometryCalculator.CalculateCenterPointsPerSectionOneLengthEach(_trackViewModel);
 
             RoadSectionsOnePerLength = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPointsOneSectionPerLength.TrackSections, _trackViewModel.TrackHeader.TrackStartWidth);
+            var pitLaneRoadSectionsOnePerLength = RoadLayoutGeometryCalculator.CalculateRoadSections(centerPointsOneSectionPerLength.PitLaneSections, LayoutConstants.PitLaneWidth);
 
             VergeData = VergeLayoutCalculator.Calculate(RoadSections, RoadSectionsOnePerLength);
             // TODO: calculate PitLane verges somewhere
 
             TrackData = RoadLayoutShapeCalculator.Calculate(RoadSections, DrawingLayout.ForTrack());
-
             PitLaneShapeData = RoadLayoutShapeCalculator.Calculate(centerPoints.PitLaneSections, LayoutConstants.PitLaneWidth, DrawingLayout.ForPitLane());
 
-            TrackSideObjectsShapeData = TracksideObjectsCalculator.Calculate(RoadSections, RoadSectionsOnePerLength, _trackViewModel.TrackObjectSettings);
+            TrackSideObjectsShapeData = TracksideObjectsCalculator.Calculate(RoadSections, RoadSectionsOnePerLength, _trackViewModel.TrackObjectSettings, true);
+            TrackSideObjectsPitShapeData = TracksideObjectsCalculator.Calculate(pits, pitLaneRoadSectionsOnePerLength, _trackViewModel.TrackObjectSettings, false);
 
             // TODO: add debug items
 
@@ -72,7 +75,6 @@ namespace ArgTrack.Features.TrackDrawing
             RecalculateViewAndScrollbars();
         }
 
-        // TODO: not used now, but will be later
         private List<LayoutSectionData> TrackSections { get; set; }
         private List<LayoutSectionData> PitLaneSections { get; set; }
 
@@ -588,6 +590,31 @@ namespace ArgTrack.Features.TrackDrawing
             set { SetProperty(ref _trackSideObjectsShapeData, value, () => TrackSideObjectsShapeData); }
         }
 
+
+        public void SetDisplayTrackSidePitObjectData(bool display)
+        {
+            DisplayTrackSidePitObjectData = display ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private Visibility _displayTrackSidePitObjectData = Visibility.Visible;
+
+        public Visibility DisplayTrackSidePitObjectData
+        {
+            get { return _displayTrackSidePitObjectData; }
+            set { SetProperty(ref _displayTrackSidePitObjectData, value, () => DisplayTrackSidePitObjectData); }
+        }
+
+        private ObservableCollection<TrackShapeData> _trackSideObjectsPitShapeData;
+
+        /// <summary>
+        /// Gets or sets the TrackShapeData values that represent the track-side objects
+        /// when data is rendered to the screen.
+        /// </summary>
+        public ObservableCollection<TrackShapeData> TrackSideObjectsPitShapeData
+        {
+            get { return _trackSideObjectsPitShapeData; }
+            set { SetProperty(ref _trackSideObjectsPitShapeData, value, () => TrackSideObjectsPitShapeData); }
+        }
 
 
         public void SetDisplayDebugCircleCenterIndicatorsData(bool display)

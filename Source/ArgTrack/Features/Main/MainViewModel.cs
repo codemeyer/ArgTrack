@@ -196,6 +196,21 @@ namespace ArgTrack.Features.Main
         }
 
 
+        private bool _drawTrackSidePitObjects = true;
+
+        public bool DrawTrackSidePitObjects
+        {
+            get { return _drawTrackSidePitObjects; }
+            set
+            {
+                if (SetProperty(ref _drawTrackSidePitObjects, value, () => DrawTrackSidePitObjects))
+                {
+                    TrackLayoutViewModel.SetDisplayTrackSidePitObjectData(value);
+                }
+            }
+        }
+
+
         private bool _drawCircleCenterIndicators;
 
         public bool DrawCircleCenterIndicators
