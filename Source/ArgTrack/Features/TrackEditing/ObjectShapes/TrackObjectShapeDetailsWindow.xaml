@@ -211,22 +211,34 @@
 
                         <StackPanel Orientation="Horizontal">
                             <Label Width="150">Header 5</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding HeaderValue5}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Header 5 Data</Label>
                             <TextBlock Width="60" Margin="0,5,0,0">
-                            <TextBlock Text="{Binding HeaderValue5.Length}"></TextBlock>
+                            <TextBlock Text="{Binding HeaderData5.Length}"></TextBlock>
                             <TextBlock>bytes</TextBlock>
                         </TextBlock>
                             <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
-                                Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding HeaderValue5}"></Button>
+                                Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding HeaderData5}"></Button>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <Label Width="150">Header 6</Label>
+                            <TextBox Width="60" Height="22" IsReadOnly="True" Text="{Binding HeaderValue6}"></TextBox>
+                            <Label Margin="10,0,0,0"></Label>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Width="150">Header 6 Data</Label>
                             <TextBlock Width="60" Margin="0,5,0,0">
-                            <TextBlock Text="{Binding HeaderValue6.Length}"></TextBlock>
+                            <TextBlock Text="{Binding HeaderData6.Length}"></TextBlock>
                             <TextBlock>bytes</TextBlock>
                         </TextBlock>
                             <Button Width="60" Margin="5,0,0,0" Height="20" Content="Edit"
-                                Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding HeaderValue6}"></Button>
+                                Command="{Binding EditGenericByteDataCommand}" CommandParameter="{Binding HeaderData6}"></Button>
                         </StackPanel>
                     </StackPanel>
                 </TabItem>

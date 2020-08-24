@@ -114,8 +114,10 @@ namespace ArgTrack.Features.Main
 
         private static void MapOffsetsToHeaderViewModel(TrackOffsets offsets, TrackHeaderViewModel viewModel)
         {
-            viewModel.UnknownLong1 = offsets.UnknownLong1;
-            viewModel.UnknownLong2 = offsets.UnknownLong2;
+            viewModel.BaseOffset = offsets.BaseOffset;
+            viewModel.Unknown2 = offsets.Unknown2;
+            viewModel.Unknown3 = offsets.Unknown3;
+            viewModel.Unknown4 = offsets.Unknown4;
             viewModel.ChecksumPosition = offsets.ChecksumPosition;
             viewModel.ObjectData = offsets.ObjectData;
             viewModel.TrackData = offsets.TrackData;
@@ -181,6 +183,8 @@ namespace ArgTrack.Features.Main
                 target.HeaderValue4 = obj.HeaderValue4;
                 target.HeaderValue5 = obj.HeaderValue5;
                 target.HeaderValue6 = obj.HeaderValue6;
+                target.HeaderData5 = obj.HeaderData5;
+                target.HeaderData6 = obj.HeaderData6;
 
                 target.ScaleValueOffset = obj.Offset1;
                 target.Offset2 = obj.Offset2;

@@ -130,21 +130,39 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
         }
 
 
-        private byte[] _headerValue5;
+        private short _headerValue5;
 
-        public byte[] HeaderValue5
+        public short HeaderValue5
         {
             get { return _headerValue5; }
             set { SetProperty(ref _headerValue5, value, () => HeaderValue5); }
         }
 
 
-        private byte[] _headerValue6;
+        private byte[] _headerData5;
 
-        public byte[] HeaderValue6
+        public byte[] HeaderData5
+        {
+            get { return _headerData5; }
+            set { SetProperty(ref _headerData5, value, () => HeaderData5); }
+        }
+
+
+        private short _headerValue6;
+
+        public short HeaderValue6
         {
             get { return _headerValue6; }
             set { SetProperty(ref _headerValue6, value, () => HeaderValue6); }
+        }
+
+
+        private byte[] _headerData6;
+
+        public byte[] HeaderData6
+        {
+            get { return _headerData6; }
+            set { SetProperty(ref _headerData6, value, () => HeaderData6); }
         }
 
 

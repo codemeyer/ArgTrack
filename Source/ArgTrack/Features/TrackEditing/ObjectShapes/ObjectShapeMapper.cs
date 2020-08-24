@@ -18,17 +18,16 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
             viewModel.Offset3 = objectData.PointDataOffset;
             viewModel.Offset4 = objectData.VectorDataOffset;
             viewModel.Offset5 = objectData.Offset5;
-            //viewModel.OffsetData1 = objectData.OffsetData1;
             viewModel.OffsetData2 = objectData.OffsetData2;
-            //viewModel.OffsetData3 = objectData.OffsetData3;
-            //viewModel.OffsetData4 = objectData.OffsetData4;
             viewModel.OffsetData5 = objectData.OffsetData5;
             viewModel.HeaderValue1 = objectData.HeaderValue1;
             viewModel.HeaderValue2 = objectData.HeaderValue2;
             viewModel.HeaderValue3 = objectData.HeaderValue3;
             viewModel.HeaderValue4 = objectData.HeaderValue4;
             viewModel.HeaderValue5 = objectData.HeaderValue5;
+            viewModel.HeaderData5 = objectData.HeaderData5;
             viewModel.HeaderValue6 = objectData.HeaderValue6;
+            viewModel.HeaderData6 = objectData.HeaderData6;
 
             // foreach scalevalue
             foreach (var scaleValue in objectData.ScaleValues)
@@ -75,10 +74,7 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
             target.Offset3 = source.Offset3;
             target.Offset4 = source.Offset4;
             target.Offset5 = source.Offset5;
-            //target.OffsetData1 = source.OffsetData1;
             target.OffsetData2 = source.OffsetData2;
-            //target.OffsetData3 = source.OffsetData3;
-            //target.OffsetData4 = source.OffsetData4;
             target.OffsetData5 = source.OffsetData5;
             target.HeaderValue1 = source.HeaderValue1;
             target.HeaderValue2 = source.HeaderValue2;
@@ -86,6 +82,9 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
             target.HeaderValue4 = source.HeaderValue4;
             target.HeaderValue5 = source.HeaderValue5;
             target.HeaderValue6 = source.HeaderValue6;
+
+            target.HeaderData5 = source.HeaderData5;
+            target.HeaderData6 = source.HeaderData6;
 
             target.ScaleValues.Clear();
 
@@ -103,10 +102,8 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
                     Index = sourcePoint.Index,
                     PointType = sourcePoint.PointType,
                     PointIndex = sourcePoint.PointIndex,
-                    //XPointIndex = sourcePoint.XPointIndex,
                     XScaleValueIndex = sourcePoint.XScaleValueIndex,
                     XIsNegative = sourcePoint.XIsNegative,
-                    //YPointIndex = sourcePoint.YPointIndex,
                     YScaleValueIndex = sourcePoint.YScaleValueIndex,
                     YIsNegative = sourcePoint.YIsNegative,
                     Z = sourcePoint.Z

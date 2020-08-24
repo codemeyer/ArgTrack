@@ -100,20 +100,36 @@ namespace ArgTrack.Features.TrackEditing.WorldLocation
 
         // also contains Offsets and RawData for now
 
-        private int _unknownLong1;
+        private short _baseOffset;
 
-        public int UnknownLong1
+        public short BaseOffset
         {
-            get { return _unknownLong1; }
-            set { SetProperty(ref _unknownLong1, value, () => UnknownLong1); }
+            get { return _baseOffset; }
+            set { SetProperty(ref _baseOffset, value, () => BaseOffset); }
         }
 
-        private int _unknownLong2;
+        private short _unknown2;
 
-        public int UnknownLong2
+        public short Unknown2
         {
-            get { return _unknownLong2; }
-            set { SetProperty(ref _unknownLong2, value, () => UnknownLong2); }
+            get { return _unknown2; }
+            set { SetProperty(ref _unknown2, value, () => Unknown2); }
+        }
+
+        private short _unknown3;
+
+        public short Unknown3
+        {
+            get { return _unknown3; }
+            set { SetProperty(ref _unknown3, value, () => Unknown3); }
+        }
+
+        private short _unknown4;
+
+        public short Unknown4
+        {
+            get { return _unknown4; }
+            set { SetProperty(ref _unknown4, value, () => Unknown4); }
         }
 
         private short _checksumPosition;
