@@ -49,7 +49,7 @@ you to manipulate the various data that describes the track.
 
 <img src="/argtrack/images/argtrack-main-focus-layout.png" alt="ArgTrack main window" class="img-fluid" />
 
-The right part of the screen will display a track drawing. By default it draws the track and the pit lane.
+The right part of the screen will display a track drawing.
 
 Using the toolbar at the top, you can toggle what is drawn:
 
@@ -57,9 +57,10 @@ Using the toolbar at the top, you can toggle what is drawn:
 - Pit Lane
 - Verges
 - Track-side objects
+- Track-side objects (Pits)
 
 Track-side objects do not resemble what they actually are, but are just indications of where the center point of
-the track-side object is. Note that track-side objects placed in the pit lane are currently not displayed.
+the track-side object is.
 
 The Refresh button will force a redraw of the content.
 
