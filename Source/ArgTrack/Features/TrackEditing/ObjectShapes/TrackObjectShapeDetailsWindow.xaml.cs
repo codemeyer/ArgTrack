@@ -102,6 +102,8 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
 
         private void Vectors_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            // TODO: as EditCommand
+
             var currentShape = (DataContext as TrackObjectShapeViewModel);
 
             if (currentShape.SelectedVector == null)

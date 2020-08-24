@@ -62,10 +62,10 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Button Width="60" Height="24" Margin="0,4,0,0">Add</Button>
-                                <Button Width="60" Height="24" Margin="4,4,0,0">Remove</Button>
-                            </StackPanel>-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button Width="60" Height="24" Margin="0,4,0,0" Command="{Binding AddObjectShapeScaleValueCommand}" CommandParameter="{Binding}">Add</Button>
+                                <Button Width="60" Height="24" Margin="4,4,0,0" Command="{Binding RemoveSelectedScaleValueCommand}" CommandParameter="{Binding}">Remove</Button>
+                            </StackPanel>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical">
@@ -117,9 +117,9 @@
                                 <Button Width="24" Height="24" Margin="4,4,0,0">↑</Button>
                                 <Button Width="24" Height="24" Margin="4,4,10,0">↓</Button>
                                 -->
-                                <!--<Button Width="64" Height="24" Margin="8,4,0,0">Add Scale</Button>
-                                <Button Width="64" Height="24" Margin="4,4,0,0">Add Ref.</Button>
-                                <Button Width="64" Height="24" Margin="4,4,0,0">Remove</Button>-->
+                                <Button Width="64" Height="24" Margin="8,4,0,0" Command="{Binding AddObjectShapeScalePointCommand}" CommandParameter="{Binding}">Add Scale</Button>
+                                <Button Width="64" Height="24" Margin="4,4,0,0" Command="{Binding AddObjectShapeReferencePointCommand}" CommandParameter="{Binding}">Add Ref.</Button>
+                                <Button Width="64" Height="24" Margin="4,4,0,0" Command="{Binding RemoveSelectedPointCommand}" CommandParameter="{Binding}">Remove</Button>
                             </StackPanel>
                         </StackPanel>
 
@@ -147,10 +147,10 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Button Width="60" Height="24" Margin="0,4,0,0">Add</Button>
-                                <Button Width="60" Height="24" Margin="4,4,0,0">Remove</Button>
-                            </StackPanel>-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button Width="60" Height="24" Margin="0,4,0,0" Command="{Binding AddObjectShapeVectorCommand}" CommandParameter="{Binding}">Add</Button>
+                                <Button Width="60" Height="24" Margin="4,4,0,0" Command="{Binding RemoveSelectedVectorCommand}" CommandParameter="{Binding}">Remove</Button>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </TabItem>

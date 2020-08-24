@@ -332,7 +332,6 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
 
 
 
-
         public ICommand EditGenericByteDataCommand { get; } = new EditGenericByteDataCommand();
 
         public ICommand EditTrackObjectShapeScaleValueCommand { get; } = new EditTrackObjectShapeScaleValueCommand();
@@ -340,6 +339,16 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
         public ICommand Edit { get; } = new EditTrackObjectShapeCommand();
 
         public ICommand HelpDocsCommand { get; } = new HelpDocsCommand("screens/object-shape-details-window/");
+
+        public ICommand AddObjectShapeVectorCommand { get; } = new AddObjectShapeVectorCommand();
+        public ICommand RemoveSelectedVectorCommand { get; } = new RemoveSelectedVectorCommand();
+
+        public ICommand AddObjectShapeScalePointCommand { get; } = new AddObjectShapeScalePointCommand();
+        public ICommand AddObjectShapeReferencePointCommand { get; } = new AddObjectShapeReferencePointCommand();
+        public ICommand RemoveSelectedPointCommand { get; } = new RemoveSelectedPointCommand();
+
+        public ICommand AddObjectShapeScaleValueCommand { get; } = new AddObjectShapeScaleValueCommand();
+        public ICommand RemoveSelectedScaleValueCommand { get; } = new RemoveSelectedScaleValueCommand();
 
         public TrackObjectShape ShapeBuddy { get; set; }
     }
