@@ -1,3 +1,4 @@
+using ArgTrack.Features.Main;
 using ArgTrack.Infrastructure;
 
 namespace ArgTrack.Features.TrackEditing.ObjectSettings
@@ -25,8 +26,26 @@ namespace ArgTrack.Features.TrackEditing.ObjectSettings
 
             if (update.HasValue && update.Value)
             {
+                bool needsRepainting = NeedsRepainting(viewModel, clone);
+
                 ObjectSettingsMapper.CopyTrackObjectSettingsViewModel(clone, viewModel);
+
+                if (needsRepainting)
+                {
+                    // TODO: not so directly...
+                    TrackViewModelPasserArounder.TrackViewModel.RecalculateLayout();
+                }
             }
+        }
+
+        private bool NeedsRepainting(TrackObjectSettingsViewModel viewModel, TrackObjectSettingsViewModel clone)
+        {
+            if (clone.DistanceFromTrack != viewModel.DistanceFromTrack)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
