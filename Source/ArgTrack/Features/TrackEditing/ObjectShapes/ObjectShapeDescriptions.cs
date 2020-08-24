@@ -2,7 +2,6 @@
 {
     public static class ObjectShapeDescriptions
     {
-        // TODO: all of these have become useless due to new way of calculating the signature
         public static string GetDescription(ulong signature)
         {
             switch (signature)

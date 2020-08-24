@@ -17,6 +17,8 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
                 var targetCommand = new TrackSectionCommandViewModel();
                 MapTrackCommandViewModel(sourceCommand, targetCommand);
                 newCommands.Add(targetCommand);
+
+                targetCommand.UpdateCommandDetails();
             }
 
             target.Commands = newCommands;
@@ -86,6 +88,7 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
             }
 
             target.Arguments = newArgs;
+            target.UpdateCommandDetails();
         }
 
         private static void MapTrackCommandArgumentViewModel(TrackSectionCommandArgumentViewModel source, TrackSectionCommandArgumentViewModel target)

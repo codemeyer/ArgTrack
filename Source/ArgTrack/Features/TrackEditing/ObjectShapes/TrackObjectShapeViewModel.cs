@@ -217,7 +217,7 @@ namespace ArgTrack.Features.TrackEditing.ObjectShapes
         }
 
 
-        private void UpdateDescription()
+        public void UpdateDescription()
         {
             Description = ObjectShapeDescriptions.GetDescription(Signature);
         }

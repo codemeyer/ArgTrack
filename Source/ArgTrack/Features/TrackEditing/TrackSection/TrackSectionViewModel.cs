@@ -22,6 +22,8 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
             UpdateCurvatureDescription();
 
             SectionPoints = new PointCollection();
+
+            _commands.CollectionChanged += _commands_CollectionChanged;
         }
 
 
@@ -164,7 +166,16 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
         public ObservableCollection<TrackSectionCommandViewModel> Commands
         {
             get { return _commands; }
-            set { SetProperty(ref _commands, value, () => Commands); }
+            set
+            {
+                SetProperty(ref _commands, value, () => Commands);
+                UpdateDescription();
+            }
+        }
+
+        private void _commands_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            UpdateDescription();
         }
 
 
@@ -309,57 +320,56 @@ namespace ArgTrack.Features.TrackEditing.TrackSection
 
 
 
+        private string _description;
 
-        // hmmm?
         public string Description
         {
-            get
-            {
-                var desc = new List<string>();
-                if (Commands.Any(c => c.Command == 0x86))
-                {
-                    desc.Add("Pitlane Start");
-                }
-
-                if (Commands.Any(c => c.Command == 0x87))
-                {
-                    desc.Add("Pitlane End");
-                }
-
-                // only in pit lane?
-                //if (PitLaneEntrance)
-                //    desc.Add("Pitlane Entrance flag");
-
-                //if (PitLaneExit)
-                //    desc.Add("Pitlane Exit flag");
-
-
-                if (Commands.Any(c => c.Command == 0x80))
-                {
-                    desc.Add($"{Commands.Count(c => c.Command == 0x80)} objects");
-                }
-
-                if (Commands.Any(c => c.Command == 0x85))
-                {
-                    desc.Add("Track width change");
-                }
-
-
-                if (Commands.Any(c => c.Command == 0x98 || c.Command == 0x99 || c.Command == 0x9A))
-                {
-                    desc.Add("Wall height change");
-                }
-
-                if (Commands.Any(c => c.Command == 0xAC))
-                {
-                    desc.Add("Palette change");
-                }
-
-
-                return string.Join(", ", desc.ToArray());
-            }
+            get { return _description; }
+            set { SetProperty(ref _description, value, () => Description); }
         }
 
+        private void UpdateDescription()
+        {
+            var desc = new List<string>();
+            if (Commands.Any(c => c.Command == 0x86))
+            {
+                desc.Add("Pitlane Start");
+            }
+
+            if (Commands.Any(c => c.Command == 0x87))
+            {
+                desc.Add("Pitlane End");
+            }
+
+            // only in pit lane?
+            //if (PitLaneEntrance)
+            //    desc.Add("Pitlane Entrance flag");
+
+            //if (PitLaneExit)
+            //    desc.Add("Pitlane Exit flag");
+
+            if (Commands.Any(c => c.Command == 0x80))
+            {
+                desc.Add($"{Commands.Count(c => c.Command == 0x80)} objects");
+            }
+
+            if (Commands.Any(c => c.Command == 0x85))
+            {
+                desc.Add("Track width change");
+            }
+
+            if (Commands.Any(c => c.Command == 0x98 || c.Command == 0x99 || c.Command == 0x9A))
+            {
+                desc.Add("Wall height change");
+            }
+
+            if (Commands.Any(c => c.Command == 0xAC))
+            {
+                desc.Add("Palette change");
+            }
+
+            Description = string.Join(", ", desc.ToArray());
+        }
 
 
         public List<KerbHeightBoundValue> AvailableKerbHeights

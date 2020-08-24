@@ -77,6 +77,7 @@ namespace ArgTrack.Features.Main
             {
                 var objectViewModel = new TrackObjectShapeViewModel();
                 ObjectShapeMapper.MapTrackObjectShapeToViewModel(obj, objectViewModel);
+                objectViewModel.UpdateDescription();
                 objectViewModel.Id = id;
                 id++;
 
