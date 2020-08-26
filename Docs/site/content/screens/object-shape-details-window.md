@@ -52,6 +52,11 @@ Below this data, there are four tabs.
 
 This tab allows you to edit the basic 3D shape of the object.
 
+_NB: Since the entire data for a 3D object has not yet been fully decomposed, it is possible
+that adding or removing the values here will either break the objects, or break the
+entire track_
+
+
 ### Scales
 
 A scale value is used as values in the point definitions.
