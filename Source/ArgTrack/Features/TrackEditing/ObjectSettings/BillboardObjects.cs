@@ -85,11 +85,23 @@ namespace ArgTrack.Features.TrackEditing.ObjectSettings
             { 127, "Large bush" },
             { 128, "Large bush" },
             { 129, "Large bush" },
+            { 160, "Pit crew member, kneeling" },
+            { 161, "Pit crew member, front tyre" },
+            { 162, "Pit crew member with headset" },
             { 163, "Stack of thin tyres" },
-            { 168, "Mobil building" },
+            { 166, "Pit crew member" },
+            { 167, "Pit crew member" },
+            { 168, "Top of Hockenheim pit building" },
+            { 169, "Pit crew member with jack" },
+            { 170, "Hand with cloth" },
+            { 171, "Brakes On sign" },
+            { 172, "Palm tree" },
             { 173, "Palm tree" },
             { 174, "Palm tree" },
-            { 175, "Palm tree" }
+            { 175, "Timing info screen" },
+            { 221, "Huge bush" },
+            { 222, "Huge bush" },
+            { 225, "Huge bush" },
         };
     }
 
