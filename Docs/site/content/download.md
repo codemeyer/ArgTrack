@@ -4,10 +4,10 @@ title: "ArgTrack: Download"
 
 # Download
 
-The latest version is **0.6**, released on 2020-07-04.
+The latest version is **0.7**, released on 2020-08-26.
 
 <p>
-    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.6.zip">Download</a>
+    <a class="btn btn-primary" href="/downloads/argtrack/ArgTrack-0.7.zip">Download</a>
 </p>
 
 <br />
@@ -33,6 +33,22 @@ be found here:
 ## Release notes
 
 Below are the release notes for each released version of ArgTrack.
+
+
+### 0.7
+
+Released 2020-08-26 - [Download](/downloads/argtrack/ArgTrack-0.7.zip)
+
+- Can add or remove object shape scale values, points and vectors
+- Track-side objects declared in the pit lane are now drawn as well
+- Updated various track section command descriptions
+- Added some additional object descriptions
+- Split object shape header values/data 5 and 6
+- Track layout is redrawn after changing layout-affecting object settings
+- Fix: Pit lane is now drawn above the track again
+- Fix: Track section commands descriptions are updated properly after editing
+- Fix: Track section command argument descriptions are updated properly after editing
+- _Known issue: Positioning of pit lane track-side objects possibly not 100% correct_
 
 
 ### 0.6
